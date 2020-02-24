@@ -5,12 +5,12 @@ import SEO from "../components/seo"
 
 import {Button} from "react-bootstrap";
 
-const IndexPage = () => (
+const OtherPage = () => (
   <Layout>
     <SEO title="Index" />
-    <h1>Index</h1>
-    <Button block variant="primary" >You can click me!</Button>
+    <h1>Other Page</h1>
+    <Button variant="success" >I'm Green and small!</Button>
   </Layout>
 )
 
-export default IndexPage
+export default OtherPage
