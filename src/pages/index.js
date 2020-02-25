@@ -1,38 +1,59 @@
-import React from "react";
-
-import Layout from "../components/layout/layout";
-import SEO from "../components/seo";
-
-import { Button, Card, Col, Container, Row, Form } from "react-bootstrap";
-
-const CustomGroup = ({col, label, placeholder, type, onChange}) => (
-  <Form.Group className={col ? `col-${col}` : ""}>
-    <Form.Label className="text-gray-600" style={{
-      fontSize: "0.875em",
-      fontWeight: 400,
-    }}>{label}</Form.Label>
-    {/*TODO: refactor so form.control can be different types*/}
-    <Form.Control className="rounded-pill" type={type || "text"} placeholder={placeholder} onChange={onChange}  />
-  </Form.Group>
-)
+import React from "react"
+import { Container, Button } from "react-bootstrap"
+import Layout from "../components/layout/layout"
+import SEO from "../components/seo"
+import "../styles/index.scss"
+import { graphql, StaticQuery } from "gatsby"
+import { FormControl, InputGroup } from "react-bootstrap"
 
 const IndexPage = () => (
-  <Layout>
-    <SEO title="Index"/>
+  <StaticQuery
+    query={graphql`
+      query {
+        desktop: file(
+          relativePath: { eq: "bg.jpg" }
+        ) {
+          childImageSharp {
+            fluid(quality: 100, maxWidth: 1920) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Layout
+        pageInfo={{ pageName: "index" }}
+        backgroundImage={data.desktop.childImageSharp.fluid}
+      >
+        <SEO
+          title="Home"
+        />
+        <Container className="text-center container">
+          <header className="major">
+            <h1>Where would you like to fly today?</h1>
+            <div>
 
-    <Container>
-      <Row style={{
-        height:"100%"
-      }}>
-        <Col lg={6}>
-          <h1>Index</h1>
-          <Button block variant="primary">You can click me!</Button>
-          <h1>I want to fly to </h1>
+              <InputGroup className="mb-3" style={{
 
-        </Col>
-      </Row>
-    </Container>
-  </Layout>
-);
+                height:"3em"
+              }}>
+                <FormControl type="text" size="lg" className="input-large" style={{
+                  backgroundColor:"rgba(255,255,255,0.3)",
+                  color:"white",
+                  height:"3em"
+                }} />
+                <InputGroup.Append>
+                  <Button variant="outline-light">Book Now</Button>
+                </InputGroup.Append>
+              </InputGroup>
 
-export default IndexPage;
+            </div>
+          </header>
+        </Container>
+      </Layout>
+    )}
+  />
+)
+
+export default IndexPage

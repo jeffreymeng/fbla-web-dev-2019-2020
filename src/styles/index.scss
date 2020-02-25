@@ -12,6 +12,24 @@
   font-family: "Nexa Bold", sans-serif;
 }
 
+.large-input::-webkit-input-placeholder {
+    color: white !important;
+  }
+
+.large-input:-moz-placeholder { /* Firefox 18- */
+    color: white !important;
+  }
+
+.large-input::-moz-placeholder {  /* Firefox 19+ */
+    color: white !important;
+  }
+
+.large-input:-ms-input-placeholder {
+    color: white !important;
+  }
+
+
+
 // Style ALL links, even without href (bootstrap doesnt do this by default)
 a:not([href]) {
   color: #007bff;

@@ -10,7 +10,6 @@ import { StaticQuery, graphql } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 import Navbar from "./navBar"
 import BackgroundImage from "gatsby-background-image"
-
 const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
   <StaticQuery
     query={graphql`
