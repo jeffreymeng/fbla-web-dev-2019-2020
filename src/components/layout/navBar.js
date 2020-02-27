@@ -25,6 +25,7 @@ const CustomNavbar = ({ pageInfo }) => {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav activeKey={pageInfo && pageInfo.pageName}>
             <NavbarLink page="otherpage">Other Page</NavbarLink>
+            <NavbarLink page="jobs">Jobs</NavbarLink>
 
           </Nav>
         </Navbar.Collapse>
