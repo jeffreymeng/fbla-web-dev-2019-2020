@@ -4,7 +4,73 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import "../styles/index.scss"
 import { graphql, StaticQuery } from "gatsby"
-import { FormControl, InputGroup } from "react-bootstrap"
+import { FormControl, Col, Jumbotron, Form } from "react-bootstrap"
+
+const BookingForm = () => {
+  const [isRoundTrip, setIsRoundTrip] = React.useState(true);
+  const [passengers, setPassengers] = React.useState(1);
+  return (
+    <Form>
+
+      <Form.Row>
+        <Form.Group as={Col} controlId="formTripType">
+          <Form.Label>Trip Type</Form.Label>
+          <Form.Control as="select" value={isRoundTrip ? "rt" : "ow"} onChange={(e) => setIsRoundTrip(e.target.value === "rt")}>
+            <option value="rt">Round Trip</option>
+            <option value="ow">One Way</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group as={Col} controlId="formDepart">
+          <Form.Label>Depart</Form.Label>
+          <Form.Control type="text" placeholder="Enter an airport..." />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formArrive">
+          <Form.Label>Arrive</Form.Label>
+          <Form.Control type="text" placeholder="Enter an airport..." />
+
+        </Form.Group>
+
+      </Form.Row>
+
+      <Form.Group controlId="formDate">
+        <Form.Label>Date</Form.Label>
+        <Form.Control placeholder={`Choose a date ${isRoundTrip ? "range " : ""}for your trip`} />
+      </Form.Group>
+
+
+      <Form.Row>
+        <Form.Group as={Col} controlId="formPassengers">
+          <Form.Label>Passengers</Form.Label>
+          <Form.Control type="number" min={1} value={passengers} onChange={(e) => setPassengers(e.target.value)}  isInvalid={passengers > 9} />
+          <Form.Control.Feedback type="invalid">
+            For more than 9 passengers, please contact our group bookings office at 1 (800) 475-2048
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridState">
+          <Form.Label>State</Form.Label>
+          <Form.Control as="select">
+            <option>Choose...</option>
+            <option>...</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridZip">
+          <Form.Label>Zip</Form.Label>
+          <Form.Control />
+        </Form.Group>
+      </Form.Row>
+
+
+
+      <Button variant="primary" block type="submit">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+
 
 const IndexPage = () => (
   <StaticQuery
@@ -29,27 +95,14 @@ const IndexPage = () => (
         <SEO
           title="Home"
         />
-        <Container className="text-center container">
-          <header className="major">
-            <h1>Where would you like to fly today?</h1>
-            <div>
+        <Container className="container">
+          <h1 className="index-hero-large text-center">Where will we be flying today?</h1>
+          <Jumbotron className="py-4">
+            <h1 className="index-hero-small">Where will we be flying today?</h1>
+            <BookingForm />
 
-              <InputGroup className="mb-3" style={{
+          </Jumbotron>
 
-                height:"3em"
-              }}>
-                <FormControl type="text" size="lg" className="input-large" style={{
-                  backgroundColor:"rgba(255,255,255,0.3)",
-                  color:"white",
-                  height:"3em"
-                }} />
-                <InputGroup.Append>
-                  <Button variant="outline-light">Book Now</Button>
-                </InputGroup.Append>
-              </InputGroup>
-
-            </div>
-          </header>
         </Container>
       </Layout>
     )}

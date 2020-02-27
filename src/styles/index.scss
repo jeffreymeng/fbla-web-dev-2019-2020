@@ -43,6 +43,7 @@ a:not([href]):hover {
   text-decoration: underline;
 }
 
+
 .bg-full {
   background-position: top center;
 
@@ -54,30 +55,58 @@ a:not([href]):hover {
   }
   .container {
     // 300px is a relatively arbitrary number. In reality, it just needs to be more than the height of the footer and navbar
-    height:calc(100vh - 300px);
+    height:calc(100vh - 150px);
     overflow:hidden;
   }
+  @media (min-width: 1001px) {
+    .index-hero-large {
 
-  header {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    color:#eee;
+      margin-top: 3%;
+      font-size: 6em;
+      color: #eee;
 
-    h1 {
-      font-size:6em;
-      font-family: "Nexa Bold", sans-serif;
     }
-
-    p {
-      font-size:1.5em;
-      font-family: "Proxima Nova Regular", sans-serif;
+    .index-hero-small {
+      display: none;
     }
+    .jumbotron {
+      position: relative;
+      top: 30%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.6);
 
+    }
   }
 
-  span {
-    color: white;
+  @media (max-width: 1000px) {
+    .index-hero-large {
+
+      display:none;
+
+    }
+    .index-hero-small {
+
+      font-weight:bold;
+    }
+    .jumbotron {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+
+
+
+
+  .form-label {
+    font-weight:bold;
+  }
+
+
+  footer {
+    color:#eee;
   }
 
   .cta {
