@@ -55,55 +55,30 @@
 
 .job-benefits {
   max-width: 42rem;
-  margin: auto;
+  margin: auto auto 4rem;
+}
 
-  .job-benefits__heading {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 3rem;
-    color: #1A202C;
-
-    &:after {
-      content: "";
-      display: block;
-      width: 5rem;
-      padding-top: 0.75rem;
-      margin-left: 0.25rem;
-      border-bottom: 6px solid #3182CE;
-    }
+.job-apply__container {
+  background-color: #F7FAFC;
+  padding: 4rem 0;
+  .job-apply {
+    max-width: 42rem;
+    margin: auto;
   }
+}
 
-  .job-benefits__list {
-    .job-benefits__list__item {
-      display: flex;
-      margin: 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 1.125rem;
-      .job-benefits__list__item__number {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #3182CE;
-        border-radius: 100%;
-        color: white;
-        font-weight: bold;
-        margin-right: 1rem;
-        margin-top: 0.25rem;
-      }
-      .job-benefits__list__item__content {
-        flex: 1;
-        color: #4A5568;
+.job__section-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  color: #1A202C;
 
-        .job-benefits__list__item__content__title {
-          color: #2A4365;
-          font-size: 1.25rem;
-          text-transform: uppercase;
-          font-weight: bold;
-          margin: 0 0 0.125rem;
-        }
-      }
-    }
+  &:after {
+    content: "";
+    display: block;
+    width: 5rem;
+    padding-top: 0.75rem;
+    margin-left: 0.25rem;
+    border-bottom: 6px solid #3182CE;
   }
 }
