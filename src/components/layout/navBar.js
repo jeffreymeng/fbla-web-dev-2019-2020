@@ -24,7 +24,7 @@ const CustomNavbar = ({ pageInfo }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav activeKey={pageInfo && pageInfo.pageName}>
-            <NavbarLink page="otherpage">Other Page</NavbarLink>
+            <NavbarLink page="index">Home</NavbarLink>
             <NavbarLink page="jobs">Jobs</NavbarLink>
             <NavbarLink page="frequent-flyer-program">Frequent Flyer Program</NavbarLink>
 
