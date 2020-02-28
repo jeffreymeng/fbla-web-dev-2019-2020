@@ -79,6 +79,7 @@ const IndexPage = () => (
       <Layout
         pageInfo={{ pageName: "index" }}
         backgroundImage={data.desktop.childImageSharp.fluid}
+        lightFooter
       >
         <SEO
           title="Home"

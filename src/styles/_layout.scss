@@ -17,10 +17,16 @@ a.link-no-style {
 }
 
 
-
+.light-footer {
+  color: #eee;
+}
+footer:not(.light-footer) {
+  color: #000;
+  background-color:#F7FAFC;
+}
 footer {
   height:90px;
-  color: #eee;
+
   .footer {
     padding: 25px 0;
     text-align: center;

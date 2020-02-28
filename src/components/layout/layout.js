@@ -24,7 +24,7 @@ const SocialMediaIcon = ({icon,link}) => {
   </a>);
 }
 
-const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
+const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -48,7 +48,7 @@ const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
               {/*</Col>*/}
             {/*</Row>*/}
           </Container>
-          <footer>
+          <footer className={lightFooter ? "light-footer" : ""}>
             <Container fluid className="px-0">
               <Row noGutters className="text-center align-items-center">
                 <Col md={4}>
