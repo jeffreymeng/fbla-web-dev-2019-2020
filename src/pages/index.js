@@ -70,7 +70,9 @@ const BookingForm = ({ onSubmit }) => {
           <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
 
           <Form.Control as={Flatpickr}
-            onChange={(date) => setDates(prevState => [date, prevState[1]])}
+                        className="datepicker"
+
+                        onChange={(date) => setDates(prevState => [date, prevState[1]])}
             value={dates[0]}
              options={{
               altInput: true,
@@ -86,7 +88,7 @@ const BookingForm = ({ onSubmit }) => {
           <Form.Label>End Date</Form.Label>
 
           <Form.Control as={Flatpickr}
-
+          className="datepicker"
                         onChange={(date) => setDates(prevState => [prevState[0], date])}
                         value={dates[1]}
           options={{
