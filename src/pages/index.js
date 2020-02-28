@@ -10,28 +10,29 @@ import Flatpickr from "react-flatpickr";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-const BookingForm = () => {
+const BookingForm = ({ onSubmit }) => {
   const [isRoundTrip, setIsRoundTrip] = React.useState(true);
   const [passengers, setPassengers] = React.useState(1);
   const [dates, setDates] = React.useState(["", ""]);
-  const [airports, setAirports] = React.useState(["", ""])
+  const [airports, setAirports] = React.useState(["", ""]);
   return (
     <Form>
 
       <Form.Row>
         <Form.Group as={Col} lg={4} sm={12} controlId="formTripType">
-          <Form.Label>Trip Type</Form.Label>
+          <Form.Label >Trip Type</Form.Label>
           <Form.Control as="select" value={isRoundTrip ? "rt" : "ow"} onChange={(e) => setIsRoundTrip(e.target.value === "rt")}>
             <option value="rt">Round Trip</option>
             <option value="ow">One Way</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group as={Col}  lg={8} sm={12} controlId="formDepart">
-          <Form.Label>Airports</Form.Label>
+        <Form.Group as={Col}  lg={8} sm={12}>
+          <Form.Label htmlFor="depart">Airports</Form.Label>
           <InputGroup className="mb-3">
 
             <FormControl
-              placeholder="Depart"
+              id="depart"
+               placeholder="Depart"
               onChange={(e) => {
                 let val = e.target.value;
                 setAirports(prevState => [val, prevState[1]])
@@ -51,7 +52,8 @@ const BookingForm = () => {
               </Button>
             </InputGroup.Prepend>
             <FormControl
-              placeholder="Arrive"
+              id="arrive"
+               placeholder="Arrive"
               onChange={(e) => {
                 let val = e.target.value;
                 setAirports(prevState => [prevState[0], val])
@@ -64,14 +66,15 @@ const BookingForm = () => {
       </Form.Row>
 
       <Form.Row>
-        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formDate">
+        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formStartDate">
           <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
 
           <Form.Control as={Flatpickr}
-            onChange={(date) => setDates(prevState => [date, prevState[1]])}
+                        className="datepicker"
+
+                        onChange={(date) => setDates(prevState => [date, prevState[1]])}
             value={dates[0]}
-            id="singlePicker"
-            options={{
+             options={{
               altInput: true,
               altFormat: "F j, Y",
               dateFormat: "Y-m-d",
@@ -81,14 +84,13 @@ const BookingForm = () => {
             }} placeholder={`Choose a${isRoundTrip ? " start" : "'"} date for your trip`}/>
 
         </Form.Group>
-        <Form.Group as={Col} sm={6} lg={4} controlId="formDate" hidden={!isRoundTrip} >
+        <Form.Group as={Col} sm={6} lg={4} controlId="formEndDate" hidden={!isRoundTrip} >
           <Form.Label>End Date</Form.Label>
 
           <Form.Control as={Flatpickr}
-
+          className="datepicker"
                         onChange={(date) => setDates(prevState => [prevState[0], date])}
                         value={dates[1]}
-          id="singlePicker"
           options={{
             altInput: true,
             altFormat: "F j, Y",
@@ -111,7 +113,7 @@ const BookingForm = () => {
 
         </Form.Group>
         <Form.Group as={Col} sm={12} lg={4} controlId="formPassengers">
-          <Form.Label>Passengers {isRoundTrip + ""}</Form.Label>
+          <Form.Label>Passengers</Form.Label>
           <Form.Control type="number" min={1} value={passengers} onChange={(e) => setPassengers(e.target.value)}  isInvalid={passengers && (passengers < 1 || passengers > 9)} />
           <Form.Control.Feedback type="invalid">
             {passengers > 9 ? "For more than 9 passengers, please contact our group bookings office at 1 (800) 475-2048" : passengers < 1 ? "You must have at least 1 passenger!" : "Please enter a number between 1 and 9."}
@@ -122,7 +124,16 @@ const BookingForm = () => {
 
 
 
-      <Button variant="primary" block type="submit">
+      <Button variant="primary" block onClick={() => {
+        onSubmit({
+          roundTrip:isRoundTrip,
+          passengers,
+          departAirport:airports[0],
+          arriveAirport:airports[1],
+          startDate:dates[0],
+          endDate:(isRoundTrip ? dates[1] : undefined)
+        })
+      }}>
         Find Flights
       </Button>
     </Form>
@@ -158,7 +169,7 @@ const IndexPage = () => (
           <h1 className="index-hero-large text-center">Where will we be flying today?</h1>
           <Jumbotron className="py-4">
             <h1 className="index-hero-small">Where will we be flying today?</h1>
-            <BookingForm />
+            <BookingForm onSubmit={(data) => console.log(data)} />
 
           </Jumbotron>
 

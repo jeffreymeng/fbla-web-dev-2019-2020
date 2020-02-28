@@ -47,7 +47,7 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage }) => 
             {/*</Row>*/}
           </Container>
           <footer className={lightFooter ? "light-footer" : ""}>
-            <Container fluid className="px-0">
+            <Container fluid className="px-0 pt-3">
               <Row noGutters className="text-center align-items-center">
                 <Col md={4}>
                   <span className="copyright">Copyright &copy; 2020 Coastal Airlines</span>

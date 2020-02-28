@@ -51,7 +51,7 @@ const FrequentFlyerProgramPage = () => (
             </div>
             <div className="numbered-sections-list__item__content">
               <h3 className="numbered-sections-list__item__content__title">Diamond Members</h3>
-              If you accumulate 20,000 points, you become a Diamond Member of our Frequent Flyer Program!
+              When you accumulate 20,000 points in a year, you will become a Diamond Member of our Frequent Flyer Program!
               Diamond members enjoy priority boarding, free checked bags, and complimentary beverages on all our
               flights.
             </div>
