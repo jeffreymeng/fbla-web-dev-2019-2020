@@ -7,11 +7,14 @@ import "../styles/flatpickr/light.scss"
 import { graphql, StaticQuery } from "gatsby"
 import { FormControl, Col, Jumbotron, Form } from "react-bootstrap"
 import Flatpickr from "react-flatpickr";
-
+import InputGroup from "react-bootstrap/InputGroup";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 const BookingForm = () => {
   const [isRoundTrip, setIsRoundTrip] = React.useState(true);
   const [passengers, setPassengers] = React.useState(1);
   const [dates, setDates] = React.useState(["", ""]);
+  const [airports, setAirports] = React.useState(["", ""])
   return (
     <Form>
 
@@ -23,15 +26,39 @@ const BookingForm = () => {
             <option value="ow">One Way</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group as={Col}  lg={4} sm={6} controlId="formDepart">
-          <Form.Label>Depart</Form.Label>
-          <Form.Control type="text" placeholder="Enter an airport..." />
-        </Form.Group>
+        <Form.Group as={Col}  lg={8} sm={12} controlId="formDepart">
+          <Form.Label>Airports</Form.Label>
+          <InputGroup className="mb-3">
 
-        <Form.Group as={Col}  lg={4} sm={6} controlId="formArrive">
-          <Form.Label>Arrive</Form.Label>
-          <Form.Control type="text" placeholder="Enter an airport..." />
-
+            <FormControl
+              placeholder="Depart"
+              onChange={(e) => {
+                let val = e.target.value;
+                setAirports(prevState => [val, prevState[1]])
+              }}
+              value={airports[0]}
+            />
+            <InputGroup.Prepend>
+              <Button variant="secondary" onClick={() => {
+                setAirports((oldState) => {
+                  let newState = oldState.slice();
+                  // swap first and second elements
+                  newState.unshift(newState.pop());
+                  return newState;
+                })
+              }}>
+                <FontAwesomeIcon icon={faExchangeAlt} />
+              </Button>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="Arrive"
+              onChange={(e) => {
+                let val = e.target.value;
+                setAirports(prevState => [prevState[0], val])
+              }}
+              value={airports[1]}
+            />
+          </InputGroup>
         </Form.Group>
 
       </Form.Row>
