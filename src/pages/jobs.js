@@ -17,7 +17,7 @@ const JobsPage = () => (
     </div>
 
     <div className="job-benefits" id="benefits">
-      <h2 className="job__section-heading">Why Us?</h2>
+      <h2 className="section-heading">Why Us?</h2>
       <div className="numbered-sections-list">
         <div className="numbered-sections-list__item">
           <div className="numbered-sections-list__item__number">
@@ -56,7 +56,7 @@ const JobsPage = () => (
 
     <div className="job-apply__container" id="apply">
       <div className="job-apply">
-        <h2 className="job__section-heading">Apply Now</h2>
+        <h2 className="section-heading">Apply Now</h2>
         <div className="numbered-sections-list numbered-sections-list--green">
           <div className="numbered-sections-list__item">
             <div className="numbered-sections-list__item__number">
