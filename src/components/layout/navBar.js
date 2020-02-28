@@ -26,6 +26,7 @@ const CustomNavbar = ({ pageInfo }) => {
           <Nav activeKey={pageInfo && pageInfo.pageName}>
             <NavbarLink page="otherpage">Other Page</NavbarLink>
             <NavbarLink page="jobs">Jobs</NavbarLink>
+            <NavbarLink page="frequent-flyer-program">Frequent Flyer Program</NavbarLink>
 
           </Nav>
         </Navbar.Collapse>
