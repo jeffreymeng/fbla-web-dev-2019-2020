@@ -1,7 +1,8 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { useState } from "react"
+import { Link, navigate } from "gatsby"
 
 import { Navbar, Nav, Button } from "react-bootstrap"
+import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
 
 function NavbarLink(props) {
   return (
@@ -13,6 +14,19 @@ function NavbarLink(props) {
   )
 }
 const CustomNavbar = ({ pageInfo }) => {
+  const [signedIn, setSignedIn] = useState(false);
+
+  useFirebase(firebase => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        setSignedIn(true);
+      } else {
+        setSignedIn(false);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
@@ -27,7 +41,8 @@ const CustomNavbar = ({ pageInfo }) => {
             <NavbarLink page="/">Home</NavbarLink>
             <NavbarLink page="jobs">Jobs</NavbarLink>
             <NavbarLink page="frequent-flyer-program">Frequent Flyer Program</NavbarLink>
-
+            {!signedIn && <NavbarLink page="sign-in">Sign In</NavbarLink>}
+            {signedIn && <NavbarLink page="sign-out">Sign Out</NavbarLink>}
           </Nav>
         </Navbar.Collapse>
         {/* </Container> */}

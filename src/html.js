@@ -12,7 +12,7 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        <link href="https://unpkg.com/tailwindcss@^1.2/dist/tailwind.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css" />
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
