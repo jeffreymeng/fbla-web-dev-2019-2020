@@ -14,12 +14,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
-const SocialMediaIcon = ({icon,link}) => {
-  return (<a href={link} className="icon-stack-link fa-stack">
-    <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
-    <FontAwesomeIcon icon={icon} className="fa-stack-1x" style={{
-      color:"black"
-    }} />
+const SocialMediaIcon = ({icon,link,lightFooter}) => {
+  return (<a href={link} className={`icon-stack-link fa-stack ${!lightFooter ? "bg-gray-200 hover:bg-gray-300 text-gray-700 hover:text-blue-500" : "bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-blue-300"}`}>
+    {/*<FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />*/}
+    <FontAwesomeIcon icon={icon} className="fa-stack-1x " />
 
   </a>);
 }
@@ -57,13 +55,13 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage }) => 
                 <Col md={4}>
                   <ul className="list-inline social-buttons d-none d-md-block">
                     <li className="list-inline-item">
-                      <SocialMediaIcon icon={faFacebookF} link={"https://facebook.com"} />
+                      <SocialMediaIcon icon={faFacebookF} link={"https://facebook.com"} lightFooter={lightFooter} />
                     </li>
                     <li className="list-inline-item">
-                      <SocialMediaIcon icon={faInstagram}  link={"https://instagram.com"} />
+                      <SocialMediaIcon icon={faInstagram}  link={"https://instagram.com"} lightFooter={lightFooter} />
                     </li>
                     <li className="list-inline-item">
-                      <SocialMediaIcon icon={faTwitter} link={"https://twitter.com"} />
+                      <SocialMediaIcon icon={faTwitter} link={"https://twitter.com"} lightFooter={lightFooter} />
                     </li>
                   </ul>
                   <ul className="list-inline quicklinks d-block p-0 m-0 d-md-none">
@@ -80,7 +78,7 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage }) => 
                 </Col>
                 <Col md={4}>
                   <ul className="list-inline quicklinks">
-                    <li className="list-inline-item">
+                    <li className="list-inline-item mr-4">
                       <a href="#">Privacy Policy</a>
                     </li>
                     <li className="list-inline-item">
