@@ -1,13 +1,10 @@
 import React from "react"
 
 import SEO from "../components/seo"
-
-import { Button, Container } from "react-bootstrap"
-import Navbar from "../components/layout/navBar"
+import Layout from "../components/layout/layout"
 
 const JobsPage = () => (
-  <>
-    <Navbar />
+  <Layout>
     <SEO title="Apply for a Job" />
 
     <div className="job-hero">
@@ -54,7 +51,7 @@ const JobsPage = () => (
         </div>
       </div>
     </div>
-  </>
+  </Layout>
 )
 
 export default JobsPage

@@ -26,13 +26,13 @@ const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
         <>
           <Container fluid className="px-0 main">
             <Navbar pageInfo={pageInfo} admin={admin} />
-            <Row noGutters>
-              <Col>
-                <Container className="mt-5">
+            {/*<Row noGutters>*/}
+            {/*  <Col>*/}
+            {/*    <Container className="mt-5">*/}
                   <main>{children}</main>
-                </Container>
-              </Col>
-            </Row>
+                {/*</Container>*/}
+              {/*</Col>*/}
+            {/*</Row>*/}
           </Container>
           <Container fluid className="px-0">
             <Row noGutters>
