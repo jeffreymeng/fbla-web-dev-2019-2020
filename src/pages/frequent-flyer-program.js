@@ -2,6 +2,7 @@ import React from "react"
 
 import SEO from "../components/seo"
 import Layout from "../components/layout/layout"
+import FFPRewardsSpender from "../components/FFPRewardsSpender"
 
 const FrequentFlyerProgramPage = () => (
   <Layout>
@@ -77,16 +78,22 @@ const FrequentFlyerProgramPage = () => (
       </div>
     </div>
 
-    <div className="light-container">
+    <div className="bg-gray-100 pt-24 pb-32">
       <div className="narrow-container">
-        <h1>Something something Spend your Points calculator</h1>
+        <h2 className="section-heading section-heading--center">Spend your Rewards</h2>
+        <p className="text-gray-700 text-xl text-center mb-12">
+          Use the tool below to explore how you can use your points! Select an origin and destination region
+          and see how many points you need to get a flight for free.
+        </p>
       </div>
+      <FFPRewardsSpender />
     </div>
 
     <div className="bg-gray-900">
       <div className="lg:flex">
         <div className="flex-1">
-          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
+          <img
+            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
         </div>
         <div className="flex-1 flex items-center">
           <div className="p-12 max-w-2xl mr-auto xl:ml-24 lg:ml-12">
@@ -95,8 +102,9 @@ const FrequentFlyerProgramPage = () => (
             </h2>
             <p className="text-blue-200 text-xl">If you earn more than 20,000 points, you automatically
               become a Diamond Member of our Frequent Flyer Program.</p>
-            <p className="text-blue-200 text-xl">Diamond members enjoy priority boarding, free checked bags, and complimentary beverages on all our
-            flights.</p>
+            <p className="text-blue-200 text-xl">Diamond members enjoy priority boarding, free checked bags, and
+              complimentary beverages on all our
+              flights.</p>
             {/* if time maybe want to make ^ bullet points */}
           </div>
         </div>
