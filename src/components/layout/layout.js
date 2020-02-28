@@ -11,11 +11,11 @@ import { Container, Row, Col } from "react-bootstrap"
 import Navbar from "./navBar"
 import BackgroundImage from "gatsby-background-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
-const SocialMediaIcon = ({icon}) => {
-  return (<a href="https://instagram.com" className="icon-stack-link fa-stack">
+const SocialMediaIcon = ({icon,link}) => {
+  return (<a href={link} className="icon-stack-link fa-stack">
     <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
     <FontAwesomeIcon icon={icon} className="fa-stack-1x" style={{
       color:"black"
@@ -55,9 +55,26 @@ const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
                   <span className="copyright">Copyright &copy; 2020 Coastal Airlines</span>
                 </Col>
                 <Col md={4}>
-                  <ul className="list-inline social-buttons">
+                  <ul className="list-inline social-buttons d-none d-md-block">
                     <li className="list-inline-item">
-                      <SocialMediaIcon icon={faInstagram} />
+                      <SocialMediaIcon icon={faFacebookF} link={"https://facebook.com"} />
+                    </li>
+                    <li className="list-inline-item">
+                      <SocialMediaIcon icon={faInstagram}  link={"https://instagram.com"} />
+                    </li>
+                    <li className="list-inline-item">
+                      <SocialMediaIcon icon={faTwitter} link={"https://twitter.com"} />
+                    </li>
+                  </ul>
+                  <ul className="list-inline quicklinks d-block p-0 m-0 d-md-none">
+                    <li className="list-inline-item">
+                      <a href="https://facebook.com">Facebook</a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="https://instagram.com">Instagram</a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="https://twitter.com">Twitter</a>
                     </li>
                   </ul>
                 </Col>
