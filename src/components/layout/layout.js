@@ -81,10 +81,10 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
                 <Col md={4}>
                   <ul className="list-inline quicklinks">
                     <li className="list-inline-item mr-4">
-                      <a href="#">Privacy Policy</a>
+                      <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Privacy Policy</a>
                     </li>
                     <li className="list-inline-item">
-                      <a href="#">Terms of Use</a>
+                      <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Terms of Use</a>
                     </li>
                   </ul>
                 </Col>
