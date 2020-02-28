@@ -28,8 +28,10 @@ const SignUpPage = props => {
   }, [email, pass, firebase]);
 
   return (
-    <Layout>
-      <div className="min-vh-100 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <Layout backgroundColor="#f9fafb">
+      <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8" style={{
+        marginTop:"20vh",
+      }}>
         <div className="max-w-md w-full">
           <div>
             {/*<img className="mx-auto h-12 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow" />*/}
