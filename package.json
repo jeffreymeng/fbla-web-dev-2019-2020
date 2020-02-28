@@ -1,9 +1,7 @@
 {
-  "name": "Troop-485",
+  "name": "FBLA-Web-Dev",
   "private": true,
-  "description": "The official BSA Troop 485 website.",
-  "version": "2.1.0",
-  "author": "Jeffrey Meng",
+  "description": "MVHS FBLA Web Dev Team 2019-2020",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
