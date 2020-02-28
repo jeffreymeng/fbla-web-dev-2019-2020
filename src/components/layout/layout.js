@@ -52,7 +52,7 @@ const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
             <Container fluid className="px-0">
               <Row noGutters className="text-center align-items-center">
                 <Col md={4}>
-                  <span className="copyright">Copyright &copy; Your Website 2019</span>
+                  <span className="copyright">Copyright &copy; 2020 Coastal Airlines</span>
                 </Col>
                 <Col md={4}>
                   <ul className="list-inline social-buttons">
@@ -62,7 +62,14 @@ const Layout = ({ children, pageInfo, admin, backgroundImage }) => (
                   </ul>
                 </Col>
                 <Col md={4}>
-                  <span className="copyright">Copyright &copy; Your Website 2019</span>
+                  <ul className="list-inline quicklinks">
+                    <li className="list-inline-item">
+                      <a href="#">Privacy Policy</a>
+                    </li>
+                    <li className="list-inline-item">
+                      <a href="#">Terms of Use</a>
+                    </li>
+                  </ul>
                 </Col>
                 {/*<Col className="footer-col">*/}
                 {/*  <footer>*/}
