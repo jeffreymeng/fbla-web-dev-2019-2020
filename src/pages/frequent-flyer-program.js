@@ -19,8 +19,7 @@ const FrequentFlyerProgramPage = () => (
       <div className="job-apply">
         <h2 className="section-heading">What are Frequent Flyer Programs?</h2>
         <p style={{ fontSize: "1.25rem" }}>Coastal Airlines Frequent Flyer Program is a customer loyalty program that
-          rewards
-          customers for flying with choosing Coastal Airlines. The more you travel with us,
+          rewards customers for choosing Coastal Airlines. The more you travel with us,
           the more rewards you earn!</p>
 
         <div style={{ marginBottom: "5rem" }} />
