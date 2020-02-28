@@ -19,6 +19,13 @@ a.link-no-style {
 
 .light-footer {
   color: #eee;
+  .quicklinks a {
+    text-decoration: underline;
+    color:rgba(100,200,255,1);
+    &:hover {
+      color:rgba(150,225,255,1);
+    }
+  }
 }
 footer:not(.light-footer) {
   color: #000;
@@ -45,13 +52,6 @@ footer {
     margin-bottom: 0;
     text-transform: none;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  }
-  .quicklinks a {
-//    text-decoration: underline;
-//    color:rgba(100,200,255,1);
-//    &:hover {
-//      color:rgba(150,225,255,1);
-//    }
   }
   ul.social-buttons {
     margin-bottom: 0;
