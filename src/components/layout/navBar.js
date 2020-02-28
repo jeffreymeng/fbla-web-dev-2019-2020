@@ -18,7 +18,7 @@ const CustomNavbar = ({ pageInfo }) => {
 
   useFirebase(firebase => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
+      // console.log(user);
       if (user) {
         setSignedIn(true);
       } else {
