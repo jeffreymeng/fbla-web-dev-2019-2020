@@ -11,6 +11,7 @@ import Flatpickr from "react-flatpickr";
 const BookingForm = () => {
   const [isRoundTrip, setIsRoundTrip] = React.useState(true);
   const [passengers, setPassengers] = React.useState(1);
+  const [dates, setDates] = React.useState(["", ""]);
   return (
     <Form>
 
@@ -36,12 +37,54 @@ const BookingForm = () => {
       </Form.Row>
 
       <Form.Row>
-        <Form.Group as={Col} sm={12} lg={8} controlId="formDate">
-          <Form.Label>Date</Form.Label>
-          <Form.Control as={Flatpickr} placeholder={`Choose a date ${isRoundTrip ? "range " : ""}for your trip`} />
+        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formDate">
+          <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
+
+          <Form.Control as={Flatpickr}
+            onChange={(date) => setDates(prevState => [date, prevState[1]])}
+            value={dates[0]}
+            id="singlePicker"
+            options={{
+              altInput: true,
+              altFormat: "F j, Y",
+              dateFormat: "Y-m-d",
+              mode: "single",
+              minDate: "today",
+              maxDate: "2021-06-30"
+            }} placeholder={`Choose a${isRoundTrip ? " start" : "'"} date for your trip`}/>
+
+        </Form.Group>
+        <Form.Group as={Col} sm={6} lg={4} controlId="formDate" hidden={!isRoundTrip} >
+          <Form.Label>End Date</Form.Label>
+
+          <Form.Control as={Flatpickr}
+
+                        onChange={(date) => setDates(prevState => [prevState[0], date])}
+                        value={dates[1]}
+          id="singlePicker"
+          options={{
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            mode: "single",
+            minDate: "today",
+            maxDate: "2021-06-30"
+          }} placeholder={`Choose an end date for your trip`}
+          isInvalid={new Date(dates[0]).getTime() > new Date(dates[1]).getTime()}
+          />
+
+          <Form.Control.Feedback type="invalid">The end date cannot be before the start date! <a onClick={() => {
+            setDates((oldState) => {
+              let newState = oldState.slice();
+              // swap first and second elements
+              newState.unshift(newState.pop());
+              return newState;
+            })
+          }}>Swap Dates</a></Form.Control.Feedback>
+
         </Form.Group>
         <Form.Group as={Col} sm={12} lg={4} controlId="formPassengers">
-          <Form.Label>Passengers</Form.Label>
+          <Form.Label>Passengers {isRoundTrip + ""}</Form.Label>
           <Form.Control type="number" min={1} value={passengers} onChange={(e) => setPassengers(e.target.value)}  isInvalid={passengers && (passengers < 1 || passengers > 9)} />
           <Form.Control.Feedback type="invalid">
             {passengers > 9 ? "For more than 9 passengers, please contact our group bookings office at 1 (800) 475-2048" : passengers < 1 ? "You must have at least 1 passenger!" : "Please enter a number between 1 and 9."}
