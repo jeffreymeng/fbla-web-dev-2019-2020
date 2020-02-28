@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'Nexa Bold';
   src: url("../fonts/Nexa Bold.otf") format("opentype");
@@ -43,6 +44,14 @@ a:not([href]):hover {
   text-decoration: underline;
 }
 
+//.icon-stack-link {
+//  color:#ccc;
+//  &:hover, &:active {
+//    color:white;
+//  }
+//
+//}
+
 
 .bg-full {
   background-position: top center;
@@ -53,12 +62,33 @@ a:not([href]):hover {
     background-color: transparent !important;
 
   }
+
   .container {
     // 300px is a relatively arbitrary number. In reality, it just needs to be more than the height of the footer and navbar
-    height:calc(100vh - 150px);
-    overflow:hidden;
+    height: calc(100vh - 150px);
+    overflow: hidden;
   }
-  @media (min-width: 1001px) {
+
+  //input, select {
+  //  background-color: rgba(255, 255, 255, 0.9);
+  //  &:active, &:focus {
+  //    background-color: rgba(255, 255, 255, 0.9);
+  //  }
+  //}
+  .flatpickr-input {
+    background-color: white;
+  }
+
+  .jumbotron {
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.6);
+
+  }
+
+  $breakpoint: 800px;
+  @media (min-width: ($breakpoint + 1px)) {
     .index-hero-large {
 
       margin-top: 3%;
@@ -69,49 +99,27 @@ a:not([href]):hover {
     .index-hero-small {
       display: none;
     }
-    .jumbotron {
-      position: relative;
-      top: 30%;
-      transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.6);
 
-    }
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: $breakpoint) {
     .index-hero-large {
 
-      display:none;
+      display: none;
 
     }
     .index-hero-small {
 
-      font-weight:bold;
+      font-weight: bold;
     }
     .jumbotron {
-      position: relative;
       top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.6);
     }
   }
-
-
-
 
 
   .form-label {
-    font-weight:bold;
-  }
-
-
-  footer {
-    color:#eee;
-  }
-
-  .cta {
-    margin-left: 10px;
-    margin-right: 10px;
+    font-weight: bold;
   }
 
 }
