@@ -11,8 +11,8 @@ const JobsPage = () => (
       <h1 className="job-hero__title">Looking for a <span className="job-hero__title__emphasis">Job</span>?</h1>
         <p className="job-hero__subtitle">Travel the world for a living at Coastal Airlines!</p>
         <div className="job-hero__buttons">
-            <a className="job-hero__buttons__button" href="#benefits">Learn More</a>
-            <a className="job-hero__buttons__button job-hero__buttons__button--highlight"  href="#apply">Apply Now</a>
+            <a className="job-hero__buttons__button btn btn-outline-secondary" href="#benefits">Learn More</a>
+            <a className="job-hero__buttons__button job-hero__buttons__button--highlight btn btn-outline-secondary"  href="#apply">Apply Now</a>
         </div>
     </div>
 
