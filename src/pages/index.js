@@ -20,18 +20,19 @@ const BookingForm = ({ onSubmit }) => {
 
       <Form.Row>
         <Form.Group as={Col} lg={4} sm={12} controlId="formTripType">
-          <Form.Label>Trip Type</Form.Label>
+          <Form.Label >Trip Type</Form.Label>
           <Form.Control as="select" value={isRoundTrip ? "rt" : "ow"} onChange={(e) => setIsRoundTrip(e.target.value === "rt")}>
             <option value="rt">Round Trip</option>
             <option value="ow">One Way</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group as={Col}  lg={8} sm={12} controlId="formDepart">
-          <Form.Label>Airports</Form.Label>
+        <Form.Group as={Col}  lg={8} sm={12}>
+          <Form.Label htmlFor="depart">Airports</Form.Label>
           <InputGroup className="mb-3">
 
             <FormControl
-              placeholder="Depart"
+              id="depart"
+               placeholder="Depart"
               onChange={(e) => {
                 let val = e.target.value;
                 setAirports(prevState => [val, prevState[1]])
@@ -51,7 +52,8 @@ const BookingForm = ({ onSubmit }) => {
               </Button>
             </InputGroup.Prepend>
             <FormControl
-              placeholder="Arrive"
+              id="arrive"
+               placeholder="Arrive"
               onChange={(e) => {
                 let val = e.target.value;
                 setAirports(prevState => [prevState[0], val])
@@ -64,14 +66,13 @@ const BookingForm = ({ onSubmit }) => {
       </Form.Row>
 
       <Form.Row>
-        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formDate">
+        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formStartDate">
           <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
 
           <Form.Control as={Flatpickr}
             onChange={(date) => setDates(prevState => [date, prevState[1]])}
             value={dates[0]}
-            id="singlePicker"
-            options={{
+             options={{
               altInput: true,
               altFormat: "F j, Y",
               dateFormat: "Y-m-d",
@@ -81,14 +82,13 @@ const BookingForm = ({ onSubmit }) => {
             }} placeholder={`Choose a${isRoundTrip ? " start" : "'"} date for your trip`}/>
 
         </Form.Group>
-        <Form.Group as={Col} sm={6} lg={4} controlId="formDate" hidden={!isRoundTrip} >
+        <Form.Group as={Col} sm={6} lg={4} controlId="formEndDate" hidden={!isRoundTrip} >
           <Form.Label>End Date</Form.Label>
 
           <Form.Control as={Flatpickr}
 
                         onChange={(date) => setDates(prevState => [prevState[0], date])}
                         value={dates[1]}
-          id="singlePicker"
           options={{
             altInput: true,
             altFormat: "F j, Y",
