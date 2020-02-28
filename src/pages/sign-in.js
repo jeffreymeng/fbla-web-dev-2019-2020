@@ -13,12 +13,13 @@ const SignInPage = props => {
   const firebase = React.useContext(FirebaseContext);
 
   useFirebase(firebase => {
-    firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       setLoading(false);
       if (user) {
         navigate("/");
       }
     });
+    return () => unsubscribe();
   }, []);
 
   const handleSubmit = useCallback((evt) => {
@@ -50,6 +51,8 @@ const SignInPage = props => {
           </div>
           <form className="mt-8" onSubmit={handleSubmit}>
             {error !== "" && <p className="text-sm font-bold text-red-600">Error: {error}</p>}
+            <p className="text-sm text-gray-700 mb-0">Feel free to use demo@gmail.com to play around with the site (username + password are autofilled for you), or create your own account.</p>
+            <p className="text-sm text-gray-700">Data syncs between devices in realtime -- try signing in on both a laptop and a phone!</p>
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm">
               <div>

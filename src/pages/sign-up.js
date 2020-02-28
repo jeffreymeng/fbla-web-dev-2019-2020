@@ -12,9 +12,10 @@ const SignUpPage = props => {
   const firebase = React.useContext(FirebaseContext);
 
   useFirebase(firebase => {
-    firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       setLoading(false);
     });
+    return () => unsubscribe();
   }, []);
 
   const handleSubmit = useCallback((evt) => {
