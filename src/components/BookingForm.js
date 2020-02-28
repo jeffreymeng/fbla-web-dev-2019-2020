@@ -113,6 +113,15 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
       <components.SingleValue {...props}>{props.data.code + " - " + props.data.name}</components.SingleValue>
     );
   }
+  const getOptWithValue = (value) => {
+    let result = undefined;
+    options.forEach(el => {
+      if (el.options.filter(opt => opt.code === value)[0])
+        result = el.options.filter(opt => opt.code === value)[0];
+    });
+    return result;
+
+  }
   return (
 
     <Select id={id}
@@ -125,7 +134,7 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
             }}
             noOptionsMessage={() => <><b>It looks like we do not fly to that airport yet!</b> Are you sure you spelled the name correctly?</>}
             placeholder={"Choose an airport..."}
-            value={value ? options.filter(opt => opt.code === value)[0] : null}
+            value={getOptWithValue(value)}
             onChange={(val) => onChange(val.code)}
     />
 
@@ -218,8 +227,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues }) => {
               // swap first and second elements
               newState.unshift(newState.pop());
               return newState;
-            })
-            console.log(airports);
+            });
           }}>
             <span className="d-inline d-lg-none">Swap</span>
             <FontAwesomeIcon className="d-none d-lg-inline-block" icon={faExchangeAlt} />
