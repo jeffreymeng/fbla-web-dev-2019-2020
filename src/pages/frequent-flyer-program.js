@@ -17,9 +17,9 @@ const FrequentFlyerProgramPage = () => (
 
     <div className="job-apply__container" id="apply">
       <div className="job-apply">
-        <h2 className="section-heading">What are Frequent Flyer Programs?</h2>
-        <p style={{ fontSize: "1.25rem" }}>Coastal Airlines Frequent Flyer Program is a customer loyalty program that
-          rewards customers for choosing Coastal Airlines. The more you travel with us,
+        <h2 className="section-heading">What is the Coastal Airlines Frequent Flyer Program?</h2>
+        <p style={{ fontSize: "1.25rem" }}>The Coastal Airlines Frequent Flyer Program is a customer loyalty program that
+          rewards customers like you for choosing Coastal Airlines. The more you travel with us,
           the more rewards you earn!</p>
 
         <div style={{ marginBottom: "5rem" }} />
@@ -67,7 +67,7 @@ const FrequentFlyerProgramPage = () => (
             <h2 className="text-blue-100 text-6xl mb-12">
               One Mile<span className="text-teal-300">,</span> <br />One Point<span className="text-teal-300">.</span>
             </h2>
-            <p className="text-blue-200 text-xl">Each mile you fly with us gives you one Frequent Flyer Program point.
+            <p className="text-blue-200 text-xl">Each mile you fly with us gives you at least one Frequent Flyer Program point. You may earn more thatn one point per mile when booking specific promotional routes, special dates, or business/first class.
               Redeem your points for free flights!</p>
           </div>
         </div>
@@ -82,7 +82,7 @@ const FrequentFlyerProgramPage = () => (
         <h2 className="section-heading section-heading--center">Spend your Rewards</h2>
         <p className="text-gray-700 text-xl text-center mb-12">
           Use the tool below to explore how you can use your points! Select an origin and destination region
-          and see how many points you need to get a flight for free.
+          and recieve an instant estimate of the average number of points you need to score a <i>free flight</i>!
         </p>
       </div>
       <FFPRewardsSpender />
