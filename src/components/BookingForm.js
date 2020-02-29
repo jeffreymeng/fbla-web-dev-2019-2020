@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
 import Select, { components } from "react-select"
 import classNames from "classnames"
+import { navigate } from "../../.cache/gatsby-browser-entry"
 
 
 const customSelectStyles = {
@@ -201,7 +202,7 @@ const flightClassOptions = [
   { label: "First Class", value: "first" },
 ]
 
-const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
+const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect }) => {
   defaultValues = defaultValues || {}
   const [roundTrip, setRoundTrip] = React.useState(defaultValues.roundTrip || roundTripOptions[0])
   const [passengers, setPassengers] = React.useState(defaultValues.passengers || passengersOptions[0])
@@ -212,12 +213,14 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
     dateFormat: "m/d/y",
     mode: "range",
   }
-  console.log(dates)
 
   return (
-    <div className="px-4">
-      <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", className)} style={style}>
-        <form>
+    <div className={classNames("px-4", className)}>
+      <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded")} style={style}>
+        <form onSubmit={e => {
+          e.preventDefault();
+          navigate("booking");
+        }}>
           <div className="flex flex-wrap">
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32">
@@ -263,9 +266,10 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
           <div className="flex flex-wrap justify-center mt-3">
             <div className="flex-1 booking-form-left-select">
               <AirportSelect id="depart"
-                             onChange={(val) =>
-                               setAirports(prevState => [val, prevState[1]])
-                             }
+                             onChange={(val) => {
+                               setAirports(prevState => [val, prevState[1]]);
+                               if (onAirportSelect) onAirportSelect(val);
+                             }}
                              value={airports[0]}
                              dropUp={dropUp}
                              isStarting
@@ -290,16 +294,17 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
             <div className="mt-1 sm:mt-0 flex-1 booking-form-right-select">
               <AirportSelect
                 id="arrive"
-                onChange={(val) =>
-                  setAirports(prevState => [prevState[0], val])
-                }
+                onChange={(val) => {
+                  setAirports(prevState => [prevState[0], val]);
+                  if (onAirportSelect) onAirportSelect(val);
+                }}
                 value={airports[1]}
                 dropUp={dropUp}
               />
             </div>
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <span className="mt-2 md:mt-0 md:ml-4 block w-full sm:w-auto sm:inline-flex rounded-md shadow-sm">
-              <button type="button"
+              <button type="submit"
                       className={classNames(
                         "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
                         "font-medium rounded-md text-green-800 bg-green-200 hover:bg-green-100 focus:outline-none",
