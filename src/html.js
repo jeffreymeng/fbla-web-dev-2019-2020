@@ -11,8 +11,8 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         {props.headComponents}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css" />
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
