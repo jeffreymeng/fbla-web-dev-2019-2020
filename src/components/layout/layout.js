@@ -14,11 +14,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
+
 const SocialMediaIcon = ({icon,link,lightFooter}) => {
   return (<a href={link} className={`icon-stack-link fa-stack ${!lightFooter ? "bg-gray-200 hover:bg-gray-300 text-gray-700 hover:text-blue-500" : "bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-blue-300"}`}>
     {/*<FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />*/}
     <FontAwesomeIcon icon={icon} className="fa-stack-1x " />
-
   </a>);
 }
 
@@ -52,7 +52,8 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
             <Container fluid className="px-0 pt-3">
               <Row noGutters className="text-center align-items-center">
                 <Col md={4}>
-                  <span className="copyright">Copyright &copy; 2020 Coastal Airlines</span>
+
+                  <span className="copyright nova">Copyright &copy; 2020 Coastal Airlines</span>
                 </Col>
                 <Col md={4}>
                   <ul className="list-inline social-buttons d-none d-md-block">
@@ -79,11 +80,12 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
                   </ul>
                 </Col>
                 <Col md={4}>
+
                   <ul className="list-inline quicklinks">
-                    <li className="list-inline-item mr-4">
+                    <li className="list-inline-item mr-4 nova">
                       <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Privacy Policy</a>
                     </li>
-                    <li className="list-inline-item">
+                    <li className="list-inline-item nova">
                       <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Terms of Use</a>
                     </li>
                   </ul>

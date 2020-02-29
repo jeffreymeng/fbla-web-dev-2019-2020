@@ -7,7 +7,14 @@ const FFPRewardsSpender = (props) => {
 
   // TODO do for real
   useEffect(() => {
-    setCost([Math.round(Math.random()*10000), Math.round(Math.random()*10000), Math.round(Math.random()*10000)]);
+    let economy = {
+      US:14839,
+      Canada:19382,
+      Mexico:18374
+    }[originRegion];
+    let business = Math.round(economy * 2.7394);
+    let first = Math.round(business * 1.837);
+    setCost([economy, business, first]);
   }, [originRegion, destRegion]);
 
   return (

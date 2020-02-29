@@ -3,6 +3,7 @@
   "private": true,
   "description": "MVHS FBLA Web Dev Team 2019-2020",
   "dependencies": {
+    "@brainhubeu/react-carousel": "^1.12.14",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",

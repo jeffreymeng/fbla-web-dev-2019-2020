@@ -36,11 +36,12 @@ const CustomNavbar = ({ pageInfo }) => {
           <Navbar.Brand as="span">Coastal Airlines</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end nexaLight">
           <Nav activeKey={pageInfo && pageInfo.pageName}>
             <NavbarLink page="">Home</NavbarLink>
             <NavbarLink page="jobs">Jobs</NavbarLink>
             <NavbarLink page="frequent-flyer-program">Frequent Flyer Program</NavbarLink>
+            <NavbarLink page="about">About</NavbarLink>  
             {!signedIn && <NavbarLink page="sign-in">Sign In</NavbarLink>}
             {signedIn && <NavbarLink page="sign-out">Sign Out</NavbarLink>}
           </Nav>
