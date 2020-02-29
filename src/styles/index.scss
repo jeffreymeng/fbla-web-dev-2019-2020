@@ -1,4 +1,6 @@
-
+.min-h-content-area {
+  min-height: calc(100vh - 64px);
+}
 @font-face {
   font-family: 'Nexa Bold';
   src: url("../fonts/Nexa Bold.otf") format("opentype");
@@ -127,8 +129,12 @@ a:not([href]):hover {
 
 }
 
-.no-underline {
-  &:hover {
-    text-decoration: none !important;
+@screen sm {
+  .booking-form-left-select {
+    margin-right: -14px;
+  }
+
+  .booking-form-right-select {
+    margin-left: -14px;
   }
 }

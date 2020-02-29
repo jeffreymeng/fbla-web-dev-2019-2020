@@ -1,74 +1,109 @@
 import React from "react"
 import "../styles/index.scss"
 import "../styles/flatpickr/light.scss"
-import { Button, Col, Form } from "react-bootstrap"
-import Flatpickr from "react-flatpickr";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-import Select, {components} from 'react-select'
+import Flatpickr from "react-flatpickr"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
+import Select, {components} from "react-select"
+import classNames from "classnames"
 
 
+const customSelectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderColor: "transparent",
+    "&:hover": {
+      borderColor: provided.borderColor,
+    },
+    width: "auto",
+  }),
+  indicatorSeparator: (provided, state) => ({
+    display: "none",
+  }),
+  menu: (provided, state) => ({
+    ...provided,
+    zIndex: 20,
+  }),
+}
+const airportCustomSelectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderColor: "transparent",
+    backgroundColor: "#EDF2F7",
+    padding: "8px",
+    "&:hover": {
+      backgroundColor: "#F7FAFC",
+    },
+    width: "auto",
+  }),
+  indicatorSeparator: (provided, state) => ({
+    display: "none",
+  }),
+  dropdownIndicator: (provided, state) => ({
+    display: "none",
+  })
+}
 
-const AirportSelect = ({id, onChange, value, dropUp}) => {
+const AirportSelect = ({ id, onChange, value, dropUp, isStarting }) => {
   const parseAirports = (airports) => {
     const abbvMap = {
-      HI:"Hawaii",
-      CA:"California",
-      NM:"New Mexico",
-      CO:"Colorado",
-      WA:"Washington",
-      AZ:"Arizona",
-      UT:"Utah",
-      OR:"Oregon",
-      NV:"Nevada",
-      AK:"Alaska",
-      "Mexico":"Mexico",
-      "Canada":"Canada",
+      HI: "Hawaii",
+      CA: "California",
+      NM: "New Mexico",
+      CO: "Colorado",
+      WA: "Washington",
+      AZ: "Arizona",
+      UT: "Utah",
+      OR: "Oregon",
+      NV: "Nevada",
+      AK: "Alaska",
+      "Mexico": "Mexico",
+      "Canada": "Canada",
     }
     // Transform into object
     let data = airports.map(info => {
-      let data = info.split(" - ");
-      let state = data[1].split(", ")[1];
+      let data = info.split(" - ")
+      let state = data[1].split(", ")[1]
       return {
         name: data[0],
-        location:data[1],
-        city:data[1].split(",")[0],
-        state:state,
-        code:data[2],
-        full:info,
-        countryPriority:(state !== "Canada" && state !== "Mexico") ? 1 : state === "Canada" ? 2 : 3
+        location: data[1],
+        city: data[1].split(",")[0],
+        state: state,
+        code: data[2],
+        full: info,
+        countryPriority: (state !== "Canada" && state !== "Mexico") ? 1 : state === "Canada" ? 2 : 3,
       }
-    });
+    })
     // Sort by country, then state, then lexicographically
     data.sort((a, b) => {
       if (a.countryPriority !== b.countryPriority) {
-        return a.countryPriority - b.countryPriority;
+        return a.countryPriority - b.countryPriority
       }
       if (a.state !== b.state) {
-        return a.state.localeCompare(b.state);
+        return a.state.localeCompare(b.state)
       }
-      return a.name.localeCompare(b.name);
-    });
+      return a.name.localeCompare(b.name)
+    })
 
     // Transform into options parsable by react select
-    let options = [];
-    let stateIndex = -1;
+    let options = []
+    let stateIndex = -1
     data.forEach((airport, i) => {
       if (i == 0 || options[stateIndex].label !== abbvMap[airport.state]) {
         options.push({
-          label:abbvMap[airport.state],
-          options:[]
-        });
-        stateIndex ++;
+          label: abbvMap[airport.state],
+          options: [],
+        })
+        stateIndex++
       }
       options[stateIndex].options.push({
-        label:`${airport.name} - ${airport.city}, ${abbvMap[airport.state]} - ${airport.code}`,
-        value:airport.code,
-        ...airport
-      });
+        label: `${airport.name} - ${airport.city}, ${abbvMap[airport.state]} - ${airport.code}`,
+        value: airport.code,
+        ...airport,
+      })
 
-    });
-    return options;
+    })
+    return options
 
   }
   const airports = [
@@ -92,48 +127,50 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
     "Vancouver International Airport - British Columbia, Canada - YVR",
     "Toronto Pearson International Airport - Ontario, Canada - YYZ",
   ]
-  const options = parseAirports(airports);
+  const options = parseAirports(airports)
   const customFilterOption = (option, rawInput) => {
-    const words = rawInput.split(' ');
+    const words = rawInput.split(" ")
     return words.reduce(
       (acc, cur) => acc && option.label.toLowerCase().includes(cur.toLowerCase()),
       true,
-    );
-  };
+    )
+  }
   const Option = props => {
     return (
       <components.Option {...props}>
         <b>{props.data.code} - {props.data.name}</b><br />
         <span className={props.isSelected ? "" : "text-muted"}>{props.data.location}</span>
       </components.Option>
-    );
-  };
+    )
+  }
   const SingleValue = ({ children, ...props }) => {
     return (
       <components.SingleValue {...props}>{props.data.code + " - " + props.data.name}</components.SingleValue>
-    );
+    )
   }
   const getOptWithValue = (value) => {
-    let result = "";
+    let result = ""
     options.forEach(el => {
       if (el.options.filter(opt => opt.code === value)[0])
-        result = el.options.filter(opt => opt.code === value)[0];
-    });
-    return result;
+        result = el.options.filter(opt => opt.code === value)[0]
+    })
+    return result
 
   }
   return (
 
     <Select id={id}
+            styles={airportCustomSelectStyles}
             filterOption={customFilterOption}
             options={options}
             menuPlacement={dropUp ? "top" : "auto"}
             components={{
               Option,
-              SingleValue
+              SingleValue,
             }}
-            noOptionsMessage={() => <><b>It looks like we do not fly to that airport yet!</b> Are you sure you spelled the name correctly?</>}
-            placeholder={"Choose an airport..."}
+            noOptionsMessage={() => <><b>It looks like we do not fly to that airport yet!</b> Are you sure you spelled
+              the name correctly?</>}
+            placeholder={isStarting ? "Choose a starting airport" : "Choose a destination airport"}
             value={getOptWithValue(value)}
             onChange={(val) => onChange(val.code)}
     />
@@ -141,135 +178,131 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
   )
 }
 
-const BookingForm = ({ onSubmit, dropUp, defaultValues }) => {
-  defaultValues = defaultValues || {};
-  const [isRoundTrip, setIsRoundTrip] = React.useState(defaultValues.isRoundTrip || true);
-  const [passengers, setPassengers] = React.useState(defaultValues.passengers || 1);
-  const [dates, setDates] = React.useState([defaultValues.startDate || "", defaultValues.endDate || ""]);
-  const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""]);
+const roundTripOptions = [
+  { label: "Round Trip", value: "rt" },
+  { label: "One Way", value: "ow" },
+]
+
+const passengersOptions = [
+  { label: "1 Passenger", value: 1 },
+  { label: "2 Passengers", value: 2 },
+  { label: "3 Passengers", value: 3 },
+  { label: "4 Passengers", value: 4 },
+  { label: "5 Passengers", value: 5 },
+  { label: "6 Passengers", value: 6 },
+  { label: "7 Passengers", value: 7 },
+  { label: "8 Passengers", value: 8 },
+  { label: "9 Passengers", value: 9 },
+]
+
+const flightClassOptions = [
+  { label: "Economy", value: "economy" },
+  { label: "Business", value: "business" },
+  { label: "First Class", value: "first" },
+]
+
+const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
+  defaultValues = defaultValues || {}
+  const [roundTrip, setRoundTrip] = React.useState(defaultValues.roundTrip || roundTripOptions[0])
+  const [passengers, setPassengers] = React.useState(defaultValues.passengers || passengersOptions[0])
+  const [flightClass, setFlightClass] = React.useState(defaultValues.flightClass || flightClassOptions[0])
+  const [dates, setDates] = React.useState([defaultValues.startDate || "", defaultValues.endDate || ""])
+  const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""])
   const datepickerOptions = {
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d",
     mode: "single",
     minDate: "today",
-    maxDate: "2021-06-30"
-  };
+    maxDate: "2021-06-30",
+  }
+
   return (
-    <Form>
-      <Form.Row>
-        <Form.Group as={Col} lg={2} sm={12} controlId="formTripType">
-          <Form.Label >Trip Type</Form.Label>
-          <Form.Control as="select" value={isRoundTrip ? "rt" : "ow"} onChange={(e) => setIsRoundTrip(e.target.value === "rt")}>
-            <option value="rt">Round Trip</option>
-            <option value="ow">One Way</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formStartDate">
-          <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
+    <div className="px-4">
+      <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", className)} style={style}>
+        <form>
+          <div className="block sm:inline-block " style={{ width: "130px" }}> {/* eww ugly magic number */}
+            <Select
+              styles={customSelectStyles}
+              options={roundTripOptions}
+              value={roundTrip}
+              onChange={(v) => setRoundTrip(v)} />
+          </div>
+          <div className="mt-2 sm:mt-0 sm:ml-6 block inline-block w-40">
+            <Select
+              styles={customSelectStyles}
+              options={passengersOptions}
+              value={passengers}
+              onChange={(v) => setPassengers(v)} />
+          </div>
+          <div className="mt-2 sm:mt-0 sm:ml-6 block sm:inline-block w-32">
+            <Select
+              styles={customSelectStyles}
+              options={flightClassOptions}
+              value={flightClass}
+              onChange={(v) => setFlightClass(v)} />
+          </div>
+          <div className="flex flex-wrap justify-center mt-3">
+            <div className="flex-1 booking-form-left-select">
+              <AirportSelect id="depart"
+                             onChange={(val) =>
+                               setAirports(prevState => [val, prevState[1]])
+                             }
+                             value={airports[0]}
+                             dropUp={dropUp}
+                             isStarting
+              />
+            </div>
+            <div className="sm:hidden" style={{flexBasis: "100%"}}/>
+            <button className="relative z-10 self-center inline-block w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setAirports((oldState) => {
+                        let newState = oldState.slice();
+                        // swap first and second elements
+                        newState.unshift(newState.pop());
+                        return newState;
+                      });
+                    }}>
+              <label className="sr-only">Swap</label>
+              <FontAwesomeIcon className="text-blue-800" icon={faExchangeAlt} />
+            </button>
+            <div className="sm:hidden" style={{flexBasis: "100%"}}/>
+            <div className="flex-1 booking-form-right-select">
+              {/*<Form.Control*/}
+              {/*  hidden*/}
+              {/*  isInvalid={airports[0] != "" && airports[0] == airports[1]}*/}
+              {/*></Form.Control>*/}
+              <AirportSelect
+                id="arrive"
+                onChange={(val) =>
+                  setAirports(prevState => [prevState[0], val])
+                }
+                value={airports[1]}
+                dropUp={dropUp}
 
-          <Form.Control as={Flatpickr}
-                        className="datepicker"
-                        onChange={(date) => setDates(prevState => [date, prevState[1]])}
-                        value={dates[0]}
-                        options={datepickerOptions} placeholder={`Choose a${isRoundTrip ? " start" : "'"} date for your trip`}/>
+              />
 
-        </Form.Group>
-        <Form.Group as={Col} sm={6} lg={4} controlId="formEndDate" hidden={!isRoundTrip} >
-          <Form.Label>End Date</Form.Label>
-
-          <Form.Control as={Flatpickr}
-                        className="datepicker"
-                        onChange={(date) => setDates(prevState => [prevState[0], date])}
-                        value={dates[1]}
-                        options={datepickerOptions} placeholder={`Choose an end date for your trip`}
-                        isInvalid={new Date(dates[0]).getTime() > new Date(dates[1]).getTime()}
-          />
-
-          <Form.Control.Feedback type="invalid">The end date cannot be before the start date! <a onClick={() => {
-            setDates((oldState) => {
-              let newState = oldState.slice();
-              // swap first and second elements
-              newState.unshift(newState.pop());
-              return newState;
-            })
-          }}>Swap Dates</a></Form.Control.Feedback>
-
-        </Form.Group>
-        <Form.Group as={Col} sm={12} lg={2} controlId="formPassengers">
-          <Form.Label>Passengers</Form.Label>
-          <Form.Control type="number" min={1} value={passengers} onChange={(e) => setPassengers(e.target.value)}  isInvalid={passengers && (passengers < 1 || passengers > 9)} />
-          <Form.Control.Feedback type="invalid">
-            {passengers > 9 ? "For more than 9 passengers, please contact our group bookings office at 1 (800) 475-2048" : passengers < 1 ? "You must have at least 1 passenger!" : "Please enter a number between 1 and 9."}
-          </Form.Control.Feedback>
-        </Form.Group>
-
-      </Form.Row>
-      <Form.Row>
-
-        <Form.Group as={Col}  lg={5} xs={9}>
-          <Form.Label htmlFor="depart">Depart</Form.Label>
-          <AirportSelect id="depart"
-                         onChange={(val) =>
-                           setAirports(prevState => [val, prevState[1]])
-                         }
-                         value={airports[0]}
-                         dropUp={dropUp}
-          />
-        </Form.Group>
-        <Form.Group as={Col}  lg={2} xs={3}>
-          <Form.Label style={{
-            visibility:"hidden"
-          }}>Swap</Form.Label>
-          <Button variant="secondary" block onClick={() => {
-            setAirports((oldState) => {
-              let newState = oldState.slice();
-              // swap first and second elements
-              newState.unshift(newState.pop());
-              return newState;
-            });
-          }}>
-            <span className="d-inline d-lg-none">Swap</span>
-            <FontAwesomeIcon className="d-none d-lg-inline-block" icon={faExchangeAlt} />
-          </Button>
-        </Form.Group>
-        <Form.Group as={Col}  lg={5} sm={12}>
-          <Form.Label htmlFor="arrive">Arrive</Form.Label>
-          <Form.Control
-            hidden
-            isInvalid={airports[0] != "" && airports[0] == airports[1]}
-          ></Form.Control>
-          <AirportSelect
-            id="arrive"
-            onChange={(val) =>
-            setAirports(prevState => [prevState[0], val])
-            }
-            value={airports[1]}
-            dropUp={dropUp}
-
-          />
-
-          <Form.Control.Feedback type="invalid">
-            Your arrival airport cannot be the same as your departure airport!
-          </Form.Control.Feedback>
-        </Form.Group>
-      </Form.Row>
-
-
-      <Button variant="primary" block onClick={() => {
-        onSubmit({
-          roundTrip:isRoundTrip,
-          passengers,
-          departAirport:airports[0],
-          arriveAirport:airports[1],
-          startDate:dates[0],
-          endDate:(isRoundTrip ? dates[1] : undefined)
-        })
-      }}>
-        Find Flights
-      </Button>
-    </Form>
+              {/*<Form.Control.Feedback type="invalid">*/}
+              {/*  Your arrival airport cannot be the same as your departure airport!*/}
+              {/*</Form.Control.Feedback>*/}
+            </div>
+            <div className="md:hidden" style={{flexBasis: "100%"}}/>
+            <span className="mt-2 md:mt-0 md:ml-4 inline-flex rounded-md shadow-sm">
+              <button type="button"
+                      className={classNames(
+                        "inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
+                        "font-medium rounded-md text-green-800 bg-green-200 hover:bg-green-100 focus:outline-none",
+                        "focus:border-green-200 focus:shadow-outline-green active:bg-green-200 transition ease-in-out duration-150"
+                      )}>
+                Search
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }
 
-export default BookingForm;
+export default BookingForm

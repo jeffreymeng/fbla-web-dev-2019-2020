@@ -23,7 +23,7 @@ const SocialMediaIcon = ({icon,link,lightFooter}) => {
   </a>);
 }
 
-const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backgroundColor }) => (
+const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgroundColor }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -36,8 +36,9 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
     `}
     render={function(data) {
       let page = (
-        <>
-          <Container fluid className="px-0 main" style={{
+
+        <div className={parallax ? "parallax-wrapper" : ""}>
+          <Container fluid className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>
             <Navbar pageInfo={pageInfo} admin={admin} />
@@ -46,7 +47,8 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
 
           </Container>
           <Footer />
-        </>
+        </div>
+
       )
       if (!backgroundImage) {
         return page

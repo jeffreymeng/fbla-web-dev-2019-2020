@@ -4,7 +4,7 @@ import SEO from "../components/seo"
 
 import "../styles/index.scss"
 import "../styles/about.scss"
-import "../styles/jobs.scss"
+import "../styles/parallax.scss"
 import { graphql, StaticQuery } from "gatsby"
 
 import planeImage from "../images/planecoast.jpg"
@@ -14,7 +14,7 @@ import icon from "../images/coastalLogo.png"
 
 
 const About = () => (
-    <Layout>
+    <Layout bodyClassName="parallax-wrapper">
 	    <SEO title="About"/>
 	   	<div className="grayColor">
 
@@ -55,6 +55,7 @@ What started off as a dream with three individuals to travel and explore the nat
 </div>
 
 {/*		   	<div className="about_box">
+
 		      	<h1 className="about_title nexa">About <span className="about_emphasis">Us</span></h1>
 		        <p className="about_sub">The Story of <span className="nexa">Coastal Airlines</span></p>
 		    </div>*/}
@@ -307,6 +308,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				  <img src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" />
 				</Carousel>
 			</div>
+
 				
 			<div className="relative bg-gray-800">
 				  <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
