@@ -60,7 +60,7 @@ const FFPRewardsSpender = (props) => {
           <Select options={regionOptions} value={originRegion} onChange={v => setOriginRegion(v)} />
         </div>
         <div className="md:flex-1">
-          <label htmlFor="rewardsSpenderDestination" className="ml-1 block text-lg leading-5 font-medium text-gray-700">Destination Region</label>
+          <label htmlFor="rewardsSpenderDestination" className="ml-1 mb-2 block text-lg leading-5 font-medium text-gray-700">Destination Region</label>
           <Select options={regionOptions} value={destRegion} onChange={v => setDestRegion(v)} />
         </div>
       </div>
