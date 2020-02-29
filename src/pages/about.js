@@ -15,7 +15,9 @@ import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
 import flightSafetyPic from "../images/flightSafetyPic.png"
-const About = () => (
+const About = () => {
+
+return(
     <Layout parallax>
 	    <SEO title="About"/>
 	   	<div className="grayColor">
@@ -283,13 +285,13 @@ What started off as a dream with three individuals to travel and explore the nat
 
 			          <a href="https://www.epa.gov/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 mx-auto flex justify-center py-1 px-8 ">
-				          <img className="max-h-28" src={epaPic} alt="EPA" />
+				          <img className="max-h-24" src={epaPic} alt="EPA" />
 				        </div>
 			          </a>
 
 				          <a href="https://www.edf.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
-				          <img className="max-h-28" src={edfPic} alt="Environmental Defense Fund" />
+				          <img className="max-h-24" src={edfPic} alt="Environmental Defense Fund" />
 				        </div>
 			          </a>
 				         <a href="https://www.onepercentfortheplanet.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
@@ -299,7 +301,7 @@ What started off as a dream with three individuals to travel and explore the nat
 			          </a>
 				           <a href="https://flightsafety.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
-				          <img className="max-h-28" src={flightSafetyPic} alt="Workcation" />
+				          <img className="max-h-28 " src={flightSafetyPic} alt="Workcation" />
 				        </div>
 			          </a>
 				        </div>
@@ -337,9 +339,10 @@ What started off as a dream with three individuals to travel and explore the nat
 				      </div>
 				    </div>
 				  </div>
-				</div>
-
 			</div>
+			</div>
+				
+
 		</Layout>
 	)
 };
