@@ -1,41 +1,11 @@
-.parallax {
-  /* Needed for children to be absolutely positioned relative to the parent. */
-  position: relative;
-  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
-  height: 50vh;
 
-  /* For text formatting. */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 0 0 5px #000;
-  text-align: center;
-  padding-top: 0;
 
+
+.about-content {
+  margin-right:0px !important;
+  padding:0;
+  width:100%;
 }
-.parallax::after {
-  content: " ";
-  position: absolute;
-  top: 0 !important;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height:100vh;
-  transform: translateZ(-1px) scale(1.5);
-  background-size: 100%;
-  z-index: -1;
-  background: url('../images/bg.jpg') center;
-}
-.parallax-wrapper {
-  top:0;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  perspective: 2px;
-
-}
-
 
 .nexa {
   font-family: 'Nexa Bold';
@@ -73,7 +43,7 @@
 
 .planeBackground{
 	text-align: left;
-	background: url('../images/planecoast.jpg'), linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0.7), transparent),  no-repeat center; 
+	background: url('../images/planecoast.jpg'), linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0.7), transparent),  no-repeat center;
 	background-size: 100%;
 	background-position: center;
     background-blend-mode: lighten;
@@ -84,7 +54,7 @@
 }
 
 
-.about_info{
+.about_content{
 	background-color: #F7FAFC;
 	padding-bottom: 4rem;
 }

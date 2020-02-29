@@ -3,9 +3,9 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 
 import { Container, Button, Image, Jumbotron, Card, CardDeck} from "react-bootstrap"
-import "../styles/index.scss"
+// import "../styles/index.scss"
 import "../styles/about.scss"
-import "../styles/jobs.scss"
+import "../styles/parallax.scss"
 import { graphql, StaticQuery } from "gatsby"
 
 import planeImage from "../images/planecoast.jpg"
@@ -15,16 +15,16 @@ import icon from "../images/coastalLogo.png"
 
 
 const About = () => (
-    <Layout>
+    <Layout bodyClassName="parallax-wrapper">
 	    <SEO title="About"/>
-	   	<div className="grayColor parallax-wrapper">
+	   	<div>
 		   	<div className="about_box parallax">
 		      	<h1 className="about_title nexa">About <span className="about_emphasis">Us</span></h1>
 		        <p className="about_sub">The Story of <span className="nexa">Coastal Airlines</span></p>
 		    </div>
 
 	    
-		    <div className="about_info container">
+		    <div className="about_content">
 			    <h1 className="about_subTitle nexa">Our Origins</h1>
 			    <h1 className="about_subTitle nexa">_</h1>
 			    <h1 className="about_phrase">What started off as a dream with three individuals to travel and explore the nation in a simple, hassle-free manner is now Coastal Airlines: <span	className="nexa">The best air travel for the West.</span></h1>
