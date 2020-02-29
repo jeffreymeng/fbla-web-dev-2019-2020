@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
+import BulletListItem from "../../components/BulletListItem"
 
 const jobs = [
   {
@@ -14,6 +15,10 @@ const jobs = [
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       position: "Junior Flight Attendant",
     },
+    application: [
+      "Service Background",
+      "Industry Background",
+    ],
   },
   {
     name: "Back End Developer",
@@ -26,6 +31,10 @@ const jobs = [
       image: "https://images.unsplash.com/photo-1506919258185-6078bba55d2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       position: "Senior Full-Stack Engineer",
     },
+    application: [
+      "Years of Experience",
+      "Skillset",
+    ],
   },
 ]
 
@@ -53,7 +62,7 @@ const ApplyPage = props => {
         </div>
       </div>
 
-      <div className="max-w-screen-lg mx-auto py-16 px-4">
+      <div id="choose" className="max-w-screen-lg mx-auto py-16 px-4">
         <h1 className="section-heading section-heading--center">
           To get started, choose an available position.
         </h1>
@@ -68,7 +77,7 @@ const ApplyPage = props => {
                    }}
                    className={(selectedJob === idx ? "border-indigo-700 " : "border-transparent ") + "border-l-4 block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out no-underline"}>
                   <div className="flex items-center">
-                    <div className="px-4 py-4 sm:px-6 flex-1">
+                    <div className="px-4 py-3 sm:px-6 flex-1">
                       <div className="flex items-center justify-between">
                         <div className="text-sm leading-5 font-medium text-indigo-600 truncate">
                           {job.name}
@@ -80,7 +89,7 @@ const ApplyPage = props => {
                           </span>
                         </div>
                       </div>
-                      <div className="mt-2 sm:flex sm:justify-between">
+                      <div className="mt-1 sm:flex sm:justify-between">
                         <div className="sm:flex">
                           <div className="mr-6 flex items-center text-sm leading-5 text-gray-500">
                             <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="currentColor"
@@ -173,7 +182,8 @@ const ApplyPage = props => {
           </div>
 
           {jobs.map((job, idx) => (
-            <div className={(idx===selectedJob?"opacity-1":"opacity-0")+" absolute transition duration-200 ease-in-out top-0 left-0 right-0 px-4"}>
+            <div
+              className={(idx === selectedJob ? "opacity-1" : "opacity-0") + " absolute transition duration-200 ease-in-out top-0 left-0 right-0 px-4"}>
               <blockquote>
                 <div className="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900">
                   <p>
@@ -207,7 +217,33 @@ const ApplyPage = props => {
         </div>
       </div>
 
-      HELLO
+      <div className="max-w-screen-sm mx-auto py-8 md:py-12 lg:py-16 px-4">
+        <h1 className="section-heading section-heading--center">Steps to Apply</h1>
+        <p className="text-gray-700 text-lg mb-12 text-center">To apply, prepare the following information (varies by job) and send it in
+          an email to <a href="mailto:jobs@coastalairlines.com">jobs@coastalairlines.com</a>. We'll reach out to you in
+          2-3 business days to schedule an interview!</p>
+
+        <p>
+          Chosen Job: <b>{jobs[selectedJob].name}</b>
+          <a href="#choose"
+             className="ml-4 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            Change Selected Job
+          </a>
+        </p>
+        <ul className="list-reset">
+          <BulletListItem>Cover Letter</BulletListItem>
+          <BulletListItem>Resume</BulletListItem>
+          {jobs[selectedJob].application.map(thing => <BulletListItem>{thing}</BulletListItem>)}
+        </ul>
+      </div>
+
+      <div className="bg-gray-50 py-16 px-4">
+        <h2 className="text-center text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+          Ready to get started?
+          <br />
+          <span className="text-indigo-600">Apply for Coastal Airlines today.</span>
+        </h2>
+      </div>
     </Layout>
   )
 }
