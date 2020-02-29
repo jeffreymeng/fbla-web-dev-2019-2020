@@ -1,7 +1,6 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
-
 import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"

@@ -304,7 +304,17 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <span className="mt-2 md:mt-0 md:ml-4 block w-full sm:w-auto sm:inline-flex rounded-md shadow-sm">
-              <button type="submit"
+              <button type="button"
+                      onClick={() => {
+                        onSubmit({
+                          roundTrip:roundTrip.value,
+                          passengers:passengers.value,
+                          departAirport:airports[0],
+                          arriveAirport:airports[1],
+                          startDate:dates[0],
+                          endDate:roundTrip.value === "rt" ? dates[1] : undefined
+                        })
+                      }}
                       className={classNames(
                         "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
                         "font-medium rounded-md text-green-800 bg-green-200 hover:bg-green-100 focus:outline-none",

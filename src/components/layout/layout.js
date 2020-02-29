@@ -7,7 +7,6 @@
 
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
-import { Container, Row, Col } from "react-bootstrap"
 import Navbar from "./navBar"
 import BackgroundImage from "gatsby-background-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,7 +23,7 @@ const SocialMediaIcon = ({icon,link,lightFooter}) => {
   </a>);
 }
 
-const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgroundColor }) => (
+const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgroundColor, customParallax }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -38,15 +37,15 @@ const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgrou
     render={function(data) {
       let page = (
 
-        <div className={parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : ""}>
-          <Container fluid className={"px-0 main"} style={{
+        <div className={(parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : "") + customParallax ? "parallax-wrapper-custom" : ""}>
+          <div fluid className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>
             <Navbar pageInfo={pageInfo} admin={admin} />
 
             <main>{children}</main>
 
-          </Container>
+          </div>
           <Footer />
         </div>
 

@@ -1,4 +1,5 @@
-.parallax-wrapper main > :first-child {
+.parallax-wrapper main > :first-child,
+.parallax {
   /* Needed for children to be absolutely positioned relative to the parent. */
   position: relative;
   /* The height of the container. Must be set, but it doesn't really matter what the value is. */
@@ -8,7 +9,8 @@
 
 }
 
-.parallax-wrapper main > :first-child::after {
+.parallax-wrapper main > :first-child::after,
+.parallax::after {
   content: " ";
   position: absolute;
   top: 0 !important;
@@ -28,7 +30,8 @@
 
 
 
-.parallax-wrapper {
+.parallax-wrapper,
+.parallax-wrapper-custom {
   top:0;
   height: 100vh;
   overflow-x: hidden;
