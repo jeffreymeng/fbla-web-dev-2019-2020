@@ -1,10 +1,48 @@
+.parallax {
+  /* Needed for children to be absolutely positioned relative to the parent. */
+  position: relative;
+  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+  height: 50vh;
+
+  /* For text formatting. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 0 0 5px #000;
+  text-align: center;
+  padding-top: 0;
+
+}
+.parallax::after {
+  content: " ";
+  position: absolute;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height:100vh;
+  transform: translateZ(-1px) scale(1.5);
+  background-size: 100%;
+  z-index: -1;
+  background: url('../images/bg.jpg') center;
+}
+.parallax-wrapper {
+  top:0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 2px;
+
+}
+
 
 .nexa {
   font-family: 'Nexa Bold';
 }
 
 .nexaLight{
-	font-family: 'Nexa Light';
+  font-family: 'Nexa Light';
 }
 
 .nova {
@@ -12,20 +50,12 @@
 }
 
 
-.about_box{
-	padding: 7rem 0;
-  text-align: center;
-  
-	background:  url('../images/bg.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-    margin-bottom: 5rem;
-}
+
 .about_title{
 	font-size: 8rem;
     color: #F7FAFC;
     margin-bottom: 2rem;
+  display:block;
 }
 
 .about_emphasis{
@@ -35,6 +65,9 @@
 .about_sub{
     font-size: 2.5rem;
     color: #FFFFFF;
+  display:block;
+  text-align: center;
+
 }
 
 
