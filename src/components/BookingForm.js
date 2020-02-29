@@ -114,7 +114,7 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
     );
   }
   const getOptWithValue = (value) => {
-    let result = undefined;
+    let result = "";
     options.forEach(el => {
       if (el.options.filter(opt => opt.code === value)[0])
         result = el.options.filter(opt => opt.code === value)[0];
@@ -239,13 +239,13 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues }) => {
             hidden
             isInvalid={airports[0] != "" && airports[0] == airports[1]}
           ></Form.Control>
-          <AirportSelect id="arrive"
-
-                         onChange={(val) =>
-                           setAirports(prevState => [prevState[0], val])
-                         }
-                         value={airports[1]}
-                         dropUp={dropUp}
+          <AirportSelect
+            id="arrive"
+            onChange={(val) =>
+            setAirports(prevState => [prevState[0], val])
+            }
+            value={airports[1]}
+            dropUp={dropUp}
 
           />
 
