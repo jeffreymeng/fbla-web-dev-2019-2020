@@ -1,11 +1,11 @@
 import React from "react"
 import "../styles/index.scss"
 import "../styles/flatpickr/light.scss"
-import { Button, Col, Form } from "react-bootstrap"
 import Flatpickr from "react-flatpickr";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import Select, {components} from 'react-select'
+import classNames from "classnames";
 
 
 
@@ -141,7 +141,7 @@ const AirportSelect = ({id, onChange, value, dropUp}) => {
   )
 }
 
-const BookingForm = ({ onSubmit, dropUp, defaultValues }) => {
+const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
   defaultValues = defaultValues || {};
   const [isRoundTrip, setIsRoundTrip] = React.useState(defaultValues.isRoundTrip || true);
   const [passengers, setPassengers] = React.useState(defaultValues.passengers || 1);
@@ -155,120 +155,20 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues }) => {
     minDate: "today",
     maxDate: "2021-06-30"
   };
+
   return (
-    <Form>
-      <Form.Row>
-        <Form.Group as={Col} lg={2} sm={12} controlId="formTripType">
-          <Form.Label >Trip Type</Form.Label>
-          <Form.Control as="select" value={isRoundTrip ? "rt" : "ow"} onChange={(e) => setIsRoundTrip(e.target.value === "rt")}>
-            <option value="rt">Round Trip</option>
-            <option value="ow">One Way</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group as={Col} sm={isRoundTrip ? 6 : 12} lg={isRoundTrip ? 4 : 8} controlId="formStartDate">
-          <Form.Label>{isRoundTrip ? "Start" : ""} Date</Form.Label>
-
-          <Form.Control as={Flatpickr}
-                        className="datepicker"
-                        onChange={(date) => setDates(prevState => [date, prevState[1]])}
-                        value={dates[0]}
-                        options={datepickerOptions} placeholder={`Choose a${isRoundTrip ? " start" : "'"} date for your trip`}/>
-
-        </Form.Group>
-        <Form.Group as={Col} sm={6} lg={4} controlId="formEndDate" hidden={!isRoundTrip} >
-          <Form.Label>End Date</Form.Label>
-
-          <Form.Control as={Flatpickr}
-                        className="datepicker"
-                        onChange={(date) => setDates(prevState => [prevState[0], date])}
-                        value={dates[1]}
-                        options={datepickerOptions} placeholder={`Choose an end date for your trip`}
-                        isInvalid={new Date(dates[0]).getTime() > new Date(dates[1]).getTime()}
-          />
-
-          <Form.Control.Feedback type="invalid">The end date cannot be before the start date! <a onClick={() => {
-            setDates((oldState) => {
-              let newState = oldState.slice();
-              // swap first and second elements
-              newState.unshift(newState.pop());
-              return newState;
-            })
-          }}>Swap Dates</a></Form.Control.Feedback>
-
-        </Form.Group>
-        <Form.Group as={Col} sm={12} lg={2} controlId="formPassengers">
-          <Form.Label>Passengers</Form.Label>
-          <Form.Control type="number" min={1} value={passengers} onChange={(e) => setPassengers(e.target.value)}  isInvalid={passengers && (passengers < 1 || passengers > 9)} />
-          <Form.Control.Feedback type="invalid">
-            {passengers > 9 ? "For more than 9 passengers, please contact our group bookings office at 1 (800) 475-2048" : passengers < 1 ? "You must have at least 1 passenger!" : "Please enter a number between 1 and 9."}
-          </Form.Control.Feedback>
-        </Form.Group>
-
-      </Form.Row>
-      <Form.Row>
-
-        <Form.Group as={Col}  lg={5} xs={9}>
-          <Form.Label htmlFor="depart">Depart</Form.Label>
-          <AirportSelect id="depart"
-                         onChange={(val) =>
-                           setAirports(prevState => [val, prevState[1]])
-                         }
-                         value={airports[0]}
-                         dropUp={dropUp}
-          />
-        </Form.Group>
-        <Form.Group as={Col}  lg={2} xs={3}>
-          <Form.Label style={{
-            visibility:"hidden"
-          }}>Swap</Form.Label>
-          <Button variant="secondary" block onClick={() => {
-            setAirports((oldState) => {
-              let newState = oldState.slice();
-              // swap first and second elements
-              newState.unshift(newState.pop());
-              return newState;
-            });
-          }}>
-            <span className="d-inline d-lg-none">Swap</span>
-            <FontAwesomeIcon className="d-none d-lg-inline-block" icon={faExchangeAlt} />
-          </Button>
-        </Form.Group>
-        <Form.Group as={Col}  lg={5} sm={12}>
-          <Form.Label htmlFor="arrive">Arrive</Form.Label>
-          <Form.Control
-            hidden
-            isInvalid={airports[0] != "" && airports[0] == airports[1]}
-          ></Form.Control>
-          <AirportSelect
-            id="arrive"
-            onChange={(val) =>
-            setAirports(prevState => [prevState[0], val])
-            }
-            value={airports[1]}
-            dropUp={dropUp}
-
-          />
-
-          <Form.Control.Feedback type="invalid">
-            Your arrival airport cannot be the same as your departure airport!
-          </Form.Control.Feedback>
-        </Form.Group>
-      </Form.Row>
-
-
-      <Button variant="primary" block onClick={() => {
-        onSubmit({
-          roundTrip:isRoundTrip,
-          passengers,
-          departAirport:airports[0],
-          arriveAirport:airports[1],
-          startDate:dates[0],
-          endDate:(isRoundTrip ? dates[1] : undefined)
-        })
-      }}>
-        Find Flights
-      </Button>
-    </Form>
+    <div className={classNames("max-w-3xl mx-auto bg-white p-12 shadow-lg", className)} style={style}>
+      <form>
+        <select
+          className="block appearance-none"
+          value={isRoundTrip ? "rt" : "ow"}
+          onChange={(e) => setIsRoundTrip(e.target.value === "rt")}
+        >
+          <option value="rt">Round Trip</option>
+          <option value="ow">One Way</option>
+        </select>
+      </form>
+    </div>
   )
 }
 

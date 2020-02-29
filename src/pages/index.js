@@ -5,6 +5,7 @@ import SEO from "../components/seo"
 import "../styles/index.scss"
 import { graphql, StaticQuery, navigate } from "gatsby"
 import BookingForm from "../components/BookingForm";
+import bgImage from "../images/bg.jpg"
 
 const IndexPage = () => (
   <StaticQuery
@@ -23,24 +24,28 @@ const IndexPage = () => (
     `}
     render={data => (
       <Layout
-        pageInfo={{ pageName: "index" }}
-        backgroundImage={data.desktop.childImageSharp.fluid}
-        lightFooter
+        // pageInfo={{ pageName: "index" }}
+        // lightFooter
       >
         <SEO
           title="Home"
         />
-        <Container className="container">
-          <h1 className="index-hero-large text-center">Where will we be flying today?</h1>
-          <Jumbotron className="py-4">
-            <h1 className="index-hero-small">Where will we be flying today?</h1>
-            <BookingForm onSubmit={(data) => navigate("otherpage", {
-              state:data
-            })} dropUp />
 
-          </Jumbotron>
+        <div className="pt-32 relative">
+          <div className="absolute top-0 bottom-0 left-0 right-0 bg-cover bg-center -z-10" style={{
+            backgroundImage: `url('${bgImage}')`,
+            backgroundColor: "blue",
+            filter: "contrast(70%)",
+            backgroundBlendMode: "multiply",
+          }}/>
+          <h1 className="text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where will we be flying today?</h1>
 
-        </Container>
+          <BookingForm onSubmit={(data) => navigate("otherpage", {
+            state:data
+          })} dropUp style={{
+            marginBottom: "-60px",
+          }} />
+        </div>
       </Layout>
     )}
   />

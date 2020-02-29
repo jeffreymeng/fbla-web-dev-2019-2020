@@ -17,7 +17,7 @@ const JobsPage = () => (
               to="jobs/apply">Apply Now</Link>
       </div>
     </div>
-    
+
     <div className="bg-gray-50 pt-12 pb-8">
       <div className="job-benefits" id="benefits">
         <h2 className="section-heading">Why Us?</h2>
