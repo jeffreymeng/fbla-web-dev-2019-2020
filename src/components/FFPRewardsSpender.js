@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Form } from "react-bootstrap"
 
 const FFPRewardsSpender = (props) => {
   const [originRegion, setOriginRegion] = useState("US");
@@ -15,19 +14,20 @@ const FFPRewardsSpender = (props) => {
     <>
       <div className="md:flex narrow-container">
         <div className="md:flex-1 md:mr-8">
-          <label htmlFor="rewardsSpenderOrigin" className="ml-1 block text-lg leading-5 font-medium text-gray-700">Origin Region</label>
-          <Form.Control as="select" id="rewardsSpenderOrigin" value={originRegion} onChange={(e) => setOriginRegion(e.target.value)}>
-            <option value="US">United States</option>
-            <option value="Mexico">Mexico</option>
-          </Form.Control>
+          <label htmlFor="rewardsSpenderOrigin" className="ml-1 mb-2 block text-lg leading-5 font-medium text-gray-700">Origin Region</label>
+          <select id="rewardsSpenderOrigin" value={originRegion} onChange={(e) => setOriginRegion(e.target.value)}
+                  className="form-select relative block w-full rounded-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <option>USA</option>
+            <option>Canada</option>
+          </select>
         </div>
 
         <div className="md:flex-1">
           <label htmlFor="rewardsSpenderDestination" className="ml-1 block text-lg leading-5 font-medium text-gray-700">Destination Region</label>
-          <Form.Control as="select" id="rewardsSpenderDestination" value={destRegion} onChange={(e) => setDestRegion(e.target.value)}>
-            <option value="US">United States</option>
-            <option value="Canada">Canada</option>
-          </Form.Control>
+          {/*<Form.Control as="select" id="rewardsSpenderDestination" value={destRegion} onChange={(e) => setDestRegion(e.target.value)}>*/}
+          {/*  <option value="US">United States</option>*/}
+          {/*  <option value="Canada">Canada</option>*/}
+          {/*</Form.Control>*/}
         </div>
       </div>
       <div className="md:max-w-5xl md:flex mx-auto mt-8 max-w-xs px-4">
