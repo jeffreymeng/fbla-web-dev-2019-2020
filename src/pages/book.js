@@ -9,7 +9,7 @@ import Img from "gatsby-image"
 const FlightResults = ({ value }) => {
   return (
     <>
-      
+
       {JSON.stringify(value || {})}
     </>
   )
