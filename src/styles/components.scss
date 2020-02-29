@@ -1,4 +1,5 @@
 .numbered-sections-list {
+  margin-top: 3rem;
   .numbered-sections-list__item {
     display: flex;
     margin: 1rem;
@@ -43,4 +44,51 @@
       }
     }
   }
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1A202C;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 5rem;
+    padding-top: 0.75rem;
+    margin-left: 0.25rem;
+    border-bottom: 6px solid #3182CE;
+  }
+
+  &--center {
+    text-align: center;
+    &:after {
+      margin-left: auto; margin-right: auto;
+    }
+  }
+
+  &--dark {
+    color: #EBF8FF;
+    &:after {
+      border-bottom: 6px solid #4299E1;
+    }
+  }
+}
+
+
+
+.light-container {
+  background-color: #F7FAFC;
+  padding: 4rem 0;
+}
+
+.dark-container {
+  background-color: #2D3748;
+  padding: 4rem 0;
+}
+
+.narrow-container {
+  max-width: 42rem;
+  margin: auto;
 }

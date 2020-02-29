@@ -29,7 +29,6 @@
       font-size: 1.125rem;
       //transition: box-shadow 150ms, background-color 150ms;
       font-weight: 600;
-      border-radius: 0;
       //box-sizing: border-box;
       //text-decoration: none;
 
@@ -57,7 +56,6 @@
 .job-benefits {
   max-width: 42rem;
   margin: auto auto 4rem;
-  padding-top: 4rem;
 }
 
 .job-apply__container {
@@ -66,21 +64,5 @@
   .job-apply {
     max-width: 42rem;
     margin: auto;
-  }
-}
-
-.job__section-heading {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 3rem;
-  color: #1A202C;
-
-  &:after {
-    content: "";
-    display: block;
-    width: 5rem;
-    padding-top: 0.75rem;
-    margin-left: 0.25rem;
-    border-bottom: 6px solid #3182CE;
   }
 }

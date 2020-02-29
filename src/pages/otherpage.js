@@ -3,13 +3,16 @@ import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 
-import {Button} from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
+import BookingForm from "../components/BookingForm";
 
 const OtherPage = () => (
   <Layout>
     <SEO title="Index" />
-    <h1>Other Page</h1>
-    <Button variant="success" >I'm Green and small!</Button>
+    <Container>
+      <h1>Book Your Flight</h1>
+      <BookingForm defaultValues={location.state} onSubmit={(d) => console.log(d)} />
+    </Container>
   </Layout>
 )
 
