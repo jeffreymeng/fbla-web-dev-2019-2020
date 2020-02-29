@@ -4,6 +4,8 @@ import classNames from "classnames"
 import links from "./navlinks";
 
 import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
+import invisLogo from "../../images/longCoastalInvisV2.png"
+
 
 const CustomNavbar = ({ pageInfo }) => {
   const [signedIn, setSignedIn] = useState(false)
@@ -47,6 +49,10 @@ const CustomNavbar = ({ pageInfo }) => {
                   strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
             </button>
+          </div>
+          <div class="flex-shrink-0 flex items-center pb-1.5">
+            <img class="block lg:hidden h-8 w-auto" src={invisLogo} alt="" />
+            <img class="hidden lg:block h-8 w-auto" src={invisLogo} alt="" />
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:block sm:ml-6">
