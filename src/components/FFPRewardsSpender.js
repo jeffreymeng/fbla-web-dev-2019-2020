@@ -35,7 +35,7 @@ const FFPRewardsSpender = (props) => {
   useEffect(() => {
     let prices = [
       // 1: USA 2: HAI 3: ASK 4. CAN 5. MEX
-      [98728, 14839, 13698, 12849, 10928],
+      [ 9728, 14839, 13698, 12849, 10928],
       [    0,  3389, 12473, 13928, 15039],
       [    0,     0,  4923,  7293, 16557],
       [    0,     0,     0,  4958, 14820],
@@ -60,7 +60,7 @@ const FFPRewardsSpender = (props) => {
           <Select options={regionOptions} value={originRegion} onChange={v => setOriginRegion(v)} />
         </div>
         <div className="md:flex-1">
-          <label htmlFor="rewardsSpenderDestination" className="ml-1 block text-lg leading-5 font-medium text-gray-700">Destination Region</label>
+          <label htmlFor="rewardsSpenderDestination" className="ml-1 mb-2 block text-lg leading-5 font-medium text-gray-700">Destination Region</label>
           <Select options={regionOptions} value={destRegion} onChange={v => setDestRegion(v)} />
         </div>
       </div>

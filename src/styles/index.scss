@@ -1,4 +1,6 @@
-
+.min-h-content-area {
+  min-height: calc(100vh - 64px);
+}
 @font-face {
   font-family: 'Nexa Bold';
   src: url("../fonts/Nexa Bold.otf") format("opentype");
