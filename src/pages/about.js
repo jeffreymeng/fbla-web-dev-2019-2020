@@ -5,52 +5,58 @@ import SEO from "../components/seo"
 import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"
-import { graphql, StaticQuery } from "gatsby"
+import { graphql, StaticQuery, Link } from "gatsby"
 
 import planeImage from "../images/planecoast.jpg"
-import Carousel, { Dots } from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
 import icon from "../images/coastalLogo.png"
+import { Link as ReactScrolling, animateScroll as scroll } from "react-scroll";
 
-
+import edfPic from "../images/EDFPic.png"
+import epaPic from "../images/EPAPic.png"
+import percentPic from "../images/1ForThePlanet.png"
+import flightSafetyPic from "../images/flightSafetyPic.png"
 const About = () => (
     <Layout bodyClassName="parallax-wrapper">
 	    <SEO title="About"/>
 	   	<div className="grayColor">
 
 
-<div className="relative bg-white overflow-hidden">
+<div className="relative bg-white overflow-hidden h-screen">
   <div className="max-w-screen-xl mx-auto ">
-    <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
- 	<div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+    <div className="relative z-10 pb-0 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-0">
+ 	<div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-0 xl:pt-28">
         <div className="sm:text-center lg:text-left">
-          <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+          <h1 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-10xl">
 	About            <br className="xl:hidden" />
             <span className="text-indigo-600"> Us</span>
-          </h2>
-          <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-What started off as a dream with three individuals to travel and explore the nation in a simple, hassle-free manner is now Coastal Airlines: <span	className="about_emphasis">The Best Air Travel in the West.</span>          </p>
-          <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-            <div className="rounded-md shadow">
-              <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
-                Get started
+          </h1>
+          <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-20 md:text-3xl lg:mx-0">
+What started off as a dream with three individuals to travel and explore the nation in a simple, hassle-free manner is now Coastal Airlines:</p><p	className="about_emphasis  mt-3 text-base text-gray-500 sm:mt-5 sm:text-2xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-4xl lg:mx-0">The Best Air Travel in the West.  </p>
+          <div className="mt-5 sm:mt-8 mr-48 sm:flex sm:justify-center">
+            <div className="mt-3 sm:mt-32 sm:mr-0">
+              <ReactScrolling
+                activeClass="active"
+                to="Section1"
+                spy={true}
+                smooth={true}
+                offset={-45}
+                duration={1000}
+              >
+              <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-2xl md:px-10">
+				 Learn More
               </a>
-            </div>
-            <div className="mt-3 sm:mt-0 sm:ml-3">
-              <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
-                Live demo
-              </a>
+              </ReactScrolling>
             </div>
           </div>
         </div>
       </div>
-      <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="white" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <polygon points="32,0 100,0 50,100 32,200" />
+      <svg className="hidden lg:block absolute right-0 inset-y-0 h-screen w-48 text-white transform translate-x-1/2" fill="white" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon points="32,0 100,0 40,100 32,100" />
       </svg>
 	   </div>
 	</div>
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-		    <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={planeImage} alt="" />
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 fixed">
+		    <img className="h-screen w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={planeImage} alt="" />
 		  </div>
 </div>
 
@@ -75,7 +81,7 @@ What started off as a dream with three individuals to travel and explore the nat
 
     <div className="relative lg:grid lg:grid-cols-3 lg:col-gap-8">
       <div className="lg:col-span-1">
-        <h3 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+        <h3 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10" id="Section1">
           A better way to fly.
         </h3>
       </div>
@@ -89,7 +95,7 @@ What started off as a dream with three individuals to travel and explore the nat
           <div className="mt-5">
             <h5 className="text-lg leading-6 font-medium text-gray-900">A Sustainable Future</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
-              Consequuntur omnis dicta cumque, inventore atque ab dolores aspernatur tempora ab doloremque.
+            	By working closely with environmental agencies such as the EPA, we have created award-winning environmentally safe procedures, integrated into our airline from the ground up.
             </p>
           </div>
         </div>
@@ -102,7 +108,7 @@ What started off as a dream with three individuals to travel and explore the nat
           <div className="mt-5">
             <h5 className="text-lg leading-6 font-medium text-gray-900">The Best for a Budget</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
-              Corporis quisquam nostrum nulla veniam recusandae temporibus aperiam officia incidunt at distinctio ratione.
+               With the best prices in the market, we provide a service for everyone - without leaving quality behind.
             </p>
           </div>
         </div>
@@ -115,8 +121,8 @@ What started off as a dream with three individuals to travel and explore the nat
           <div className="mt-5">
             <h5 className="text-lg leading-6 font-medium text-gray-900">Instant Booking</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
-              Omnis, illo delectus? Libero, possimus nulla nemo tenetur adipisci repellat dolore eligendi velit doloribus mollitia.
-            </p>
+ 		 		Leave behind the fine print and huge options. In just a few steps, you can be on your way to your long needed vacation. 
+				       </p>
           </div>
         </div>
         <div className="mt-10 sm:mt-0">
@@ -128,8 +134,9 @@ What started off as a dream with three individuals to travel and explore the nat
           <div className="mt-5">
             <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club+</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
-              Veniam necessitatibus reiciendis fugit explicabo dolorem nihil et omnis assumenda odit? Quisquam unde accusantium.
-            </p>
+				One of our core principles is to <span className="italics">loyalty</span> - thats why we wanted to give back to those who love and care for Coastal Airlines as much as we love them. Go to our	<Link to="frequent-flyer-program"
+             className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club+
+          		</Link> page to learn more.</p>
           </div>
         </div>
       </div>
@@ -221,7 +228,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				                95%
 				              </p>
 				              <p className="mt-2 text-lg leading-6 font-medium text-gray-500">
-				                Cheapest Rates
+				                Cheapest Rates<span className="text-sm">*</span>
 				              </p>
 				            </div>
 				            <div className="border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -254,7 +261,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				    <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
 				      <div>
 				        <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-				          Used by the world's most average companies
+				          Working together to make travel just better
 				        </h2>
 				        <p className="mt-3 max-w-3xl text-lg leading-7 text-gray-500">
 				          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.
@@ -272,41 +279,34 @@ What started off as a dream with three individuals to travel and explore the nat
 				          </div>
 				        </div>
 				      </div>
-				      <div className="mt-8 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-0 lg:grid-cols-2">
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/transistor-logo.svg" alt="Workcation" />
+				      <div className="mt-8 grid grid-cols-2 gap-0.5 md:grid-cols-2 lg:mt-0 lg:grid-cols-2">
+
+			          <a href="https://www.epa.gov/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+				        <div className="col-span-1 mx-auto flex justify-center py-1 px-8 ">
+				          <img className="max-h-28" src={epaPic} alt="EPA" />
 				        </div>
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/mirage-logo.svg" alt="Mirage" />
+			          </a>
+
+				          <a href="https://www.edf.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
+				          <img className="max-h-28" src={edfPic} alt="Environmental Defense Fund" />
 				        </div>
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/tuple-logo.svg" alt="Tuple" />
+			          </a>
+				         <a href="https://www.onepercentfortheplanet.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
+				          <img className="max-h-28" src={percentPic} alt="1% For the Planet" />
 				        </div>
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/laravel-logo.svg" alt="Laravel" />
+			          </a>
+				           <a href="https://flightsafety.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
+				          <img className="max-h-28" src={flightSafetyPic} alt="Workcation" />
 				        </div>
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/statickit-logo.svg" alt="StaticKit" />
+			          </a>
 				        </div>
-				        <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
-				          <img className="max-h-12" src="/img/logos/statamic-logo.svg" alt="Statamic" />
-				        </div>
-				      </div>
 				    </div>
 				  </div>
 				</div>
 
-
-
-
-				<Carousel
-				  autoPlay={5000}
-				  animationSpeed={500}
-				  infinite>
-				  <img src="../images/bg.jpg" />
-				  <img src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" />
-				  <img src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" />
-				</Carousel>
 			</div>
 
 				
@@ -327,8 +327,8 @@ What started off as a dream with three individuals to travel and explore the nat
 					  </p>
 				      <div className="mt-8">
 				        <div className="inline-flex rounded-md shadow">
-				          <a href="#" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-				            Visit the help center
+				          <a href="/" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+				            Book your next vacation
 				            <svg className="-mr-1 ml-3 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
 				              <path fill-rule="evenodd" d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5zM5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" clip-rule="evenodd"/>
 				            </svg>

@@ -20,6 +20,8 @@ module.exports = {
       "6xl": "4rem",
       "7xl": "5rem",
       "8xl": "6rem",
+      "10xl": "8rem",
+      "12xl": "10rem"
     },
     zIndex: {
       '-10': '-10',
@@ -32,7 +34,9 @@ module.exports = {
       'auto': 'auto',
     }
   },
-  variants: {},
+  variants: {
+     margin: ['responsive', 'hover', 'focus'],
+  },
   plugins: [
     require("@tailwindcss/ui"),
   ],
