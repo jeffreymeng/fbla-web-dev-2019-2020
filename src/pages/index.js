@@ -31,19 +31,19 @@ const IndexPage = () => (
           title="Home"
         />
 
-        <div className="pt-32 relative">
+        <div className="pt-32 pb-12 relative">
           <div className="absolute top-0 bottom-0 left-0 right-0 bg-cover bg-center -z-10" style={{
             backgroundImage: `url('${bgImage}')`,
             backgroundColor: "blue",
             filter: "contrast(70%)",
             backgroundBlendMode: "multiply",
           }}/>
-          <h1 className="text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where will we be flying today?</h1>
+          <h1 className="px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where will we be flying today?</h1>
 
           <BookingForm onSubmit={(data) => navigate("otherpage", {
             state:data
-          })} dropUp style={{
-            marginBottom: "-60px",
+          })} dropUp className="relative" style={{
+            bottom: "-7rem",
           }} />
         </div>
       </Layout>

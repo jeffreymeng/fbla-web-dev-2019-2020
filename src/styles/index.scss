@@ -129,8 +129,12 @@ a:not([href]):hover {
 
 }
 
-.no-underline {
-  &:hover {
-    text-decoration: none !important;
+@screen sm {
+  .booking-form-left-select {
+    margin-right: -14px;
+  }
+
+  .booking-form-right-select {
+    margin-left: -14px;
   }
 }
