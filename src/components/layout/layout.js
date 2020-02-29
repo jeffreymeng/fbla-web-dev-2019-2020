@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer"
+import "../../styles/parallax.scss";
 
 
 const SocialMediaIcon = ({icon,link,lightFooter}) => {
@@ -37,7 +38,7 @@ const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgrou
     render={function(data) {
       let page = (
 
-        <div className={parallax ? "parallax-wrapper" : ""}>
+        <div className={parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : ""}>
           <Container fluid className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>

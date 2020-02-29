@@ -3,10 +3,9 @@ import { Link } from "gatsby";
 
 import SEO from "../../components/seo"
 import Layout from "../../components/layout/layout"
-import "../../styles/parallax.scss"
 
 const JobsPage = () => (
-  <Layout parallax>
+  <Layout parallax={"jobs"}>
     <SEO title="Apply for a Job" />
 
     <div className="job-hero py-12 md:py-16 lg:py-24">

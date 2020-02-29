@@ -16,7 +16,7 @@ import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
 import flightSafetyPic from "../images/flightSafetyPic.png"
 const About = () => (
-    <Layout bodyClassName="parallax-wrapper">
+    <Layout parallax>
 	    <SEO title="About"/>
 	   	<div className="grayColor">
 
@@ -338,10 +338,11 @@ What started off as a dream with three individuals to travel and explore the nat
 				    </div>
 				  </div>
 				</div>
-				
-		  </div>
-	</Layout>
-)
+
+			</div>
+		</Layout>
+	)
+};
 export default About
  
 

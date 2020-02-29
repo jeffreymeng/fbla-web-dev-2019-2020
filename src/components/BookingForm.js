@@ -4,7 +4,7 @@ import "../styles/flatpickr/light.scss"
 import Flatpickr from "react-flatpickr"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
-import Select, {components} from "react-select"
+import Select, { components } from "react-select"
 import classNames from "classnames"
 
 
@@ -41,7 +41,7 @@ const airportCustomSelectStyles = {
   }),
   dropdownIndicator: (provided, state) => ({
     display: "none",
-  })
+  }),
 }
 
 const AirportSelect = ({ id, onChange, value, dropUp, isStarting }) => {
@@ -192,7 +192,7 @@ const passengersOptions = [
   { label: "6 Passengers", value: 6 },
   { label: "7 Passengers", value: 7 },
   { label: "8 Passengers", value: 8 },
-  { label: "9 Passengers", value: 9 },
+  { label: "9+ Passengers", value: 9 },
 ]
 
 const flightClassOptions = [
@@ -206,41 +206,59 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
   const [roundTrip, setRoundTrip] = React.useState(defaultValues.roundTrip || roundTripOptions[0])
   const [passengers, setPassengers] = React.useState(defaultValues.passengers || passengersOptions[0])
   const [flightClass, setFlightClass] = React.useState(defaultValues.flightClass || flightClassOptions[0])
-  const [dates, setDates] = React.useState([defaultValues.startDate || "", defaultValues.endDate || ""])
+  const [dates, setDates] = React.useState([new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
   const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""])
   const datepickerOptions = {
-    altInput: true,
-    altFormat: "F j, Y",
-    dateFormat: "Y-m-d",
-    mode: "single",
-    minDate: "today",
-    maxDate: "2021-06-30",
+    dateFormat: "m/d/y",
+    mode: "range",
   }
+  console.log(dates)
 
   return (
     <div className="px-4">
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", className)} style={style}>
         <form>
-          <div className="block sm:inline-block " style={{ width: "130px" }}> {/* eww ugly magic number */}
-            <Select
-              styles={customSelectStyles}
-              options={roundTripOptions}
-              value={roundTrip}
-              onChange={(v) => setRoundTrip(v)} />
-          </div>
-          <div className="mt-2 sm:mt-0 sm:ml-6 block inline-block w-40">
-            <Select
-              styles={customSelectStyles}
-              options={passengersOptions}
-              value={passengers}
-              onChange={(v) => setPassengers(v)} />
-          </div>
-          <div className="mt-2 sm:mt-0 sm:ml-6 block sm:inline-block w-32">
-            <Select
-              styles={customSelectStyles}
-              options={flightClassOptions}
-              value={flightClass}
-              onChange={(v) => setFlightClass(v)} />
+          <div className="flex flex-wrap">
+            <div className="md:hidden" style={{ flexBasis: "100%" }} />
+            <div className="block sm:inline-block w-full sm:w-32">
+              <Select
+                styles={customSelectStyles}
+                options={roundTripOptions}
+                value={roundTrip}
+                onChange={(v) => setRoundTrip(v)} />
+            </div>
+            <div className="mt-2 sm:mt-0 sm:ml-4 block inline-block w-full sm:w-40">
+              <Select
+                styles={customSelectStyles}
+                options={passengersOptions}
+                value={passengers}
+                onChange={(v) => setPassengers(v)} />
+            </div>
+            <div className="mt-2 sm:mt-0 sm:ml-4 block sm:inline-block w-full sm:w-32">
+              <Select
+                styles={customSelectStyles}
+                options={flightClassOptions}
+                value={flightClass}
+                onChange={(v) => setFlightClass(v)} />
+            </div>
+            <div
+              className="order-first md:order-last mr-auto md:ml-auto sm:mr-0 px-2 py-2 mt-2 sm:mt-0 flex sm:inline-flex w-full sm:w-56 relative border border-l-2 border-transparent">
+              <Flatpickr
+                className={classNames(
+                  "bg-white inline-block w-full",
+                )}
+                value={dates}
+                options={datepickerOptions}
+                onChange={d => setDates(d)} />
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+                   style={{ color: "hsl(0,0%,80%)" }}>
+                <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"
+                     className="css-6q0nyr-Svg">
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
+                </svg>
+              </div>
+            </div>
           </div>
           <div className="flex flex-wrap justify-center mt-3">
             <div className="flex-1 booking-form-left-select">
@@ -253,26 +271,23 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
                              isStarting
               />
             </div>
-            <div className="sm:hidden" style={{flexBasis: "100%"}}/>
-            <button className="relative z-10 self-center inline-block w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setAirports((oldState) => {
-                        let newState = oldState.slice();
-                        // swap first and second elements
-                        newState.unshift(newState.pop());
-                        return newState;
-                      });
-                    }}>
+            <div className="sm:hidden" style={{ flexBasis: "100%" }} />
+            <button
+              className="hidden sm:inline-block relative z-10 self-center w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
+              onClick={(e) => {
+                e.preventDefault()
+                setAirports((oldState) => {
+                  let newState = oldState.slice()
+                  // swap first and second elements
+                  newState.unshift(newState.pop())
+                  return newState
+                })
+              }}>
               <label className="sr-only">Swap</label>
               <FontAwesomeIcon className="text-blue-800" icon={faExchangeAlt} />
             </button>
-            <div className="sm:hidden" style={{flexBasis: "100%"}}/>
-            <div className="flex-1 booking-form-right-select">
-              {/*<Form.Control*/}
-              {/*  hidden*/}
-              {/*  isInvalid={airports[0] != "" && airports[0] == airports[1]}*/}
-              {/*></Form.Control>*/}
+            <div className="sm:hidden" style={{ flexBasis: "100%" }} />
+            <div className="mt-1 sm:mt-0 flex-1 booking-form-right-select">
               <AirportSelect
                 id="arrive"
                 onChange={(val) =>
@@ -280,25 +295,25 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style }) => {
                 }
                 value={airports[1]}
                 dropUp={dropUp}
-
               />
-
-              {/*<Form.Control.Feedback type="invalid">*/}
-              {/*  Your arrival airport cannot be the same as your departure airport!*/}
-              {/*</Form.Control.Feedback>*/}
             </div>
-            <div className="md:hidden" style={{flexBasis: "100%"}}/>
-            <span className="mt-2 md:mt-0 md:ml-4 inline-flex rounded-md shadow-sm">
+            <div className="md:hidden" style={{ flexBasis: "100%" }} />
+            <span className="mt-2 md:mt-0 md:ml-4 block w-full sm:w-auto sm:inline-flex rounded-md shadow-sm">
               <button type="button"
                       className={classNames(
-                        "inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
+                        "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
                         "font-medium rounded-md text-green-800 bg-green-200 hover:bg-green-100 focus:outline-none",
-                        "focus:border-green-200 focus:shadow-outline-green active:bg-green-200 transition ease-in-out duration-150"
+                        "focus:border-green-200 focus:shadow-outline-green active:bg-green-200 transition ease-in-out duration-150",
                       )}>
                 Search
               </button>
             </span>
           </div>
+          {airports[0] === airports[1] && airports[0] !== "" &&
+          <p className="mt-2 text-sm text-red-600">Your arrival airport cannot be the same as your departure
+            airport!</p>}
+          {passengers.value===9 &&
+          <p className="mt-2 text-sm text-red-600">For 9+ passengers, please contact our booking department at +1 (800) 243-2102.</p>}
         </form>
       </div>
     </div>

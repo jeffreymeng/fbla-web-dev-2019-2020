@@ -5,7 +5,7 @@ import Layout from "../components/layout/layout"
 import FFPRewardsSpender from "../components/FFPRewardsSpender"
 
 const FrequentFlyerProgramPage = () => (
-  <Layout>
+  <Layout parallax>
     <SEO title="Frequent Flyer Program" />
 
     <div className="job-hero py-12 md:py-16 lg:py-24">

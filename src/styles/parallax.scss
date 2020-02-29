@@ -1,31 +1,5 @@
-.parallax-wrapper main > :first-child {
-  /* Needed for children to be absolutely positioned relative to the parent. */
-  position: relative;
-  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
-  height: 50vh;
+@import "parallax-base";
 
 
-
-}
-.parallax-wrapper main > :first-child::after {
-  content: " ";
-  position: absolute;
-  top: 0 !important;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height:100vh;
-  transform: translateZ(-1px) scale(1.5);
-  background-size: 100%;
-  z-index: -1;
-  background: url('../images/bg.jpg') center;
-  background-size:cover;
-}
-.parallax-wrapper {
-  top:0;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  perspective: 2px;
-
-}
+@include parallax-background("skyline", "../images/bg.jpg", center, 100vw auto);
+@include parallax-background("jobs", "https://metroairportnews.com/wp-content/uploads/Delta-Airlines-Flight-Attendants.jpg", center 35%, auto 100vh);

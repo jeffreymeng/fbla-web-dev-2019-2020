@@ -11,7 +11,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        {/*<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />*/}
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
