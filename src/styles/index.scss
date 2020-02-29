@@ -121,3 +121,9 @@ a:not([href]):hover {
   }
 
 }
+
+.no-underline {
+  &:hover {
+    text-decoration: none !important;
+  }
+}
