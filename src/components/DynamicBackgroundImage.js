@@ -1,8 +1,11 @@
 import React from "react";
+import Img from "gatsby-image";
 
-const DynamicBackgroundImage = props => {
+const DynamicBackgroundImage = ({ className, defaultImage, images, currentImage }) => {
   return (
-    <h1>Hi</h1>
+    <div className={className}>
+      <Img className="h-full" fluid={currentImage === null ? defaultImage : images[currentImage]} />
+    </div>
   )
 }
 
