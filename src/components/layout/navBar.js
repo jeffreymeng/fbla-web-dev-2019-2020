@@ -1,27 +1,9 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import classNames from "classnames"
+import links from "./navlinks";
 
 import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
-
-const links = [
-  {
-    label: "Home",
-    url: "/",
-  },
-  {
-    label: "About",
-    url: "/about",
-  },
-  {
-    label: "Jobs",
-    url: "/jobs",
-  },
-  {
-    label: "Frequent Flyer",
-    url: "/frequent-flyer-program",
-  },
-]
 
 const CustomNavbar = ({ pageInfo }) => {
   const [signedIn, setSignedIn] = useState(false)
@@ -39,7 +21,7 @@ const CustomNavbar = ({ pageInfo }) => {
   }, [])
 
   const [open, setOpen] = useState(false)
-  
+
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

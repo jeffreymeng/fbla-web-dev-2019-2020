@@ -13,6 +13,7 @@ import BackgroundImage from "gatsby-background-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import Footer from "./Footer"
 
 
 const SocialMediaIcon = ({icon,link,lightFooter}) => {
@@ -40,67 +41,11 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
             backgroundColor:backgroundColor
           }}>
             <Navbar pageInfo={pageInfo} admin={admin} />
-            {/*<Row noGutters>*/}
-            {/*  <Col>*/}
-            {/*    <Container className="mt-5">*/}
-                  <main>{children}</main>
-                {/*</Container>*/}
-              {/*</Col>*/}
-            {/*</Row>*/}
+
+            <main>{children}</main>
+
           </Container>
-          <footer className={lightFooter ? "light-footer" : ""}>
-            <Container fluid className="px-0 pt-3">
-              <Row noGutters className="text-center align-items-center">
-                <Col md={4}>
-
-                  <span className="copyright nova">Copyright &copy; 2020 Coastal Airlines</span>
-                </Col>
-                <Col md={4}>
-                  <ul className="list-inline social-buttons d-none d-md-block">
-                    <li className="list-inline-item">
-                      <SocialMediaIcon icon={faFacebookF} link={"https://facebook.com"} lightFooter={lightFooter} />
-                    </li>
-                    <li className="list-inline-item">
-                      <SocialMediaIcon icon={faInstagram}  link={"https://instagram.com"} lightFooter={lightFooter} />
-                    </li>
-                    <li className="list-inline-item">
-                      <SocialMediaIcon icon={faTwitter} link={"https://twitter.com"} lightFooter={lightFooter} />
-                    </li>
-                  </ul>
-                  <ul className="list-inline quicklinks d-block p-0 m-0 d-md-none">
-                    <li className="list-inline-item">
-                      <a href="https://facebook.com">Facebook</a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="https://instagram.com">Instagram</a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="https://twitter.com">Twitter</a>
-                    </li>
-                  </ul>
-                </Col>
-                <Col md={4}>
-
-                  <ul className="list-inline quicklinks">
-                    <li className="list-inline-item mr-4 nova">
-                      <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Privacy Policy</a>
-                    </li>
-                    <li className="list-inline-item nova">
-                      <a href="#" className="text-gray-800 hover:text-blue-800 no-underline">Terms of Use</a>
-                    </li>
-                  </ul>
-                </Col>
-                {/*<Col className="footer-col">*/}
-                {/*  <footer>*/}
-                {/*    <span>*/}
-                {/*      Copyright © 2020 Coastal Airlines*/}
-                {/*    </span>*/}
-
-                {/*  </footer>*/}
-                {/*</Col>*/}
-              </Row>
-            </Container>
-          </footer>
+          <Footer />
         </>
       )
       if (!backgroundImage) {
