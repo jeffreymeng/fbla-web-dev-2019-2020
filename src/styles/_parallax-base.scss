@@ -1,0 +1,46 @@
+.parallax-wrapper main > :first-child {
+  /* Needed for children to be absolutely positioned relative to the parent. */
+  position: relative;
+  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+  height: 50vh;
+
+
+
+}
+
+.parallax-wrapper main > :first-child::after {
+  content: " ";
+  position: absolute;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height:100vh;
+  transform: translateZ(-1px) scale(1.5);
+  z-index: -1;
+  background-size: 100vw auto;
+  background-repeat:no-repeat;
+  background-position:center top;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),  url('../images/error-background.png');
+}
+
+
+
+
+
+.parallax-wrapper {
+  top:0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 2px;
+
+}
+
+@mixin parallax-background($identifier, $path, $position, $background-size) {
+  .parallax-wrapper.bg-#{$identifier} main > :first-child::after {
+    background-size: $background-size;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(#{$path});
+    background-position:$position;
+  }
+}

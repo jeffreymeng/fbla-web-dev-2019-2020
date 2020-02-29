@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer"
+import "../../styles/parallax.scss";
 
 
 const SocialMediaIcon = ({icon,link,lightFooter}) => {
@@ -23,7 +24,7 @@ const SocialMediaIcon = ({icon,link,lightFooter}) => {
   </a>);
 }
 
-const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backgroundColor }) => (
+const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgroundColor }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -36,8 +37,9 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
     `}
     render={function(data) {
       let page = (
-        <>
-          <Container fluid className="px-0 main" style={{
+
+        <div className={parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : ""}>
+          <Container fluid className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>
             <Navbar pageInfo={pageInfo} admin={admin} />
@@ -46,7 +48,8 @@ const Layout = ({ children, pageInfo, admin, lightFooter, backgroundImage, backg
 
           </Container>
           <Footer />
-        </>
+        </div>
+
       )
       if (!backgroundImage) {
         return page

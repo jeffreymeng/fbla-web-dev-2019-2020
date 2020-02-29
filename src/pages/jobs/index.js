@@ -5,7 +5,7 @@ import SEO from "../../components/seo"
 import Layout from "../../components/layout/layout"
 
 const JobsPage = () => (
-  <Layout>
+  <Layout parallax={"jobs"}>
     <SEO title="Apply for a Job" />
 
     <div className="job-hero py-12 md:py-16 lg:py-24">

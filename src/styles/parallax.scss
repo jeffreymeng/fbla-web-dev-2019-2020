@@ -1,0 +1,5 @@
+@import "parallax-base";
+
+
+@include parallax-background("skyline", "../images/bg.jpg", center, 100vw auto);
+@include parallax-background("jobs", "https://metroairportnews.com/wp-content/uploads/Delta-Airlines-Flight-Attendants.jpg", center 35%, auto 100vh);
