@@ -15,10 +15,10 @@ import icon from "../images/coastalLogo.png"
 
 
 const About = () => (
-    <Layout bodyClassName="parallax-wrapper">
+    <Layout parallax>
 	    <SEO title="About"/>
 	   	<div>
-		   	<div className="about_box parallax">
+		   	<div className="about_box">
 		      	<h1 className="about_title nexa">About <span className="about_emphasis">Us</span></h1>
 		        <p className="about_sub">The Story of <span className="nexa">Coastal Airlines</span></p>
 		    </div>
