@@ -8,9 +8,9 @@ const FrequentFlyerProgramPage = () => (
   <Layout>
     <SEO title="Frequent Flyer Program" />
 
-    <div className="job-hero">
-      <h1 className="job-hero__title">Frequent Flyer <span className="job-hero__title__emphasis">Program</span></h1>
-      <p className="job-hero__subtitle">Earn rewards for flying more.</p>
+    <div className="job-hero py-12 md:py-16 lg:py-24">
+      <h1 className="job-hero__title mb-6 lg:mb-8 text-4xl md:text-5xl lg:text-6xl xl:text-8xl">Frequent Flyer <span className="job-hero__title__emphasis">Program</span></h1>
+      <p className="job-hero__subtitle text-2xl md:text-3xl lg:text-4xl xl:text-4xl">Earn rewards for flying more.</p>
     </div>
 
     {/* See https://www.alaskaair.com/content/mileage-plan */}
@@ -62,8 +62,8 @@ const FrequentFlyerProgramPage = () => (
 
     <div className="bg-gray-900">
       <div className="lg:flex">
-        <div className="flex-1 flex items-center">
-          <div className="p-12 max-w-2xl ml-auto">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="px-12 py-24 max-w-2xl lg:ml-auto">
             <h2 className="text-blue-100 text-6xl mb-12">
               One Mile<span className="text-teal-300">,</span> <br />One Point<span className="text-teal-300">.</span>
             </h2>
@@ -71,9 +71,7 @@ const FrequentFlyerProgramPage = () => (
               Redeem your points for free flights!</p>
           </div>
         </div>
-        <div className="flex-1">
-          <img src="/jobs-bg.jpg" />
-        </div>
+        <div className="hidden lg:block flex-1 bg-cover bg-center" style={{ backgroundImage: "url('/jobs-bg.jpg')" }}/>
       </div>
     </div>
 
@@ -90,12 +88,9 @@ const FrequentFlyerProgramPage = () => (
 
     <div className="bg-gray-900">
       <div className="lg:flex">
-        <div className="flex-1">
-          <img
-            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-        </div>
-        <div className="flex-1 flex items-center">
-          <div className="p-12 max-w-2xl mr-auto xl:ml-24 lg:ml-12">
+        <div className="hidden lg:block flex-1 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')" }}/>
+        <div className="flex-1 flex items-center justify-center">
+          <div className="p-12 max-w-2xl lg:mr-auto lg:ml-12">
             <h2 className="text-blue-100 text-6xl mb-12">
               <span className="text-teal-300">Diamond</span> <br />Members<span className="text-teal-300">.</span>
             </h2>

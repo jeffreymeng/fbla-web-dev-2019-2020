@@ -8,16 +8,16 @@ const JobsPage = () => (
   <Layout>
     <SEO title="Apply for a Job" />
 
-    <div className="job-hero">
-      <h1 className="job-hero__title">Looking for a <span className="job-hero__title__emphasis">Job</span>?</h1>
-      <p className="job-hero__subtitle">Travel the world for a living at Coastal Airlines!</p>
+    <div className="job-hero py-12 md:py-16 lg:py-24">
+      <h1 className="job-hero__title mb-6 lg:mb-8 text-4xl md:text-5xl lg:text-6xl xl:text-8xl">Looking for a <span className="job-hero__title__emphasis">Job</span>?</h1>
+      <p className="job-hero__subtitle text-2xl md:text-3xl lg:text-4xl xl:text-4xl">Travel the world for a living at Coastal Airlines!</p>
       <div className="job-hero__buttons">
         <a className="job-hero__buttons__button btn btn-outline-secondary" href="#benefits">Learn More</a>
         <Link className="job-hero__buttons__button job-hero__buttons__button--highlight btn btn-outline-secondary"
-           to="jobs/apply">Apply Now</Link>
+              to="jobs/apply">Apply Now</Link>
       </div>
     </div>
-
+    
     <div className="bg-gray-50 pt-12 pb-8">
       <div className="job-benefits" id="benefits">
         <h2 className="section-heading">Why Us?</h2>
