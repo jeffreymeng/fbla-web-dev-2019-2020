@@ -1,8 +1,6 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
-
-import { Container, Button, Image, Jumbotron, Card, CardDeck} from "react-bootstrap"
 // import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"

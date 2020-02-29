@@ -6,16 +6,22 @@ import { graphql, StaticQuery, navigate } from "gatsby"
 import BookingForm from "../components/BookingForm";
 import Img from "gatsby-image"
 
-const IndexPage = ({ data }) => {
-  // console.log(data);
+const FlightResults = ({ value }) => {
   return (
-    <Layout
-      // pageInfo={{ pageName: "index" }}
-      // lightFooter
+    <>
+      
+      {JSON.stringify(value || {})}
+    </>
+  )
+};
 
-    >
+const BookingPage = ({ data }) => {
+  // console.log(data);
+  const [bookingData, setBookingData] = React.useState({});
+  return (
+    <Layout>
       <SEO
-        title="Home"
+        title="Book a flight"
       />
 
       <div className="pt-32 relative">
@@ -24,17 +30,19 @@ const IndexPage = ({ data }) => {
         </div>
         <h1 className="px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where will we be flying today?</h1>
 
-        <BookingForm onSubmit={(data) => navigate("otherpage", {
-          state:data
-        })} className="relative" style={{
+        <BookingForm onSubmit={(d) => setBookingData(d)} className="relative" style={{
           bottom: "-7rem",
         }} />
+
+      </div>
+      <div className="pt-32">
+        <FlightResults value={bookingData} />
       </div>
     </Layout>
   )
 };
 
-export default IndexPage
+export default BookingPage
 
 export const query = graphql`
   query {
