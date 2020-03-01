@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
+
 import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"
@@ -212,10 +213,10 @@ What started off as a dream with three individuals to travel and explore the nat
 				  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 				    <div className="max-w-4xl mx-auto text-center">
 				      <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-				        Trusted by developers from over 80 planets
+				        Over 1,000,000 Flights a Year 
 				      </h2>
 				      <p className="mt-3 text-xl leading-7 text-gray-500 sm:mt-4">
-				        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
+				        and our passengers love every bit of it - we'll let them tell you!
 				      </p>
 				    </div>
 				  </div>
@@ -243,10 +244,10 @@ What started off as a dream with three individuals to travel and explore the nat
 				            </div>
 				            <div className="border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
 				              <p className="text-5xl leading-none font-extrabold text-indigo-600">
-				                100k
+				                5 Stars
 				              </p>
 				              <p className="mt-2 text-lg leading-6 font-medium text-gray-500">
-				                Calories
+				                Beach Club+ Program
 				              </p>
 				            </div>
 				          </div>
@@ -263,10 +264,10 @@ What started off as a dream with three individuals to travel and explore the nat
 				    <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
 				      <div>
 				        <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-				          Working together to make travel just better
+				          Working together to make travel just better.
 				        </h2>
 				        <p className="mt-3 max-w-3xl text-lg leading-7 text-gray-500">
-				          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.
+				          By working with these leading agencies we hope to revolutionize the industry of Air Travel in the future. 
 				        </p>
 				        <div className="mt-8 sm:flex">
 				          <div className="rounded-md shadow">
