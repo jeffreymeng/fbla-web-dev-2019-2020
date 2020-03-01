@@ -4,6 +4,10 @@ const navLinks = [
     url: "/",
   },
   {
+    label:"Book Flight",
+    url:"/book"
+  },
+  {
     label: "About",
     url: "/about",
   },
@@ -15,6 +19,7 @@ const navLinks = [
     label: "Frequent Flyer",
     url: "/frequent-flyer-program",
   },
+
 ];
 
 export default navLinks;
