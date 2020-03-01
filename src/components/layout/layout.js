@@ -38,7 +38,7 @@ const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgrou
       let page = (
 
         <div className={(parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : "") + customParallax ? "parallax-wrapper-custom" : ""}>
-          <div fluid className={"px-0 main"} style={{
+          <div className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>
             <Navbar pageInfo={pageInfo} admin={admin} />
