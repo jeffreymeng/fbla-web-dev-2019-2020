@@ -14,10 +14,11 @@ import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
 import flightSafetyPic from "../images/flightSafetyPic.png"
+import vacationPic from "../images/vacationPic.jpg"
 const About = () => {
 
 return(
-    <Layout parallax>
+    <Layout>
 	    <SEO title="About"/>
 	   	<div className="grayColor">
 
@@ -312,8 +313,8 @@ What started off as a dream with three individuals to travel and explore the nat
 
 				
 			<div className="relative bg-gray-800">
-				  <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
-				    <img className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&blend=6875F5&sat=-100&blend-mode=multiply" alt="Support team" />
+				  <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2 bg-indigo-800">
+				    <img className="w-full h-full object-cover opacity-50" src={vacationPic} alt="Support team" />
 				  </div>
 				  <div className="relative max-w-screen-xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 				    <div className="md:ml-auto md:w-1/2 md:pl-10">

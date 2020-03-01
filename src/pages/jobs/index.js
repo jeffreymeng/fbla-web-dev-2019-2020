@@ -3,6 +3,8 @@ import { Link } from "gatsby";
 
 import SEO from "../../components/seo"
 import Layout from "../../components/layout/layout"
+import { Link as ReactScrolling, animateScroll as scroll } from "react-scroll";
+
 
 const JobsPage = () => (
   <Layout parallax={"jobs"}>
@@ -12,15 +14,26 @@ const JobsPage = () => (
       <h1 className="job-hero__title mb-6 lg:mb-8 text-4xl md:text-5xl lg:text-6xl xl:text-8xl">Looking for a <span className="job-hero__title__emphasis">Job</span>?</h1>
       <p className="job-hero__subtitle text-2xl md:text-3xl lg:text-4xl xl:text-4xl">Travel the world for a living at Coastal Airlines!</p>
       <div className="job-hero__buttons">
-        <a className="job-hero__buttons__button btn btn-outline-secondary" href="#benefits">Learn More</a>
+        
+        
+                <ReactScrolling 
+               activeClass="active"
+                to="benefits"
+                spy={true}
+                smooth={true}
+                offset={0}
+                duration={1000}
+                ><a className="job-hero__buttons__button btn btn-outline-secondary" href="#">Learn More</a>
+                </ReactScrolling>
+
         <Link className="job-hero__buttons__button job-hero__buttons__button--highlight btn btn-outline-secondary"
               to="jobs/apply">Apply Now</Link>
       </div>
     </div>
 
     <div className="bg-gray-50 pt-12 pb-8">
-      <div className="job-benefits" id="benefits">
-        <h2 className="section-heading">Why Us?</h2>
+      <div className="job-benefits">
+        <h2 className="section-heading" id="benefits">Why Us?</h2>
         <div className="numbered-sections-list">
           <div className="numbered-sections-list__item">
             <div className="numbered-sections-list__item__number">
