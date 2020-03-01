@@ -14,44 +14,50 @@ const FlightPrice = ({ price, label }) => {
 }
 
 const FlightResult = ({ flight, searchedClass, highlightPrice }) => {
+  const stopInfo = flight.airports.map((airport, idx) => {
+    if (idx === 0 || idx === flight.airports.length-1) return null;
+    return (idx !== 1 ? ", ": "") + flight.times[idx] + " " + airport;
+  });
   return (
     <Link to="/" className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
       <div className="flex items-center px-4 py-4 sm:px-6">
-        <div className="min-w-0 flex-1 md:grid md:grid-cols-4 md:gap-4">
+        <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
           <div className="col-span-2">
             <div className="text-lg leading-5 font-medium text-gray-700 truncate">{flight.start.toString()} – {flight.end.toString()}</div>
-            <div className="mt-2 text-sm font-light leading-5 text-gray-700 truncate">
+            <div className="hidden sm:block mt-2 text-sm font-light leading-5 text-gray-700 truncate">
               {flight.aircraft.map((name, j) => (
                 <span key={j}>{j!==0?", ":""}{name}</span>
               ))}
             </div>
-          </div>
-          <div>
-            <span className="text-gray-700">{flight.length}</span>
-            <div className="mt-2 text-sm font-light leading-5 text-gray-700 truncate">
-              {flight.airports.join(" – ")}
+            <div className="sm:hidden mt-1 text-sm font-light leading-5 text-gray-700 truncate">
+              {flight.stops===0?"No Stops":"1 Stop: "}
+              {stopInfo}
             </div>
           </div>
           <div>
+            <span className="text-gray-700">{flight.length}</span>
+            <div className="sm:mt-1 text-sm font-light leading-5 text-gray-700 truncate">
+              {flight.airports.join(" – ")}
+            </div>
+          </div>
+          <div className="hidden sm:block">
             <span
               className={classNames(
-                "inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5",
+                "inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 relative",
                 {
                   "bg-green-100 text-green-800": flight.stops === 0,
                   "bg-yellow-100 text-yellow-800": flight.stops !== 0
                 }
-              )}>
+              )}
+              style={{bottom: "0.25rem"}}>
               {flight.stops === 0 ? "Nonstop" : "1 Stop"}
             </span>
-            <div className="mt-2 text-sm font-light leading-5 text-gray-700 truncate">
-              {flight.airports.map((airport, idx) => {
-                if (idx === 0 || idx === flight.airports.length-1) return null;
-                return (idx !== 1 ? ", ": "") + flight.times[idx] + " " + airport;
-              })}
+            <div className="text-sm font-light leading-5 text-gray-700 truncate">
+              {stopInfo}
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center mr-4 sm:mr-8">
+        <div className="flex flex-col justify-center mx-8">
           <div className={classNames(
             "text-lg leading-5 font-medium truncate",
             {
