@@ -12,14 +12,13 @@ const navLinks = [
     url: "/about",
   },
   {
-    label: "Jobs",
-    url: "/jobs",
-  },
-  {
     label: "Frequent Flyer",
     url: "/frequent-flyer-program",
   },
-
+  {
+    label: "Jobs",
+    url: "/jobs",
+  },
 ];
 
 export default navLinks;
