@@ -1,0 +1,15 @@
+{
+  "OAK": {
+    "caption": "Bay Bridge",
+    "location": "Oakland, California"
+  },
+  "LAX": {
+    "caption": "Griffith Observatory",
+    "location": "Los Angeles, California"
+  },
+  "FAI": {
+    "caption": "The Northern Lights",
+    "location": "Fairbanks, Alaska"
+  }
+
+}
