@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import Img from "gatsby-image";
 import classNames from "classnames";
 
 const Caption = ({ caption }) => (
   <div className="absolute bottom-0 right-0 pr-4 pb-4 sm:pr-12 sm:pb-8 text-white"
        style={{ textShadow: "0 0 6px black, 0 0 4px black, 0 0 2px black" }}>
-    {caption?.caption}<br />
+    <div className="text-right">{caption?.caption}</div>
     <div className="flex">
       <div className="text-gray-200 mr-1 mt-1">
         <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
@@ -22,14 +22,17 @@ const DynamicBackgroundImage = ({ className, defaultImage, defaultCaption, image
   const [imageOne, setImageOne] = useState({img:defaultImage, caption:defaultCaption});
   const [imageTwo, setImageTwo] = useState(null);
 
-  useEffect(() => {
+  const handleCurrentImageChange = () => {
     if (currentImage === null) return;
     if (activeImg === 0) {
-      setImageTwo({img: images[currentImage], caption: captions[currentImage]});
+      if (imageTwo?.img === images[currentImage]) setActiveImg(1);
+      else setImageTwo({img: images[currentImage], caption: captions[currentImage]});
     } else {
-      setImageOne({img: images[currentImage], caption: captions[currentImage]});
+      if (imageOne?.img === images[currentImage]) setActiveImg(0);
+      else setImageOne({img: images[currentImage], caption: captions[currentImage]});
     }
-  }, [currentImage]);
+  };
+  useEffect(handleCurrentImageChange, [currentImage]);
 
   return (
     <div className={classNames(className, "relative")}>

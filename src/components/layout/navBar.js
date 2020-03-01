@@ -1,26 +1,14 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Link } from "gatsby"
 import classNames from "classnames"
 import links from "./navlinks";
 
-import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
 import invisLogo from "../../images/longCoastalInvisV2.png"
+import AuthContext from "../../context/AuthContext"
 
 
 const CustomNavbar = ({ pageInfo }) => {
-  const [signedIn, setSignedIn] = useState(false)
-
-  useFirebase(firebase => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      // console.log(user);
-      if (user) {
-        setSignedIn(true)
-      } else {
-        setSignedIn(false)
-      }
-    })
-    return () => unsubscribe()
-  }, [])
+  const auth = useContext(AuthContext);
 
   const [open, setOpen] = useState(false)
 
@@ -74,14 +62,14 @@ const CustomNavbar = ({ pageInfo }) => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {!signedIn && <Link to="/sign-in"
+            {!auth.user && <Link to="/sign-in"
                                 className="text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium leading-5 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
               Sign In
             </Link>}
-            {signedIn && <Link to="/sign-out"
+            {auth.user && <button onClick={() => auth.signOut()}
                                className="text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium leading-5 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
               Sign Out
-            </Link>}
+            </button>}
           </div>
         </div>
       </div>
