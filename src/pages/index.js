@@ -38,8 +38,8 @@ const IndexPage = ({ data }) => {
         <div className="pt-16">
           <img className="max-w-6xl mx-auto mb-16" src={test} />
           <h1
-            className="mb-4 sm:mb-8 px-4 text-center text-white text-3xl leading-10 font-bold sm:text-4xl sm:leading-none md:text-6xl"
-            style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)", color: "#dee4fe" }}>Where will we be flying today?</h1>
+            className="mb-4 sm:mb-8 px-4 text-center text-white text-3xl leading-10 font-bold text-indigo-100 sm:text-4xl sm:leading-none md:text-6xl"
+            style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
           <div>
             <BookingForm onAirportSelect={airport => setAirport(airport)}/>

@@ -317,8 +317,8 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                       }}
                       className={classNames(
                         "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
-                        "font-medium rounded-md text-blue-800 bg-blue-100 hover:bg-blue-50 focus:outline-none",
-                        "focus:border-blue-100 focus:shadow-outline-blue active:bg-blue-100 transition ease-in-out duration-150",
+                        "font-medium rounded-md text-indigo-800 bg-indigo-100 hover:bg-indigo-50 focus:outline-none",
+                        "focus:border-indigo-100 focus:shadow-outline-indigo active:bg-indigo-100 transition ease-in-out duration-150",
                       )}>
                 Search
               </button>
