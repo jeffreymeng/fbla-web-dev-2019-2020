@@ -6,6 +6,11 @@ import { graphql } from "gatsby"
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 
+const bgImageCaptions = {
+  "PHX": "Phoenix Airport Caption",
+  "LAX": "LAX Caption!!"
+}
+
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
   const backgroundImages = useMemo(() => {
@@ -30,8 +35,10 @@ const IndexPage = ({ data }) => {
           <DynamicBackgroundImage
             className="h-full"
             images={backgroundImages}
+            captions={bgImageCaptions}
             currentImage={airport}
-            defaultImage={data.file.childImageSharp.fluid} />
+            defaultImage={data.file.childImageSharp.fluid}
+            defaultCaption={"Default Caption @jeffrey"} />
         </div>
         <div className="pb-16">
           {/*<h1 className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Coastal Airlines</h1>*/}
