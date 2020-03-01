@@ -50,7 +50,7 @@ const IndexPage = ({ data }) => {
 
       <div className="relative overflow-hidden">
         <div className="relative z-10 pb-8 bg-gray-50 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
-          <div className="pt-10 mx-auto max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+          <div className="pt-10 mx-auto lg:mr-0 max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
             <div className="sm:text-center lg:text-right">
               <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-black sm:text-5xl sm:leading-none md:text-6xl">
                 About <span className="text-indigo-700">Us</span>
