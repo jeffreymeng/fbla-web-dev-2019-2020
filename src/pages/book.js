@@ -47,6 +47,7 @@ const BookingPage = ({ data }) => {
           will we be flying today?</h1>
 
         <div>
+          {/*todo no defaults*/}
           <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={{
             departAirport: "SFO",
             arriveAirport: "SLC",

@@ -51,11 +51,11 @@ const IndexPage = ({ data }) => {
       <div className="relative overflow-hidden">
         <div className="relative z-10 pb-8 bg-gray-50 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
           <div className="pt-10 mx-auto max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
-            <div className="sm:text-center lg:text-left">
+            <div className="sm:text-center lg:text-right">
               <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-black sm:text-5xl sm:leading-none md:text-6xl">
                 About <span className="text-indigo-700">Us</span>
               </h2>
-              <p className="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mr-0">
                 From humble beginnings, Coastal Airlines has grown to become a leading air travel company in the West Coast.
               </p>
               <div className="inline-block mt-8">
@@ -88,11 +88,11 @@ const IndexPage = ({ data }) => {
               <polygon points="50,0 50,100 0,100" />
             </svg>
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
-              <div className="sm:text-center lg:text-right">
+              <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
                   Frequent <span className="text-yellow-200">Flyer</span>
                 </h2>
-                <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 lg:ml-auto">
+                <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 lg:mr-auto">
                   Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
                 </p>
                 <div className="inline-block mt-8">
