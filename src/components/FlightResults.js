@@ -1,8 +1,17 @@
 import React from "react";
 import FlightData from "./flightData";
 import Select from "react-select";
-const FlightResults = ({ value }) => {
+import FlightResult from "./FlightResult"
+import classNames from "classnames";
+
+const FlightResults = ({ value, searchedClass }) => {
  let flights = getFlights(value);
+
+ const classIdx = (searchedClass==="economy"?0:(searchedClass==="business"?1:2));
+ let cheapestPrice = 10000000;
+ for (let i = 0; i < flights.length; i++) {
+   cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);
+ }
 
   const noFlights = (
     <div>
@@ -37,29 +46,24 @@ const FlightResults = ({ value }) => {
           <input type="checkbox" />Show nonstop only
         </label>
       <span>PRICE RANGE SELECT HERE</span>
-      {
-        flights.map((flight, i) => {
-          return (
-            <div key={i}>
-              <hr />
-              {flight.stops == 0 ? "Nonstop" : "1 Stop"}
-              <b>{flight.start.toString()} - {flight.end.toString()}</b> ({flight.length})
-              <p>{flight.airports.join(" --> ")}</p>
-              <p>{flight.times?.join(" --> ")}</p>
-              <div>
-                <b>Aircraft: </b>
-                {flight.aircraft.length > 1 ?
-                  <ul>
-                    {flight.aircraft.map((name, j) => <li key={j}>{name}</li>)}
-                  </ul>
-                  : <i>{flight.aircraft[0]}</i>
-                }
-              </div>
-              <span>Economy: ${flight.price[0]} Business: ${flight.price[1]} First: ${flight.price[2]}</span>
-            </div>
-          )
-        })
-      }
+      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <ul>
+          {
+            flights.map((flight, i) => {
+              return (
+                <li key={i} className={classNames({
+                  "border-t border-gray-200": i !== 0
+                })}>
+                  <FlightResult
+                    flight={flight}
+                    searchedClass={searchedClass}
+                    highlightPrice={flight.price[classIdx]===cheapestPrice} />
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
     </>: noFlights
   )
 };
@@ -82,7 +86,7 @@ function getFlights(value) {
      */
     time;
     toString() {
-      return `${this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A." : "P."}M.`
+      return `${this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M`
     }
     static timeFromHourMinuteIsAm(hour, minute, isAm) {
       return hour + (isAm ? 0 : 12) + (minute/60);
@@ -134,7 +138,7 @@ function getFlights(value) {
       return this;
     }
     toHourMinute() {
-      return `${this.hour}hr${this.minute !== 0 ? " " + this.minute + "min" : ""}`;
+      return `${this.hour}h${this.minute !== 0 ? " " + this.minute + "m" : ""}`;
   }
 
     /**
@@ -169,7 +173,7 @@ function getFlights(value) {
               return {
                 start:startTime,
                 end:startTime.clone().add(routeTime),
-                length:`${routeTime.hour}hr${routeTime.minute !== 0 ? " " + routeTime.minute + "min" : ""}`,
+                length:`${routeTime.hour}h${routeTime.minute !== 0 ? " " + routeTime.minute + "m" : ""}`,
                 aircraft:[rule.aircraft],
                 stops:0,
                 airports:[value.departAirport, value.arriveAirport],
@@ -191,33 +195,33 @@ function getFlights(value) {
         // Now, search the schedules to find matches (layover < 2 hours)
         // For each of the initial airport's flights to the layover airport, check if there is a flight from the layover airport to the destination airport
         // within a reasonable amount of time.
-        let a = [];
-        let b = FlightData[value.departAirport].flights[layoverAirport];
-        add(a, b.schedule, new Time(b.time));
+        let layoverFlights = [];
+        let toLayoverFlight = FlightData[value.departAirport].flights[layoverAirport];
+        add(layoverFlights, toLayoverFlight.schedule, new Time(toLayoverFlight.time));
         console.log(new Time(0,45, true));
-        console.log(a);
-        let cc = [];
-        let bes = FlightData[layoverAirport].flights[value.arriveAirport];
-        add(cc, bes.schedule, new Time(bes.time));
-        a.forEach((l) => {
-          cc.forEach((fj) => {
-            console.log("HI",l, fj, l.start.compareTo(fj.end));
-            if (l.end.compareTo(fj.start) >= 0 && l.end.compareTo(fj.start) <= MAX_LAYOVER_LENGTH) {
-              console.log("BLDS", l.start.clone())
-              let d = l.end.clone().subtract(l.start);
-              let atLayoverTime = fj.start.clone().subtract(l.end);
-              let toDestTime = fj.end.clone().subtract(fj.start);
+        console.log(layoverFlights);
+        let destFlights = [];
+        let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport];
+        add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time));
+        layoverFlights.forEach((flightToLayover) => {
+          destFlights.forEach((flightToDest) => {
+            console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
+            if (flightToLayover.end.compareTo(flightToDest.start) >= 0 && flightToLayover.end.compareTo(flightToDest.start) <= MAX_LAYOVER_LENGTH) {
+              console.log("BLDS", flightToLayover.start.clone())
+              let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start);
+              let atLayoverTime = flightToDest.start.clone().subtract(flightToLayover.end);
+              let toDestTime = flightToDest.end.clone().subtract(flightToDest.start);
 
-              let travelTime = fj.end.clone().subtract(l.start);
-              console.log("TT", travelTime, fj, l, bes, b)
+              let travelTime = flightToDest.end.clone().subtract(flightToLayover.start);
+              console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
               flights.push({
-                start:l.start,
-                end:fj.end,
+                start:flightToLayover.start,
+                end:flightToDest.end,
                 length:travelTime.toHourMinute(),
                 layover:`Layover at ${layoverAirport}`,
                 airports:[value.departAirport, layoverAirport, value.arriveAirport],
-                aircraft:[l.aircraft, fj.aircraft],
-                times:[d.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
+                aircraft:[flightToLayover.aircraft, flightToDest.aircraft],
+                times:[toLayoverTime.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
                 price:[1324, 2899, 4859]//TODO
 
               })

@@ -53,7 +53,7 @@ const BookingPage = ({ data, location }) => {
 
       <div className="bg-gray-100 pt-40 sm:pt-32 pb-10 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto">
-          {bookingData !== null && <FlightResults value={bookingData} />}
+          {bookingData !== null && <FlightResults value={bookingData} searchedClass={bookingData.flightClass} />}
 
           {
             bookingData === null &&

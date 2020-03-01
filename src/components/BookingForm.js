@@ -217,7 +217,18 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   return (
     <div className={classNames("px-4", className)}>
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded")} style={style}>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit({
+            roundTrip:roundTrip.value,
+            passengers:passengers.value,
+            flightClass:flightClass.value,
+            departAirport:airports[0],
+            arriveAirport:airports[1],
+            startDate:dates[0],
+            endDate:roundTrip.value === "rt" ? dates[1] : undefined
+          })
+        }}>
           <div className="flex flex-wrap">
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32">
@@ -274,6 +285,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="sm:hidden" style={{ flexBasis: "100%" }} />
             <button
+              type="button"
               className="hidden sm:inline-block relative z-10 self-center w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
               onClick={(e) => {
                 e.preventDefault()
@@ -301,18 +313,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <span className="mt-2 md:mt-0 md:ml-4 block w-full sm:w-auto sm:inline-flex rounded-md shadow-sm">
-              <button type="button"
-                      onClick={() => {
-                        onSubmit({
-                          roundTrip:roundTrip.value,
-                          passengers:passengers.value,
-                          flightClass:flightClass.value,
-                          departAirport:airports[0],
-                          arriveAirport:airports[1],
-                          startDate:dates[0],
-                          endDate:roundTrip.value === "rt" ? dates[1] : undefined
-                        })
-                      }}
+              <button type="submit"
                       className={classNames(
                         "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
                         "font-medium rounded-md text-indigo-800 bg-indigo-100 hover:bg-indigo-50 focus:outline-none",
