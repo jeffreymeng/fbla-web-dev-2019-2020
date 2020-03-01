@@ -7,6 +7,8 @@ import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
 
+import test from "../images/longCoastalInvisV2.png";
+
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
   const backgroundImages = useMemo(() => {
@@ -34,6 +36,7 @@ const IndexPage = ({ data }) => {
             defaultCaption={{ caption: "New York City Skylines", location: "New York, New York" }} />
         </div>
         <div className="pb-16">
+          <img src={test} />
           {/*<h1 className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Coastal Airlines</h1>*/}
           <h1
             className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl leading-10 font-bold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl"
