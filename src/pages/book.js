@@ -1,19 +1,11 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
+import Img from "gatsby-image";
 import "../styles/index.scss"
 import { graphql, StaticQuery, navigate } from "gatsby"
 import BookingForm from "../components/BookingForm";
-import Img from "gatsby-image"
-
-const FlightResults = ({ value }) => {
-  return (
-    <>
-
-      {JSON.stringify(value || {})}
-    </>
-  )
-};
+import FlightResults from "../components/FlightResults";
 
 const BookingPage = ({ data }) => {
   // console.log(data);

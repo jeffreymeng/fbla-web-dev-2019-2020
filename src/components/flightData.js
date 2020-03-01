@@ -38,13 +38,14 @@ const dayOfWeekMap = {
   Su:"Sunday"
 
 }
-const flightData = [
-  {
-    code:"SFO",
-    flights:[
+const flightData = {
+  SFO: {
+    code: "SFO",
+    flights:
       {
-        code:"SLC",
-        schedule:[
+      SLC: {
+        code: "SLC",
+        schedule: [
           {
             days: "MWF",
             times: ["8am", "12:20pm"]
@@ -54,15 +55,15 @@ const flightData = [
             times: ["8am", "2:45pm"]
           },
           {
-            days:"Sa",
+            days: "Sa",
             times: ["6pm"]
           }
         ]
       }
-    ]
+    }
   }
 
-];
+};
 // "SFO-SLC 787-300 1hr 30min MWF: 12:20pm SaSu: 8am 2:45pm Sa: 6pm"
 // const parseFlights = (flights) => {
 //   flights.forEach((string) => {
