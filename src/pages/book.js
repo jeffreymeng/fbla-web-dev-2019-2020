@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback, useEffect } from "react"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import BookingForm from "../components/BookingForm"
@@ -6,6 +6,7 @@ import { navigate } from "gatsby-link"
 import Layout from "../components/layout/layout"
 import { graphql } from "gatsby"
 import FlightResults from "../components/FlightResults"
+import ConfirmFlightModal from "../components/ConfirmFlightModal"
 
 const SuggestedFlight = ({ title, img, flight, children }) => {
   return (
@@ -31,7 +32,14 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
 
 const BookingPage = ({ data, location }) => {
   const [bookingData, setBookingData] = React.useState(null)
-  console.log(location.state)
+  const [selectedFlight, setSelectedFlight] = React.useState(null);
+  const [showBookingModal, setShowBookingModal] = React.useState(false);
+
+  const handleFlightSelected = (flight) => {
+    setSelectedFlight(flight);
+    setShowBookingModal(true);
+  };
+
   return (
     <Layout>
       <SEO
@@ -53,7 +61,13 @@ const BookingPage = ({ data, location }) => {
 
       <div className="bg-gray-100 pt-40 sm:pt-32 pb-10 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto">
-          {bookingData !== null && <FlightResults value={bookingData} searchedClass={bookingData.flightClass} />}
+          {
+            bookingData !== null &&
+            <FlightResults
+              value={bookingData}
+              searchedClass={bookingData.flightClass}
+              onFlightSelected={handleFlightSelected}/>
+          }
 
           {
             bookingData === null &&
@@ -97,6 +111,10 @@ const BookingPage = ({ data, location }) => {
           }
         </div>
       </div>
+
+      <ConfirmFlightModal
+        isOpen={showBookingModal}
+        onConfirm={() => setShowBookingModal(false)}/>
     </Layout>
   )
 }

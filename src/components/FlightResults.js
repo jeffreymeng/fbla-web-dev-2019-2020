@@ -4,7 +4,7 @@ import Select from "react-select";
 import FlightResult from "./FlightResult"
 import classNames from "classnames";
 
-const FlightResults = ({ value, searchedClass }) => {
+const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
  let flights = getFlights(value);
 
  const classIdx = (searchedClass==="economy"?0:(searchedClass==="business"?1:2));
@@ -57,7 +57,8 @@ const FlightResults = ({ value, searchedClass }) => {
                   <FlightResult
                     flight={flight}
                     searchedClass={searchedClass}
-                    highlightPrice={flight.price[classIdx]===cheapestPrice} />
+                    highlightPrice={flight.price[classIdx]===cheapestPrice}
+                    onClick={flight => onFlightSelected(flight)}/>
                 </li>
               )
             })

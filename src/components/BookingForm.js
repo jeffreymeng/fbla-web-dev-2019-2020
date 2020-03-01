@@ -233,6 +233,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={roundTripOptions}
                 value={roundTrip}
@@ -240,6 +241,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="mt-2 sm:mt-0 sm:ml-4 block inline-block w-full sm:w-40">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={passengersOptions}
                 value={passengers}
@@ -247,6 +249,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="mt-2 sm:mt-0 sm:ml-4 block sm:inline-block w-full sm:w-32">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={flightClassOptions}
                 value={flightClass}

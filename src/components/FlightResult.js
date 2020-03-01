@@ -13,13 +13,13 @@ const FlightPrice = ({ price, label }) => {
   );
 }
 
-const FlightResult = ({ flight, searchedClass, highlightPrice }) => {
+const FlightResult = ({ flight, searchedClass, highlightPrice, onClick }) => {
   const stopInfo = flight.airports.map((airport, idx) => {
     if (idx === 0 || idx === flight.airports.length-1) return null;
     return (idx !== 1 ? ", ": "") + flight.times[idx] + " " + airport;
   });
   return (
-    <Link to="/" className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+    <div onClick={onClick} className="cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
       <div className="flex items-center px-4 py-4 sm:px-6">
         <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
           <div className="col-span-2">
@@ -79,7 +79,7 @@ const FlightResult = ({ flight, searchedClass, highlightPrice }) => {
           </svg>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
