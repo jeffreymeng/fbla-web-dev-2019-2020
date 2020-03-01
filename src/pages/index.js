@@ -5,11 +5,7 @@ import "../styles/index.scss"
 import { graphql } from "gatsby"
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
-
-const bgImageCaptions = {
-  "PHX": "Phoenix Airport Caption",
-  "LAX": "LAX Caption!!"
-}
+import bgImageCaptions from "../images/airport_bg_images/captions"
 
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
@@ -35,7 +31,7 @@ const IndexPage = ({ data }) => {
             captions={bgImageCaptions}
             currentImage={airport}
             defaultImage={data.file.childImageSharp.fluid}
-            defaultCaption={"Default Caption @jeffrey"} />
+            defaultCaption={{ caption: "New York City Skylines", location: "New York, New York" }} />
         </div>
         <div className="pb-16">
           {/*<h1 className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Coastal Airlines</h1>*/}
@@ -56,7 +52,7 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    images: allFile(filter: {absolutePath: {regex: "/(airport_bg_images).*(\\.jpg)/"}}) {
+    images: allFile(filter: {absolutePath: {regex: "/(airport_bg_images).*(\\.jpe?g)/"}}) {
       edges {
         node {
           childImageSharp {
