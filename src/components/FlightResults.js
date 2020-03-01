@@ -191,33 +191,33 @@ function getFlights(value) {
         // Now, search the schedules to find matches (layover < 2 hours)
         // For each of the initial airport's flights to the layover airport, check if there is a flight from the layover airport to the destination airport
         // within a reasonable amount of time.
-        let layoverFlights = [];
-        let toLayoverFlight = FlightData[value.departAirport].flights[layoverAirport];
-        add(layoverFlights, toLayoverFlight.schedule, new Time(toLayoverFlight.time));
+        let a = [];
+        let b = FlightData[value.departAirport].flights[layoverAirport];
+        add(a, b.schedule, new Time(b.time));
         console.log(new Time(0,45, true));
-        console.log(layoverFlights);
-        let destFlights = [];
-        let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport];
-        add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time));
-        layoverFlights.forEach((flightToLayover) => {
-          destFlights.forEach((flightToDest) => {
-            console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
-            if (flightToLayover.end.compareTo(flightToDest.start) >= 0 && flightToLayover.end.compareTo(flightToDest.start) <= MAX_LAYOVER_LENGTH) {
-              console.log("BLDS", flightToLayover.start.clone())
-              let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start);
-              let atLayoverTime = flightToDest.start.clone().subtract(flightToLayover.end);
-              let toDestTime = flightToDest.end.clone().subtract(flightToDest.start);
+        console.log(a);
+        let cc = [];
+        let bes = FlightData[layoverAirport].flights[value.arriveAirport];
+        add(cc, bes.schedule, new Time(bes.time));
+        a.forEach((l) => {
+          cc.forEach((fj) => {
+            console.log("HI",l, fj, l.start.compareTo(fj.end));
+            if (l.end.compareTo(fj.start) >= 0 && l.end.compareTo(fj.start) <= MAX_LAYOVER_LENGTH) {
+              console.log("BLDS", l.start.clone())
+              let d = l.end.clone().subtract(l.start);
+              let atLayoverTime = fj.start.clone().subtract(l.end);
+              let toDestTime = fj.end.clone().subtract(fj.start);
 
-              let travelTime = flightToDest.end.clone().subtract(flightToLayover.start);
-              console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
+              let travelTime = fj.end.clone().subtract(l.start);
+              console.log("TT", travelTime, fj, l, bes, b)
               flights.push({
-                start:flightToLayover.start,
-                end:flightToDest.end,
+                start:l.start,
+                end:fj.end,
                 length:travelTime.toHourMinute(),
                 layover:`Layover at ${layoverAirport}`,
                 airports:[value.departAirport, layoverAirport, value.arriveAirport],
-                aircraft:[flightToLayover.aircraft, flightToDest.aircraft],
-                times:[toLayoverTime.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
+                aircraft:[l.aircraft, fj.aircraft],
+                times:[d.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
                 price:[1324, 2899, 4859]//TODO
 
               })
