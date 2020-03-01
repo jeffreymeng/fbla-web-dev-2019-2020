@@ -14,9 +14,9 @@ const CustomNavbar = ({ pageInfo }) => {
 
   return (
     <nav className="bg-gray-800">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+      <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
+        <div className="relative flex items-center h-16">
+          <div className="flex items-center md:hidden">
             <button
               onClick={() => setOpen(!open)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out">
@@ -38,18 +38,18 @@ const CustomNavbar = ({ pageInfo }) => {
               </svg>
             </button>
           </div>
-          <Link to="/" className="flex-shrink-0 flex items-center pb-1.5">
+          <Link to="/" className="flex-shrink-0 flex items-center pb-1.5 ml-4 md:ml-0">
             <img className="block lg:hidden h-8 w-auto" src={invisLogo} alt="" />
             <img className="hidden lg:block h-8 w-auto" src={invisLogo} alt="" />
           </Link>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="hidden sm:block sm:ml-6">
+            <div className="hidden md:block sm:ml-6">
               <div className="flex">
                 {links.map((link, idx) => (
                   <Link to={link.url}
                         key={link.url}
                         className={classNames({
-                            "ml-4": idx !== 0,
+                            "ml-2 xl:ml-4": idx !== 0,
                             "text-gray-300 hover:text-white hover:bg-gray-700": true,
                           },
                           "px-3 py-2 rounded-md text-sm font-medium leading-5 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out",
@@ -76,7 +76,7 @@ const CustomNavbar = ({ pageInfo }) => {
       <div className={classNames({
         "block": open,
         "hidden": !open,
-      }, "sm:hidden")}>
+      }, "md:hidden")}>
         <div className="px-2 pt-2 pb-3">
           {links.map((link, idx) => (
             <Link to={link.url}
