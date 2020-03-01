@@ -44,19 +44,63 @@ const flightData = {
     flights:
       {
       SLC: {
-        code: "SLC",
+          code: "SLC",
+          time: "2:30",
+          schedule: [
+            {
+              days: "MWF",
+              times: ["8am", "12:20pm"],
+              aircraft: "Boeing 737-700"
+            },
+            {
+              days: "SaSu",
+              times: ["8am", "2:45pm"],
+              aircraft: "Boeing 737-700"
+
+            },
+            {
+              days: "Sa",
+              times: ["6pm"],
+              aircraft:"Boeing 787-7 Dreamliner"
+            }
+          ]
+        },
+        LAS: {
+          code: "LAS",
+          time: "1:20",
+          schedule: [
+            {
+              days: "WThFSaSu",
+              times: ["7am", "11am", "5pm"],
+              aircraft: "Boeing 737-700"
+            },
+            {
+              days: "MTu",
+              times: ["7am", "2:45pm"],
+              aircraft: "Boeing 737-700"
+
+            }
+          ]
+        },
+
+    }
+  },
+  LAS:{
+    code:"LAS",
+    flights:{
+      SLC:{
+        code:"SLC",
+        time:"0:45",
         schedule: [
           {
-            days: "MWF",
-            times: ["8am", "12:20pm"]
+            days:"MTuWThFSaSu",
+            times:["9am", "7pm"],
+            aircraft: "Boeing 737-700"
           },
           {
-            days: "SaSu",
-            times: ["8am", "2:45pm"]
-          },
-          {
-            days: "Sa",
-            times: ["6pm"]
+            days:"ThFSaSu",
+            times:["1:30pm"],
+            aircraft: "Boeing 787-8 Dreamliner"
           }
         ]
       }
