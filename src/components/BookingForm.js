@@ -204,10 +204,10 @@ const flightClassOptions = [
 
 const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect }) => {
   defaultValues = defaultValues || {}
-  const [roundTrip, setRoundTrip] = React.useState(defaultValues.roundTrip || roundTripOptions[0])
-  const [passengers, setPassengers] = React.useState(defaultValues.passengers || passengersOptions[0])
-  const [flightClass, setFlightClass] = React.useState(defaultValues.flightClass || flightClassOptions[0])
-  const [dates, setDates] = React.useState([new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
+  const [roundTrip, setRoundTrip] = React.useState(roundTripOptions.filter(x => x.value === defaultValues.roundTrip)[0] || roundTripOptions[0])
+  const [passengers, setPassengers] = React.useState(passengersOptions.filter(x => x.value === defaultValues.passengers)[0] || passengersOptions[0])
+  const [flightClass, setFlightClass] = React.useState(flightClassOptions.filter(x => x.value === defaultValues.flightClass)[0] || flightClassOptions[0])
+  const [dates, setDates] = React.useState([defaultValues.startDate || new Date(), defaultValues.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
   const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""])
   const datepickerOptions = {
     dateFormat: "m/d/y",
@@ -217,10 +217,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   return (
     <div className={classNames("px-4", className)}>
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded")} style={style}>
-        <form onSubmit={e => {
-          e.preventDefault();
-          navigate("booking");
-        }}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-wrap">
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32">
@@ -309,6 +306,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                         onSubmit({
                           roundTrip:roundTrip.value,
                           passengers:passengers.value,
+                          flightClass:flightClass.value,
                           departAirport:airports[0],
                           arriveAirport:airports[1],
                           startDate:dates[0],

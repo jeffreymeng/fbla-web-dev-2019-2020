@@ -29,9 +29,9 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
   )
 }
 
-const BookingPage = ({ data }) => {
+const BookingPage = ({ data, location }) => {
   const [bookingData, setBookingData] = React.useState(null)
-
+  console.log(location.state)
   return (
     <Layout>
       <SEO
@@ -47,10 +47,7 @@ const BookingPage = ({ data }) => {
           will we be flying today?</h1>
 
         <div>
-          <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={{
-            departAirport: "SFO",
-            arriveAirport: "SLC",
-          }} className="-mb-40 sm:-mb-32" />
+          <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={location.state} className="-mb-40 sm:-mb-32" />
         </div>
       </div>
 

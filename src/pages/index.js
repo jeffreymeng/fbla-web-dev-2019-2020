@@ -42,7 +42,7 @@ const IndexPage = ({ data }) => {
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
           <div>
-            <BookingForm onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("booking", {state:data})}/>
+            <BookingForm onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
           </div>
         </div>
       </div>
