@@ -13,10 +13,30 @@ const FlightResults = ({ value }) => {
   return (
     flights.length != 0  ?
     <>
-      {/*<Select options={{*/}
-      {/*  name:"Departure Time",*/}
-      {/*  value:"depart"*/}
-      {/*}} />*/}
+      <Select options={[{
+        name:"Departure Time",
+        value:"depart"
+      },
+        {
+          name:"Arrival Time",
+          value:"arrival"
+        },
+        {
+          name:"Price",
+          value:"price"
+        },
+        {
+          name:"Number of Stops",
+          value:"stops"
+        },
+        {
+          name:"Duration",
+          value:"length"
+        }]} />
+        <label>
+          <input type="checkbox" />Show nonstop only
+        </label>
+      <span>PRICE RANGE SELECT HERE</span>
       {
         flights.map((flight, i) => {
           return (
@@ -35,7 +55,7 @@ const FlightResults = ({ value }) => {
                   : <i>{flight.aircraft[0]}</i>
                 }
               </div>
-              <span>${flight.price}</span>
+              <span>Economy: ${flight.price[0]} Business: ${flight.price[1]} First: ${flight.price[2]}</span>
             </div>
           )
         })
