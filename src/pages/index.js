@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react"
+import {navigate} from "gatsby";
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import "../styles/index.scss"
@@ -31,7 +32,7 @@ const IndexPage = ({ data }) => {
             captions={bgImageCaptions}
             currentImage={airport}
             defaultImage={data.file.childImageSharp.fluid}
-            defaultCaption={{ caption: "New York City Skylines", location: "New York, New York" }} />
+            defaultCaption={{ caption: "New York City Skyline", location: "New York, New York" }} />
         </div>
         <div className="pb-16">
           {/*<h1 className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Coastal Airlines</h1>*/}
@@ -40,7 +41,7 @@ const IndexPage = ({ data }) => {
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
           <div>
-            <BookingForm onAirportSelect={airport => setAirport(airport)}/>
+            <BookingForm onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
           </div>
         </div>
       </div>
