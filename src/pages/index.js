@@ -7,7 +7,7 @@ import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
 
-import test from "../images/longCoastalInvisV2.png";
+import test from "../images/longCoastalInvisV6.png";
 
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
@@ -25,7 +25,7 @@ const IndexPage = ({ data }) => {
         title="Home"
       />
 
-      <div className="min-h-content-area relative flex items-center justify-center">
+      <div className="min-h-content-area relative">
         <div className="absolute top-0 bottom-0 left-0 right-0 overflow-hidden -z-10">
           <DynamicBackgroundImage
             className="h-full"
@@ -35,12 +35,11 @@ const IndexPage = ({ data }) => {
             defaultImage={data.file.childImageSharp.fluid}
             defaultCaption={{ caption: "New York City Skylines", location: "New York, New York" }} />
         </div>
-        <div className="pb-16">
-          <img src={test} />
-          {/*<h1 className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Coastal Airlines</h1>*/}
+        <div className="pt-16">
+          <img className="max-w-6xl mx-auto mb-16" src={test} />
           <h1
-            className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl leading-10 font-bold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl"
-            style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
+            className="mb-4 sm:mb-8 px-4 text-center text-white text-3xl leading-10 font-bold sm:text-4xl sm:leading-none md:text-6xl"
+            style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)", color: "#dee4fe" }}>Where will we be flying today?</h1>
 
           <div>
             <BookingForm onAirportSelect={airport => setAirport(airport)}/>
