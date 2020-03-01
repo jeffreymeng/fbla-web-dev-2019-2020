@@ -37,7 +37,7 @@ const Layout = ({ children, pageInfo, admin, parallax, backgroundImage, backgrou
     render={function(data) {
       let page = (
 
-        <div className={(parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : "") + customParallax ? "parallax-wrapper-custom" : ""}>
+        <div className={(parallax ? "parallax-wrapper " + (parallax !== "" ? "bg-" + parallax : "") : "")}>
           <div className={"px-0 main"} style={{
             backgroundColor:backgroundColor
           }}>

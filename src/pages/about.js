@@ -9,7 +9,7 @@ import { graphql, StaticQuery, Link } from "gatsby"
 
 import planeImage from "../images/planecoast.jpg"
 import icon from "../images/coastalLogo.png"
-import { Link as ReactScrolling, animateScroll as scroll } from "react-scroll";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
@@ -37,18 +37,11 @@ return(
 What started off as a dream with three individuals to travel and explore the nation in a simple, hassle-free manner is now Coastal Airlines:</p><p	className="about_emphasis  mt-3 text-base text-gray-500 sm:mt-5 sm:text-2xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-4xl lg:mx-0">The Best Air Travel in the West.  </p>
           <div className="mt-5 sm:mt-8 mr-48 sm:flex sm:justify-center">
             <div className="mt-3 sm:mt-32 sm:mr-0">
-              <ReactScrolling
-                activeClass="active"
-                to="Section1"
-                spy={true}
-                smooth={true}
-                offset={-45}
-                duration={1000}
-              >
-              <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-2xl md:px-10">
+
+              <AnchorLink href="#Section1" offset="45" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-2xl md:px-10">
 				 Learn More
-              </a>
-              </ReactScrolling>
+              </AnchorLink>
+
             </div>
           </div>
         </div>
