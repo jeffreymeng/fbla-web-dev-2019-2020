@@ -19,13 +19,10 @@ const IndexPage = ({ data }) => {
       acc[airportCode] = cur.node.childImageSharp.fluid
       return acc
     }, {})
-  }, data.images)
+  }, data.images);
 
   return (
-    <Layout
-      // pageInfo={{ pageName: "index" }}
-      // lightFooter
-    >
+    <Layout>
       <SEO
         title="Home"
       />
@@ -59,7 +56,7 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    images: allFile(filter: {absolutePath: {regex: "/(airport_bg_images)/"}}) {
+    images: allFile(filter: {absolutePath: {regex: "/(airport_bg_images).*(\\.jpg)/"}}) {
       edges {
         node {
           childImageSharp {
@@ -89,16 +86,3 @@ export const query = graphql`
    }
   }
 `
-
-// export const query = graphql`
-//   query {
-//     file(relativePath: { eq: "bg.jpg" }) {
-//       childImageSharp {
-//         # Specify the image processing specifications right in the query.
-//         # Makes it trivial to update as your page's design changes.
-//         fluid(maxWidth: 1920, quality: 100) {
-//           ...GatsbyImageSharpFluid
-//         }
-//       }
-//     }
-//   }
