@@ -27,7 +27,7 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
   )
 }
 
-const BookingPage = ({ data }) => {
+const BookingPage = ({ data, location }) => {
   return (
     <Layout>
       <SEO
@@ -43,9 +43,7 @@ const BookingPage = ({ data }) => {
           will we be flying today?</h1>
 
         <div>
-          <BookingForm onSubmit={(data) => navigate("otherpage", {
-            state: data,
-          })} dropUp className="-mb-40 sm:-mb-32" />
+          <BookingForm defaultValues={location.state} className="-mb-40 sm:-mb-32" />
         </div>
       </div>
 
