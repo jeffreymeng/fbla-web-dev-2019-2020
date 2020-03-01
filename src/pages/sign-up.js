@@ -2,32 +2,30 @@ import React, { useCallback, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
-import { FirebaseContext } from "gatsby-plugin-firebase"
-import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
 
 const SignUpPage = props => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const firebase = React.useContext(FirebaseContext);
+  // const firebase = React.useContext(FirebaseContext);
 
-  useFirebase(firebase => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleSubmit = useCallback((evt) => {
-    evt.preventDefault();
-    setError("");
-    setLoading(true);
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
-      setError(error.message);
-      setLoading(false);
-    });
-  }, [email, pass, firebase]);
+  // useFirebase(firebase => {
+  //   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+  //     setLoading(false);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+  //
+  // const handleSubmit = useCallback((evt) => {
+  //   evt.preventDefault();
+  //   setError("");
+  //   setLoading(true);
+  //   firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
+  //     setError(error.message);
+  //     setLoading(false);
+  //   });
+  // }, [email, pass, firebase]);
 
   return (
     <Layout backgroundColor="#f9fafb">
