@@ -49,7 +49,7 @@ const IndexPage = ({ data }) => {
 
       <div className="relative bg-indigo-800 overflow-hidden">
         <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
-          <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+          <div className="pt-10 mx-auto max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
             <div className="sm:text-center lg:text-left">
               <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
                 About <span className="text-yellow-200">Us</span>
