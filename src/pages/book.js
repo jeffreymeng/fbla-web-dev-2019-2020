@@ -12,7 +12,8 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
     <div className="rounded overflow-hidden shadow-lg bg-white">
       <div className="h-64 lg:h-48">
         {/*todo center this?*/}
-        <img className="w-full h-full object-cover" src="https://tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains" />
+        <img className="w-full h-full object-cover" src="https://tailwindcss.com/img/card-top.jpg"
+             alt="Sunset in the mountains" />
       </div>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
@@ -29,7 +30,7 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
 }
 
 const BookingPage = ({ data }) => {
-  const [bookingData, setBookingData] = React.useState({});
+  const [bookingData, setBookingData] = React.useState(null)
 
   return (
     <Layout>
@@ -47,37 +48,56 @@ const BookingPage = ({ data }) => {
 
         <div>
           <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={{
-            departAirport:"SFO",
-            arriveAirport:"SLC"
+            departAirport: "SFO",
+            arriveAirport: "SLC",
           }} className="-mb-40 sm:-mb-32" />
         </div>
       </div>
 
       <div className="bg-gray-100 pt-40 sm:pt-32 pb-10 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <FlightResults value={bookingData} />
+          {bookingData !== null && <FlightResults value={bookingData} />}
 
-        {/*  <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>*/}
-        {/*  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*    <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit tempore ut?*/}
-        {/*    </SuggestedFlight>*/}
-        {/*  </div>*/}
+          {
+            bookingData === null &&
+            (
+              <>
+                <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
+                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
+                    tempore ut?
+                  </SuggestedFlight>
+                </div>
+              </>
+            )
+          }
         </div>
       </div>
     </Layout>
