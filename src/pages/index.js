@@ -48,18 +48,18 @@ const IndexPage = ({ data }) => {
         </div>
       </div>
 
-      <div className="relative bg-indigo-800 overflow-hidden">
-        <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
+      <div className="relative overflow-hidden">
+        <div className="relative z-10 pb-8 bg-gray-50 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
           <div className="pt-10 mx-auto max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
             <div className="sm:text-center lg:text-left">
-              <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
-                About <span className="text-yellow-200">Us</span>
+              <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-black sm:text-5xl sm:leading-none md:text-6xl">
+                About <span className="text-indigo-700">Us</span>
               </h2>
-              <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 From humble beginnings, Coastal Airlines has grown to become a leading air travel company in the West Coast.
               </p>
               <div className="inline-block mt-8">
-                <Link to="about" className="rounded border border-yellow-200 px-4 py-2 text-yellow-200 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-yellow-200 hover:text-yellow-800">
+                <Link to="about" className="rounded border border-indigo-700 px-4 py-2 text-indigo-700 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-indigo-700 hover:text-indigo-50">
                   Learn More
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                        className="fill-current inline-block ml-4">
@@ -69,7 +69,7 @@ const IndexPage = ({ data }) => {
               </div>
             </div>
           </div>
-          <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-indigo-800 transform translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-50 transform translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
             <polygon points="50,0 100,0 50,100" />
           </svg>
         </div>
