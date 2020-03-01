@@ -22,7 +22,7 @@ const BookingPage = ({ data }) => {
         </div>
         <h1 className="px-4 text-center text-white text-4xl tracking-tight leading-10 font-extrabold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where will we be flying today?</h1>
 
-        <BookingForm onSubmit={(d) => setBookingData(d)} className="relative" style={{
+        <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={location.state}  className="relative" style={{
           bottom: "-7rem",
         }} />
 
