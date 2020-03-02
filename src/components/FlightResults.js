@@ -26,7 +26,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
 
   let flights = getFlights(value);
 
- const classIdx = ["economy", "business", "first"].indexOf(searchedClass);
+ const classIdx = ["economy", "business", "first"].indexOf(searchedClass); // class index
  let cheapestPrice = 10000000;
  for (let i = 0; i < flights.length; i++) {
    cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);
@@ -40,6 +40,38 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
   )
   let filteredFlights = flights.filter((flight) => {
     return ! ((nonstopOnly && flight.stops > 0) || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice));
+  }).sort((a,b) => {
+    let compare = function (a, b, comparison, depth) {
+      comparison = comparison || "depart";
+      depth = depth === undefined ? 0 : depth;
+      // Make sure we sort in priority of ["depart", "arrive", "length", "stops", "price"] to break ties.
+      switch(comparison) {
+
+        case "depart":
+          let byDepart = b.start.compareTo(a.start);
+          if (byDepart !== 0) return byDepart
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "arrive":
+          let byArrive = b.end.compareTo(a.end);
+          if (byArrive !== 0) return byArrive;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "length":
+          let byLength = b.travelTime.compareTo(a.travelTime);
+          if (byLength !== 0) return byLength;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "stops":
+          let byStops = a.stops - b.stops;
+          if (byStops !== 0) return byLength;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "price":
+          let byClass = a.price[classIdx] - b.price[classIdx];
+          return byClass; // even if it's equal to 0
+        default:
+          throw "SortFlightsError: Unrecognized comparison";
+      }
+    }
+    let result = compare(a, b, sort.value);
+    return result !== 0 ? result : compare(a, b, "depart");
   });
   return (
     flights.length != 0  ?
@@ -51,7 +83,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
       },
         {
           label:"Arrival Time",
-          value:"arrival"
+          value:"arrive"
         },
         {
           label:"Price",
@@ -128,7 +160,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
 };
 
 function getFlights(value) {
-  const MAX_LAYOVER_LENGTH = 4;
+  const MAX_LAYOVER_LENGTH = 5;
 
   class Time {
     /**
@@ -229,14 +261,16 @@ function getFlights(value) {
           arr.push(
             ...rule.times.map(startTimeString => {
               let startTime = new Time(startTimeString);
+              let totalPrice = 1.1208 * (rule.price);
               return {
                 start:startTime,
                 end:startTime.clone().add(routeTime),
+                travelTime:routeTime,
                 length:`${routeTime.hour}h${routeTime.minute !== 0 ? " " + routeTime.minute + "m" : ""}`,
                 aircraft:[rule.aircraft],
                 stops:0,
                 airports:[value.departAirport, value.arriveAirport],
-                price:[976, 1537, 3099]//TODO
+                price:[totalPrice, totalPrice*2.184, totalPrice*3.892].map(x => Math.round(x))
               }
             })
           );
@@ -273,15 +307,18 @@ function getFlights(value) {
 
               let travelTime = flightToDest.end.clone().subtract(flightToLayover.start);
               // console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
+              let totalPrice = 1.1208 * (toLayoverFlight.price + toDestFlight.price);
+              console.log(totalPrice,flightToLayover.price, "TPP")
               flights.push({
                 start:flightToLayover.start,
                 end:flightToDest.end,
+                travelTime:travelTime,
                 length:travelTime.toHourMinute(),
                 layover:`Layover at ${layoverAirport}`,
                 airports:[value.departAirport, layoverAirport, value.arriveAirport],
                 aircraft:[flightToLayover.aircraft, flightToDest.aircraft],
                 times:[toLayoverTime.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
-                price:[1324, 2899, 4859],//TODO
+                price:flightToLayover.price.map((x, i) => x + flightToDest.price[i]),
                 stops:1,
               })
             }

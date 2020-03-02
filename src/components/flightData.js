@@ -50,18 +50,21 @@ const flightData = {
             {
               days: "MWF",
               times: ["8am", "12:20pm"],
-              aircraft: "Boeing 737-700"
+              aircraft: "Boeing 737-700",
+              price:800,
             },
             {
               days: "SaSu",
               times: ["8am", "2:45pm"],
-              aircraft: "Boeing 737-700"
+              aircraft: "Boeing 737-700",
+              price:900,
 
             },
             {
               days: "Sa",
               times: ["6pm"],
-              aircraft:"Boeing 787-7 Dreamliner"
+              aircraft:"Boeing 787-7 Dreamliner",
+              price:900,
             }
           ]
         },
@@ -72,12 +75,14 @@ const flightData = {
             {
               days: "WThFSaSu",
               times: ["7am", "11am", "5pm"],
-              aircraft: "Boeing 737-700"
+              aircraft: "Boeing 737-700",
+              price: 480,
             },
             {
               days: "MTu",
               times: ["7am", "2:45pm"],
-              aircraft: "Boeing 737-700"
+              aircraft: "Boeing 737-700",
+              price: 220,
 
             }
           ]
@@ -94,13 +99,21 @@ const flightData = {
         schedule: [
           {
             days:"MTuWThFSaSu",
-            times:["9am", "7pm"],
-            aircraft: "Boeing 737-700"
+            times:["9am"],
+            aircraft: "Boeing 737-700",
+            price:210,
+          },
+          {
+            days:"MTuWThFSaSu",
+            times:["5pm", "7pm"],
+            aircraft: "Boeing 737-700",
+            price:400,
           },
           {
             days:"ThFSaSu",
             times:["1:30pm"],
-            aircraft: "Boeing 787-8 Dreamliner"
+            aircraft: "Boeing 787-8 Dreamliner",
+            price:490,
           }
         ]
       }
