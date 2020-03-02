@@ -19,7 +19,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
         <span className="rounded-md shadow-sm">
           <button onClick={() => setNonstopOpen(!nonstopOpen)}
                   type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+                  className="inline-flex justify-between w-48 rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
             {NSOLabel}
             <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd"
@@ -37,7 +37,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
           leave="transition ease-in duration-75"
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
-          className="origin-top-right absolute right-0 mt-1 w-40 rounded-md z-10">
+          className="origin-top-right absolute right-0 mt-1 w-48 rounded-md z-10">
           <div className="rounded-md bg-white"
                style={{
                  "box-shadow": "0 1px 3px rgba(60,64,67, 0.3), 0 4px 8px 3px rgba(60,64,67, 0.15)",
@@ -46,19 +46,21 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
 
               <a onClick={e => {
                 e.preventDefault();
+                setNonstopOpen(false);
                 onNonstopOnlyChange && onNonstopOnlyChange(false);
               }}
                  href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-                Show All Flights
+                All Flights
               </a>
               <a onClick={e => {
                 e.preventDefault();
+                setNonstopOpen(false);
                 onNonstopOnlyChange && onNonstopOnlyChange(true);
               }}
                  href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-                Show Nonstop Only
+                Nonstop Only
               </a>
             </div>
           </div>
@@ -71,7 +73,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
         <span className="rounded-md shadow-sm">
           <button onClick={() => setSortOpen(!sortOpen)}
                   type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+                  className="inline-flex justify-between w-56 rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
             {sortLabel}
             <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd"
@@ -89,7 +91,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
           leave="transition ease-in duration-75"
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
-          className="origin-top-right absolute right-0 mt-1 w-40 rounded-md z-10">
+          className="origin-top-right absolute right-0 mt-1 w-56 rounded-md z-10">
           <div className="rounded-md bg-white"
                style={{
                  "box-shadow": "0 1px 3px rgba(60,64,67, 0.3), 0 4px 8px 3px rgba(60,64,67, 0.15)",
@@ -97,6 +99,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
             <div className="py-1">
               <a onClick={e => {
                 e.preventDefault();
+                setSortOpen(false);
                 onSortByChange({
                   label: "Departure Time",
                   value: "depart",
@@ -108,6 +111,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
               </a>
               <a onClick={e => {
                 e.preventDefault();
+                setSortOpen(false);
                 onSortByChange({
                   label: "Arrival Time",
                   value: "arrive",
@@ -119,6 +123,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
               </a>
               <a onClick={e => {
                 e.preventDefault();
+                setSortOpen(false);
                 onSortByChange({
                   label: "Price",
                   value: "price",
@@ -130,6 +135,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
               </a>
               <a onClick={e => {
                 e.preventDefault();
+                setSortOpen(false);
                 onSortByChange({
                   label: "Number of stops",
                   value: "stops",
@@ -142,6 +148,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
               </a>
               <a onClick={e => {
                 e.preventDefault();
+                setSortOpen(false);
                 onSortByChange({
                   label: "Trip Time",
                   value: "length",
