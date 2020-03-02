@@ -13,6 +13,28 @@
   font-family: 'Proxima Nova Regular';
   src: url("../fonts/ProximaNova-Regular.otf") format("opentype");
 }
+.swap-button {
+  //@keyframes fade-in {
+  //  0% { opacity: 0; }
+  //  100% { opacity: 1; }
+  //}
+
+    transition: all 0.2s;
+
+  outline:0 !important;
+  border: 2px solid #EDF2F7;
+  &:hover {
+    border:2px solid #1e429f;
+  }
+  &:active {
+    background-color: #1e429f;
+    border: 2px solid #EDF2F7;
+    & svg {
+      color:#EDF2F7 !important;
+    }
+  }
+}
+
 .airport-select > div:first-child > div:nth-child(3) {
   z-index:100000 !important;
   //background-color:purple !important;
@@ -32,9 +54,9 @@
   //
   .swap-button {
     background-color:rgba(255, 255, 255, 0.8) !important;
-    &:hover {
-      background-color:rgba(255, 255, 255, 1) !important;
-    }
+    //&:hover {
+    //  background-color:rgba(255, 255, 255, 1) !important;
+    //}
     outline:0; // BAD!!!, but ok for this website LOL
     background-color: rgba(144,205,244,0.8) !important;
     &:hover {
