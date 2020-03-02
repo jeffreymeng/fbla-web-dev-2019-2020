@@ -96,11 +96,10 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
       <div>
         <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
         <a onClick={() => {
-          setSort(defaults.sort);
           setNonstopOnly(defaults.nonstopOnly);
           setMinPrice(defaults.minPrice);
           setMaxPrice(defaults.maxPrice);
-        }}>Reset Filters</a>
+        }}>Reset All Filters</a>
       </div>}
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <ul>
