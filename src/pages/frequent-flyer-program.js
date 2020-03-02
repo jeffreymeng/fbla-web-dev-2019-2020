@@ -32,7 +32,7 @@ const FrequentFlyerProgramPage = () => (
             </div>
             <div className="numbered-sections-list__item__content">
               <h3 className="numbered-sections-list__item__content__title">Earn Points</h3>
-              For each mile you fly, you earn one point in Coastal Airline's Frequent Flyer Program.
+              For each mile you fly, you earn at least one Beach Club point. However, you'll often earn much more based on what dates you fly, how expensive your ticket is, and what class you book.
             </div>
           </div>
           <div className="numbered-sections-list__item">

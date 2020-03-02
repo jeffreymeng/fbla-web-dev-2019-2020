@@ -15,3 +15,6 @@ a.link-no-style {
     text-decoration: none;
   }
 }
+.min-h-content-area {
+  min-height: calc(100vh - 64px);
+}

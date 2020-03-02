@@ -1,6 +1,4 @@
-.min-h-content-area {
-  min-height: calc(100vh - 64px);
-}
+
 @font-face {
   font-family: 'Nexa Bold';
   src: url("../fonts/Nexa Bold.otf") format("opentype");
@@ -15,6 +13,28 @@
   font-family: 'Proxima Nova Regular';
   src: url("../fonts/ProximaNova-Regular.otf") format("opentype");
 }
+.index-booking-form {
+  background-color:rgba(255, 255, 255, 0.5);
+  input,
+  .booking-select > div:first-child > div:first-child,
+  .airport-select > div:first-child > div:first-child {
+    background-color:rgba(255, 255, 255, 0.8) !important;
+    &:hover {
+      background-color:rgba(255, 255, 255, 1) !important;
+    }
+  }
+  .swap-button {
+    background-color: rgba(144,205,244,0.8) !important;
+    &:hover {
+      background-color: rgba(144,205,244,1) !important;
+    }
+  }
+  button[type="submit"]:not(:active):not(:hover):not(:focus) {
+    background-color:rgba(235,244,255, 0.8)!important;
+  }
+
+}
+
 
 .navbar-brand {
   font-family: "Nexa Bold", sans-serif;
