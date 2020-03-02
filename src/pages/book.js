@@ -7,13 +7,19 @@ import Layout from "../components/layout/layout"
 import { graphql } from "gatsby"
 import FlightResults from "../components/FlightResults"
 import ConfirmFlightModal from "../components/ConfirmFlightModal"
+import bigBalloons from "../images/bigBalloons.jpg"
+import northLight from "../images/northLight.jpg"
+import goldCity from "../images/goldCity.png"
+import hawaii from "../images/hawaii.jpg"
+import cnTower from "../images/cnTower.jpg"
+import goldenGate from "../images/goldenGate.jpg"
 
 const SuggestedFlight = ({ title, img, flight, children }) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg bg-white">
+    <div className="rounded overflow-hidden shadow-lg bg-white transition ease-in-out duration-300 hover:shadow-2xl">
       <div className="h-64 lg:h-48">
         {/*todo center this?*/}
-        <img className="w-full h-full object-cover" src="https://tailwindcss.com/img/card-top.jpg"
+        <img className="w-full h-full object-cover" src={img}
              alt="Sunset in the mountains" />
       </div>
       <div className="px-6 py-4">
@@ -74,33 +80,31 @@ const BookingPage = ({ data, location }) => {
             (
               <>
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
+                  <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                  <SuggestedFlight title="The Golden City" img={goldCity} flight="LAS">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                  <SuggestedFlight title="The Flight of the Balloons" img={bigBalloons} flight="ABQ">
+                    Travel to Albuquerque to witness the International Balloon Fiesta, a festival of color, culture, celebration. Where will your flights take you?   
+                  </SuggestedFlight>
+                  <SuggestedFlight title="The Lonely Islands" img={hawaii} flight="HNL">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYZ">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
-                  </SuggestedFlight>
-                  <SuggestedFlight title="The Coldest Sunset" flight="SFO to LAX">
+                  <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
