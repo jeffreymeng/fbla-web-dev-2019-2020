@@ -5,9 +5,12 @@ import SEO from "../../components/seo"
 import Layout from "../../components/layout/layout"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import flightJob from "../../images/flightJob.jpg"
+import attendantPic from "../../images/attendant.jpg"
+import officePic from "../../images/officePic.jpg"
+import offerPic from "../../images/offerPic.jpg"
 
 const JobsPage = () => (
-  <Layout parallax={"jobs"}>
+  <Layout> {/*parallax={"jobs"}*/}
     <SEO title="Apply for a Job" />
 {/*}
     <div className="job-hero py-12 md:py-16 lg:py-24">
@@ -139,45 +142,87 @@ const JobsPage = () => (
   </div>
 </div>
 
-    <div className="bg-gray-50 pt-12 pb-8">
-      <div className="job-benefits" id="benefits">
-        <h2 className="section-heading" >Why Us?</h2>
-        <div className="numbered-sections-list">
-          <div className="numbered-sections-list__item">
-            <div className="numbered-sections-list__item__number">
-              01
-            </div>
-            <div className="numbered-sections-list__item__content">
-              <h3 className="numbered-sections-list__item__content__title">Travel the World</h3>
-              When working for Coastal Airlines, you can travel the world -- and get paid to do it!
-              Visit Hawaii, Rome, Paris, and so much more with Coastal Airlines.
-            </div>
-          </div>
-          <div className="numbered-sections-list__item">
-            <div className="numbered-sections-list__item__number">
-              02
-            </div>
-            <div className="numbered-sections-list__item__content">
-              <h3 className="numbered-sections-list__item__content__title">Comprehensive Employee Benefits</h3>
-              Coastal Airlines provides extremely comprehensive employee benefits to all employees.
-              We provide renowned benefits including healthcare, 401(k) matching, and much more!
-            </div>
-          </div>
-          <div className="numbered-sections-list__item">
-            <div className="numbered-sections-list__item__number">
-              03
-            </div>
-            <div className="numbered-sections-list__item__content">
-              <h3 className="numbered-sections-list__item__content__title">Proven Employee Testimonials</h3>
-              We have more than 500 satisfied employees! We are consistently ranked amongst
-              the top airlines to work for.
-            </div>
-          </div>
-        </div>
-      </div>
+ 
+
+<div class="py-16 bg-gray-50 overflow-hidden lg:py-24">
+  <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl pb-20">
+   
+    <div class="relative">
+      <h3 class="text-center text-4xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl sm:leading-10">
+        Why Us?
+      </h3>
+      <p class="mt-4 max-w-3xl mx-auto text-center text-xl leading-7 text-gray-500">
+  _______________________________      </p>
     </div>
 
-    <div className="bg-white overflow-hidden">
+    <div class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center pb-4">
+      <div class="relative">
+       <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9">
+            What We Offer
+          </h4>
+        <ul class="mt-10">
+          <li>
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
+                  <p className="text-xl md:text-2xl">1.</p>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h5 class="text-lg leading-6 font-bold text-gray-900">Travel the World</h5>
+                <p class="mt-2 text-base leading-6 text-gray-500">
+                  When working for Coastal Airlines, you can travel the world -- and get paid to do it! Visit Hawaii, Alaska, Mexico, and so much more with Coastal Airlines.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="mt-10">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
+                  <p className="text-xl md:text-2xl">2.</p>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h5 class="text-lg leading-6 font-bold text-gray-900">Comprehensive Employee Benefits</h5>
+                <p class="mt-2 text-base leading-6 text-gray-500">
+Coastal Airlines provides extremely comprehensive employee benefits to all employees. We provide renowned benefits including healthcare, 401(k) matching, and much more!                </p>
+              </div>
+            </div>
+          </li>
+          <li class="mt-10">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
+                  <p className="text-xl md:text-2xl">3.</p>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h5 class="text-lg leading-6 font-bold text-gray-900">Proven Employee Testimonials</h5>
+                <p class="mt-2 text-base leading-6 text-gray-500">
+We have more than 500 satisfied employees! We are consistently ranked amongst the top airlines to work for, and would love you here!                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-10 -mx-4 relative lg:mt-0">
+        <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
+          <defs>
+            <pattern id="svg-pattern-squares-2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="784" height="404" fill="url(#svg-pattern-squares-2)" />
+        </svg>
+        <img class="relative mx-auto rounded-lg" width="490" src={offerPic} alt="" />
+      </div>
+    </div>
+</div>
+
+
+<div className="bg-white overflow-hidden">
       <div className="relative max-w-screen-xl mx-auto pt-20 pb-12 px-4 sm:px-6 lg:px-8 lg:py-20">
         <svg className="absolute top-full left-0 transform translate-x-80 -translate-y-24 lg:hidden" width="784"
              height="404" fill="none" viewBox="0 0 784 404">
@@ -202,7 +247,7 @@ const JobsPage = () => (
         <div className="relative lg:flex lg:items-center">
           <div className="hidden lg:block lg:flex-shrink-0">
             <img className="h-64 w-64 rounded-full xl:h-80 xl:w-80"
-                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                 src={attendantPic}
                  alt="" />
           </div>
 
@@ -224,7 +269,7 @@ const JobsPage = () => (
                 <div className="flex">
                   <div className="flex-shrink-0 lg:hidden">
                     <img className="h-12 w-12 rounded-full"
-                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                         src={attendantPic}
                          alt="" />
                   </div>
                   <div className="ml-4 lg:ml-0">
@@ -239,6 +284,88 @@ const JobsPage = () => (
       </div>
     </div>
 
+
+    <div class="py-16 bg-gray-50 overflow-hidden lg:py-24">
+  <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl">
+   
+      <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
+        <div class="lg:col-start-2">
+          <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9">
+            Apply Now
+          </h4>
+          <ul class="mt-10">
+            <li>
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-100 text-indigo-700">
+                  <p className="text-xl md:text-2xl">1.</p>
+                </div>
+              </div>
+                </div>
+                <div class="ml-4">
+                  <h5 class="text-lg leading-6 font-bold text-gray-900">Select a Position</h5>
+                  <p class="mt-2 text-base leading-6 text-gray-500">
+Choose from a variety of different job openings!                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="mt-10">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-100 text-indigo-700">
+                  <p className="text-xl md:text-2xl">2.</p>
+                </div>
+              </div>
+                </div>
+                <div class="ml-4">
+                  <h5 class="text-lg leading-6 font-bold text-gray-900">Send Your Resume</h5>
+                  <p class="mt-2 text-base leading-6 text-gray-500">
+Prepare a resume and cover letter for your selected position.                  </p>
+                </div>
+              </div>
+            </li>
+             <li class="mt-10">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-100 text-indigo-700">
+                  <p className="text-xl md:text-2xl">3.</p>
+                </div>
+              </div>
+                </div>
+                <div class="ml-4">
+                  <h5 class="text-lg leading-6 font-bold text-gray-900">Apply!</h5>
+                  <p class="mt-2 text-base leading-6 text-gray-500">
+We'll get back to you within a few days to arrange an interview!                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
+          <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
+            <defs>
+              <pattern id="svg-pattern-squares-4" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width="784" height="404" fill="url(#svg-pattern-squares-4)" />
+          </svg>
+          <img class="relative mx-auto rounded-lg" width="490" src={officePic} alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    {/*
     <div className="job-apply__container" id="apply">
       <div className="job-apply">
         <h2 className="section-heading">Apply Now</h2>
@@ -273,7 +400,7 @@ const JobsPage = () => (
         </div>
       </div>
     </div>
-
+*/}
     <div className="bg-white mb-4">
       <div className="max-w-screen-xl mx-auto text-center py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
         <h2 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">

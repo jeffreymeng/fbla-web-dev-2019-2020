@@ -157,7 +157,7 @@ What started off as a dream with three individuals to travel and explore the nat
           <div className="mt-5">
             <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club+</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
-				One of our core principles is to <span className="italics">loyalty</span> - thats why we wanted to give back to those who love and care for Coastal Airlines as much as we love them. Go to our	<Link to="frequent-flyer-program"
+				One of our core principles is <span className="italics">loyalty</span> - thats why we wanted to give back to those who love and care for Coastal Airlines as much as we love them. Go to our	<Link to="frequent-flyer-program"
              className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club+
           		</Link> page to learn more.</p>
           </div>
@@ -343,14 +343,14 @@ What started off as a dream with three individuals to travel and explore the nat
 				       	Simplicity is our Motto
 				      </div>
 				      <h2 className="mt-2 text-white text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl sm:leading-10">
-				        Dream On!
+				        Live On!
 				      </h2>
 				      <p className="mt-3 text-lg leading-7 text-gray-300">
 						Travel to your favorite locations <span className="italics">right now!</span>
 					  </p>
 				      <div className="mt-8">
 				        <div className="inline-flex rounded-md shadow">
-				          <Link href="/" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+				          <Link to="/book" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
 				            Book Your Next Vacation!
 				            
 				          </Link>

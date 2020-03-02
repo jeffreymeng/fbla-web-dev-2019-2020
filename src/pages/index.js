@@ -8,6 +8,9 @@ import Img from "gatsby-image";
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
+import beachClubp1 from "../images/beachClubp1.jpg"
+import aboutUsp1 from "../images/aboutUsp1.jpg"
+import judithRose from "../images/judithRose.jpg"
 
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
@@ -60,8 +63,7 @@ const IndexPage = ({ data }) => {
               <div className="inline-block mt-8">
                 <Link to="about" className="rounded border border-indigo-700 px-4 py-2 text-indigo-700 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-indigo-700 hover:text-indigo-50">
                   Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                       className="fill-current inline-block ml-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"         className="fill-current inline-block ml-4">
                     <path d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z" />
                   </svg>
                 </Link>
@@ -73,13 +75,13 @@ const IndexPage = ({ data }) => {
           </svg>
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="" />
+          <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={aboutUsp1} alt="" />
         </div>
       </div>
 
       <div className="flex bg-indigo-800 overflow-hidden items-stretch">
         <div className="hidden lg:block flex-1 overflow-hidden relative">
-          <img className="absolute h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="" />
+          <img className="absolute h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full" src={beachClubp1} alt="" />
         </div>
         <div className="flex-1">
           <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -89,13 +91,13 @@ const IndexPage = ({ data }) => {
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
               <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
-                  Frequent <span className="text-yellow-200">Flyer</span>
+                  Beach <span className="text-yellow-200">Club+</span>
                 </h2>
                 <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 lg:mr-auto">
                   Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
                 </p>
                 <div className="inline-block mt-8">
-                  <Link to="about" className="rounded border border-yellow-200 px-4 py-2 text-yellow-200 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-yellow-200 hover:text-yellow-800">
+                  <Link to="frequent-flyer-program" className="rounded border border-yellow-200 px-4 py-2 text-yellow-200 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-yellow-200 hover:text-yellow-800">
                     More Information
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                          className="fill-current inline-block ml-4">
@@ -133,11 +135,11 @@ const IndexPage = ({ data }) => {
                 <div className="md:flex md:items-center md:justify-center">
                   <div className="md:flex-shrink-0">
                     <img className="mx-auto h-10 w-10 rounded-full"
-                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                         src={judithRose}
                          alt="" />
                   </div>
                   <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
-                    <div className="text-base leading-6 font-medium text-gray-900">Judith Black</div>
+                    <div className="text-base leading-6 font-medium text-gray-900">Judith Rose</div>
 
                     <svg className="hidden md:block mx-1 h-5 w-5 text-indigo-600" fill="currentColor"
                          viewBox="0 0 20 20">
@@ -168,7 +170,7 @@ const IndexPage = ({ data }) => {
               </Link>
             </div>
             <div className="ml-3 inline-flex">
-              <Link href="jobs"
+              <Link to="jobs"
                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out">
                 Learn more
               </Link>

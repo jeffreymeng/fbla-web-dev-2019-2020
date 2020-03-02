@@ -92,32 +92,22 @@ const BookingPage = ({ data, location }) => {
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
                   <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
+                    A spectular dance of solar wind in the magnetosphere brought us this magnificent view. Fly to Fairbanks, Alaska to experience the awe yourself!
                   </SuggestedFlight>
                   <SuggestedFlight title="The Golden City" img={goldCity} flight="LAS" onClick={()=>setSelectedTrip("LAS")}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
+                    If the enormous buildings, skyline, and beautiful buildings aren't enough to take your breath away, the vibrance of gold, in all forms, is bound to draw you in. That's Vegas, baby.
                   </SuggestedFlight>
                   <SuggestedFlight title="The Flight of the Balloons" img={bigBalloons} flight="ABQ" onClick={()=>setSelectedTrip("ABQ")}>
                     Travel to Albuquerque to witness the International Balloon Fiesta, a festival of color, culture, celebration. Where will your flights take you?   
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Lonely Islands" img={hawaii} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
+                  <SuggestedFlight title="The Islands of Aloha" img={hawaii} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
+                    With the best beaches, foods, and natural beauties to be found in the US, Hawaii is a must for the frequent traveler, the once-in-a-lifetime honeymoon, and everything in between.
                   </SuggestedFlight>
                   <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYR" onClick={()=>setSelectedTrip("YYR")}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
+                    Ontario holds many treasures, and one you cannot miss is the CN Tower, once the tallest tower ever. Even for the faint of heart, it's an experience worth every penny.
                   </SuggestedFlight>
                   <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO" onClick={()=>setSelectedTrip("SFO")}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
-                    doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
-                    tempore ut?
+                    California holds many of the most famous attractions and the Golden Gate is one of them. With foggy mornings and a cool ocean breeze at all times, you never know where this bridge will take you.
                   </SuggestedFlight>
                 </div>
               </>
