@@ -58,7 +58,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
                     flight={flight}
                     searchedClass={searchedClass}
                     highlightPrice={flight.price[classIdx]===cheapestPrice}
-                    onClick={flight => onFlightSelected(flight)}/>
+                    onClick={e => onFlightSelected(flight)}/>
                 </li>
               )
             })

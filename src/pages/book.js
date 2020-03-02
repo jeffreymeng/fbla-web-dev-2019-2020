@@ -46,6 +46,11 @@ const BookingPage = ({ data, location }) => {
     setShowBookingModal(true);
   };
 
+  const handleConfirmedBooking = () => {
+    setShowBookingModal(false);
+    // TODO @jeffrey
+  }
+
   return (
     <Layout>
       <SEO
@@ -117,8 +122,11 @@ const BookingPage = ({ data, location }) => {
       </div>
 
       <ConfirmFlightModal
+        flight={selectedFlight}
+        selectedClass={bookingData?.flightClass}
         isOpen={showBookingModal}
-        onConfirm={() => setShowBookingModal(false)}/>
+        onConfirm={handleConfirmedBooking}
+        onCancel={() => setShowBookingModal(false)}/>
     </Layout>
   )
 }
