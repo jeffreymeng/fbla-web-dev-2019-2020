@@ -13,11 +13,14 @@ const FlightPrice = ({ price, label }) => {
   );
 }
 
-const FlightResult = ({ flight, searchedClass, highlightPrice, onClick }) => {
+const FlightResult = ({ flight, searchedClass, highlightPrice, onClick, hidden }) => {
   const stopInfo = flight.airports.map((airport, idx) => {
     if (idx === 0 || idx === flight.airports.length-1) return null;
     return (idx !== 1 ? ", ": "") + flight.times[idx] + " " + airport;
   });
+  if (hidden) {
+    return (<></>)
+  }
   return (
     <div onClick={onClick} className="cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
       <div className="flex items-center px-4 py-4 sm:px-6">
@@ -26,7 +29,7 @@ const FlightResult = ({ flight, searchedClass, highlightPrice, onClick }) => {
             <div className="text-lg leading-5 font-medium text-gray-700 truncate">{flight.start.toString()} – {flight.end.toString()}</div>
             <div className="hidden sm:block mt-2 text-sm font-light leading-5 text-gray-700 truncate">
               {flight.aircraft.map((name, j) => (
-                <span key={j}>{j!==0?", ":""}{name}</span>
+                <span key={j}>{j!==0?" and ":""}{name}</span>
               ))}
             </div>
             <div className="sm:hidden mt-1 text-sm font-light leading-5 text-gray-700 truncate">
@@ -65,7 +68,13 @@ const FlightResult = ({ flight, searchedClass, highlightPrice, onClick }) => {
               "text-green-500": highlightPrice
             }
           )}>
-            ${flight.price[searchedClass==="economy"?0:(searchedClass==="business"?1:2)]}
+            ${}
+            {flight.price[["economy", "business", "first"].indexOf(searchedClass || "")] > 999 ?
+              (Math.floor(flight.price[["economy", "business", "first"].indexOf(searchedClass || "")]/1000) + ",")
+              : ""}
+            {Math.floor(flight.price[["economy", "business", "first"].indexOf(searchedClass || "")]%1000/100)}
+            {Math.floor(flight.price[["economy", "business", "first"].indexOf(searchedClass || "")]%100/10)}
+            {Math.floor(flight.price[["economy", "business", "first"].indexOf(searchedClass || "")]%10)}
           </div>
           <div className="mt-1 text-sm font-light leading-5 text-gray-700 truncate">
             {searchedClass==="economy"?"Economy":(searchedClass==="business"?"Business":"First Class")}

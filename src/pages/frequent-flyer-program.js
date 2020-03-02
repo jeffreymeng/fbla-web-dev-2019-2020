@@ -17,8 +17,8 @@ const FrequentFlyerProgramPage = () => (
 
     <div className="job-apply__container" id="apply">
       <div className="job-apply">
-        <h2 className="section-heading">What is the Coastal Airlines Frequent Flyer Program?</h2>
-        <p style={{ fontSize: "1.25rem" }}>The Coastal Airlines Frequent Flyer Program is a customer loyalty program that
+        <h2 className="section-heading">What is Beach Club?</h2>
+        <p style={{ fontSize: "1.25rem" }}>Beach Club is Coastal Airlines' Frequent Flyer Program. It is a customer loyalty program that
           rewards customers like you for choosing Coastal Airlines. The more you travel with us,
           the more rewards you earn!</p>
 
@@ -51,7 +51,7 @@ const FrequentFlyerProgramPage = () => (
             </div>
             <div className="numbered-sections-list__item__content">
               <h3 className="numbered-sections-list__item__content__title">Diamond Members</h3>
-              When you accumulate 20,000 points in a year, you will become a Diamond Member of our Frequent Flyer Program!
+              When you accumulate 20,000 points in a year, you will become a Diamond Beach Club Member!
               Diamond members enjoy priority boarding, free checked bags, and complimentary beverages on all our
               flights.
             </div>
@@ -67,7 +67,7 @@ const FrequentFlyerProgramPage = () => (
             <h2 className="text-blue-100 text-6xl mb-12">
               One Mile<span className="text-teal-300">,</span> <br />One Point<span className="text-teal-300">.</span>
             </h2>
-            <p className="text-blue-200 text-xl">Each mile you fly with us gives you at least one Frequent Flyer Program point. You may earn more thatn one point per mile when booking specific promotional routes, special dates, or business/first class.
+            <p className="text-blue-200 text-xl">Each mile you fly with us gives you at least one Beach Club point. You may earn more than one point per mile when booking specific promotional routes, special dates, or business/first class.
               Redeem your points for free flights!</p>
           </div>
         </div>
@@ -80,7 +80,7 @@ const FrequentFlyerProgramPage = () => (
         <h2 className="section-heading section-heading--center">Spend your Rewards</h2>
         <p className="text-gray-700 text-xl text-center mb-12">
           Use the tool below to explore how you can use your points! Select an origin and destination region
-          and recieve an instant estimate of the average number of points you need to score a <i>free flight</i>!
+          and receive an instant estimate of the average number of points you need to score a <i>free flight</i>!
         </p>
       </div>
       <FFPRewardsSpender />
@@ -95,7 +95,7 @@ const FrequentFlyerProgramPage = () => (
               <span className="text-teal-300">Diamond</span> <br />Members<span className="text-teal-300">.</span>
             </h2>
             <p className="text-blue-200 text-xl">If you earn more than 20,000 points, you automatically
-              become a Diamond Member of our Frequent Flyer Program.</p>
+              become a Diamond Beach Club Member.</p>
             <p className="text-blue-200 text-xl">Diamond members enjoy priority boarding, free checked bags, and
               complimentary beverages on all our
               flights.</p>

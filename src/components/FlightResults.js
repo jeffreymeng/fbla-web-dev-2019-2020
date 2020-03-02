@@ -3,11 +3,30 @@ import FlightData from "./flightData";
 import Select from "react-select";
 import FlightResult from "./FlightResult"
 import classNames from "classnames";
+import ReactSlider from 'react-slider'
+import "../styles/slider.scss";
 
 const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
- let flights = getFlights(value);
+  const defaults = {
+    sort: {
+      label:"Departure Time",
+      value:"depart"
+    },
+    nonstopOnly: false,
+    minPrice: 0,
+    maxPrice: 20000,
+  }
+  const [sort, setSort] = React.useState(defaults.sort);
+  const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly);
+  const [minPrice, setMinPrice] = React.useState(defaults.minPrice);
+  const [maxPrice, setMaxPrice] = React.useState(defaults.maxPrice);
 
- const classIdx = (searchedClass==="economy"?0:(searchedClass==="business"?1:2));
+
+
+
+  let flights = getFlights(value);
+
+ const classIdx = ["economy", "business", "first"].indexOf(searchedClass);
  let cheapestPrice = 10000000;
  for (let i = 0; i < flights.length; i++) {
    cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);
@@ -19,37 +38,76 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
       <p>Sorry, it doesn't look like we have any flights for you on the selected dates. However, we found 3 flights for you from xxxx to xxxx on 3/24</p>
     </div>
   )
+  let filteredFlights = flights.filter((flight) => {
+    return ! ((nonstopOnly && flight.stops > 0) || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice));
+  });
   return (
     flights.length != 0  ?
     <>
+      <b>Sort By</b>
       <Select options={[{
-        name:"Departure Time",
+        label:"Departure Time",
         value:"depart"
       },
         {
-          name:"Arrival Time",
+          label:"Arrival Time",
           value:"arrival"
         },
         {
-          name:"Price",
+          label:"Price",
           value:"price"
         },
         {
-          name:"Number of Stops",
+          label:"Number of Stops",
           value:"stops"
         },
         {
-          name:"Duration",
+          label:"Duration",
           value:"length"
-        }]} />
+        }]}
+      value={sort}
+              onChange={(v) => setSort(v)}
+      />
         <label>
-          <input type="checkbox" />Show nonstop only
+          <input type="checkbox" value={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only
         </label>
-      <span>PRICE RANGE SELECT HERE</span>
+      <b>Price Range:</b>
+      <ReactSlider
+        min={0}
+        max={20000}
+        step={10}
+        className="slider"
+        thumbClassName="slider-thumb"
+        trackClassName="slider-track"
+        value={[minPrice, maxPrice]}
+        ariaLabel={['Lower thumb', 'Upper thumb']}
+        ariaValuetext={state => `Thumb value ${state.valueNow}`}
+        renderThumb={(props, state) => <div {...props}>${state.valueNow}</div>}
+        pearling
+        minDistance={100}
+        onChange={(v) => {
+          // console.log("HI", v)
+          setMinPrice(v[0]);
+          setMaxPrice(v[1]);
+        }}
+      />
+      <hr />
+      {filteredFlights.length === 0 &&
+      <div>
+        <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
+        <a onClick={() => {
+          setSort(defaults.sort);
+          setNonstopOnly(defaults.nonstopOnly);
+          setMinPrice(defaults.minPrice);
+          setMaxPrice(defaults.maxPrice);
+        }}>Reset Filters</a>
+      </div>}
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <ul>
           {
-            flights.map((flight, i) => {
+            filteredFlights.map((flight, i) => {
+
+
               return (
                 <li key={i} className={classNames({
                   "border-t border-gray-200": i !== 0
@@ -63,6 +121,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
               )
             })
           }
+
         </ul>
       </div>
     </>: noFlights
@@ -223,8 +282,8 @@ function getFlights(value) {
                 airports:[value.departAirport, layoverAirport, value.arriveAirport],
                 aircraft:[flightToLayover.aircraft, flightToDest.aircraft],
                 times:[toLayoverTime.toHourMinute(), atLayoverTime.toHourMinute(), toDestTime.toHourMinute()],
-                price:[1324, 2899, 4859]//TODO
-
+                price:[1324, 2899, 4859],//TODO
+                stops:1,
               })
             }
           })

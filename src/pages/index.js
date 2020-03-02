@@ -89,10 +89,10 @@ const IndexPage = ({ data }) => {
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
               <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
-                  Frequent <span className="text-yellow-200">Flyer</span>
+                  <span className="text-yellow-200">Beach</span> Club
                 </h2>
                 <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 lg:mr-auto">
-                  Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
+                  Beach Club is the Coastal Airlines Frequent Flyer program. Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
                 </p>
                 <div className="inline-block mt-8">
                   <Link to="about" className="rounded border border-yellow-200 px-4 py-2 text-yellow-200 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-yellow-200 hover:text-yellow-800">
@@ -201,7 +201,7 @@ const IndexPage = ({ data }) => {
               </div>
             </form>
             <p className="mt-3 text-sm leading-5 text-gray-300">
-              We care about the protection of your data. Read our <a href="#" className="text-white font-medium underline">Privacy Policy.</a>
+              We care about the protection of your data. Read our <a href="/privacy-policy" className="text-white font-medium underline">Privacy Policy.</a>
             </p>
           </div>
         </div>

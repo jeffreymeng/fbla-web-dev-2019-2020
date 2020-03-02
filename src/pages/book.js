@@ -69,7 +69,7 @@ const BookingPage = ({ data, location }) => {
         <div>
           <BookingForm
             onSubmit={(d) => setBookingData(d)}
-            defaultValues={location.state}
+            defaultValues={location.state || {}}
             featuredAirport={selectedTrip}
             className="-mb-40 sm:-mb-32" />
         </div>
@@ -79,10 +79,26 @@ const BookingPage = ({ data, location }) => {
         <div className="max-w-4xl mx-auto">
           {
             bookingData !== null &&
-            <FlightResults
-              value={bookingData}
-              searchedClass={bookingData.flightClass}
-              onFlightSelected={handleFlightSelected}/>
+            <>
+            <h3>Select a {bookingData.roundTrip === "rt" && "departure "}flight</h3>
+
+              {
+                <FlightResults
+                  value={bookingData}
+                  searchedClass={bookingData.flightClass}
+                  onFlightSelected={handleFlightSelected}/>
+              }
+              {
+                bookingData.roundTrip === "rt" &&
+                  <>
+                    <h3>Select a return flight</h3>
+                <FlightResults
+                  value={bookingData}
+                  searchedClass={bookingData.flightClass}
+                  onFlightSelected={handleFlightSelected}/>
+                  </>
+              }
+            </>
           }
 
           {
