@@ -109,7 +109,7 @@ const BookingPage = ({ data, location }) => {
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYZ" onClick={()=>setSelectedTrip("YVZ")}>
+                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYR" onClick={()=>setSelectedTrip("YYR")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
