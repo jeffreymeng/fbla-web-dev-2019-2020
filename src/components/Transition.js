@@ -1,19 +1,12 @@
 import React, { useEffect, useRef, useState } from "react"
-import { CSSTransition, Transition as ReactTransition } from 'react-transition-group'
+import classNames from "classnames";
 
 // Forces a reflow of the DOM
 // see https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
 // see https://stackoverflow.com/questions/21664940/force-browser-to-trigger-reflow-while-changing-css
-const forceReflow = node => console.log("Force reflow", node.offsetHeight);
+const forceReflow = node => node.offsetWidth;
 
-const Transition = ({ show, enter, enterFrom, enterTo, leave, leaveFrom, leaveTo, children }) => {
-  const enterClasses = enter?.split(' ') || []
-  const enterFromClasses = enterFrom?.split(' ') || []
-  const enterToClasses = enterTo?.split(' ') || []
-  const leaveClasses = leave?.split(' ') || []
-  const leaveFromClasses = leaveFrom?.split(' ') || []
-  const leaveToClasses = leaveTo?.split(' ') || []
-
+const Transition = ({ show, enter, enterFrom, enterTo, leave, leaveFrom, leaveTo, children, className }) => {
   const [state, setState] = useState("hidden");
   const ref = useRef();
   const transitionEndCallbackRef = useRef();
@@ -29,25 +22,17 @@ const Transition = ({ show, enter, enterFrom, enterTo, leave, leaveFrom, leaveTo
     // console.log(state);
 
     if (state === "enter") {
-      ref.current.classList.add(...enterClasses, ...enterFromClasses);
+      forceReflow(ref.current);
       setState("entering");
     } else if (state === "entering") {
-      forceReflow(ref.current);
-      ref.current.classList.remove(...enterFromClasses)
-      ref.current.classList.add(...enterToClasses)
       transitionEndCallbackRef.current = () => setState("entered");
     } else if (state === "entered") {
-      ref.current.classList.remove(...enterToClasses, ...enterClasses)
     } else if (state === "exit") {
-      ref.current.classList.add(...leaveClasses, ...leaveFromClasses)
+      forceReflow(ref.current);
       setState("exiting");
     } else if (state === "exiting") {
-      forceReflow(ref.current);
-      ref.current.classList.remove(...leaveFromClasses)
-      ref.current.classList.add(...leaveToClasses)
       transitionEndCallbackRef.current = () => setState("exited");
     } else if (state === "exited") {
-      ref.current.classList.remove(...leaveToClasses, ...leaveClasses);
       setState("hidden");
     }
   }, [state]);
@@ -59,18 +44,34 @@ const Transition = ({ show, enter, enterFrom, enterTo, leave, leaveFrom, leaveTo
 
     ref.current.addEventListener('transitionend', e => {
       if (e.target === ref.current) {
-        transitionEndCallbackRef.current();
+        // console.log(e);
+        if (transitionEndCallbackRef.current) transitionEndCallbackRef.current();
       }
     }, false);
   }, [ref.current]);
 
-  // console.log("RENDER");
+  // console.log("RENDER", state);
 
   if (state === "hidden") return null;
 
-  return React.cloneElement(
-    children,
-    { ref }
+  const computedClassName = classNames(
+    className,
+    {
+      [enter]: state === "enter" || state === "entering",
+      [enterFrom]: state === "enter",
+      [enterTo]: state === "entering",
+    },
+    {
+      [leave]: state === "exit" || state === "exiting",
+      [leaveFrom]: state === "exit",
+      [leaveTo]: state === "exiting"
+    }
+  );
+
+  return (
+    <div className={computedClassName} ref={ref}>
+      {children}
+    </div>
   );
 }
 

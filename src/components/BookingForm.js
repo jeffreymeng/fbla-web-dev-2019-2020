@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "../styles/index.scss"
 import "../styles/flatpickr/light.scss"
 import Flatpickr from "react-flatpickr"
@@ -202,7 +202,7 @@ const flightClassOptions = [
   { label: "First Class", value: "first" },
 ]
 
-const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect }) => {
+const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect, featuredAirport }) => {
   defaultValues = defaultValues || {}
   const [roundTrip, setRoundTrip] = React.useState(roundTripOptions.filter(x => x.value === defaultValues.roundTrip)[0] || roundTripOptions[0])
   const [passengers, setPassengers] = React.useState(passengersOptions.filter(x => x.value === defaultValues.passengers)[0] || passengersOptions[0])
@@ -213,6 +213,10 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
     dateFormat: "m/d/y",
     mode: "range",
   }
+
+  useEffect(() => {
+    if (featuredAirport !== null) setAirports([airports[0], featuredAirport]);
+  }, [featuredAirport]);
 
   return (
     <div className={classNames("px-4", className)}>

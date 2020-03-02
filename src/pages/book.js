@@ -14,9 +14,9 @@ import hawaii from "../images/hawaii.jpg"
 import cnTower from "../images/cnTower.jpg"
 import goldenGate from "../images/goldenGate.jpg"
 
-const SuggestedFlight = ({ title, img, flight, children }) => {
+const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg bg-white transition ease-in-out duration-300 hover:shadow-2xl">
+    <div className="cursor-pointer rounded overflow-hidden shadow-lg bg-white transition ease-in-out duration-300 hover:shadow-2xl" onClick={onClick}>
       <div className="h-64 lg:h-48">
         {/*todo center this?*/}
         <img className="w-full h-full object-cover" src={img}
@@ -39,12 +39,18 @@ const SuggestedFlight = ({ title, img, flight, children }) => {
 const BookingPage = ({ data, location }) => {
   const [bookingData, setBookingData] = React.useState(null)
   const [selectedFlight, setSelectedFlight] = React.useState(null);
+  const [selectedTrip, setSelectedTrip] = React.useState(null);
   const [showBookingModal, setShowBookingModal] = React.useState(false);
 
   const handleFlightSelected = (flight) => {
     setSelectedFlight(flight);
     setShowBookingModal(true);
   };
+
+  const handleConfirmedBooking = () => {
+    setShowBookingModal(false);
+    // TODO @jeffrey
+  }
 
   return (
     <Layout>
@@ -61,7 +67,11 @@ const BookingPage = ({ data, location }) => {
           will we be flying today?</h1>
 
         <div>
-          <BookingForm onSubmit={(d) => setBookingData(d)} defaultValues={location.state} className="-mb-40 sm:-mb-32" />
+          <BookingForm
+            onSubmit={(d) => setBookingData(d)}
+            defaultValues={location.state}
+            featuredAirport={selectedTrip}
+            className="-mb-40 sm:-mb-32" />
         </div>
       </div>
 
@@ -81,30 +91,30 @@ const BookingPage = ({ data, location }) => {
               <>
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-                  <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI">
+                  <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Golden City" img={goldCity} flight="LAS">
+                  <SuggestedFlight title="The Golden City" img={goldCity} flight="LAS" onClick={()=>setSelectedTrip("LAS")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Flight of the Balloons" img={bigBalloons} flight="ABQ">
+                  <SuggestedFlight title="The Flight of the Balloons" img={bigBalloons} flight="ABQ" onClick={()=>setSelectedTrip("ABQ")}>
                     Travel to Albuquerque to witness the International Balloon Fiesta, a festival of color, culture, celebration. Where will your flights take you?   
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Lonely Islands" img={hawaii} flight="HNL">
+                  <SuggestedFlight title="The Lonely Islands" img={hawaii} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYZ">
+                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYR" onClick={()=>setSelectedTrip("YYR")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO">
+                  <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO" onClick={()=>setSelectedTrip("SFO")}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda beatae corporis dolores
                     doloribus eaque eius eos, fugiat hic labore magni nulla odio provident quaerat quis repellat sit
                     tempore ut?
@@ -117,8 +127,11 @@ const BookingPage = ({ data, location }) => {
       </div>
 
       <ConfirmFlightModal
+        flight={selectedFlight}
+        selectedClass={bookingData?.flightClass}
         isOpen={showBookingModal}
-        onConfirm={() => setShowBookingModal(false)}/>
+        onConfirm={handleConfirmedBooking}
+        onCancel={() => setShowBookingModal(false)}/>
     </Layout>
   )
 }
