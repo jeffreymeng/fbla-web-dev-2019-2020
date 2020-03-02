@@ -1,0 +1,34 @@
+
+.slider {
+
+  .slider-track {
+
+    //background-color:black;
+
+    height:5px;
+
+  }
+  // inactive region
+  .slider-track-0,
+  .slider-track-2 {
+    background-color:gray;
+  }
+  // active region
+  .slider-track-1 {
+    background-color:blue;
+  }
+
+  .slider-thumb {
+    // Make it so that it is a circle with a tip on the line, and the tip is pointing down for the first slider, and up for the second
+    // OR, make the both circles with no text, and a tooltip shows when you hover/grab a circle
+    background-color:purple;
+
+  }
+  .slider-thumb-0 {
+    margin-bottom:30px;
+  }
+  .slider-thumb-1 {
+    margin-top:30px;
+  }
+
+}

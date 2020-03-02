@@ -32,7 +32,8 @@ module.exports = {
       '40': '40',
       '50': "50",
       'auto': 'auto',
-    }
+    },
+
   },
   variants: {
      margin: ['responsive', 'hover', 'focus'],

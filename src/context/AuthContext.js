@@ -11,7 +11,17 @@ const firebaseConfig = {
   measurementId: "G-5BBC2V2HZE",
 }
 
-const AuthContext = React.createContext(null);
+const AuthContext = React.createContext({
+  user: null,
+  signIn: () => {
+  },
+  signOut: () => {
+  },
+  signUp: () => {
+  },
+  loading: false,
+  error: null,
+});
 
 const AuthProvider = ({ children }) => {
   const [firebase, setFirebase] = useState(undefined);
@@ -58,10 +68,19 @@ const AuthProvider = ({ children }) => {
     firebase.auth().signOut();
   }, [firebase]);
 
+  const signUp = useCallback((email, pass) => {
+    setError(null);
+    setLoading(true);
+    return firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
+      setLoading(false);
+      setError(error.message);
+    });
+  }, [firebase]);
+
   return (
     <AuthContext.Provider
       value={{
-        user, signIn, signOut, loading, error
+        user, signIn, signOut, signUp, loading, error
       }}>
       {children}
     </AuthContext.Provider>

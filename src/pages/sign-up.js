@@ -1,36 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
+import AuthContext from "../context/AuthContext"
 
 const SignUpPage = props => {
+  const auth = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  // const firebase = React.useContext(FirebaseContext);
-
-  // useFirebase(firebase => {
-  //   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-  //     setLoading(false);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-  //
-  // const handleSubmit = useCallback((evt) => {
-  //   evt.preventDefault();
-  //   setError("");
-  //   setLoading(true);
-  //   firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
-  //     setError(error.message);
-  //     setLoading(false);
-  //   });
-  // }, [email, pass, firebase]);
 
   return (
     <Layout backgroundColor="#f9fafb">
       <div className="min-h-content-area bg-white flex">
-        <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <form onSubmit={() => auth.signUp(email, pass)} className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm ">
             <div className="">
               {/*<img className="h-12 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow"/>*/}
@@ -80,14 +63,14 @@ const SignUpPage = props => {
                   </div>
 
 
-                  {error !== "" && <p className="mt-3 text-md font-bold text-red-600">Error: {error}</p>}
+                  {auth.error !== "" && <p className="mt-3 text-md font-bold text-red-600">Error: {auth.error}</p>}
 
                   <div className="mt-16">
                     <span className="block w-full rounded-md shadow-sm">
                       <button
-                        disabled={loading}
+                        disabled={auth.loading}
                         className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                       {loading ? "Signing In..." : "Sign in"}
+                       {auth.loading ? "Signing In..." : "Sign in"}
                       </button>
                     </span>
                   </div>

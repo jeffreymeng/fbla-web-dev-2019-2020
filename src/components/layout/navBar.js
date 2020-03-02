@@ -6,6 +6,7 @@ import links from "./navlinks";
 import invisLogo from "../../images/longCoastalInvisV2.png"
 import AuthContext from "../../context/AuthContext"
 import Transition from "../Transition"
+import ClickAwayListener from "../ClickAwayListener"
 
 
 const CustomNavbar = ({ pageInfo }) => {
@@ -13,21 +14,6 @@ const CustomNavbar = ({ pageInfo }) => {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [userNavOpen, setUserNavOpen] = useState(false);
-  const userDropdownRef = useRef();
-
-  const onClick = useCallback(e => {
-    if (userNavOpen && userDropdownRef.current.contains(e.target)) {
-      return;
-    }
-    setUserNavOpen(false);
-  }, [userDropdownRef]);
-
-  useEffect(() => {
-    if (document != null) {
-      document.addEventListener("mousedown", onClick, false);
-    }
-    return () => document.removeEventListener("mousedown", onClick, false);
-  }, []);
 
   return (
     <nav className="bg-gray-800">
@@ -82,7 +68,7 @@ const CustomNavbar = ({ pageInfo }) => {
           {
             auth.user &&
             <div className="mx-4 flex-shrink-0 flex items-center">
-              <div ref={userDropdownRef} className="ml-3 relative">
+              <ClickAwayListener onClickAway={() => setUserNavOpen(false)} className="ml-3 relative">
                 <div>
                   <button onClick={() => setUserNavOpen(!userNavOpen)} className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                     <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
@@ -102,7 +88,7 @@ const CustomNavbar = ({ pageInfo }) => {
                     <a href="#" onClick={(e) => {e.preventDefault();auth.signOut()}} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Sign out</a>
                   </div>
                 </Transition>
-              </div>
+              </ClickAwayListener>
             </div>
           }
 

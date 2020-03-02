@@ -159,8 +159,9 @@ const AirportSelect = ({ id, onChange, value, dropUp, isStarting }) => {
 
   }
   return (
-
+    <div className={"airport-select"}>
     <Select id={id}
+
             styles={airportCustomSelectStyles}
             filterOption={customFilterOption}
             options={options}
@@ -175,7 +176,7 @@ const AirportSelect = ({ id, onChange, value, dropUp, isStarting }) => {
             value={getOptWithValue(value)}
             onChange={(val) => onChange(val.code)}
     />
-
+    </div>
   )
 }
 
@@ -202,7 +203,7 @@ const flightClassOptions = [
   { label: "First Class", value: "first" },
 ]
 
-const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect, featuredAirport }) => {
+const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect, featuredAirport, divClassName }) => {
   defaultValues = defaultValues || {}
   const [roundTrip, setRoundTrip] = React.useState(roundTripOptions.filter(x => x.value === defaultValues.roundTrip)[0] || roundTripOptions[0])
   const [passengers, setPassengers] = React.useState(passengersOptions.filter(x => x.value === defaultValues.passengers)[0] || passengersOptions[0])
@@ -220,7 +221,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
 
   return (
     <div className={classNames("px-4", className)}>
-      <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded")} style={style}>
+      <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", divClassName)} style={style}>
         <form onSubmit={(e) => {
           e.preventDefault();
           onSubmit({
@@ -235,7 +236,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
         }}>
           <div className="flex flex-wrap">
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
-            <div className="block sm:inline-block w-full sm:w-32">
+            <div className="block sm:inline-block w-full sm:w-32 booking-select">
               <Select
                 isSearchable={false}
                 styles={customSelectStyles}
@@ -243,7 +244,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                 value={roundTrip}
                 onChange={(v) => setRoundTrip(v)} />
             </div>
-            <div className="mt-2 sm:mt-0 sm:ml-4 block inline-block w-full sm:w-40">
+            <div className="mt-2 sm:mt-0 sm:ml-4 block inline-block w-full sm:w-40 booking-select">
               <Select
                 isSearchable={false}
                 styles={customSelectStyles}
@@ -251,7 +252,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                 value={passengers}
                 onChange={(v) => setPassengers(v)} />
             </div>
-            <div className="mt-2 sm:mt-0 sm:ml-4 block sm:inline-block w-full sm:w-32">
+            <div className="mt-2 sm:mt-0 sm:ml-4 block sm:inline-block w-full sm:w-32 booking-select">
               <Select
                 isSearchable={false}
                 styles={customSelectStyles}
@@ -263,7 +264,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
               className="order-first md:order-last mr-auto md:ml-auto sm:mr-0 px-2 py-2 mt-2 sm:mt-0 flex sm:inline-flex w-full sm:w-56 relative border border-l-2 border-transparent">
               <Flatpickr
                 className={classNames(
-                  "bg-white inline-block w-full",
+                  "bg-white inline-block w-full px-3 py-1 rounded",
                 )}
                 value={dates}
                 options={datepickerOptions}
@@ -293,7 +294,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             <div className="sm:hidden" style={{ flexBasis: "100%" }} />
             <button
               type="button"
-              className="hidden sm:inline-block relative z-10 self-center w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
+              className="swap-button hidden sm:inline-block relative z-10 self-center w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
               onClick={(e) => {
                 e.preventDefault()
                 setAirports((oldState) => {
