@@ -15,7 +15,7 @@ import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
 import flightSafetyPic from "../images/flightSafetyPic.png"
-import vacationPic from "../images/vacationPic.jpg"
+import vacationPic from "../images/dreamOn.jpg"
 const About = () => {
 
 return(
@@ -23,7 +23,7 @@ return(
 	    <SEO title="About"/>
 	   	<div className="grayColor">
 
-
+{/*
 <div className="relative bg-white overflow-hidden h-screen">
   <div className="max-w-screen-xl mx-auto ">
     <div className="relative z-10 pb-0 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-0">
@@ -56,11 +56,38 @@ What started off as a dream with three individuals to travel and explore the nat
 		  </div>
 </div>
 
-{/*		   	<div className="about_box">
 
-		      	<h1 className="about_title nexa">About <span className="about_emphasis">Us</span></h1>
-		        <p className="about_sub">The Story of <span className="nexa">Coastal Airlines</span></p>
-		    </div>*/}
+*/}
+
+<div class="relative bg-white overflow-hidden">
+  <div class="max-w-screen-xl mx-auto ">
+    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+      <div class="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28 pb-10 sm:pb-12 md:pb-16 lg:pb-20 xl:pb-28">
+        <div class="sm:text-center lg:text-left">
+          <h1 class="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-6xl sm:leading-none md:text-10xl">
+            About<span className="text-indigo-600"> Us</span>
+          </h1>
+          <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-2xl lg:mx-0 pt-10 sm:pt-10 md:pt-12 lg:pt-16 xl:pt-20">
+			<p>What started off as a dream with three individuals to travel and explore the nation in a simple, hassle-free manner is now Coastal Airlines:</p><p	className="about_emphasis  mt-3 text-lg text-gray-500 sm:mt-5 sm:text-2xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-4xl lg:mx-0">The Best Air Travel in the West.  </p>
+          </p>
+          <div class="mx-15 md:mx-0 mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start  pt-10 sm:pt-10 md:pt-12 lg:pt-16 xl:pt-20">
+            <div class="mt-3 sm:mt-0 sm:ml-3">
+              <AnchorLink href="#Section1" offset="45" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10 ">
+                Learn More
+              </AnchorLink>
+            </div>
+          </div>
+        </div>
+      </div>
+      <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon points="50,0 100,0 50,100 0,100" />
+      </svg>
+    </div>
+  </div>
+  <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={planeImage} alt="" />
+  </div>
+</div>
 
 
 
@@ -260,16 +287,16 @@ What started off as a dream with three individuals to travel and explore the nat
 				          Working together to make travel just better.
 				        </h2>
 				        <p className="mt-3 max-w-3xl text-lg leading-7 text-gray-500">
-				          By working with these leading agencies we hope to revolutionize the industry of Air Travel in the future. 
+				          By working with these leading agencies we hope to revolutionize the industry of Air Travel in the future - we hope you join us!
 				        </p>
 				        <div className="mt-8 sm:flex">
 				          <div className="rounded-md shadow">
-				            <a href="#" className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-				              Create Account
-				            </a>
+				            <Link to="/jobs" className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+				              Job Information
+				            </Link>
 				          </div>
 				          <div className="mt-3 sm:mt-0 sm:ml-3">
-				            <a href="#" className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out">
+				            <a href="mailto:jobs@coastalairlines.com" className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out">
 				              Contact Us
 				            </a>
 				          </div>
@@ -308,7 +335,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				
 			<div className="relative bg-gray-800">
 				  <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2 bg-indigo-800">
-				    <img className="w-full h-full object-cover opacity-50" src={vacationPic} alt="Support team" />
+				    <img className="w-full h-full object-cover opacity-90" src={vacationPic} alt="Support team" />
 				  </div>
 				  <div className="relative max-w-screen-xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 				    <div className="md:ml-auto md:w-1/2 md:pl-10">
@@ -323,12 +350,10 @@ What started off as a dream with three individuals to travel and explore the nat
 					  </p>
 				      <div className="mt-8">
 				        <div className="inline-flex rounded-md shadow">
-				          <a href="/" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-				            Book your next vacation
-				            <svg className="-mr-1 ml-3 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-				              <path fill-rule="evenodd" d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5zM5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" clip-rule="evenodd"/>
-				            </svg>
-				          </a>
+				          <Link href="/" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-600 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+				            Book Your Next Vacation!
+				            
+				          </Link>
 				        </div>
 				      </div>
 				    </div>
