@@ -10,5 +10,70 @@
   "FAI": {
     "caption": "The Northern Lights",
     "location": "Fairbanks, Alaska"
+  },
+  "ABQ": {
+    "caption": "International Balloon Fiesta",
+    "location": "Albuquerque, New Mexico"
+  },
+  "ANC": {
+    "caption": "Anchorage Skyline",
+    "location": "Anchorage, Alaska"
+  },
+  "DEN": {
+    "caption": "Speer Bridge",
+    "location": "Denver, Colorado"
+  },
+  "HNL": {
+    "caption": "Diamond Head Coastline",
+    "location": "Honolulu, Hawaii"
+  },
+  "KOA": {
+    "caption": "Mahai'ula Beach",
+    "location": "Kalaoa, Hawaii"
+  },
+  "LAS": {
+    "caption": "Fountains of Bellagio",
+    "location": "Las Vegas, Nevada"
+  },
+  "PDX": {
+    "caption": "Mount Hood",
+    "location": "Portland, Oregon"
+  },
+  "PHX": {
+    "caption": "Phoenix Mountains",
+    "location": "Phoenix, Arizona"
+  },
+  "PVR": {
+    "caption": "Conchas Chinas Beach",
+    "location": "Puerto Vallarta, Mexico"
+  },
+  "SAN": {
+    "caption": "San Diego Bay",
+    "location": "San Diego, California"
+  },
+  "SEA": {
+    "caption": "Space Needle",
+    "location": "Seattle, Washington"
+  },
+  "SFO": {
+    "caption": "Golden Gate Bridge",
+    "location": "San Francisco, California"
+  },
+  "SLC": {
+    "caption": "Wasatch Mountains",
+    "location": "Salt Lake City, Utah"
+  },
+  "TIJ": {
+    "caption": "Tijuana Cultural Center",
+    "location": "Tijuana, Mexico"
+  },
+  "YVR": {
+    "caption": "Autumn Skyline",
+    "location": "Vancouver, Canada"
+  },
+  "YYZ": {
+    "caption": "CN Tower",
+    "location": "Toronto, Canada"
   }
+
 }

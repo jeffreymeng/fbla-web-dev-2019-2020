@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
 import BulletListItem from "../../components/BulletListItem"
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 
 const jobs = [
   {
@@ -226,10 +228,10 @@ const ApplyPage = props => {
 
         <p>
           Chosen Job: <b>{jobs[selectedJob].name}</b>
-          <a href="#choose"
+          <AnchorLink href="#choose"
              className="ml-4 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
             Change Selected Job
-          </a>
+          </AnchorLink>
         </p>
         <ul className="list-reset">
           <BulletListItem>Cover Letter</BulletListItem>
