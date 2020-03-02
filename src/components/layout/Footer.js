@@ -16,16 +16,16 @@ const Footer = props => {
               </Link>
             </div>
           ))}
-          <div className="px-5 py-2">
-            <Link to="privacy-policy" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Privacy Policy
-            </Link>
-          </div>
-          <div className="px-5 py-2">
-            <Link to="terms-of-use" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Terms of Use
-            </Link>
-          </div>
+          {/*<div className="px-5 py-2">*/}
+          {/*  <Link to="privacy-policy" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
+          {/*    Privacy Policy*/}
+          {/*  </Link>*/}
+          {/*</div>*/}
+          {/*<div className="px-5 py-2">*/}
+          {/*  <Link to="terms-of-use" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
+          {/*    Terms of Use*/}
+          {/*  </Link>*/}
+          {/*</div>*/}
         </nav>
         <div className="mt-8 flex justify-center">
           <a href="https://facebook.com" className="text-gray-400 hover:text-gray-500 mx-2">
