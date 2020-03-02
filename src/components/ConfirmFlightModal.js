@@ -15,13 +15,13 @@ const ConfirmFlightModal = ({ isOpen, onConfirm, onCancel }) => {
   return (
     <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center z-20">
       <Transition
-        show={isOpen}
-        enter="transition-opacity ease-out duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="ease-in duration-200"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0">
+      show={isOpen}
+      enter="transition-opacity ease-out duration-300"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="ease-in duration-200"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0">
         <div className="fixed inset-0">
           <div className="absolute inset-0 bg-gray-500 opacity-75" />
         </div>

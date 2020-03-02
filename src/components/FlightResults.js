@@ -163,7 +163,7 @@ function getFlights(value) {
   const route = FlightData[value.departAirport]?.flights[value.arriveAirport];
   if (route){
     const add = (arr, schedule, routeTime) => {
-      console.log("RT", routeTime)
+      // console.log("RT", routeTime)
       schedule.forEach((rule) => {
         // console.log(rule.days)
         if (rule.days.indexOf(dayOfWeek) > -1) {
@@ -199,22 +199,22 @@ function getFlights(value) {
         let layoverFlights = [];
         let toLayoverFlight = FlightData[value.departAirport].flights[layoverAirport];
         add(layoverFlights, toLayoverFlight.schedule, new Time(toLayoverFlight.time));
-        console.log(new Time(0,45, true));
-        console.log(layoverFlights);
+        // console.log(new Time(0,45, true));
+        // console.log(layoverFlights);
         let destFlights = [];
         let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport];
         add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time));
         layoverFlights.forEach((flightToLayover) => {
           destFlights.forEach((flightToDest) => {
-            console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
+            // console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
             if (flightToLayover.end.compareTo(flightToDest.start) >= 0 && flightToLayover.end.compareTo(flightToDest.start) <= MAX_LAYOVER_LENGTH) {
-              console.log("BLDS", flightToLayover.start.clone())
+              // console.log("BLDS", flightToLayover.start.clone())
               let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start);
               let atLayoverTime = flightToDest.start.clone().subtract(flightToLayover.end);
               let toDestTime = flightToDest.end.clone().subtract(flightToDest.start);
 
               let travelTime = flightToDest.end.clone().subtract(flightToLayover.start);
-              console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
+              // console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
               flights.push({
                 start:flightToLayover.start,
                 end:flightToDest.end,
