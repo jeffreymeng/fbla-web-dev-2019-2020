@@ -80,23 +80,21 @@ const BookingPage = ({ data, location }) => {
           {
             bookingData !== null &&
             <>
-            <h3>Select a {bookingData.roundTrip === "rt" && "departure "}flight</h3>
-
               {
                 <FlightResults
+                  title={bookingData.roundTrip==="rt"?"Select a departure flight":null}
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={handleFlightSelected}/>
               }
               {
-                bookingData.roundTrip === "rt" &&
-                  <>
-                    <h3>Select a return flight</h3>
+                bookingData.roundTrip ==="rt"&&
                 <FlightResults
+                  className="mt-8"
+                  title="Select a return flight"
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={handleFlightSelected}/>
-                  </>
               }
             </>
           }
