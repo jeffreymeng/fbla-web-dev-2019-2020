@@ -13,6 +13,9 @@
   font-family: 'Proxima Nova Regular';
   src: url("../fonts/ProximaNova-Regular.otf") format("opentype");
 }
+.airport-select > div:first-child > div:nth-child(3) {
+  z-index:10000 !important;
+}
 .index-booking-form {
   background-color:rgba(255, 255, 255, 0.5);
   input,
@@ -23,10 +26,15 @@
       background-color:rgba(255, 255, 255, 1) !important;
     }
   }
+
   .swap-button {
+    outline:0; // BAD!!!, but ok for this website LOL
     background-color: rgba(144,205,244,0.8) !important;
     &:hover {
       background-color: rgba(144,205,244,1) !important;
+    }
+    &:active {
+      background-color:rgba(99,179,237,1)!important;
     }
   }
   button[type="submit"]:not(:active):not(:hover):not(:focus) {
