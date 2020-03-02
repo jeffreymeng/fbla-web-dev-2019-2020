@@ -43,7 +43,6 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.9.0",
     "react-select": "^3.0.8",
-    "react-slider": "^1.0.3",
     "react-transition-group": "^4.3.0",
     "styled-components": "^5.0.1",
     "uncss": "^0.17.3"

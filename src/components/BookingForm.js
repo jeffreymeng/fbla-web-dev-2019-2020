@@ -192,9 +192,7 @@ const passengersOptions = [
   { label: "4 Passengers", value: 4 },
   { label: "5 Passengers", value: 5 },
   { label: "6 Passengers", value: 6 },
-  { label: "7 Passengers", value: 7 },
-  { label: "8 Passengers", value: 8 },
-  { label: "9+ Passengers", value: 9 },
+  { label: "7+ Passengers", value: 7 },
 ]
 
 const flightClassOptions = [
@@ -334,8 +332,8 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
           {airports[0] === airports[1] && airports[0] !== "" &&
           <p className="mt-2 text-sm text-red-600">Your arrival airport cannot be the same as your departure
             airport!</p>}
-          {passengers.value===9 &&
-          <p className="mt-2 text-sm text-red-600">For 9+ passengers, please contact our booking department at +1 (800) 243-2102.</p>}
+          {passengers.value===passengersOptions[passengersOptions.length - 1].value &&
+          <p className="mt-2 text-sm text-red-600">For bookings with {passengersOptions[passengersOptions.length - 1].value} or more passengers, please contact our group booking office at +1 (800) 243-2102.</p>}
         </form>
       </div>
     </div>

@@ -2,13 +2,12 @@ import React, { useState } from "react"
 import FlightData from "./flightData"
 import Select from "react-select"
 import FlightResult from "./FlightResult"
-import ReactSlider from "react-slider"
 import "../styles/slider.scss"
 import ClickAwayListener from "./ClickAwayListener"
 import Transition from "./Transition"
 import classNames from "classnames"
 
-const FilterUI = ({ className, sortBy }) => {
+const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, NSOLabel }) => {
   const [sortOpen, setSortOpen] = useState(false)
   const [nonstopOpen, setNonstopOpen] = useState(false)
 
@@ -21,7 +20,7 @@ const FilterUI = ({ className, sortBy }) => {
           <button onClick={() => setNonstopOpen(!nonstopOpen)}
                   type="button"
                   className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
-            Nonstop Only
+            {NSOLabel}
             <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -44,13 +43,22 @@ const FilterUI = ({ className, sortBy }) => {
                  "box-shadow": "0 1px 3px rgba(60,64,67, 0.3), 0 4px 8px 3px rgba(60,64,67, 0.15)",
                }}>
             <div className="py-1">
-              <a href="#" onClick={e => sortBy("depart")}
+
+              <a onClick={e => {
+                e.preventDefault();
+                onNonstopOnlyChange && onNonstopOnlyChange(false);
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-                Nonstop Only
+                Show All Flights
               </a>
-              <a href="#" onClick={e => sortBy("arrival")}
+              <a onClick={e => {
+                e.preventDefault();
+                onNonstopOnlyChange && onNonstopOnlyChange(true);
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-                All Flights
+                Show Nonstop Only
               </a>
             </div>
           </div>
@@ -64,7 +72,7 @@ const FilterUI = ({ className, sortBy }) => {
           <button onClick={() => setSortOpen(!sortOpen)}
                   type="button"
                   className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
-            Sort By
+            {sortLabel}
             <svg className="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -87,23 +95,59 @@ const FilterUI = ({ className, sortBy }) => {
                  "box-shadow": "0 1px 3px rgba(60,64,67, 0.3), 0 4px 8px 3px rgba(60,64,67, 0.15)",
                }}>
             <div className="py-1">
-              <a href="#" onClick={e => sortBy("depart")}
+              <a onClick={e => {
+                e.preventDefault();
+                onSortByChange({
+                  label: "Departure Time",
+                  value: "depart",
+                });
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                 Departure Time
               </a>
-              <a href="#" onClick={e => sortBy("arrival")}
+              <a onClick={e => {
+                e.preventDefault();
+                onSortByChange({
+                  label: "Arrival Time",
+                  value: "arrive",
+                });
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                 Arrival Time
               </a>
-              <a href="#" onClick={e => sortBy("price")}
+              <a onClick={e => {
+                e.preventDefault();
+                onSortByChange({
+                  label: "Price",
+                  value: "price",
+                });
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                 Price
               </a>
-              <a href="#" onClick={e => sortBy("stops")}
+              <a onClick={e => {
+                e.preventDefault();
+                onSortByChange({
+                  label: "Number of stops",
+                  value: "stops",
+                });
+
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                 Number of Stops
               </a>
-              <a href="#" onClick={e => sortBy("length")}
+              <a onClick={e => {
+                e.preventDefault();
+                onSortByChange({
+                  label: "Trip Time",
+                  value: "length",
+                });
+              }}
+                 href="#"
                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
                 Duration
               </a>
@@ -118,17 +162,17 @@ const FilterUI = ({ className, sortBy }) => {
 const FlightResults = ({ title, value, searchedClass, onFlightSelected, className }) => {
   const defaults = {
     sort: {
-      label: "Departure Time",
-      value: "depart",
+      label:"Departure Time",
+      value:"depart"
     },
     nonstopOnly: false,
-    minPrice: 0,
-    maxPrice: 20000,
+    // minPrice: 0,
+    // maxPrice: 20000,
   }
-  const [sort, setSort] = React.useState(defaults.sort)
-  const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly)
-  const [minPrice, setMinPrice] = React.useState(defaults.minPrice)
-  const [maxPrice, setMaxPrice] = React.useState(defaults.maxPrice)
+  const [sort, setSort] = React.useState(defaults.sort);
+  const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly);
+  // const [minPrice, setMinPrice] = React.useState(defaults.minPrice);
+  // const [maxPrice, setMaxPrice] = React.useState(defaults.maxPrice);
 
 
   let flights = getFlights(value)
@@ -148,134 +192,51 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
     </div>
   )
   let filteredFlights = flights.filter((flight) => {
-// <<<<<<< HEAD
-//     return ! ((nonstopOnly && flight.stops > 0) || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice));
-//   }).sort((a,b) => {
-//     let compare = function (a, b, comparison, depth) {
-//       comparison = comparison || "depart";
-//       depth = depth === undefined ? 0 : depth;
-//       // Make sure we sort in priority of ["depart", "arrive", "length", "stops", "price"] to break ties.
-//       switch(comparison) {
-//
-//         case "depart":
-//           let byDepart = b.start.compareTo(a.start);
-//           if (byDepart !== 0) return byDepart
-//           else if (depth === 0) return compare(a, b, undefined,1);
-//         case "arrive":
-//           let byArrive = b.end.compareTo(a.end);
-//           if (byArrive !== 0) return byArrive;
-//           else if (depth === 0) return compare(a, b, undefined,1);
-//         case "length":
-//           let byLength = b.travelTime.compareTo(a.travelTime);
-//           if (byLength !== 0) return byLength;
-//           else if (depth === 0) return compare(a, b, undefined,1);
-//         case "stops":
-//           let byStops = a.stops - b.stops;
-//           if (byStops !== 0) return byLength;
-//           else if (depth === 0) return compare(a, b, undefined,1);
-//         case "price":
-//           let byClass = a.price[classIdx] - b.price[classIdx];
-//           return byClass; // even if it's equal to 0
-//         default:
-//           throw "SortFlightsError: Unrecognized comparison";
-//       }
-//     }
-//     let result = compare(a, b, sort.value);
-//     return result !== 0 ? result : compare(a, b, "depart");
-//   });
-//   return (
-//     flights.length != 0  ?
-//     <>
-//       <b>Sort By</b>
-//       <Select options={[{
-//         label:"Departure Time",
-//         value:"depart"
-//       },
-//         {
-//           label:"Arrival Time",
-//           value:"arrive"
-//         },
-//         {
-//           label:"Price",
-//           value:"price"
-//         },
-//         {
-//           label:"Number of Stops",
-//           value:"stops"
-//         },
-//         {
-//           label:"Duration",
-//           value:"length"
-//         }]}
-//       value={sort}
-//               onChange={(v) => setSort(v)}
-//       />
-//         <label>
-//           <input type="checkbox" checked={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only
-//         </label>
-//       <b>Price Range:</b>
-//       <ReactSlider
-//         min={0}
-//         max={20000}
-//         step={10}
-//         className="slider"
-//         thumbClassName="slider-thumb"
-//         trackClassName="slider-track"
-//         value={[minPrice, maxPrice]}
-//         ariaLabel={['Lower thumb', 'Upper thumb']}
-//         ariaValuetext={state => `Thumb value ${state.valueNow}`}
-//         renderThumb={(props, state) => <div {...props}>${state.valueNow}</div>}
-//         pearling
-//         minDistance={100}
-//         onChange={(v) => {
-//           // console.log("HI", v)
-//           setMinPrice(v[0]);
-//           setMaxPrice(v[1]);
-//         }}
-//       />
-//       <hr />
-//       {filteredFlights.length === 0 &&
-//       <div>
-//         <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
-//         <a onClick={() => {
-//           setNonstopOnly(defaults.nonstopOnly);
-//           setMinPrice(defaults.minPrice);
-//           setMaxPrice(defaults.maxPrice);
-//         }}>Reset All Filters</a>
-//       </div>}
-//       <div className="bg-white shadow overflow-hidden sm:rounded-md">
-//         <ul>
-//           {
-//             filteredFlights.map((flight, i) => {
-//
-//
-//               return (
-//                 <li key={i} className={classNames({
-//                   "border-t border-gray-200": i !== 0
-//                 })}>
-//                   <FlightResult
-//                     flight={flight}
-//                     searchedClass={searchedClass}
-//                     highlightPrice={flight.price[classIdx]===cheapestPrice}
-//                     onClick={e => onFlightSelected(flight)}/>
-//                 </li>
-//               )
-//             })
-//           }
-//
-//         </ul>
-//       </div>
-//     </>: noFlights
-// =======
-    return !((nonstopOnly && flight.stops > 0) || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice))
-  })
+    return !((nonstopOnly && flight.stops > 0)/* || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice)*/)
+  }).sort((a,b) => {
+    let compare = function (a, b, comparison, depth) {
+      comparison = comparison || "depart";
+      depth = depth === undefined ? 0 : depth;
+      // Make sure we sort in priority of ["depart", "arrive", "length", "stops", "price"] to break ties.
+      switch(comparison) {
+
+        case "depart":
+          let byDepart = b.start.compareTo(a.start);
+          if (byDepart !== 0) return byDepart
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "arrive":
+          let byArrive = b.end.compareTo(a.end);
+          if (byArrive !== 0) return byArrive;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "length":
+          let byLength = b.travelTime.compareTo(a.travelTime);
+          if (byLength !== 0) return byLength;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "stops":
+          let byStops = a.stops - b.stops;
+          if (byStops !== 0) return byLength;
+          else if (depth === 0) return compare(a, b, undefined,1);
+        case "price":
+          let byClass = a.price[classIdx] - b.price[classIdx];
+          return byClass; // even if it's equal to 0
+        default:
+          throw "SortFlightsError: Unrecognized comparison";
+      }
+    }
+    let result = compare(a, b, sort.value);
+    return result !== 0 ? result : compare(a, b, "depart");
+  });
   return (
     flights.length != 0 ?
       <div className={className}>
         <div className="ml-4 mb-4 flex justify-between items-center">
           <h3 className="text-xl font-semibold">{title}</h3>
           <FilterUI
-            sortBy={v => setSort(v)} />
+            sortLabel={"Sort By: " + sort.label}
+            NSOLabel={"Show: " + (nonstopOnly ? "Nonstop Only" : "All Flights")}
+            onSortByChange={v => setSort(v)}
+            onNonstopOnlyChange={v => setNonstopOnly(v)}
+          />
         </div>
 
         {/*/>*/}
@@ -307,9 +268,9 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
         <div>
           <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
           <a onClick={() => {
-            setNonstopOnly(defaults.nonstopOnly)
-            setMinPrice(defaults.minPrice)
-            setMaxPrice(defaults.maxPrice)
+            setNonstopOnly(defaults.nonstopOnly);
+            setMinPrice(defaults.minPrice)//
+            setMaxPrice(defaults.maxPrice)//
           }}>Reset All Filters</a>
         </div>}
         <div className="bg-white shadow overflow-hidden sm:rounded-md">
