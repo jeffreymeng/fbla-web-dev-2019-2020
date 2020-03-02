@@ -1,37 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
-import { FirebaseContext } from "gatsby-plugin-firebase"
-import { useFirebase } from "gatsby-plugin-firebase/src/components/FirebaseContext"
 import { navigate } from "gatsby"
+import AuthContext from "../context/AuthContext"
 
 const SignInPage = props => {
+  const auth = useContext(AuthContext);
   const [email, setEmail] = useState("demo@gmail.com");
   const [pass, setPass] = useState("demo@gmail.com");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const firebase = React.useContext(FirebaseContext);
-
-  useFirebase(firebase => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      setLoading(false);
-      if (user) {
-        navigate("/");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleSubmit = useCallback((evt) => {
     evt.preventDefault();
-    setError("");
-    setLoading(true);
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch((error) => {
-      setError(error.message);
-      setLoading(false);
-    });
-  }, [email, pass, firebase]);
+    auth.signIn(email, pass).then(() => navigate("/"));
+  }, [email, pass, auth.signIn]);
 
   return (
     <Layout backgroundColor="#f9fafb">
@@ -93,14 +75,14 @@ const SignInPage = props => {
                       </a>
                     </div>
                   </div>
-                  {error !== "" && <p className="mt-3 text-md font-bold text-red-600">Error: {error}</p>}
+                  {auth.error !== null && <p className="mt-3 text-md font-bold text-red-600">Error: {auth.error}</p>}
 
                   <div className="mt-6">
                     <span className="block w-full rounded-md shadow-sm">
                       <button
-                        disabled={loading}
+                        disabled={auth.loading}
                               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                       {loading ? "Signing In..." : "Sign in"}
+                        {auth.loading ? "Signing In..." : "Sign in"}
                       </button>
                     </span>
                   </div>

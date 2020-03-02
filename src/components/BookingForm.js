@@ -204,10 +204,10 @@ const flightClassOptions = [
 
 const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirportSelect }) => {
   defaultValues = defaultValues || {}
-  const [roundTrip, setRoundTrip] = React.useState(defaultValues.roundTrip || roundTripOptions[0])
-  const [passengers, setPassengers] = React.useState(defaultValues.passengers || passengersOptions[0])
-  const [flightClass, setFlightClass] = React.useState(defaultValues.flightClass || flightClassOptions[0])
-  const [dates, setDates] = React.useState([new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
+  const [roundTrip, setRoundTrip] = React.useState(roundTripOptions.filter(x => x.value === defaultValues.roundTrip)[0] || roundTripOptions[0])
+  const [passengers, setPassengers] = React.useState(passengersOptions.filter(x => x.value === defaultValues.passengers)[0] || passengersOptions[0])
+  const [flightClass, setFlightClass] = React.useState(flightClassOptions.filter(x => x.value === defaultValues.flightClass)[0] || flightClassOptions[0])
+  const [dates, setDates] = React.useState([defaultValues.startDate || new Date(), defaultValues.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
   const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""])
   const datepickerOptions = {
     dateFormat: "m/d/y",
@@ -217,14 +217,23 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   return (
     <div className={classNames("px-4", className)}>
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded")} style={style}>
-        <form onSubmit={e => {
+        <form onSubmit={(e) => {
           e.preventDefault();
-          navigate("booking");
+          onSubmit({
+            roundTrip:roundTrip.value,
+            passengers:passengers.value,
+            flightClass:flightClass.value,
+            departAirport:airports[0],
+            arriveAirport:airports[1],
+            startDate:dates[0],
+            endDate:roundTrip.value === "rt" ? dates[1] : undefined
+          })
         }}>
           <div className="flex flex-wrap">
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={roundTripOptions}
                 value={roundTrip}
@@ -232,6 +241,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="mt-2 sm:mt-0 sm:ml-4 block inline-block w-full sm:w-40">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={passengersOptions}
                 value={passengers}
@@ -239,6 +249,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="mt-2 sm:mt-0 sm:ml-4 block sm:inline-block w-full sm:w-32">
               <Select
+                isSearchable={false}
                 styles={customSelectStyles}
                 options={flightClassOptions}
                 value={flightClass}
@@ -277,6 +288,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="sm:hidden" style={{ flexBasis: "100%" }} />
             <button
+              type="button"
               className="hidden sm:inline-block relative z-10 self-center w-10 h-10 my-2 sm:my-0 rounded-full flex items-center justify-center bg-blue-50 sm:bg-white"
               onClick={(e) => {
                 e.preventDefault()
@@ -304,21 +316,11 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             </div>
             <div className="md:hidden" style={{ flexBasis: "100%" }} />
             <span className="mt-2 md:mt-0 md:ml-4 block w-full sm:w-auto sm:inline-flex rounded-md shadow-sm">
-              <button type="button"
-                      onClick={() => {
-                        onSubmit({
-                          roundTrip:roundTrip.value,
-                          passengers:passengers.value,
-                          departAirport:airports[0],
-                          arriveAirport:airports[1],
-                          startDate:dates[0],
-                          endDate:roundTrip.value === "rt" ? dates[1] : undefined
-                        })
-                      }}
+              <button type="submit"
                       className={classNames(
                         "w-full sm:inline-flex items-center px-6 py-2 border border-transparent text-base leading-6",
-                        "font-medium rounded-md text-green-800 bg-green-200 hover:bg-green-100 focus:outline-none",
-                        "focus:border-green-200 focus:shadow-outline-green active:bg-green-200 transition ease-in-out duration-150",
+                        "font-medium rounded-md text-indigo-800 bg-indigo-100 hover:bg-indigo-50 focus:outline-none",
+                        "focus:border-indigo-100 focus:shadow-outline-indigo active:bg-indigo-100 transition ease-in-out duration-150",
                       )}>
                 Search
               </button>

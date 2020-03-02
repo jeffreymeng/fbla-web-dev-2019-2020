@@ -56,30 +56,6 @@ module.exports = {
         showSpinner: true,
       },
     },
-    {
-      resolve: "gatsby-plugin-firebase",
-      options: {
-        features: {
-          auth: true,
-          database: false,
-          firestore: true,
-          storage: false,
-          messaging: false,
-          functions: false,
-          performance: false,
-        },
-        credentials: {
-          apiKey: "AIzaSyAxwtWhP9KDXEiqV2pAk67O2d-fnDDmxMg",
-          authDomain: "fbla-website-design-2020.firebaseapp.com",
-          databaseURL: "https://fbla-website-design-2020.firebaseio.com",
-          projectId: "fbla-website-design-2020",
-          storageBucket: "fbla-website-design-2020.appspot.com",
-          messagingSenderId: "336349869076",
-          appId: "1:336349869076:web:ac05b19b25c05f96b06301",
-          measurementId: "G-5BBC2V2HZE",
-        }
-      },
-    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

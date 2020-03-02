@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import Img from "gatsby-image";
 import classNames from "classnames";
 
@@ -22,14 +22,17 @@ const DynamicBackgroundImage = ({ className, defaultImage, defaultCaption, image
   const [imageOne, setImageOne] = useState({img:defaultImage, caption:defaultCaption});
   const [imageTwo, setImageTwo] = useState(null);
 
-  useEffect(() => {
+  const handleCurrentImageChange = () => {
     if (currentImage === null) return;
     if (activeImg === 0) {
-      setImageTwo({img: images[currentImage], caption: captions[currentImage]});
+      if (imageTwo?.img === images[currentImage]) setActiveImg(1);
+      else setImageTwo({img: images[currentImage], caption: captions[currentImage]});
     } else {
-      setImageOne({img: images[currentImage], caption: captions[currentImage]});
+      if (imageOne?.img === images[currentImage]) setActiveImg(0);
+      else setImageOne({img: images[currentImage], caption: captions[currentImage]});
     }
-  }, [currentImage]);
+  };
+  useEffect(handleCurrentImageChange, [currentImage]);
 
   return (
     <div className={classNames(className, "relative")}>
