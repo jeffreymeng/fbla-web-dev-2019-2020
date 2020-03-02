@@ -69,7 +69,7 @@ const FlightResults = ({ value, searchedClass, onFlightSelected }) => {
               onChange={(v) => setSort(v)}
       />
         <label>
-          <input type="checkbox" value={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only
+          <input type="checkbox" checked={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only
         </label>
       <b>Price Range:</b>
       <ReactSlider
