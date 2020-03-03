@@ -51,7 +51,9 @@ const BookingPage = ({ data, location }) => {
     setShowBookingModal(false);
     // TODO @jeffrey
   }
-
+  const returnTripData = Object.assign({}, bookingData);
+  // swap
+  [returnTripData.departAirport, returnTripData.arriveAirport] = [returnTripData.arriveAirport, returnTripData.departAirport];
   return (
     <Layout>
       <SEO
@@ -70,6 +72,13 @@ const BookingPage = ({ data, location }) => {
           <BookingForm
             onSubmit={(d) => setBookingData(d)}
             defaultValues={location.state || {}}
+            dateValue={[bookingData?.startDate || new Date(), bookingData?.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)]}
+            onDateValueChange={(v) => setBookingData(o => {
+              let clone = Object.assign({}, o);
+              clone.startDate = v[0];
+              clone.endDate = v[1];
+              return clone;
+            })}
             featuredAirport={selectedTrip}
             className="-mb-40 sm:-mb-32" />
         </div>
@@ -85,7 +94,16 @@ const BookingPage = ({ data, location }) => {
                   title={bookingData.roundTrip==="rt"?"Select a departure flight":null}
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
-                  onFlightSelected={handleFlightSelected}/>
+                  onFlightSelected={handleFlightSelected}
+                  isDepartResult={true}
+                  onDateChange={(d) => {
+                    setBookingData(o => {
+                      let clone = Object.assign({}, o);
+                      clone.startDate = d;
+                      return clone;
+                    })
+                  }}
+                />
               }
               {
                 bookingData.roundTrip ==="rt"&&
@@ -93,8 +111,16 @@ const BookingPage = ({ data, location }) => {
                  <FlightResults
                   className="mt-8"
                   title="Select a return flight"
-                  value={bookingData}
+                  value={returnTripData}
                   searchedClass={bookingData.flightClass}
+                  isDepartResult={false}
+                  onDateChange={(d) => {
+                    setBookingData(o => {
+                      let clone = Object.assign({}, o);
+                      clone.endDate = d;
+                      return clone;
+                    })
+                  }}
                   onFlightSelected={handleFlightSelected}/>
                   <button>Submit Results</button>
                   </>

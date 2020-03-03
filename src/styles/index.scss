@@ -23,7 +23,7 @@
 
   outline:0 !important;
   border: 2px solid #EDF2F7;
-  &:hover {
+  &:hover,  &:focus {
     border:2px solid #1e429f;
   }
   &:active {
