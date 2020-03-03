@@ -5,8 +5,8 @@ import { Link } from "gatsby";
 import "../styles/card.css"
 import "../card"
 
-const CheckoutPage = ({}) => {
-  console.log(location.state || {})
+const CheckoutPage = ({location}) => {
+  console.log(location.state || {}) // @nathan wang TODO
   useEffect(() => {
     new Card({
       // a selector or DOM element for the form where users will
