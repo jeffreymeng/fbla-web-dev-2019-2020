@@ -40,18 +40,16 @@ const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
 
 const BookingPage = ({ data, location }) => {
   const [bookingData, setBookingData] = React.useState(null)
-  const [selectedFlight, setSelectedFlight] = React.useState(null);
+  // const [selectedFlight, setSelectedFlight] = React.useState(null);
+  const [departFlight, setDepartFlight] = React.useState(null);
+  const [arriveFlight, setArriveFlight] = React.useState(null);
   const [selectedTrip, setSelectedTrip] = React.useState(null);
   const [showBookingModal, setShowBookingModal] = React.useState(false);
-  const [showCheckoutBanner, setShowCheckoutBanner] = React.useState(true); // todo make false
+  const [showCheckoutBanner, setShowCheckoutBanner] = React.useState(false); // todo make not false
 
-  const handleFlightSelected = (flight) => {
-    setSelectedFlight(flight);
-    setShowBookingModal(true);
-  };
 
   const handleConfirmedBooking = () => {
-    setShowBookingModal(false);
+    console.log(departFlight, arriveFlight)
     // TODO @jeffrey
   }
   const returnTripData = Object.assign({}, bookingData);
@@ -97,15 +95,15 @@ const BookingPage = ({ data, location }) => {
                   title={bookingData.roundTrip==="rt"?"Select a departure flight":null}
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
-                  onFlightSelected={handleFlightSelected}
-                  isDepartResult={true}
-                  onDateChange={(d) => {
-                    setBookingData(o => {
-                      let clone = Object.assign({}, o);
-                      clone.startDate = d;
-                      return clone;
-                    })
-                  }}
+                  onFlightSelected={(f) => setDepartFlight(f)}
+                  // isDepartResult={true}
+                  // onDateChange={(d) => {
+                  //   setBookingData(o => {
+                  //     let clone = Object.assign({}, o);
+                  //     clone.startDate = d;
+                  //     return clone;
+                  //   })
+                  // }}
                 />
               }
               {
@@ -124,8 +122,8 @@ const BookingPage = ({ data, location }) => {
                       return clone;
                     })
                   }}
-                  onFlightSelected={handleFlightSelected}/>
-                  <button>Submit Results</button>
+                  onFlightSelected={(f) => setArriveFlight(f)}/>
+                  <button onClick={() => setShowBookingModal(true)} disabled={!departFlight || !arriveFlight}>Submit Results</button>
                   </>
               }
             </>
@@ -197,8 +195,8 @@ const BookingPage = ({ data, location }) => {
       {/* END CART/CHECKOUT BANNER */}
 
       <ConfirmFlightModal
-        flight={selectedFlight}
-        selectedClass={bookingData?.flightClass}
+        // flight={selectedFlight}
+        price={departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)]}
         isOpen={showBookingModal}
         onConfirm={handleConfirmedBooking}
         onCancel={() => setShowBookingModal(false)}/>

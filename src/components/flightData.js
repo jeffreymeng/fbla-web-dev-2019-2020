@@ -127,7 +127,7 @@ const flightData = {
         time:"2:40",
         schedule: [
           {
-            days:"MThFSaSu",
+            days:"MTuWThFSaSu",
             times:["9am", "12:10pm", "5pm"],
             aircraft: "Boeing 787-8 Dreamliner",
             price:1080,

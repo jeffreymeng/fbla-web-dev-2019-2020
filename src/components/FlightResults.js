@@ -169,6 +169,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
 const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult, onDateChange }) => {
   const daysOfWeek = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
   let dayOfWeek = daysOfWeek[value[isDepartResult ? "startDate" : "endDate"]?.getDay()];
+  const [selected, setSelected] = React.useState(-1);
 
   const defaults = {
     sort: {
@@ -181,7 +182,9 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
   }
   const [sort, setSort] = React.useState(defaults.sort);
   const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly);
-  let flights = getFlights(value, dayOfWeek).filter((flight) => {
+  let flights = getFlights(value, dayOfWeek);
+  let flightFound = flights.length > 0;
+  flights = flights.filter((flight) => {
     return !((nonstopOnly && flight.stops > 0)/* || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice)*/)
   }).sort((a,b) => {
     let compare = function (a, b, comparison, depth) {
@@ -247,24 +250,22 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
    return result;
  };
   const FormatDate = (date) => {
+    if (!date) return "";
     return `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][date.getDay()]}, ${["January","February","March","April","May","June","July","August","September","October","November","December"][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
   const noFlightsMessage = (
     <div>
-      <p>Sorry, it doesn't look like we have any flights for you from {value.departAirport} to {value.arriveAirport} on
-        {FormatDate(value[isDepartResult ? "startDate" : "endDate"])} you selected.
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p>Sorry, it doesn't look like we have any flights from {value.departAirport} to {value.arriveAirport} on {FormatDate(value[isDepartResult ? "startDate" : "endDate"])}.
       </p>
-      <b>However, we found flights on the following days between the specified airports:</b>
+      <b>However, we found flights on the following days between {value.departAirport} and {value.arriveAirport}:</b>
       <ul>
         {[...getBestAlternative(value, true, 3),...getBestAlternative(value, false, 3)]
           .sort((a,b) => a.getTime()-b.getTime())
           .map((date, i) => {
           return (
-            <li key={i}>
-              <a href="#" onClick={(e) => {
-                e.preventDefault();
-                onDateChange(date);
-              }}>{FormatDate(date)}</a>
+            <li key={i} hidden={!date}>
+              {FormatDate(date)}
             </li>
           )
         })}
@@ -273,7 +274,7 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
   )
 
   return (
-    flights.length != 0 ?
+    flightFound ?
       <div className={className}>
         <div className="ml-4 mb-4 flex justify-between items-center">
           <h3 className="text-xl font-semibold">{title}</h3>
@@ -285,45 +286,22 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
           />
         </div>
 
-        {/*/>*/}
-        {/*  <label>*/}
-        {/*    <input type="checkbox" checked={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only*/}
-        {/*  </label>*/}
-        {/*<b>Price Range:</b>*/}
-        {/*<ReactSlider*/}
-        {/*  min={0}*/}
-        {/*  max={20000}*/}
-        {/*  step={10}*/}
-        {/*  className="slider"*/}
-        {/*  thumbClassName="slider-thumb"*/}
-        {/*  trackClassName="slider-track"*/}
-        {/*  value={[minPrice, maxPrice]}*/}
-        {/*  ariaLabel={['Lower thumb', 'Upper thumb']}*/}
-        {/*  ariaValuetext={state => `Thumb value ${state.valueNow}`}*/}
-        {/*  renderThumb={(props, state) => <div {...props}>${state.valueNow}</div>}*/}
-        {/*  pearling*/}
-        {/*  minDistance={100}*/}
-        {/*  onChange={(v) => {*/}
-        {/*    // console.log("HI", v)*/}
-        {/*    setMinPrice(v[0]);*/}
-        {/*    setMaxPrice(v[1]);*/}
-        {/*  }}*/}
-        {/*/>*/}
-        {/*<hr />*/}
         {flights.length === 0 &&
         <div>
           <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
           <a onClick={() => {
             setNonstopOnly(defaults.nonstopOnly);
-            setMinPrice(defaults.minPrice)//
-            setMaxPrice(defaults.maxPrice)//
+            // setMinPrice(defaults.minPrice)//
+            // setMaxPrice(defaults.maxPrice)//
           }}>Reset All Filters</a>
         </div>}
         <div className="bg-white shadow overflow-hidden sm:rounded-md">
           <ul>
             {
               flights.map((flight, i) => {
-
+                if (selected !== -1 && selected !== i) {
+                  return <></>;
+                }
 
                 return (
                   <li key={i} className={classNames({
@@ -333,13 +311,32 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
                       flight={flight}
                       searchedClass={searchedClass}
                       highlightPrice={flight.price[classIdx] === cheapestPrice}
-                      onClick={e => onFlightSelected(flight)}
-                      isSelected={true} /> {/* // TODO @jeffrey */}
+                      // onClick={e => onFlightSelected(flight)}
+                      isSelected={selected == i}
+                      onClick = {() => {
+                        setSelected(i);
+                        onFlightSelected(flight);
+                      }}
+                    />
                   </li>
                 )
               })
             }
-
+<li hidden={selected === -1}>
+  <div className={classNames(
+    "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out",
+      "border-indigo-700"
+  )}
+  onClick={() => setSelected(-1)}
+  >
+    <div className="flex items-center px-4 py-4 sm:px-6">
+      <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
+        {/*<div className="col-span-2">*/}
+          <div className="text-lg leading-5 font-medium text-gray-700 truncate">
+            Change Selection
+          </div></div></div></div>
+{/*</div>*/}
+</li>
           </ul>
         </div>
       </div> : noFlightsMessage

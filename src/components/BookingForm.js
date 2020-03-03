@@ -206,9 +206,9 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   const [roundTrip, setRoundTrip] = React.useState(roundTripOptions.filter(x => x.value === defaultValues.roundTrip)[0] || roundTripOptions[0])
   const [passengers, setPassengers] = React.useState(passengersOptions.filter(x => x.value === defaultValues.passengers)[0] || passengersOptions[0])
   const [flightClass, setFlightClass] = React.useState(flightClassOptions.filter(x => x.value === defaultValues.flightClass)[0] || flightClassOptions[0])
-  //const [dates, setDates] = React.useState([defaultValues.startDate || new Date(), defaultValues.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
-  const dates = dateValue;
-  const setDates = (v) => onDateValueChange(v);
+  const [dates, setDates] = React.useState([defaultValues.startDate || new Date(), defaultValues.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)])
+  // const dates = dateValue;
+  // const setDates = (v) => onDateValueChange(v);
   const [airports, setAirports] = React.useState([defaultValues.departAirport || "", defaultValues.arriveAirport || ""])
   const datepickerOptions = {
     dateFormat: "m/d/y",
