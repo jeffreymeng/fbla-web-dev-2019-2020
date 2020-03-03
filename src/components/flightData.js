@@ -127,7 +127,7 @@ let flightData = {
         schedule: [
           {
             days:"MTuWThFSaSu",
-            times:["9am", "12:10pm", "5pm"],
+            times:["9am", "10:10pm", "5pm"],
             aircraft: "Boeing 787-8 Dreamliner",
             price:1080,
           },

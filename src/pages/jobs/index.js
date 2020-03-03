@@ -109,6 +109,8 @@ const JobsPage = () => (
     <div class="mt-8 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-20 xl:mt-24">
       <div class="lg:grid lg:grid-cols-12 lg:gap-8">
         <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+          <Fade left appear cascade>
+          <div>
           <div class="text-sm font-semibold uppercase tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
             Welcome
           </div>
@@ -132,14 +134,20 @@ const JobsPage = () => (
               </Link>
             </div>
           </div>
+                    </div>
+          </Fade>
+
         </div>
         <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+          <Fade right appear>
           <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-            <button class="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
+            
+            <div class="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
               <img class="w-full" src={flightJob} alt="Woman making a sale" />
              
-            </button>
+            </div>
           </div>
+            </Fade>
         </div>
       </div>
     </div>

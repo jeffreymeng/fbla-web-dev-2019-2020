@@ -6,6 +6,7 @@ import "../styles/card.css"
 import "../card"
 
 const CheckoutPage = ({}) => {
+  console.log(location.state || {})
   useEffect(() => {
     new Card({
       // a selector or DOM element for the form where users will
