@@ -53,7 +53,7 @@ const CheckoutPage = ({}) => {
     <Layout>
       <div className="min-h-content-area flex flex-col bg-gray-50">
         <div className="bg-gray-800">
-          <div className="md:flex md:items-center md:justify-between max-w-7xl mx-auto px-2 md:px-6 lg:px-8 pt-2 pb-6">
+          <div className="md:flex md:items-center md:justify-between max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-2 pb-6">
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-white sm:text-3xl sm:leading-9">
                 My Cart
@@ -62,9 +62,53 @@ const CheckoutPage = ({}) => {
           </div>
         </div>
         <div className="w-100 flex-1 pt-8">
-          <form id="checkoutForm" className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
-            <div className="grid grid-cols-3 gap-20">
-              <div className="col-span-2">
+          <form id="checkoutForm" className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div className="lg:flex">
+              <div className="lg:w-72 lg:order-2">
+                <div className="text-purple-700 uppercase font-semibold">Total Cost</div>
+                <div className="text-6xl font-semibold mb-8">$1023</div>
+
+                <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs">
+                  <div className="px-6 pt-4">
+                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
+                    <p className="text-gray-700 text-base">
+                      TODO add details here....<br/>
+                      TODO add details here....<br/>
+                      TODO add details here....<br/>
+                    </p>
+                  </div>
+                  <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
+                    <span className="text-purple-700 font-semibold">$124</span>
+                    <span className="inline-flex">
+                    <button type="button"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
+                      Remove
+                    </button>
+                  </span>
+                  </div>
+                </div>
+
+                <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs mt-4">
+                  <div className="px-6 pt-4">
+                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
+                    <p className="text-gray-700 text-base">
+                      TODO add details here....<br/>
+                      TODO add details here....<br/>
+                      TODO add details here....<br/>
+                    </p>
+                  </div>
+                  <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
+                    <span className="text-purple-700 font-semibold">$124</span>
+                    <span className="inline-flex">
+                    <button type="button"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
+                      Remove
+                    </button>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-12 lg:mt-0 lg:flex-1 lg:mr-10 lg:mr-20">
                 <div>
                   <div>
                     <div>
@@ -76,7 +120,7 @@ const CheckoutPage = ({}) => {
                           For demonstration purposes, we prefilled some of the fields for you.
                         </p>
                       </div>
-                      <div className="mt-6 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-6">
+                      <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
                         <div className="sm:col-span-3">
                           <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">
                             First name
@@ -162,7 +206,7 @@ const CheckoutPage = ({}) => {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-8 border-t border-gray-200 pt-8">
+                    <div className="mt-8 border-t border-gray-200 pt-6">
                       <div>
                         <h3 className="text-lg leading-6 font-medium text-gray-900">
                           Billing
@@ -171,11 +215,11 @@ const CheckoutPage = ({}) => {
                           For demonstration purposes, try entering 5555-5555-5555-5555. The card will NOT be charged.
                         </p>
                       </div>
-                      <div className="mt-6 xl:flex xl:items-center">
-                        <div className="flex-1 order-2">
+                      <div className="mt-2 sm:flex sm:items-center">
+                        <div className="flex-1 order-2 max-w-full overflow-hidden">
                           <div id="cardJS"/>
                         </div>
-                        <div className="mt-4 xl:mt-0">
+                        <div className="mt-4 sm:mt-0">
                           <div className="max-w-xs mx-auto">
                             <fieldset>
                               <legend className="block text-sm font-medium leading-5 text-gray-700">Card Details</legend>
@@ -212,50 +256,6 @@ const CheckoutPage = ({}) => {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="text-purple-700 uppercase font-semibold">Total Cost</div>
-                <div className="text-6xl font-semibold mb-8">$1023</div>
-
-                <div className="rounded overflow-hidden shadow-lg bg-white">
-                  <div className="px-6 pt-4">
-                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
-                    <p className="text-gray-700 text-base">
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                    </p>
-                  </div>
-                  <div className="px-6 pt-2 pb-4 flex justify-between items-baseline">
-                    <span className="text-purple-700 font-semibold">$124</span>
-                    <span className="inline-flex">
-                    <button type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
-                      Remove
-                    </button>
-                  </span>
-                  </div>
-                </div>
-
-                <div className="rounded overflow-hidden shadow-lg bg-white mt-4">
-                  <div className="px-6 pt-4">
-                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
-                    <p className="text-gray-700 text-base">
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                    </p>
-                  </div>
-                  <div className="px-6 pt-2 pb-4 flex justify-between items-baseline">
-                    <span className="text-purple-700 font-semibold">$124</span>
-                    <span className="inline-flex">
-                    <button type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
-                      Remove
-                    </button>
-                  </span>
                   </div>
                 </div>
               </div>

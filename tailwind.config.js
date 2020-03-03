@@ -6,6 +6,11 @@ module.exports = {
       fontFamily: {
         // sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
+      spacing: {
+        "72": "18rem",
+        "84": "21rem",
+        "96": "24rem",
+      },
     },
     fontSize: {
       "xs": ".75rem",
@@ -21,22 +26,22 @@ module.exports = {
       "7xl": "5rem",
       "8xl": "6rem",
       "10xl": "8rem",
-      "12xl": "10rem"
+      "12xl": "10rem",
     },
     zIndex: {
-      '-10': '-10',
-      '0': '0',
-      '10': '10',
-      '20': '20',
-      '30': '30',
-      '40': '40',
-      '50': "50",
-      'auto': 'auto',
+      "-10": "-10",
+      "0": "0",
+      "10": "10",
+      "20": "20",
+      "30": "30",
+      "40": "40",
+      "50": "50",
+      "auto": "auto",
     },
 
   },
   variants: {
-     margin: ['responsive', 'hover', 'focus'],
+    margin: ["responsive", "hover", "focus"],
   },
   plugins: [
     require("@tailwindcss/ui"),
