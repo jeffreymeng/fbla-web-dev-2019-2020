@@ -101,7 +101,7 @@ const BookingPage = ({ data, location }) => {
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={(f) => setDepartFlight(f)}
-                  // isDepartResult={true}
+                  isDepartResult={true}
                   // onDateChange={(d) => {
                   //   setBookingData(o => {
                   //     let clone = Object.assign({}, o);
@@ -152,7 +152,7 @@ const BookingPage = ({ data, location }) => {
                   <SuggestedFlight title="The Islands of Aloha" img={hawaii} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
                     With the best beaches, foods, and natural beauties to be found in the US, Hawaii is a must for the frequent traveler, the once-in-a-lifetime honeymoon, and everything in between.
                   </SuggestedFlight>
-                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YYR" onClick={()=>setSelectedTrip("YYR")}>
+                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YVR" onClick={()=>setSelectedTrip("YVR")}>
                     Ontario holds many treasures, and one you cannot miss is the CN Tower, once the tallest tower ever. Even for the faint of heart, it's an experience worth every penny.
                   </SuggestedFlight>
                   <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO" onClick={()=>setSelectedTrip("SFO")}>

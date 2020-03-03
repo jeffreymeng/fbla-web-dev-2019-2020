@@ -8,7 +8,7 @@ import "./src/styles/style.scss"
 
 import React from "react";
 
-import { AuthProvider } from "./src/context/AuthContext";
+import { AuthProvider } from "./src/context/ServerContext";
 
 export const wrapRootElement = ({ element }) => (
   <AuthProvider>{element}</AuthProvider>

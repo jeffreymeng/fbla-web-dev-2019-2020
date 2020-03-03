@@ -11,7 +11,7 @@ const firebaseConfig = {
   measurementId: "G-5BBC2V2HZE",
 }
 
-const AuthContext = React.createContext({
+const ServerContext = React.createContext({
   user: null,
   signIn: () => {
   },
@@ -76,16 +76,19 @@ const AuthProvider = ({ children }) => {
       setError(error.message);
     });
   }, [firebase]);
-
+const pushFlights = useCallback((data) => {
+  setError(null);
+ return firebase.firestore().collection("users").doc(user.uid).collection("flights").add(data).catch(error => setError(error.message))
+})
   return (
-    <AuthContext.Provider
+    <ServerContext.Provider
       value={{
         user, signIn, signOut, signUp, loading, error
       }}>
       {children}
-    </AuthContext.Provider>
+    </ServerContext.Provider>
   )
 }
 
-export default AuthContext
+export default ServerContext
 export { AuthProvider }

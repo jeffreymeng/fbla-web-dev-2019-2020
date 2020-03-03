@@ -4,13 +4,13 @@ import classNames from "classnames"
 import links from "./navlinks";
 
 import invisLogo from "../../images/longCoastalInvisV2.png"
-import AuthContext from "../../context/AuthContext"
+import ServerContext from "../../context/ServerContext"
 import Transition from "../Transition"
 import ClickAwayListener from "../ClickAwayListener"
 
 
 const CustomNavbar = ({ pageInfo }) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(ServerContext);
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [userNavOpen, setUserNavOpen] = useState(false);
