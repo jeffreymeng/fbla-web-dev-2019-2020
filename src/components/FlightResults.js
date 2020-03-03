@@ -465,39 +465,44 @@ function getFlights(value, dayOfWeek, testMode) {
   // const daysOfWeekReadable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   let flights = []
   const route = FlightData[value.departAirport]?.flights[value.arriveAirport]
-  if (route) {
-    const add = (arr, schedule, routeTime) => {
-      // console.log("RT", routeTime)
-      schedule.forEach((rule) => {
-        // console.log(rule, "rule", rule.days, dayOfWeek, rule.days.indexOf(dayOfWeek), testMode)
-        if (rule.days.indexOf(dayOfWeek) > -1) {
-          if (testMode) {
-            testPassed = true;
-            return;
-          }
-          arr.push(
-            ...rule.times.map(startTimeString => {
-              let startTime = new Time(startTimeString);
-              let totalPrice = 1.1208 * (rule.price);
-              return {
-                start:startTime,
-                end:startTime.clone().add(routeTime),
-                travelTime:routeTime,
-                length:`${routeTime.hour}h${routeTime.minute !== 0 ? " " + routeTime.minute + "m" : ""}`,
-                aircraft:[rule.aircraft],
-                stops:0,
-                airports:[value.departAirport, value.arriveAirport],
-                price:[totalPrice, totalPrice*2.184, totalPrice*3.892].map(x => Math.round(x))
-              }
-            }),
-          )
+  console.log(value.departAirport, value, route, 3988)
+  const add = (arr, schedule, routeTime) => {
+    // console.log("RT", routeTime)
+    schedule.forEach((rule) => {
+      // console.log(rule, "rule", rule.days, dayOfWeek, rule.days.indexOf(dayOfWeek), testMode)
+      if (rule.days.indexOf(dayOfWeek) > -1) {
+        if (testMode) {
+          testPassed = true;
+          return;
         }
-      })
-    }
+        arr.push(
+          ...rule.times.map(startTimeString => {
+            let startTime = new Time(startTimeString);
+            let totalPrice = 1.1208 * (rule.price);
+            return {
+              start: startTime,
+              end: startTime.clone().add(routeTime),
+              travelTime: routeTime,
+              length: `${routeTime.hour}h${routeTime.minute !== 0 ? " " + routeTime.minute + "m" : ""}`,
+              aircraft: [rule.aircraft],
+              stops: 0,
+              airports: [value.departAirport, value.arriveAirport],
+              price: [totalPrice, totalPrice * 2.184, totalPrice * 3.892].map(x => Math.round(x))
+            }
+          }),
+        )
+      }
+    })
+  }
+  if (route) {
+
     add(flights, route.schedule, new Time(route.time))
+  }
+    console.log(value.departAirport, Object.keys(FlightData[value.departAirport]?.flights || {}))
     // find connecting flights via brute force LOL
     for (let layoverAirport of Object.keys(FlightData[value.departAirport]?.flights)) {
       if (layoverAirport === value.arriveAirport) continue;
+      console.log("Testing", layoverAirport)
       // For each one of the departure airport's destinations, search the destination's flights to see if any of them go to the requested destination.
       // If they do, make sure the layover is acceptable.
       if (Object.keys(FlightData[layoverAirport]?.flights || {}).indexOf(value.arriveAirport) > -1) {
@@ -548,7 +553,7 @@ function getFlights(value, dayOfWeek, testMode) {
           })
         })
       }
-    }
+
   }
   if (testMode) return testPassed;
   return flights

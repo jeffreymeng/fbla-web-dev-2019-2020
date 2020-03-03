@@ -49,8 +49,13 @@ const BookingPage = ({ data, location }) => {
 
 
   const handleConfirmedBooking = () => {
-    console.log(departFlight, arriveFlight)
-    // TODO @jeffrey
+    // console.log(departFlight, arriveFlight)
+   navigate("checkout", {
+      state:{
+        depart:departFlight,
+        arrive:arriveFlight
+      }
+    })
   }
   const returnTripData = Object.assign({}, bookingData);
   // swap
