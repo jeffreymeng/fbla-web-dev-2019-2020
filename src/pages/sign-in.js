@@ -3,10 +3,10 @@ import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
 import { navigate } from "gatsby"
-import AuthContext from "../context/AuthContext"
+import ServerContext from "../context/ServerContext"
 
 const SignInPage = props => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(ServerContext);
   const [email, setEmail] = useState("demo@gmail.com");
   const [pass, setPass] = useState("demo@gmail.com");
 

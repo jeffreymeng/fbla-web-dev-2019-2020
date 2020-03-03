@@ -500,7 +500,7 @@ function getFlights(value, dayOfWeek, testMode) {
   }
     console.log(value.departAirport, Object.keys(FlightData[value.departAirport]?.flights || {}))
     // find connecting flights via brute force LOL
-    for (let layoverAirport of Object.keys(FlightData[value.departAirport]?.flights)) {
+    for (let layoverAirport of Object.keys(FlightData[value.departAirport]?.flights || {})) {
       if (layoverAirport === value.arriveAirport) continue;
       console.log("Testing", layoverAirport)
       // For each one of the departure airport's destinations, search the destination's flights to see if any of them go to the requested destination.
