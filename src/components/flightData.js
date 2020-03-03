@@ -152,25 +152,25 @@ let flightData = {
 // BEGIN GENERATING FLIGHTS //
 console.group("Generating Flights...");
 
-let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:true},
-  LAX: { latitude: 34.052235, longitude: -118.243683, isHub:true},
+let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:false},
+  LAX: { latitude: 34.052235, longitude: -118.243683, isHub:false},
   FAI: { latitude: 64.837776, longitude: -147.716385, isHub:false},
-  ABQ: { latitude: 35.081206, longitude: -106.654514, isHub:true},
+  ABQ: { latitude: 35.081206, longitude: -106.654514, isHub:false},
   ANC: { latitude: 61.208400, longitude: -149.890815, isHub:false},
   DEN: { latitude: 39.752642, longitude: -104.967042, isHub:true},
-  HNL: { latitude: 21.329299, longitude: -157.919581, isHub:true},
+  HNL: { latitude: 21.329299, longitude: -157.919581, isHub:false},
   KOA: { latitude: 19.740591, longitude: -156.043164, isHub:false},
-  LAS: { latitude: 36.174819, longitude: -115.141362, isHub:true},
-  PDX: { latitude: 45.505649, longitude: -122.678018, isHub:true},
+  LAS: { latitude: 36.174819, longitude: -115.141362, isHub:false},
+  PDX: { latitude: 45.505649, longitude: -122.678018, isHub:false},
   PHX: { latitude: 33.437134, longitude: -112.008003, isHub:true},
-  PVR: { latitude: 20.680468, longitude: -105.252709, isHub:true},
-  SAN: { latitude: 32.733593, longitude: -117.193390, isHub:true},
-  SEA: { latitude: 47.605999, longitude: -122.324905, isHub:true},
+  PVR: { latitude: 20.680468, longitude: -105.252709, isHub:false},
+  SAN: { latitude: 32.733593, longitude: -117.193390, isHub:false},
+  SEA: { latitude: 47.605999, longitude: -122.324905, isHub:false},
   SFO: { latitude: 37.621950, longitude: -122.380189, isHub:true},
-  SLC: { latitude: 40.753444, longitude: -111.881691, isHub:true},
-  TIJ: { latitude: 32.542879, longitude: -116.973975, isHub:true},
+  SLC: { latitude: 40.753444, longitude: -111.881691, isHub:false},
+  TIJ: { latitude: 32.542879, longitude: -116.973975, isHub:false},
   YVR: { latitude: 49.196522, longitude: -123.182722, isHub:true},
-  YYZ: { latitude: 43.678881, longitude: -79.628596, isHub:true}}
+  YYZ: { latitude: 43.678881, longitude: -79.628596, isHub:false}}
 
 // https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
 function randn_bm() {
@@ -179,7 +179,9 @@ function randn_bm() {
   while(v === 0) v = Math.random();
   let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
   num = num / 10.0 + 0.5; // Translate to 0 -> 1
-  if (num > 1 || num < 0) return randn_bm(); // resample between 0 and 1
+  // changed from 0, 1 to 0.25, 0.75
+  if (num > 0.75 || num < 0.25) return randn_bm(); // resample between 0 and 1
+  num = (num-0.25)*2;
   return num;
 }
 
@@ -208,11 +210,11 @@ const calcDistanceBetween = (a, b) => {
   }
 }
 const genPrice = (distance) => {
-  let basePrice = 60;
-  let costPerKM = 0.264;
+  let basePrice = 88;
+  let costPerKM = 0.11;
 
   let additionalCost = distance*costPerKM;
-  let variance = (randn_bm()-0.5)*0.2*additionalCost;
+  let variance = (randn_bm()-0.5)*0.5*additionalCost;
 
   return basePrice + additionalCost - variance;
 }
@@ -235,7 +237,7 @@ for (let i = 0; i < 100; i++) {
 
 let getFlightSchedule = (from, to) => {
   let flights = [];
-  for (let i = 0; i < 4 + Math.random() * 3; i++) {
+  for (let i = 0; i < 1 + (randn_bm()>0.75?1:0); i++) {
     let days = "";
     let mask = 0;
     for (let j = 0; j < 3 + Math.random() * 7; j++) {
@@ -247,7 +249,7 @@ let getFlightSchedule = (from, to) => {
       }
     }
     let times = [];
-    for (let j = 0; j < 1 + Math.floor(Math.random() * 2); j++) {
+    for (let j = 0; j < 1 + (randn_bm()>0.75?1:0); j++) {
       let time = flightTimes[Math.floor(Math.random() * flightTimes.length)];
       if (times.includes(time)) {
         j--;
@@ -266,9 +268,15 @@ let getFlightSchedule = (from, to) => {
 }
 
 let genTimeOfFlight = (from, to) => {
-  let hr = Math.ceil(Math.random()*12);
+  let planeSpeed = 800; // kph
+  let dist = calcDistanceBetween(from, to);
+  let minutes = dist/planeSpeed*60;
+  let variance = (randn_bm()-0.5)*0.3*minutes;
+  minutes += variance;
+
+  let hr = Math.round(minutes/60);
   if (hr < 10) hr = "0" + hr;
-  let min = Math.ceil(Math.random()*60/5)*5%60;
+  let min = Math.round(minutes%60);
   if (min < 10) min = "0" + min;
   return `${hr}:${min}`;
 }
@@ -277,6 +285,7 @@ let getFlightsFromAirport = blacklist => {
   let flights = {};
   for (let code of codes) {
     if (code === blacklist) continue;
+    if (locations[blacklist].isHub || locations[code].isHub || calcDistanceBetween(blacklist, code) < 500) {} else continue;
     flights[code] = {
       code,
       time: genTimeOfFlight(blacklist, code),
