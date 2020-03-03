@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Transition from "./Transition"
 import classNames from "classnames"
 
-const ConfirmFlightModal = ({ flight, selectedClass, isOpen, onConfirm, onCancel }) => {
+const ConfirmFlightModal = ({ price, isOpen, onConfirm, onCancel }) => {
   const [shouldShow, setShouldShow] = useState(false);
   // give time for animation
   useEffect(() => {
@@ -13,8 +13,6 @@ const ConfirmFlightModal = ({ flight, selectedClass, isOpen, onConfirm, onCancel
   }, [isOpen]);
   if (!shouldShow) return null;
 
-  const classIdx = (selectedClass==="economy"?0:(searchedClass==="business"?1:2));
-  console.log(flight);
 
   return (
     <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center z-20">
@@ -51,7 +49,7 @@ const ConfirmFlightModal = ({ flight, selectedClass, isOpen, onConfirm, onCancel
             </h3>
             <div className="mt-2">
               <p className="text-sm leading-5 text-gray-500">
-                Please confirm your booking, {flight.airports.join(" – ")}.
+                If you are sure your selection is correct, then press confirm to continue to checkout.
               </p>
             </div>
           </div>
@@ -60,7 +58,7 @@ const ConfirmFlightModal = ({ flight, selectedClass, isOpen, onConfirm, onCancel
           <span className="flex w-full rounded-md shadow-sm sm:col-start-2">
             <button onClick={() => onConfirm()} type="button"
                     className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-              Confirm: ${flight?.price[classIdx]}
+              Confirm: ${price}
             </button>
           </span>
           <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
