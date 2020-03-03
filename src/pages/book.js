@@ -202,7 +202,7 @@ const BookingPage = ({ data, location }) => {
 
       <ConfirmFlightModal
         // flight={selectedFlight}
-        price={departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + (bookingData.roundTrip === "rt" ? arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] : 0)}
+        price={bookingData && departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + (bookingData.roundTrip === "rt" ? arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] : 0)}
         isOpen={showBookingModal}
         onConfirm={handleConfirmedBooking}
         onCancel={() => setShowBookingModal(false)}/>

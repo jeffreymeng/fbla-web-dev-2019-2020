@@ -1,5 +1,7 @@
 import React from "react";
 import ServerContext from "../context/ServerContext"
+import Layout from "../components/layout/Layout";
+import SEO from "../components/seo";
 
 const MyFlightsPage = () => {
   const [flights, setFlights] = React.useState([]);
@@ -18,11 +20,12 @@ const MyFlightsPage = () => {
     });
   }, [server.user])
   return (
-    <>
+    <Layout>
+      <SEO title="My Flights"/>
     <h1>My Flights</h1>
   {flights.map(x => JSON.stringify(x))}
 
-  </>
+  </Layout>
   )
 }
 
