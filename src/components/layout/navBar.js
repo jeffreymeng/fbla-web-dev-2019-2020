@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import classNames from "classnames"
 import links from "./navlinks";
 
-import invisLogo from "../../images/longCoastalInvisV2.png"
+import invisLogo from "../../images/longCoastalInvisVBlue.png"
 import ServerContext from "../../context/ServerContext"
 import Transition from "../Transition"
 import ClickAwayListener from "../ClickAwayListener"
@@ -41,7 +41,7 @@ const CustomNavbar = ({ pageInfo }) => {
               </svg>
             </button>
           </div>
-          <Link to="/" className="flex-shrink-0 flex items-center pb-1.5 ml-4 md:ml-0">
+          <Link to="/" className="flex-shrink-0 flex items-center ml-4 md:ml-0">
             <img className="block lg:hidden h-8 w-auto" src={invisLogo} alt="" />
             <img className="hidden lg:block h-8 w-auto" src={invisLogo} alt="" />
           </Link>

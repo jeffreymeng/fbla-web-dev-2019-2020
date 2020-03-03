@@ -42,6 +42,7 @@ const IndexPage = ({ data }) => {
             defaultImage={data.file.childImageSharp.fluid}
             defaultCaption={{ caption: "New York City Skyline", location: "New York, New York" }} />
         </div>
+        <Fade appear bottom cascade>
         <div className="pt-16">
           <Img className="max-w-6xl mx-auto mb-16" fluid={data.logoBig.childImageSharp.fluid} />
           <h1
@@ -52,6 +53,7 @@ const IndexPage = ({ data }) => {
             <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
           </div>
         </div>
+        </Fade>
       </div>
 
       <div className="relative overflow-hidden">
@@ -264,7 +266,7 @@ export const query = graphql`
        }
      }
     },
-    logoBig: file(relativePath: { eq: "longCoastalInvisV6.png" }) {
+    logoBig: file(relativePath: { eq: "longCoastalInvisVBlue.png" }) {
      childImageSharp {
        fluid(maxWidth: 1152, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
