@@ -225,7 +225,7 @@ const IndexPage = ({ data }) => {
               </div>
             </form>
             <p className="mt-3 text-sm leading-5 text-gray-300">
-              We care about the protection of your data. Read our <a href="/privacy-policy" className="text-white font-medium underline">Privacy Policy.</a>
+              We care about the protection of your data. That's why we never send your data anywhere.
             </p>
           </div>
         </div>

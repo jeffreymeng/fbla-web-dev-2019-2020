@@ -23,7 +23,7 @@ const SignInPage = props => {
             <div className="">
               {/*<img className="h-12 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow"/>*/}
               <h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
-                Sign in
+                Sign In
               </h2>
               <p className="mt-2 text-1xl leading-5 text-gray-600 max-w font-bold">
                 A flight to paradise is just a few clicks away!
@@ -82,7 +82,7 @@ const SignInPage = props => {
                       <button
                         disabled={auth.loading}
                               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                        {auth.loading ? "Signing In..." : "Sign in"}
+                        {auth.loading ? "Signing In..." : "Sign In"}
                       </button>
                     </span>
                   </div>
