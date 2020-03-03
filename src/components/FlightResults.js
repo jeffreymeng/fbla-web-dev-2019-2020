@@ -166,7 +166,11 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
   )
 }
 
-const FlightResults = ({ title, value, searchedClass, onFlightSelected, className }) => {
+const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult, onDateChange }) => {
+  const daysOfWeek = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
+  let dayOfWeek = daysOfWeek[value[isDepartResult ? "startDate" : "endDate"]?.getDay()];
+  const [selected, setSelected] = React.useState(-1);
+
   const defaults = {
     sort: {
       label:"Departure Time",
@@ -178,27 +182,9 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
   }
   const [sort, setSort] = React.useState(defaults.sort);
   const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly);
-  // const [minPrice, setMinPrice] = React.useState(defaults.minPrice);
-  // const [maxPrice, setMaxPrice] = React.useState(defaults.maxPrice);
-
-
-  let flights = getFlights(value)
-
- const classIdx = ["economy", "business", "first"].indexOf(searchedClass); // class index
- let cheapestPrice = 10000000;
- for (let i = 0; i < flights.length; i++) {
-   cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);
- }
-
-
-  const noFlights = (
-    <div>
-      {/*TODO*/}
-      <p>Sorry, it doesn't look like we have any flights for you on the selected dates. However, we found 3 flights for
-        you from xxxx to xxxx on 3/24</p>
-    </div>
-  )
-  let filteredFlights = flights.filter((flight) => {
+  let flights = getFlights(value, dayOfWeek);
+  let flightFound = flights.length > 0;
+  flights = flights.filter((flight) => {
     return !((nonstopOnly && flight.stops > 0)/* || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice)*/)
   }).sort((a,b) => {
     let compare = function (a, b, comparison, depth) {
@@ -233,8 +219,62 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
     let result = compare(a, b, sort.value);
     return result !== 0 ? result : compare(a, b, "depart");
   });
+ const classIdx = ["economy", "business", "first"].indexOf(searchedClass); // class index
+ let cheapestPrice = 10000000;
+ for (let i = 0; i < flights.length; i++) {
+   cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);
+ }
+
+ const getBestAlternative = (value, before, findAmount) => {
+   console.log(value, before, findAmount, "BATNA");
+    // before: boolean, if true, finds closest flight that is before the selected date, if false, finds closest flight after.
+    let numFound = 0;// This function returns as many days possible with flights (at most 6, since it only searches within a week), up to findAmount
+   let result = [];
+   let OneDay = 24 * 60 * 60 * 1000;
+   for (let i = 1; i < 7; i ++) {
+     let newIndex = daysOfWeek.indexOf(dayOfWeek) + ((before ? -1 : 1)*i);
+     if (newIndex > 6) {
+       newIndex -= 7;
+     }
+     if (newIndex < 0) {
+       newIndex += 7;
+     }
+     //
+     if (getFlights(value, daysOfWeek[newIndex], true)) {
+      result.push(new Date(value[isDepartResult ? "startDate" : "endDate"].getTime()+(OneDay*(before ? -1 : 1)*i)));
+      numFound ++;
+      // console.log("dasf", result[result.length - 1])
+      if (numFound >= findAmount) break;
+    }
+   }
+   return result;
+ };
+  const FormatDate = (date) => {
+    if (!date) return "";
+    return `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][date.getDay()]}, ${["January","February","March","April","May","June","July","August","September","October","November","December"][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  }
+  const noFlightsMessage = (
+    <div>
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p>Sorry, it doesn't look like we have any flights from {value.departAirport} to {value.arriveAirport} on {FormatDate(value[isDepartResult ? "startDate" : "endDate"])}.
+      </p>
+      <b>However, we found flights on the following days between {value.departAirport} and {value.arriveAirport}:</b>
+      <ul>
+        {[...getBestAlternative(value, true, 3),...getBestAlternative(value, false, 3)]
+          .sort((a,b) => a.getTime()-b.getTime())
+          .map((date, i) => {
+          return (
+            <li key={i} hidden={!date}>
+              {FormatDate(date)}
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+
   return (
-    flights.length != 0 ?
+    flightFound ?
       <div className={className}>
         <div className="ml-4 mb-4 flex justify-between items-center">
           <h3 className="text-xl font-semibold">{title}</h3>
@@ -246,45 +286,22 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
           />
         </div>
 
-        {/*/>*/}
-        {/*  <label>*/}
-        {/*    <input type="checkbox" checked={nonstopOnly} onChange={(e) => setNonstopOnly(e.target.checked)} />Show nonstop flights only*/}
-        {/*  </label>*/}
-        {/*<b>Price Range:</b>*/}
-        {/*<ReactSlider*/}
-        {/*  min={0}*/}
-        {/*  max={20000}*/}
-        {/*  step={10}*/}
-        {/*  className="slider"*/}
-        {/*  thumbClassName="slider-thumb"*/}
-        {/*  trackClassName="slider-track"*/}
-        {/*  value={[minPrice, maxPrice]}*/}
-        {/*  ariaLabel={['Lower thumb', 'Upper thumb']}*/}
-        {/*  ariaValuetext={state => `Thumb value ${state.valueNow}`}*/}
-        {/*  renderThumb={(props, state) => <div {...props}>${state.valueNow}</div>}*/}
-        {/*  pearling*/}
-        {/*  minDistance={100}*/}
-        {/*  onChange={(v) => {*/}
-        {/*    // console.log("HI", v)*/}
-        {/*    setMinPrice(v[0]);*/}
-        {/*    setMaxPrice(v[1]);*/}
-        {/*  }}*/}
-        {/*/>*/}
-        {/*<hr />*/}
-        {filteredFlights.length === 0 &&
+        {flights.length === 0 &&
         <div>
           <p>Sorry, but we couldn't find any flights for you that match your filters.</p>
           <a onClick={() => {
             setNonstopOnly(defaults.nonstopOnly);
-            setMinPrice(defaults.minPrice)//
-            setMaxPrice(defaults.maxPrice)//
+            // setMinPrice(defaults.minPrice)//
+            // setMaxPrice(defaults.maxPrice)//
           }}>Reset All Filters</a>
         </div>}
         <div className="bg-white shadow overflow-hidden sm:rounded-md">
           <ul>
             {
-              filteredFlights.map((flight, i) => {
-
+              flights.map((flight, i) => {
+                if (selected !== -1 && selected !== i) {
+                  return <></>;
+                }
 
                 return (
                   <li key={i} className={classNames({
@@ -294,24 +311,45 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
                       flight={flight}
                       searchedClass={searchedClass}
                       highlightPrice={flight.price[classIdx] === cheapestPrice}
-                      onClick={e => onFlightSelected(flight)}
-                      isSelected={true} /> {/* // TODO @jeffrey */}
+                      // onClick={e => onFlightSelected(flight)}
+                      isSelected={selected == i}
+                      onClick = {() => {
+                        setSelected(i);
+                        onFlightSelected(flight);
+                      }}
+                    />
                   </li>
                 )
               })
             }
-
+<li hidden={selected === -1}>
+  <div className={classNames(
+    "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out",
+      "border-indigo-700"
+  )}
+  onClick={() => setSelected(-1)}
+  >
+    <div className="flex items-center px-4 py-4 sm:px-6">
+      <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
+        {/*<div className="col-span-2">*/}
+          <div className="text-lg leading-5 font-medium text-gray-700 truncate">
+            Change Selection
+          </div></div></div></div>
+{/*</div>*/}
+</li>
           </ul>
         </div>
-      </div> : noFlights
+      </div> : noFlightsMessage
   )
 }
 
-function getFlights(value) {
-
+function getFlights(value, dayOfWeek, testMode) {
+  let testPassed = false;
+  testMode = testMode === undefined ? false : testMode;
   const MAX_LAYOVER_LENGTH = 5;
 
-
+  // Time = 0 means 12:00 AM!
+  // The first time in each AM/PM category is 12, NOT 1
   class Time {
     /**
      * Create a time object
@@ -328,7 +366,14 @@ function getFlights(value) {
     time
 
     toString() {
-      return `${this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M`
+      if (this.time >= 24) {
+        this.time -= 24;
+      }
+      if (`${this.hour === 0 ? "12" : this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M` == "2:50 AM") {
+        // console.log("BOOOM", this)
+
+      }
+      return `${this.hour === 0 ? "12" : this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M`
     }
 
     static timeFromHourMinuteIsAm(hour, minute, isAm) {
@@ -342,18 +387,21 @@ function getFlights(value) {
         this.hour = parseInt(timeString)
         this.minute = 0
       }
+      if (this.hour >= 12) {
+        this.hour = this.hour - 12;
+      }
       this.isAm = timeString.indexOf("pm") === -1
       this.time = Time.timeFromHourMinuteIsAm(this.hour, this.minute, this.isAm)
     }
 
     _setFromNumber(time) {
-      if (time > 24) {
+      if (time >= 24) {
         this._setFromNumber(time - 24)
         return
       }
       this.time = time
       this.isAm = time < 12
-      if (time >= 13) time -= 12 // NOT this.time
+      if (time >= 12) time -= 12 // NOT this.time
       this.hour = Math.floor(time)
       this.minute = Math.round(60 * (time % 1))
 
@@ -374,10 +422,19 @@ function getFlights(value) {
         this.isAm = isAm || true
         this.time = Time.timeFromHourMinuteIsAm(hour, minute, isAm)
       }
+      // console.log(hour, minute, isAm, this.hour, this.time)
+      // if (this.hour > 12) {
+      //   this.hour -= 12;
+      // }
+      // console.log("TWO", this.time, this.hour, this.toString())
     }
 
+
     add(time) {
+
+      // console.log("BAAH", this, time)
       this._setFromNumber(this.time + time.time)
+      // console.log("ACC", this)
       return this
     }
 
@@ -405,18 +462,19 @@ function getFlights(value) {
 
   }
 
-  const daysOfWeekReadable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  const daysOfWeek = ["Su", "M", "Tu", "W", "Th", "F", "Sa"]
-  let dayOfWeek = daysOfWeek[value.startDate?.getDay()]
+  // const daysOfWeekReadable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   let flights = []
   const route = FlightData[value.departAirport]?.flights[value.arriveAirport]
   if (route) {
     const add = (arr, schedule, routeTime) => {
       // console.log("RT", routeTime)
       schedule.forEach((rule) => {
-        // console.log(rule.days)
+        // console.log(rule, "rule", rule.days, dayOfWeek, rule.days.indexOf(dayOfWeek), testMode)
         if (rule.days.indexOf(dayOfWeek) > -1) {
-
+          if (testMode) {
+            testPassed = true;
+            return;
+          }
           arr.push(
             ...rule.times.map(startTimeString => {
               let startTime = new Time(startTimeString);
@@ -439,7 +497,7 @@ function getFlights(value) {
     add(flights, route.schedule, new Time(route.time))
     // find connecting flights via brute force LOL
     for (let layoverAirport of Object.keys(FlightData[value.departAirport]?.flights)) {
-      if (layoverAirport === value.arriveAirport) continue
+      if (layoverAirport === value.arriveAirport) continue;
       // For each one of the departure airport's destinations, search the destination's flights to see if any of them go to the requested destination.
       // If they do, make sure the layover is acceptable.
       if (Object.keys(FlightData[layoverAirport]?.flights || {}).indexOf(value.arriveAirport) > -1) {
@@ -456,6 +514,7 @@ function getFlights(value) {
         let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport]
         add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time))
         layoverFlights.forEach((flightToLayover) => {
+          if (testPassed) return;
           destFlights.forEach((flightToDest) => {
             // console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
             if (flightToLayover.end.compareTo(flightToDest.start) >= 0 && flightToLayover.end.compareTo(flightToDest.start) <= MAX_LAYOVER_LENGTH) {
@@ -467,7 +526,11 @@ function getFlights(value) {
               let travelTime = flightToDest.end.clone().subtract(flightToLayover.start)
               // console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
               let totalPrice = 1.1208 * (toLayoverFlight.price + toDestFlight.price);
-              console.log(totalPrice,flightToLayover.price, "TPP")
+              // console.log(totalPrice,flightToLayover.price, "TPP")
+              if (testMode) {
+                testPassed = true;
+                return;
+              }
               flights.push({
                 start:flightToLayover.start,
                 end:flightToDest.end,
@@ -487,6 +550,7 @@ function getFlights(value) {
       }
     }
   }
+  if (testMode) return testPassed;
   return flights
 }
 

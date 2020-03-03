@@ -40,21 +40,21 @@ const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
 
 const BookingPage = ({ data, location }) => {
   const [bookingData, setBookingData] = React.useState(null)
-  const [selectedFlight, setSelectedFlight] = React.useState(null);
+  // const [selectedFlight, setSelectedFlight] = React.useState(null);
+  const [departFlight, setDepartFlight] = React.useState(null);
+  const [arriveFlight, setArriveFlight] = React.useState(null);
   const [selectedTrip, setSelectedTrip] = React.useState(null);
   const [showBookingModal, setShowBookingModal] = React.useState(false);
-  const [showCheckoutBanner, setShowCheckoutBanner] = React.useState(true); // todo make false
+  const [showCheckoutBanner, setShowCheckoutBanner] = React.useState(false); // todo make not false
 
-  const handleFlightSelected = (flight) => {
-    setSelectedFlight(flight);
-    setShowBookingModal(true);
-  };
 
   const handleConfirmedBooking = () => {
-    setShowBookingModal(false);
+    console.log(departFlight, arriveFlight)
     // TODO @jeffrey
   }
-
+  const returnTripData = Object.assign({}, bookingData);
+  // swap
+  [returnTripData.departAirport, returnTripData.arriveAirport] = [returnTripData.arriveAirport, returnTripData.departAirport];
   return (
     <Layout>
       <SEO
@@ -73,6 +73,13 @@ const BookingPage = ({ data, location }) => {
           <BookingForm
             onSubmit={(d) => setBookingData(d)}
             defaultValues={location.state || {}}
+            dateValue={[bookingData?.startDate || new Date(), bookingData?.endDate || new Date(new Date().getTime() + 24 * 60 * 60 * 1000)]}
+            onDateValueChange={(v) => setBookingData(o => {
+              let clone = Object.assign({}, o);
+              clone.startDate = v[0];
+              clone.endDate = v[1];
+              return clone;
+            })}
             featuredAirport={selectedTrip}
             className="-mb-40 sm:-mb-32" />
         </div>
@@ -88,7 +95,16 @@ const BookingPage = ({ data, location }) => {
                   title={bookingData.roundTrip==="rt"?"Select a departure flight":null}
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
-                  onFlightSelected={handleFlightSelected}/>
+                  onFlightSelected={(f) => setDepartFlight(f)}
+                  // isDepartResult={true}
+                  // onDateChange={(d) => {
+                  //   setBookingData(o => {
+                  //     let clone = Object.assign({}, o);
+                  //     clone.startDate = d;
+                  //     return clone;
+                  //   })
+                  // }}
+                />
               }
               {
                 bookingData.roundTrip ==="rt"&&
@@ -96,10 +112,18 @@ const BookingPage = ({ data, location }) => {
                  <FlightResults
                   className="mt-8"
                   title="Select a return flight"
-                  value={bookingData}
+                  value={returnTripData}
                   searchedClass={bookingData.flightClass}
-                  onFlightSelected={handleFlightSelected}/>
-                  <button>Submit Results</button>
+                  isDepartResult={false}
+                  onDateChange={(d) => {
+                    setBookingData(o => {
+                      let clone = Object.assign({}, o);
+                      clone.endDate = d;
+                      return clone;
+                    })
+                  }}
+                  onFlightSelected={(f) => setArriveFlight(f)}/>
+                  <button onClick={() => setShowBookingModal(true)} disabled={!departFlight || !arriveFlight}>Submit Results</button>
                   </>
               }
             </>
@@ -171,8 +195,8 @@ const BookingPage = ({ data, location }) => {
       {/* END CART/CHECKOUT BANNER */}
 
       <ConfirmFlightModal
-        flight={selectedFlight}
-        selectedClass={bookingData?.flightClass}
+        // flight={selectedFlight}
+        price={departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)]}
         isOpen={showBookingModal}
         onConfirm={handleConfirmedBooking}
         onCancel={() => setShowBookingModal(false)}/>
