@@ -89,12 +89,15 @@ const BookingPage = ({ data, location }) => {
               }
               {
                 bookingData.roundTrip ==="rt"&&
-                <FlightResults
+               <>
+                 <FlightResults
                   className="mt-8"
                   title="Select a return flight"
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={handleFlightSelected}/>
+                  <button>Submit Results</button>
+                  </>
               }
             </>
           }
