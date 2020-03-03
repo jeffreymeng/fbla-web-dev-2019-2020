@@ -9,6 +9,9 @@ import "../styles/about.scss"
 import "../styles/parallax.scss"
 import { Link } from "gatsby"
 import beachClubHeader from "../images/beachClubp1.jpg"
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
@@ -58,6 +61,8 @@ const FrequentFlyerProgramPage = () => (
 
     <div className="job-apply__container" id="Section1">
       <div className="job-apply">
+        
+      <Fade bottom cascade>
       <div class="relative">
       <h3 class="text-center text-4xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl sm:leading-10">
         What is Beach <span className="text-indigo-600">Club+</span>?
@@ -70,9 +75,12 @@ const FrequentFlyerProgramPage = () => (
           the more rewards you earn!</p>
 
         <div style={{ marginBottom: "5rem" }} />
-
+        </Fade>
+        <Fade bottom>
         <h2 className="section-heading">How it Works</h2>
+        </Fade>
         <div className="numbered-sections-list numbered-sections-list--green">
+        <Fade bottom>
           <div className="numbered-sections-list__item">
             <div className="numbered-sections-list__item__number">
               01
@@ -103,8 +111,10 @@ const FrequentFlyerProgramPage = () => (
               flights.
             </div>
           </div>
+        </Fade>
         </div>
       </div>
+      
     </div>
 
 
@@ -112,24 +122,30 @@ const FrequentFlyerProgramPage = () => (
     <div className="bg-gray-900">
       <div className="lg:flex">
         <div className="flex-1 flex items-center justify-center">
+        <Fade left cascade>
           <div className="px-12 py-24 max-w-2xl lg:ml-auto">
           <div class="text-base leading-6 font-semibold uppercase tracking-wider text-gray-300">
         More Out of Each Flight
       </div>
             <h2 className="mb-12 text-white text-4xl leading-9 font-bold tracking-normal sm:text-6xl sm:leading-tight">
-              One Mile<span className="text-teal-300">,</span> <br />One Point<span className="text-teal-300">.</span>
+              One Mile<span className="text-indigo-600">,</span> <br />One Point<span className="text-indigo-600">.</span>
             </h2>
             <p className="text-xl leading-7 text-gray-300">Each mile you fly with us gives you at least one Beach Club+ point. You may earn more than one point per mile when booking specific promotional routes, special dates, or business/first class.
               Redeem your points for free flights!</p>
           </div>
+        </Fade>
         </div>
+        <Fade right>
         <div className="hidden lg:block flex-1 bg-cover bg-center" style={{ backgroundImage: "url('/jobs-bg.jpg')" }}/>
+        </Fade>
       </div>
       <div class="md:ml-auto md:w-1/2 md:pl-10">
     </div>
     </div>
 
-    <div className="bg-gray-100 pt-24 pb-32">
+    <Fade bottom cascade>
+     <div className="bg-gray-100 pt-24 pb-32">
+   
       <div className="narrow-container">
         <h2 className="section-heading section-heading--center font-bold tracking-normal sm:leading-10">Spend your Rewards</h2>
         <p className="text-gray-700 text-xl text-center mb-12">
@@ -137,8 +153,11 @@ const FrequentFlyerProgramPage = () => (
           and receive an instant estimate of the average number of points you need to score a <i>free flight</i>!
         </p>
       </div>
+      <Fade bottom>
       <FFPRewardsSpender />
+      </Fade>
     </div>
+    </Fade>
 
   
 
@@ -153,7 +172,7 @@ const FrequentFlyerProgramPage = () => (
         Our Special Speciality Program
       </div>
       <h2 class="mt-2 text-white text-4xl leading-9 font-bold tracking-normal sm:text-6xl sm:leading-tight">
-Diamond Members.      </h2>
+Diamond Members<span className="text-indigo-600">.</span>    </h2>
       <p class="mt-3 text-xl leading-7 text-gray-300">
 If you earn more than 100,000 points, you automatically
               become a Diamond Beach Club+ Member.

@@ -234,8 +234,8 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
             endDate:roundTrip.value === "rt" ? dates[1] : undefined
           })
         }}>
-          <div className="flex flex-wrap">
-            <div className="md:hidden" style={{ flexBasis: "100%" }} />
+          <div className="flex flex-wrap items-center">
+            <div className="lg:hidden" style={{ flexBasis: "100%" }} />
             <div className="block sm:inline-block w-full sm:w-32 booking-select">
               <Select
                 isSearchable={false}
@@ -261,11 +261,12 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                 onChange={(v) => setFlightClass(v)} />
             </div>
             <div
-              className="order-first md:order-last mr-auto md:ml-auto sm:mr-0 px-2 py-2 mt-2 sm:mt-0 flex sm:inline-flex w-full sm:w-56 relative border border-l-2 border-transparent">
+              className="order-first md:order-last mr-auto md:ml-auto sm:mr-0 mt-2 sm:mt-0 flex sm:inline-flex w-full sm:w-56 relative mb-2 md:mb-0">
               <Flatpickr
                 className={classNames(
-                  "bg-white inline-block w-full px-3 py-1 rounded",
+                  "bg-white inline-block w-full px-3 py-2 rounded booking-input",
                 )}
+                style={{ height: "36px" }}
                 value={dates}
                 options={datepickerOptions}
                 onChange={d => setDates(d)} />
