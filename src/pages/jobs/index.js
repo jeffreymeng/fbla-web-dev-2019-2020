@@ -108,10 +108,10 @@ const JobsPage = () => (
           <div class="text-sm font-semibold uppercase tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
             Welcome
           </div>
-          <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
+          <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-4xl lg:text-5xl xl:text-6xl">
             Looking for a
             <br class="hidden md:inline" />
-            <span class="text-indigo-600"> Job</span> ?
+            <span class="text-indigo-600 text-5xl sm:text-5xl lg:text-6xl xl:text-8xl"> Job?</span> 
           </h2>
           <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
             Look no further. With the right steps, you can start travelling the world for a living at Coastal Airlines!
@@ -144,7 +144,7 @@ const JobsPage = () => (
 
  
 
-<div class="py-16 bg-gray-50 overflow-hidden lg:py-24">
+<div class="py-16 bg-gray-50 overflow-hidden lg:py-24"  id="benefits">
   <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl pb-20">
    
     <div class="relative">

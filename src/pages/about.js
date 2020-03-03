@@ -155,10 +155,10 @@ What started off as a dream with three individuals to travel and explore the nat
             </svg>
           </div>
           <div className="mt-5">
-            <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club+</h5>
+            <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
 				One of our core principles is <span className="italics">loyalty</span> - thats why we wanted to give back to those who love and care for Coastal Airlines as much as we love them. Go to our	<Link to="frequent-flyer-program"
-             className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club+
+             className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club
           		</Link> page to learn more.</p>
           </div>
         </div>

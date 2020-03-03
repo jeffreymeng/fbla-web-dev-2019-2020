@@ -12,7 +12,7 @@ const navLinks = [
     url: "/about",
   },
   {
-    label: "Frequent Flyer",
+    label: "Beach Club+",
     url: "/frequent-flyer-program",
   },
   {

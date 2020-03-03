@@ -8,7 +8,7 @@ import Img from "gatsby-image";
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
-import beachClubp1 from "../images/beachClubp1.jpg"
+import beachClubp1 from "../images/beachClubHome.jpg"
 import aboutUsp1 from "../images/aboutUsp1.jpg"
 import judithRose from "../images/judithRose.jpg"
 
@@ -91,10 +91,10 @@ const IndexPage = ({ data }) => {
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
               <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
-                  <span className="text-yellow-200">Beach</span> Club
+                  <span className="text-yellow-200">Beach</span> Club+
                 </h2>
                 <p className="mt-3 text-base text-indigo-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 lg:mr-auto">
-                  Beach Club is the Coastal Airlines Frequent Flyer program. Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
+                  Beach Club+ is the Coastal Airlines Frequent Flyer program. Get rewarded for choosing Coastal Airlines. For each mile you fly, you earn one point. Redeem points for free tickets!
                 </p>
                 <div className="inline-block mt-8">
                   <Link to="frequent-flyer-program" className="rounded border border-yellow-200 px-4 py-2 text-yellow-200 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-yellow-200 hover:text-yellow-800">
@@ -146,7 +146,7 @@ const IndexPage = ({ data }) => {
                       <path d="M11 0h3L9 20H6l5-20z" />
                     </svg>
 
-                    <div className="text-base leading-6 font-medium text-gray-500">Coastal Airlines Beach Club Member</div>
+                    <div className="text-base leading-6 font-medium text-gray-500">Coastal Airlines Beach Club+ Member</div>
                   </div>
                 </div>
               </footer>

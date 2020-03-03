@@ -36,11 +36,11 @@
 .numbered-sections-list--green {
   .numbered-sections-list__item {
     .numbered-sections-list__item__number {
-      background-color: #38A169;
+      background-color: #5a67d8;
     }
     .numbered-sections-list__item__content {
       .numbered-sections-list__item__content__title {
-        color: #22543D;
+        color: black;
       }
     }
   }
@@ -58,7 +58,7 @@
     width: 5rem;
     padding-top: 0.75rem;
     margin-left: 0.25rem;
-    border-bottom: 6px solid #3182CE;
+    border-bottom: 6px solid #5a67d8;
   }
 
   &--center {
