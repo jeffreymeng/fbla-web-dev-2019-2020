@@ -13,6 +13,7 @@ import goldCity from "../images/goldCity.png"
 import hawaii from "../images/hawaii.jpg"
 import cnTower from "../images/cnTower.jpg"
 import goldenGate from "../images/goldenGate.jpg"
+import Transition from "../components/Transition"
 
 
 const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
@@ -42,6 +43,7 @@ const BookingPage = ({ data, location }) => {
   const [selectedFlight, setSelectedFlight] = React.useState(null);
   const [selectedTrip, setSelectedTrip] = React.useState(null);
   const [showBookingModal, setShowBookingModal] = React.useState(false);
+  const [showCheckoutBanner, setShowCheckoutBanner] = React.useState(true); // todo make false
 
   const handleFlightSelected = (flight) => {
     setSelectedFlight(flight);
@@ -133,6 +135,40 @@ const BookingPage = ({ data, location }) => {
           }
         </div>
       </div>
+
+      {/* BEGIN CART/CHECKOUT BANNER */}
+      <Transition
+        show={showCheckoutBanner}
+        enter="ease-out duration-500"
+        enterFrom="opacity-0 scale-95 translate-y-2"
+        enterTo="opacity-100 scale-100 translate-y-0"
+        leave="ease-in duration-300"
+        leaveFrom="opacity-100 scale-100 translate-y-0"
+        leaveTo="opacity-0 scale-95 translate-y-2"
+        className="transition transform fixed z-100 bottom-0 inset-x-0 pb-2 sm:pb-5">
+        <div className="max-w-screen-xl mx-auto px-2 sm:px-4">
+          <div className="p-2 rounded-lg bg-gray-900 shadow-lg sm:p-3">
+            <div className="flex items-center justify-between flex-wrap">
+              <div className="w-0 flex-1 flex items-center">
+                <p className="ml-3 font-medium text-white truncate">
+                  <span className="text-gray-400">
+                    <strong className="text-white font-semibold mr-8">One flight selected</strong>
+                    <span>SFO to LAX</span>
+                  </span>
+                </p>
+              </div>
+              <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                <div className="rounded-md shadow-sm">
+                  <a href="https://tailwindui.com?utm_source=tailwindcss&amp;utm_medium=footer-banner" className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
+                    Checkout
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+      {/* END CART/CHECKOUT BANNER */}
 
       <ConfirmFlightModal
         flight={selectedFlight}

@@ -48,7 +48,7 @@ const IndexPage = ({ data }) => {
             className="mb-4 sm:mb-8 px-4 text-center text-white text-3xl leading-10 font-bold text-indigo-50 sm:text-4xl sm:leading-none md:text-6xl"
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
-          <div>
+          <div className="pb-24">
             <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
           </div>
         </div>
