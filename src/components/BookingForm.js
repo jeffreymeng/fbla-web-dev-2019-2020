@@ -266,7 +266,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
                 className={classNames(
                   "bg-white inline-block w-full px-3 py-2 rounded booking-input",
                 )}
-                style={{ height: "36px" }}
+                style={{ height: "38px" }}
                 value={dates}
                 options={datepickerOptions}
                 onChange={d => setDates(d)} />
