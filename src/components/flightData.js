@@ -36,9 +36,8 @@ const dayOfWeekMap = {
   F:"Friday",
   Sa:"Saturday",
   Su:"Sunday"
-
 }
-const flightData = {
+let flightData = {
   SFO: {
     code: "SFO",
     flights:
@@ -150,7 +149,154 @@ const flightData = {
 
 
 
+// BEGIN GENERATING FLIGHTS //
+console.group("Generating Flights...");
 
+let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:true},
+  LAX: { latitude: 34.052235, longitude: -118.243683, isHub:true},
+  FAI: { latitude: 64.837776, longitude: -147.716385, isHub:false},
+  ABQ: { latitude: 35.081206, longitude: -106.654514, isHub:true},
+  ANC: { latitude: 61.208400, longitude: -149.890815, isHub:false},
+  DEN: { latitude: 39.752642, longitude: -104.967042, isHub:true},
+  HNL: { latitude: 21.329299, longitude: -157.919581, isHub:true},
+  KOA: { latitude: 19.740591, longitude: -156.043164, isHub:false},
+  LAS: { latitude: 36.174819, longitude: -115.141362, isHub:true},
+  PDX: { latitude: 45.505649, longitude: -122.678018, isHub:true},
+  PHX: { latitude: 33.437134, longitude: -112.008003, isHub:true},
+  PVR: { latitude: 20.680468, longitude: -105.252709, isHub:true},
+  SAN: { latitude: 32.733593, longitude: -117.193390, isHub:true},
+  SEA: { latitude: 47.605999, longitude: -122.324905, isHub:true},
+  SFO: { latitude: 37.621950, longitude: -122.380189, isHub:true},
+  SLC: { latitude: 40.753444, longitude: -111.881691, isHub:true},
+  TIJ: { latitude: 32.542879, longitude: -116.973975, isHub:true},
+  YVR: { latitude: 49.196522, longitude: -123.182722, isHub:true},
+  YYZ: { latitude: 43.678881, longitude: -79.628596, isHub:true}}
+
+// https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
+function randn_bm() {
+  let u = 0, v = 0;
+  while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+  while(v === 0) v = Math.random();
+  let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+  num = num / 10.0 + 0.5; // Translate to 0 -> 1
+  if (num > 1 || num < 0) return randn_bm(); // resample between 0 and 1
+  return num;
+}
+
+// https://www.geodatasource.com/developers/javascript
+const calcDistanceBetween = (a, b) => {
+  let lat1 = locations[a].latitude, lon1 = locations[a].longitude,
+    lat2 = locations[b].latitude, lon2 = locations[b].longitude, unit = "K";
+  if ((lat1 === lat2) && (lon1 === lon2)) {
+    return 0;
+  }
+  else {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit==="K") { dist = dist * 1.609344 }
+    if (unit==="N") { dist = dist * 0.8684 }
+    return dist;
+  }
+}
+const genPrice = (distance) => {
+  let basePrice = 60;
+  let costPerKM = 0.264;
+
+  let additionalCost = distance*costPerKM;
+  let variance = (randn_bm()-0.5)*0.2*additionalCost;
+
+  return basePrice + additionalCost - variance;
+}
+
+const codes = airports.map(x => x.split(" - ")[2]);
+// console.log(codes);
+const daysOfWeek = Object.keys(dayOfWeekMap);
+// console.log(daysOfWeek);
+const aircrafts = ["Boeing 787-8 Dreamliner", "Boeing 787-9 Dreamliner", "Boeing 787-10 Dreamliner", "Boeing 777-200", "Boeing 777-300ER", "Boeing 767-300ER", "Boeing 767-400ER", "Boeing 757-200", "Boeing 757-300", "Boeing 737-700", "Boeing 737-800", "Boeing 737-900", "Airbus 319", "Airbus 320", "Bombardier CRJ-200", "Bombardier CRJ-550", "Bombardier CRJ-700", "EMB 170", "EMB 175", "EMB 145"];
+const flightTimes = [];
+for (let i = 0; i < 100; i++) {
+  let hr = Math.ceil(Math.random()*12);
+  if (hr < 10) hr = "0" + hr;
+  let min = Math.ceil(Math.random()*60/5)*5%60;
+  if (min < 10) min = "0" + min;
+  let am = Math.random() >= 0.5;
+  if (am && hr <= 5) continue;
+  flightTimes.push(`${hr}:${min}${am?"am":"pm"}`);
+}
+
+let getFlightSchedule = (from, to) => {
+  let flights = [];
+  for (let i = 0; i < 4 + Math.random() * 3; i++) {
+    let days = "";
+    let mask = 0;
+    for (let j = 0; j < 3 + Math.random() * 7; j++) {
+      mask |= (1 << Math.floor(Math.random() * 7));
+    }
+    for (let j = 0; j < 7; j++) {
+      if (mask & (1 << j)) {
+        days += daysOfWeek[j];
+      }
+    }
+    let times = [];
+    for (let j = 0; j < 1 + Math.floor(Math.random() * 2); j++) {
+      let time = flightTimes[Math.floor(Math.random() * flightTimes.length)];
+      if (times.includes(time)) {
+        j--;
+        continue;
+      }
+      times.push(time);
+    }
+    flights.push({
+      days,
+      times,
+      aircraft: aircrafts[Math.floor(Math.random() * aircrafts.length)],
+      price: genPrice(calcDistanceBetween(from, to))
+    });
+  }
+  return flights;
+}
+
+let genTimeOfFlight = (from, to) => {
+  let hr = Math.ceil(Math.random()*12);
+  if (hr < 10) hr = "0" + hr;
+  let min = Math.ceil(Math.random()*60/5)*5%60;
+  if (min < 10) min = "0" + min;
+  return `${hr}:${min}`;
+}
+
+let getFlightsFromAirport = blacklist => {
+  let flights = {};
+  for (let code of codes) {
+    if (code === blacklist) continue;
+    flights[code] = {
+      code,
+      time: genTimeOfFlight(blacklist, code),
+      schedule: getFlightSchedule(blacklist, code)
+    };
+  }
+  return flights;
+};
+
+flightData = {};
+for (let code of codes) {
+  flightData[code] = {
+    code,
+    flights: getFlightsFromAirport(code)
+  };
+}
+console.log(flightData);
+
+console.groupEnd();
+// END GENERATING FLIGHTS //
 
 
 
