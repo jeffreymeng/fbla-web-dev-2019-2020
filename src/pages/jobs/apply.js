@@ -4,6 +4,9 @@ import SEO from "../../components/seo"
 import BulletListItem from "../../components/BulletListItem"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
 
 const jobs = [
   {
@@ -63,7 +66,7 @@ const ApplyPage = props => {
           </div>
         </div>
       </div>
-
+      <Fade right cascade>
       <div id="choose" className="max-w-screen-lg mx-auto py-16 px-4">
         <h1 className="section-heading section-heading--center">
           To get started, choose an available position.
@@ -138,6 +141,7 @@ const ApplyPage = props => {
           </ul>
         </div>
       </div>
+      </Fade>
 
       <div className="py-8 bg-gray-50 overflow-hidden md:py-12 lg:py-16 relative">
         <div className={"max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative"}>
@@ -151,8 +155,8 @@ const ApplyPage = props => {
             </defs>
             <rect width="404" height="404" fill="url(#svg-pattern-squares-1)"/>
           </svg>
-
           <div className={"opacity-0"}>
+
             <blockquote>
               <div className="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900">
                 <p>
@@ -182,7 +186,6 @@ const ApplyPage = props => {
               </div>
             </blockquote>
           </div>
-
           {jobs.map((job, idx) => (
             <div
               className={(idx === selectedJob ? "opacity-1" : "opacity-0") + " absolute transition duration-200 ease-in-out top-0 left-0 right-0 px-4"}>
@@ -220,12 +223,17 @@ const ApplyPage = props => {
       </div>
 
       <div className="max-w-screen-sm mx-auto py-8 md:py-12 lg:py-16 px-4">
+      <Fade bottom cascade>
         <h1 className="section-heading section-heading--center">Steps to Apply</h1>
+        </Fade>
+        <Fade bottom>
         <p className="text-gray-700 text-lg mb-12 text-center">To apply, prepare the following information (varies by
           job) and send it in
           an email to <a href="mailto:jobs@coastalairlines.com">jobs@coastalairlines.com</a>. We'll reach out to you in
           2-3 business days to schedule an interview!</p>
 
+        </Fade>
+        <Fade bottom>
         <p>
           Chosen Job: <b>{jobs[selectedJob].name}</b>
           <AnchorLink href="#choose"
@@ -233,21 +241,26 @@ const ApplyPage = props => {
             Change Selected Job
           </AnchorLink>
         </p>
+        </Fade>
+        <Fade left>
         <ul className="list-reset">
           <BulletListItem>Cover Letter</BulletListItem>
           <BulletListItem>Resume</BulletListItem>
           {jobs[selectedJob].application.map(thing => <BulletListItem>{thing}</BulletListItem>)}
         </ul>
+        </Fade>
       </div>
 
+      <Fade bottom cascade>
       <div className="bg-gray-50 py-16 px-4">
         <h2
           className="text-center text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
           Ready to get started?
           <br />
-          <span className="text-indigo-600">Apply for Coastal Airlines today.</span>
+          <span className="text-indigo-600 tracking-normal">Apply for Coastal Airlines today.</span>
         </h2>
       </div>
+      </Fade>
     </Layout>
   )
 }

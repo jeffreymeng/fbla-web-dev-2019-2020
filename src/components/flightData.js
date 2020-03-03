@@ -118,6 +118,24 @@ const flightData = {
         ]
       }
     }
+  },
+  SLC:{
+    code:"SLC",
+    flights:{
+      SFO:{
+        code:"SFO",
+        time:"2:40",
+        schedule: [
+          {
+            days:"MThFSaSu",
+            times:["9am", "12:10pm", "5pm"],
+            aircraft: "Boeing 787-8 Dreamliner",
+            price:1080,
+          },
+
+        ]
+      }
+    }
   }
 
 };

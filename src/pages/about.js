@@ -10,12 +10,17 @@ import { graphql, StaticQuery, Link } from "gatsby"
 import planeImage from "../images/planecoast.jpg"
 import icon from "../images/coastalLogo.png"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
+import Fade from 'react-reveal/Fade';
+
+
 
 import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
 import flightSafetyPic from "../images/flightSafetyPic.png"
 import vacationPic from "../images/dreamOn.jpg"
+
+
 const About = () => {
 
 return(
@@ -101,14 +106,16 @@ What started off as a dream with three individuals to travel and explore the nat
       </defs>
       <rect width="404" height="784" fill="url(#svg-pattern-squares-1)" />
     </svg>
-
     <div className="relative lg:grid lg:grid-cols-3 lg:col-gap-8">
+    <Fade left>
       <div className="lg:col-span-1">
         <h3 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10" id="Section1">
           A better way to fly.
         </h3>
       </div>
+      </Fade>
       <div className="mt-10 sm:grid sm:grid-cols-2 sm:col-gap-8 sm:row-gap-10 lg:col-span-2 lg:mt-0">
+       <Fade right cascade>
         <div>
           <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
             <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -155,13 +162,14 @@ What started off as a dream with three individuals to travel and explore the nat
             </svg>
           </div>
           <div className="mt-5">
-            <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club</h5>
+            <h5 className="text-lg leading-6 font-medium text-gray-900">Beach Club+</h5>
             <p className="mt-2 text-base leading-6 text-gray-500">
 				One of our core principles is <span className="italics">loyalty</span> - thats why we wanted to give back to those who love and care for Coastal Airlines as much as we love them. Go to our	<Link to="frequent-flyer-program"
-             className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club
+             className=" font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Beach Club+
           		</Link> page to learn more.</p>
           </div>
         </div>
+        </Fade>
       </div>
     </div>
   </div>
@@ -231,6 +239,7 @@ What started off as a dream with three individuals to travel and explore the nat
 
 				<div className="bg-gray-50 pt-12 sm:pt-16">
 				  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+				  	<Fade bottom cascade>
 				    <div className="max-w-4xl mx-auto text-center">
 				      <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
 				        Over 1,000,000 Flights a Year 
@@ -239,12 +248,14 @@ What started off as a dream with three individuals to travel and explore the nat
 				        and our passengers love every bit of it - we'll let them tell you!
 				      </p>
 				    </div>
+				    </Fade>
 				  </div>
 				  <div className="mt-10 pb-12 bg-white sm:pb-16">
 				    <div className="relative">
 				      <div className="absolute inset-0 h-1/2 bg-gray-50"></div>
 				      <div className="relative max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 				        <div className="max-w-4xl mx-auto">
+				          <Fade bottom>
 				          <div className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
 				            <div className="border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
 				              <p className="text-5xl leading-none font-extrabold text-indigo-600">
@@ -271,6 +282,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				              </p>
 				            </div>
 				          </div>
+				          </Fade>
 				        </div>
 				      </div>
 				    </div>
@@ -282,6 +294,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				<div className="bg-white">
 				  <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
 				    <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+				    <Fade left cascade>
 				      <div>
 				        <h2 className="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
 				          Working together to make travel just better.
@@ -302,6 +315,8 @@ What started off as a dream with three individuals to travel and explore the nat
 				          </div>
 				        </div>
 				      </div>
+				      </Fade>
+				      <Fade right cascade>
 				      <div className="mt-8 grid grid-cols-2 gap-0.5 md:grid-cols-2 lg:mt-0 lg:grid-cols-2">
 
 			          <a href="https://www.epa.gov/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
@@ -326,6 +341,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				        </div>
 			          </a>
 				        </div>
+				        </Fade>
 				    </div>
 				  </div>
 				</div>
@@ -334,10 +350,13 @@ What started off as a dream with three individuals to travel and explore the nat
 
 				
 			<div className="relative bg-gray-800">
+			<Fade left>
 				  <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2 bg-indigo-800">
 				    <img className="w-full h-full object-cover opacity-90" src={vacationPic} alt="Support team" />
 				  </div>
+				  </Fade>
 				  <div className="relative max-w-screen-xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+				  <Fade right cascade>
 				    <div className="md:ml-auto md:w-1/2 md:pl-10">
 				      <div className="text-base leading-6 font-semibold uppercase tracking-wider text-gray-300">
 				       	Simplicity is our Motto
@@ -357,6 +376,7 @@ What started off as a dream with three individuals to travel and explore the nat
 				        </div>
 				      </div>
 				    </div>
+				    </Fade>
 				  </div>
 			</div>
 			</div>
