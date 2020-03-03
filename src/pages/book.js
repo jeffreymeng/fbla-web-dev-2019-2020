@@ -14,6 +14,7 @@ import hawaii from "../images/hawaii.jpg"
 import cnTower from "../images/cnTower.jpg"
 import goldenGate from "../images/goldenGate.jpg"
 
+
 const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
   return (
     <div className="cursor-pointer rounded overflow-hidden shadow-lg bg-white transition ease-in-out duration-300 hover:shadow-2xl" onClick={onClick}>

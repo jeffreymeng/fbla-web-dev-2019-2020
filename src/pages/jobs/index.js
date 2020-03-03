@@ -9,6 +9,10 @@ import attendantPic from "../../images/attendant.jpg"
 import officePic from "../../images/officePic.jpg"
 import offerPic from "../../images/offerPic.jpg"
 
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
+
 const JobsPage = () => (
   <Layout> {/*parallax={"jobs"}*/}
     <SEO title="Apply for a Job" />
@@ -97,7 +101,7 @@ const JobsPage = () => (
           <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
         </pattern>
       </defs>
-      <rect y="72" width="640" height="640" class="text-gray-50" fill="currentColor" />
+      <rect y="72" width="640" height="680" class="text-gray-50" fill="currentColor" />
       <rect x="118" width="404" height="784" fill="url(#svg-pattern-squares-desktop)" />
     </svg>
   </div>
@@ -116,7 +120,7 @@ const JobsPage = () => (
           <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
             Look no further. With the right steps, you can start travelling the world for a living at Coastal Airlines!
           </p>
-         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+         <div class="my-12 sm:mt-20 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
               <AnchorLink href="#benefits" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                 Learn More
@@ -146,7 +150,7 @@ const JobsPage = () => (
 
 <div class="py-16 bg-gray-50 overflow-hidden lg:py-24"  id="benefits">
   <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl pb-20">
-   
+   <Fade bottom cascade>
     <div class="relative">
       <h3 class="text-center text-4xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl sm:leading-10">
         Why Us?
@@ -154,12 +158,19 @@ const JobsPage = () => (
       <p class="mt-4 max-w-3xl mx-auto text-center text-xl leading-7 text-gray-500">
   _______________________________      </p>
     </div>
+    </Fade>
 
     <div class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center pb-4">
+
       <div class="relative">
-       <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9">
+      <Fade left>
+      <div>
+       <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9 mb-10">
             What We Offer
           </h4>
+          </div>
+          </Fade>
+          <Fade left cascade>
         <ul class="mt-10">
           <li>
             <div class="flex">
@@ -205,8 +216,9 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
             </div>
           </li>
         </ul>
+        </Fade>
       </div>
-
+      <Fade right>
       <div class="mt-10 -mx-4 relative lg:mt-0">
         <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
           <defs>
@@ -218,6 +230,8 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
         </svg>
         <img class="relative mx-auto rounded-lg" width="490" src={offerPic} alt="" />
       </div>
+      </Fade>
+
     </div>
 </div>
 
@@ -245,11 +259,14 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
         </svg>
 
         <div className="relative lg:flex lg:items-center">
+          <Flip right>
           <div className="hidden lg:block lg:flex-shrink-0">
+
             <img className="h-64 w-64 rounded-full xl:h-80 xl:w-80"
                  src={attendantPic}
                  alt="" />
           </div>
+          </Flip>
 
           <div className="relative lg:ml-10">
             <svg
@@ -259,6 +276,7 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
                     d="M41.485 15C17.753 31.753 1 59.208 1 89.455c0 24.664 14.891 39.09 32.109 39.09 16.287 0 28.386-13.03 28.386-28.387 0-15.356-10.703-26.524-24.663-26.524-2.792 0-6.515.465-7.446.93 2.327-15.821 17.218-34.435 32.11-43.742L41.485 15zm80.04 0c-23.268 16.753-40.02 44.208-40.02 74.455 0 24.664 14.891 39.09 32.109 39.09 15.822 0 28.386-13.03 28.386-28.387 0-15.356-11.168-26.524-25.129-26.524-2.792 0-6.049.465-6.98.93 2.327-15.821 16.753-34.435 31.644-43.742L121.525 15z" />
             </svg>
             <blockquote>
+            <Fade right cascade>
               <div className="text-2xl leading-9 font-medium text-gray-900">
                 <p>
                   I thoroughly enjoy working at Coastal Airlines! Their employee benefits are unbelievable, and I love
@@ -278,6 +296,7 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
                   </div>
                 </div>
               </div>
+              </Fade>
             </blockquote>
           </div>
         </div>
@@ -290,9 +309,14 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
    
       <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
         <div class="lg:col-start-2">
+        <Fade right>
+        <div className="mb-10">
           <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9">
             Apply Now
           </h4>
+          </div>
+          </Fade>
+          <Fade right cascade>
           <ul class="mt-10">
             <li>
               <div class="flex">
@@ -343,6 +367,7 @@ We'll get back to you within a few days to arrange an interview!                
               </div>
             </li>
           </ul>
+          </Fade>
         </div>
 
         <div class="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
@@ -402,6 +427,7 @@ We'll get back to you within a few days to arrange an interview!                
     </div>
 */}
     <div className="bg-white mb-4">
+    <Fade bottom cascade>
       <div className="max-w-screen-xl mx-auto text-center py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
         <h2 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
           Ready to dive in?
@@ -423,6 +449,7 @@ We'll get back to you within a few days to arrange an interview!                
           </div>
         </div>
       </div>
+    </Fade>
     </div>
   </Layout>
 )

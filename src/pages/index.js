@@ -12,6 +12,10 @@ import beachClubp1 from "../images/beachClubHome.jpg"
 import aboutUsp1 from "../images/aboutUsp1.jpg"
 import judithRose from "../images/judithRose.jpg"
 
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
+
 const IndexPage = ({ data }) => {
   const [airport, setAirport] = useState(null)
   const backgroundImages = useMemo(() => {
@@ -53,6 +57,7 @@ const IndexPage = ({ data }) => {
       <div className="relative overflow-hidden">
         <div className="relative z-10 pb-8 bg-gray-50 sm:pb-16 md:pb-20 lg:w-1/2 lg:pb-28 xl:pb-32">
           <div className="pt-10 mx-auto lg:mr-0 max-w-2xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+           <Fade left cascade>
             <div className="sm:text-center lg:text-right">
               <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-black sm:text-5xl sm:leading-none md:text-6xl">
                 About <span className="text-indigo-700">Us</span>
@@ -69,19 +74,24 @@ const IndexPage = ({ data }) => {
                 </Link>
               </div>
             </div>
+            </Fade>
           </div>
           <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-50 transform translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
             <polygon points="50,0 100,0 50,100" />
           </svg>
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+        <Fade right>
           <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={aboutUsp1} alt="" />
+          </Fade>
         </div>
       </div>
 
       <div className="flex bg-indigo-800 overflow-hidden items-stretch">
         <div className="hidden lg:block flex-1 overflow-hidden relative">
+        <Fade left>
           <img className="absolute h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full" src={beachClubp1} alt="" />
+          </Fade>
         </div>
         <div className="flex-1">
           <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -89,6 +99,7 @@ const IndexPage = ({ data }) => {
               <polygon points="50,0 50,100 0,100" />
             </svg>
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+            <Fade right cascade>
               <div className="sm:text-center lg:text-left">
                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
                   <span className="text-yellow-200">Beach</span> Club+
@@ -106,6 +117,7 @@ const IndexPage = ({ data }) => {
                   </Link>
                 </div>
               </div>
+              </Fade>
             </div>
           </div>
         </div>
@@ -127,26 +139,32 @@ const IndexPage = ({ data }) => {
           <div className="relative">
             <blockquote className="mt-8">
               <div className="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900">
+              <Fade bottom>
                 <p>
                   &ldquo;I love flying with Coastal Airlines. Their prices are unbeatable and their service is always extremely friendly. I would recommend them to anyone!&rdquo;
                 </p>
+                </Fade>
               </div>
               <footer className="mt-8">
                 <div className="md:flex md:items-center md:justify-center">
                   <div className="md:flex-shrink-0">
+                  <Fade left>
                     <img className="mx-auto h-10 w-10 rounded-full"
                          src={judithRose}
                          alt="" />
+                  </Fade>
                   </div>
                   <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
+                  <Fade left>
                     <div className="text-base leading-6 font-medium text-gray-900">Judith Rose</div>
-
+                    </Fade>
                     <svg className="hidden md:block mx-1 h-5 w-5 text-indigo-600" fill="currentColor"
                          viewBox="0 0 20 20">
                       <path d="M11 0h3L9 20H6l5-20z" />
                     </svg>
-
+                    <Fade right>
                     <div className="text-base leading-6 font-medium text-gray-500">Coastal Airlines Beach Club+ Member</div>
+                    </Fade>
                   </div>
                 </div>
               </footer>
@@ -156,6 +174,7 @@ const IndexPage = ({ data }) => {
       </div>
 
       <div className="bg-white">
+      <Fade left cascade>
         <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
           <h2 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
             Looking for a Job?
@@ -176,7 +195,10 @@ const IndexPage = ({ data }) => {
               </Link>
             </div>
           </div>
+
         </div>
+        
+          </Fade>
       </div>
 
       <div className="bg-gray-800">
