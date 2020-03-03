@@ -259,7 +259,7 @@ const ApplyPage = props => {
           className="text-center text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
           Ready to get started?
           <br />
-          <span className="text-indigo-600 tracking-normal">Apply for Coastal Airlines today.</span>
+          <a className="text-indigo-600 tracking-normal transition duration-500 ease-in-out hover:text-indigo-700" href="mailto:jobs@coastalairlines.com">Apply for Coastal Airlines today.</a>
         </h2>
       </div>
       </Fade>

@@ -2,10 +2,10 @@ import React, { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
-import AuthContext from "../context/AuthContext"
+import ServerContext from "../context/ServerContext"
 
 const SignUpPage = props => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(ServerContext);
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");

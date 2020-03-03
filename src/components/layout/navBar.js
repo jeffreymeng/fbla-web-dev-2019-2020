@@ -4,13 +4,13 @@ import classNames from "classnames"
 import links from "./navlinks";
 
 import invisLogo from "../../images/longCoastalInvisV2.png"
-import AuthContext from "../../context/AuthContext"
+import ServerContext from "../../context/ServerContext"
 import Transition from "../Transition"
 import ClickAwayListener from "../ClickAwayListener"
 
 
 const CustomNavbar = ({ pageInfo }) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(ServerContext);
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [userNavOpen, setUserNavOpen] = useState(false);
@@ -86,7 +86,7 @@ const CustomNavbar = ({ pageInfo }) => {
                   <div className="py-1 rounded-md bg-white shadow-xs">
                     <Link to="checkout" className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Cart</Link>
                     <Link to="my-flights" className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">My Flights</Link>
-                    <a href="#" onClick={(e) => {e.preventDefault();auth.signOut()}} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Sign out</a>
+                    <Link to="index" onClick={(e) => {e.preventDefault();auth.signOut()}} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Sign Out</Link>
                   </div>
                 </Transition>
               </ClickAwayListener>

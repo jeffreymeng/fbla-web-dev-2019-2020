@@ -3,16 +3,24 @@ import { Link } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
 import { navigate } from "gatsby"
-import AuthContext from "../context/AuthContext"
+import ServerContext from "../context/ServerContext"
 
 const SignInPage = props => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(ServerContext);
   const [email, setEmail] = useState("demo@gmail.com");
   const [pass, setPass] = useState("demo@gmail.com");
 
   const handleSubmit = useCallback((evt) => {
     evt.preventDefault();
-    auth.signIn(email, pass).then(() => navigate("/"));
+    auth.signIn(email, pass).then(() => {
+      if (props.location.state.continueTo) {
+        navigate(props.location.state.continueTo, {
+          state:props.location.state.continueState,
+        })
+      } else {
+        navigate("/")
+      }
+    });
   }, [email, pass, auth.signIn]);
 
   return (
@@ -23,7 +31,7 @@ const SignInPage = props => {
             <div className="">
               {/*<img className="h-12 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow"/>*/}
               <h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
-                Sign in
+                Sign In
               </h2>
               <p className="mt-2 text-1xl leading-5 text-gray-600 max-w font-bold">
                 A flight to paradise is just a few clicks away!
@@ -82,7 +90,7 @@ const SignInPage = props => {
                       <button
                         disabled={auth.loading}
                               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                        {auth.loading ? "Signing In..." : "Sign in"}
+                        {auth.loading ? "Signing In..." : "Sign In"}
                       </button>
                     </span>
                   </div>
