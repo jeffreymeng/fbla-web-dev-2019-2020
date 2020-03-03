@@ -1,13 +1,17 @@
 import React, { useEffect, useRef } from "react"
 import Layout from "../components/layout/layout"
 import { Link } from "gatsby";
+import ServerContext from "../context/ServerContext"
 
 import "../styles/card.css"
 import "../card"
 
 const CheckoutPage = ({location}) => {
   console.log(location.state || {}) // @nathan wang TODO
+  const server = React.useContext(ServerContext);
+
   useEffect(() => {
+    if (!server.user) return;
     new Card({
       // a selector or DOM element for the form where users will
       // be entering their information
@@ -47,7 +51,7 @@ const CheckoutPage = ({location}) => {
       // if true, will log helpful messages for setting up Card
       debug: false // optional - default false
     });
-  }, []);
+  }, [server.user]);
 
   return (
     <Layout>
@@ -62,196 +66,219 @@ const CheckoutPage = ({location}) => {
           </div>
         </div>
         <div className="w-100 flex-1 pt-8">
-          <form id="checkoutForm" className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-            <div className="lg:flex">
-              <div className="lg:w-72 lg:order-2">
-                <div className="text-purple-700 uppercase font-semibold">Total Cost</div>
-                <div className="text-6xl font-semibold mb-8">$1023</div>
+          { !server.user ? <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            Before you can continue, you need to <Link to="sign-in" className="" state={{
+              continueTo:"checkout",
+              continueState:location.state
+            }}>sign in</Link>
+            {/*  or <Link to="sign-in" state={{*/}
+            {/*continueTo:"checkout",*/}
+            {/*continueState:location.state*/}
+            {/*}}>create an account</Link>*/}
+              !
+          </div> :
 
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs">
-                  <div className="px-6 pt-4">
-                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
-                    <p className="text-gray-700 text-base">
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                    </p>
-                  </div>
-                  <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
-                    <span className="text-purple-700 font-semibold">$124</span>
-                    <span className="inline-flex">
+
+            <form id="checkoutForm" className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8" onSubmit={(e) => {
+              e.preventDefault();
+              console.log(e, e.target.value);
+              server.pushFlights({
+                depart: JSON.stringify(location.state.depart),
+                arrive: JSON.stringify(location.state.arrive),
+              })
+            }}>
+              <div className="lg:flex">
+                <div className="lg:w-72 lg:order-2">
+                  <div className="text-purple-700 uppercase font-semibold">Total Cost</div>
+                  <div className="text-6xl font-semibold mb-8">$1023</div>
+
+                  <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs">
+                    <div className="px-6 pt-4">
+                      <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
+                      <p className="text-gray-700 text-base">
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                      </p>
+                    </div>
+                    <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
+                      <span className="text-purple-700 font-semibold">$124</span>
+                      <span className="inline-flex">
                     <button type="button"
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
                       Remove
                     </button>
                   </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs mt-4">
-                  <div className="px-6 pt-4">
-                    <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
-                    <p className="text-gray-700 text-base">
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                      TODO add details here....<br/>
-                    </p>
-                  </div>
-                  <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
-                    <span className="text-purple-700 font-semibold">$124</span>
-                    <span className="inline-flex">
+                  <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs mt-4">
+                    <div className="px-6 pt-4">
+                      <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
+                      <p className="text-gray-700 text-base">
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                      </p>
+                    </div>
+                    <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
+                      <span className="text-purple-700 font-semibold">$124</span>
+                      <span className="inline-flex">
                     <button type="button"
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
                       Remove
                     </button>
                   </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-12 lg:mt-0 lg:flex-1 lg:mr-10 lg:mr-20">
-                <div>
+                <div className="mt-12 lg:mt-0 lg:flex-1 lg:mr-10 lg:mr-20">
                   <div>
                     <div>
                       <div>
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">
-                          Personal Information
-                        </h3>
-                        <p className="mt-1 text-sm leading-5 text-gray-500">
-                          For demonstration purposes, we prefilled some of the fields for you.
-                        </p>
+                        <div>
+                          <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Personal Information
+                          </h3>
+                          <p className="mt-1 text-sm leading-5 text-gray-500">
+                            For demonstration purposes, we prefilled some of the fields for you.
+                          </p>
+                        </div>
+                        <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
+                          <div className="sm:col-span-3">
+                            <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">
+                              First name
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="first_name"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-3">
+                            <label htmlFor="last_name" className="block text-sm font-medium leading-5 text-gray-700">
+                              Last name
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="last_name"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-4">
+                            <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
+                              Email address
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="email" type="email"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-3">
+                            <label htmlFor="country" className="block text-sm font-medium leading-5 text-gray-700">
+                              Country / Region
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <select id="country"
+                                      className="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>Mexico</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-6">
+                            <label htmlFor="street_address"
+                                   className="block text-sm font-medium leading-5 text-gray-700">
+                              Street address
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="street_address"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-2">
+                            <label htmlFor="city" className="block text-sm font-medium leading-5 text-gray-700">
+                              City
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="city"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-2">
+                            <label htmlFor="state" className="block text-sm font-medium leading-5 text-gray-700">
+                              State / Province
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="state"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-2">
+                            <label htmlFor="zip" className="block text-sm font-medium leading-5 text-gray-700">
+                              ZIP / Postal
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="zip"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
-                        <div className="sm:col-span-3">
-                          <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">
-                            First name
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="first_name"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                      <div className="mt-8 border-t border-gray-200 pt-6">
+                        <div>
+                          <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Billing
+                          </h3>
+                          <p className="mt-1 text-sm leading-5 text-gray-500">
+                            For demonstration purposes, try entering 5555-5555-5555-5555. The card will NOT be charged.
+                          </p>
+                        </div>
+                        <div className="mt-2 sm:flex sm:items-center">
+                          <div className="flex-1 order-2 max-w-full overflow-hidden">
+                            <div id="cardJS"/>
                           </div>
-                        </div>
-
-                        <div className="sm:col-span-3">
-                          <label htmlFor="last_name" className="block text-sm font-medium leading-5 text-gray-700">
-                            Last name
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="last_name"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-4">
-                          <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
-                            Email address
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="email" type="email"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-3">
-                          <label htmlFor="country" className="block text-sm font-medium leading-5 text-gray-700">
-                            Country / Region
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <select id="country"
-                                    className="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                              <option>United States</option>
-                              <option>Canada</option>
-                              <option>Mexico</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-6">
-                          <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">
-                            Street address
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="street_address"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                          <label htmlFor="city" className="block text-sm font-medium leading-5 text-gray-700">
-                            City
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="city"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                          <label htmlFor="state" className="block text-sm font-medium leading-5 text-gray-700">
-                            State / Province
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="state"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                          <label htmlFor="zip" className="block text-sm font-medium leading-5 text-gray-700">
-                            ZIP / Postal
-                          </label>
-                          <div className="mt-1 rounded-md shadow-sm">
-                            <input id="zip"
-                                   className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-8 border-t border-gray-200 pt-6">
-                      <div>
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">
-                          Billing
-                        </h3>
-                        <p className="mt-1 text-sm leading-5 text-gray-500">
-                          For demonstration purposes, try entering 5555-5555-5555-5555. The card will NOT be charged.
-                        </p>
-                      </div>
-                      <div className="mt-2 sm:flex sm:items-center">
-                        <div className="flex-1 order-2 max-w-full overflow-hidden">
-                          <div id="cardJS"/>
-                        </div>
-                        <div className="mt-4 sm:mt-0">
-                          <div className="max-w-xs mx-auto">
-                            <fieldset>
-                              <legend className="block text-sm font-medium leading-5 text-gray-700">Card Details</legend>
-                              <div className="mt-1 bg-white rounded-md shadow-sm">
-                                <div>
-                                  <input id="name"
-                                         aria-label="Cardholder name"
-                                         className="form-input relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                         placeholder="Cardholder name" />
-                                </div>
-                                <div className="-mt-px">
-                                  <input id="number"
-                                         aria-label="Card number"
-                                         className="form-input relative block w-full rounded-none bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                         placeholder="Card number" />
-                                </div>
-                                <div className="-mt-px flex">
-                                  <div className="w-1/2 flex-1 min-w-0">
-                                    <input id="expiry"
-                                           aria-label="Card expiration date"
-                                           className="form-input relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                           placeholder="MM / YY" />
+                          <div className="mt-4 sm:mt-0">
+                            <div className="max-w-xs mx-auto">
+                              <fieldset>
+                                <legend className="block text-sm font-medium leading-5 text-gray-700">Card Details
+                                </legend>
+                                <div className="mt-1 bg-white rounded-md shadow-sm">
+                                  <div>
+                                    <input id="name"
+                                           aria-label="Cardholder name"
+                                           className="form-input relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                           placeholder="Cardholder name"/>
                                   </div>
-                                  <div className="-ml-px flex-1 min-w-0">
-                                    <input id="cvc"
-                                           aria-label="Card CVC"
-                                           className="form-input relative block w-full rounded-none rounded-br-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                           placeholder="CVC" />
+                                  <div className="-mt-px">
+                                    <input id="number"
+                                           aria-label="Card number"
+                                           className="form-input relative block w-full rounded-none bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                           placeholder="Card number"/>
+                                  </div>
+                                  <div className="-mt-px flex">
+                                    <div className="w-1/2 flex-1 min-w-0">
+                                      <input id="expiry"
+                                             aria-label="Card expiration date"
+                                             className="form-input relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                             placeholder="MM / YY"/>
+                                    </div>
+                                    <div className="-ml-px flex-1 min-w-0">
+                                      <input id="cvc"
+                                             aria-label="Card CVC"
+                                             className="form-input relative block w-full rounded-none rounded-br-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                             placeholder="CVC"/>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </fieldset>
+                              </fieldset>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -259,24 +286,25 @@ const CheckoutPage = ({location}) => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="my-8 border-t border-gray-200 pt-5">
-              <div className="flex justify-end">
+              <div className="my-8 border-t border-gray-200 pt-5">
+                <div className="flex justify-end">
                 <span className="inline-flex rounded-md shadow-sm">
                   <Link to="/"
                         className="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                     Cancel
                   </Link>
                 </span>
-                <span className="ml-3 inline-flex rounded-md shadow-sm">
+                  <span className="ml-3 inline-flex rounded-md shadow-sm">
                   <button type="submit"
+
                           className="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                     Book Flights
                   </button>
                 </span>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          }
         </div>
       </div>
     </Layout>

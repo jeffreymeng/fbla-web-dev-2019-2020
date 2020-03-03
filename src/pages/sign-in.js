@@ -12,7 +12,15 @@ const SignInPage = props => {
 
   const handleSubmit = useCallback((evt) => {
     evt.preventDefault();
-    auth.signIn(email, pass).then(() => navigate("/"));
+    auth.signIn(email, pass).then(() => {
+      if (props.location.state.continueTo) {
+        navigate(props.location.state.continueTo, {
+          state:props.location.state.continueState,
+        })
+      } else {
+        navigate("/")
+      }
+    });
   }, [email, pass, auth.signIn]);
 
   return (

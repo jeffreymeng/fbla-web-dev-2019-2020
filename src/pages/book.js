@@ -128,9 +128,10 @@ const BookingPage = ({ data, location }) => {
                     })
                   }}
                   onFlightSelected={(f) => setArriveFlight(f)}/>
-                  <button onClick={() => setShowBookingModal(true)} disabled={!departFlight || !arriveFlight}>Submit Results</button>
+
                   </>
               }
+              <button onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>Submit Results</button>
             </>
           }
 
@@ -201,7 +202,7 @@ const BookingPage = ({ data, location }) => {
 
       <ConfirmFlightModal
         // flight={selectedFlight}
-        price={departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)]}
+        price={departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + (bookingData.roundTrip === "rt" ? arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] : 0)}
         isOpen={showBookingModal}
         onConfirm={handleConfirmedBooking}
         onCancel={() => setShowBookingModal(false)}/>

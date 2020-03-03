@@ -19,6 +19,8 @@ const ServerContext = React.createContext({
   },
   signUp: () => {
   },
+  getFlights:() => {},
+  pushFlights: () => {},
   loading: false,
   error: null,
 });
@@ -79,11 +81,27 @@ const AuthProvider = ({ children }) => {
 const pushFlights = useCallback((data) => {
   setError(null);
  return firebase.firestore().collection("users").doc(user.uid).collection("flights").add(data).catch(error => setError(error.message))
-})
+}, [firebase, user]);
+const getFlights = useCallback(() => {
+  return new Promise((resolve, reject) => {
+    firebase?.firestore().collection("users")
+      .doc(user.uid)
+      .collection("flights")
+      .onSnapshot(function(querySnapshot) {
+        let data = [];
+        querySnapshot.forEach(function(doc) {
+          data.push(doc.data());
+        });
+        resolve(data);
+      });
+  });
+
+
+}, [firebase, user]);
   return (
     <ServerContext.Provider
       value={{
-        user, signIn, signOut, signUp, loading, error
+        user, signIn, signOut, signUp, loading, error, pushFlights, getFlights
       }}>
       {children}
     </ServerContext.Provider>
