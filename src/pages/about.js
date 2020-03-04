@@ -1,19 +1,20 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
+import Img from "gatsby-image"
 
 import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"
 import { graphql, StaticQuery, Link } from "gatsby"
-
-import planeImage from "../images/planecoast.jpg"
-import icon from "../images/coastalLogo.png"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Fade from 'react-reveal/Fade';
 
 
 
+
+import planeImage from "../images/planecoast.jpg"
+import icon from "../images/coastalLogo.png"
 import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
@@ -21,7 +22,7 @@ import flightSafetyPic from "../images/flightSafetyPic.png"
 import vacationPic from "../images/dreamOn.jpg"
 
 
-const About = () => {
+const About = ({ data }) => {
 
 return(
     <Layout>
@@ -93,7 +94,7 @@ What started off as a dream with three individuals to travel and explore the nat
     </div>
   </div>
   <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={planeImage} alt="" />
+    <Img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" fluid={data.planeImage.childImageSharp.fluid} alt="" />
   </div>
 </div>
 
@@ -389,6 +390,53 @@ What started off as a dream with three individuals to travel and explore the nat
 	)
 };
 export default About
+
+export const query = graphql`
+  query {
+    planeImage: file(relativePath: { eq: "planecoast.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1920, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    northLight: file(relativePath: { eq: "northLight.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    goldCity: file(relativePath: { eq: "goldCity.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    hawaii: file(relativePath: { eq: "hawaii.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    cnTower: file(relativePath: { eq: "cnTower.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    goldenGate: file(relativePath: { eq: "goldenGate.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
  
 
  /*
