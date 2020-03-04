@@ -37,7 +37,7 @@ const MyFlightsPage = () => {
         <div className="w-100 flex-1 pt-8">
           <div className="max-w-3xl mx-auto px-4 md:px-6 lg:px-8">
             {/*<pre>{flights.map(x => JSON.stringify(x, null, 2))}</pre>*/}
-            {flights.map(x => <FlightInfoCard flight={x} />)}
+            {flights.map(x => <FlightInfoCard flight={x} className="mb-6" />)}
           </div>
         </div>
       </div>
