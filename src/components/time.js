@@ -7,7 +7,7 @@ class Time {
 
   toString() {
     let HM = this.getHourMinuteObj();
-    return `${HM.hour}:${HM.minuteString} ${HM.isAm}`;
+    return `${HM.hourString}:${HM.minuteString} ${HM.isAm}`;
   }
 
 
@@ -41,11 +41,16 @@ class Time {
   getHourMinuteObj() {
     let normalizedTime = Time.normalize(this.time);
     let hour = Math.floor(normalizedTime / 60);
+    let isAm = hour < 12 ? "AM":"PM";
+    while (hour >= 12) {
+      hour -= 12;
+    }
     let minute = normalizedTime % 60;
-    let isAm = normalizedTime < 12 ? "A.M.":"P.M.";
+
     console.log("TIME", this, hour, minute, isAm);
     return {
       hour,
+      hourString:hour === 0 ? "12" : hour,
       minute,
       isAm,
       minuteString:(minute.toString().length == 1 ? "0" : "") + minute
@@ -72,7 +77,7 @@ class Time {
   toHourMinute() {
     let HM = this.getHourMinuteObj();
     console.log("TO", HM)
-    console.log(`${HM.hour}h ${HM.minuteString}m`)
+    console.log(`${HM.hourString}h ${HM.minuteString}m`)
     return `${HM.hour}h ${HM.minute}m`;
   }
 
