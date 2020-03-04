@@ -23,7 +23,7 @@ const FlightResult = ({ flight, searchedClass, highlightPrice, onClick, hidden, 
   }
   return (
     <div onClick={onClick} className={classNames(
-      "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out",
+      "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition-bg duration-150 ease-in-out",
       {
         "border-indigo-700": isSelected,
         "border-transparent": !isSelected

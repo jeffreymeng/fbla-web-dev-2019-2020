@@ -11,6 +11,9 @@ module.exports = {
         "84": "21rem",
         "96": "24rem",
       },
+      transitionProperty: {
+        "bg": "background",
+      },
     },
     fontSize: {
       "xs": ".75rem",

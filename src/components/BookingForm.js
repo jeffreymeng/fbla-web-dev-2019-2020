@@ -219,20 +219,30 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
     if (featuredAirport !== null) setAirports([airports[0], featuredAirport]);
   }, [featuredAirport]);
 
+  const handleSubmit = () => {
+    onSubmit({
+      roundTrip:roundTrip.value,
+      passengers:passengers.value,
+      flightClass:flightClass.value,
+      departAirport:airports[0],
+      arriveAirport:airports[1],
+      startDate:dates[0],
+      endDate:roundTrip.value === "rt" ? dates[1] : undefined
+    })
+  };
+
+  useEffect(() => {
+    if (defaultValues != null && Object.keys(defaultValues).length > 1) {
+      handleSubmit();
+    }
+  }, [defaultValues]);
+
   return (
     <div className={classNames("", className)}>
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", divClassName)} style={style}>
         <form onSubmit={(e) => {
           e.preventDefault();
-          onSubmit({
-            roundTrip:roundTrip.value,
-            passengers:passengers.value,
-            flightClass:flightClass.value,
-            departAirport:airports[0],
-            arriveAirport:airports[1],
-            startDate:dates[0],
-            endDate:roundTrip.value === "rt" ? dates[1] : undefined
-          })
+          handleSubmit();
         }}>
           <div className="flex flex-wrap items-center">
             <div className="lg:hidden" style={{ flexBasis: "100%" }} />
