@@ -78,7 +78,7 @@ const CheckoutPage = ({ location }) => {
       depart: JSON.stringify(server.checkoutState.depart),
       arrive: JSON.stringify(server.checkoutState.arrive),
     }).then(() => navigate("/my-flights"));
-    server.clearFlights();
+    server.updateCheckoutState(null);
   }
 
   return (
