@@ -140,7 +140,9 @@ const BookingPage = ({ data, location }) => {
 
                   </>
               }
-              <button onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>Submit Results</button>
+              <div className="flex justify-end py-3">
+              <button className="flex justify-center px-5 py-3 border border-transparent text-base leading-6 font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>Checkout</button>
+              </div>
             </>
           }
 

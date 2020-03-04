@@ -26,6 +26,11 @@ const Footer = props => {
           {/*    Terms of Use*/}
           {/*  </Link>*/}
           {/*</div>*/}
+          <div className="px-5 py-2" key="/credits">
+          <Link to="/credits" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Credits
+            </Link>
+          </div>
         </nav>
         <div className="mt-8 flex justify-center">
           <a href="https://facebook.com" className="text-gray-400 hover:text-gray-500 mx-2">
