@@ -143,7 +143,14 @@ const CreditsPage = () => (
           <li class="mt-5">
             <div class="flex">
               <div>
-                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://unsplash.com/photos/xyXcGADvAwE" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">green mountain beside body of water under white sky</a> by <span className="italics">Kyle Hinkson</span></h5>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://unsplash.com/photos/qr8Ci2tzyR8" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">photography of concrete high-rise buildings</a> by <span className="italics">Ken Yam</span></h5>
+              </div>
+            </div>
+          </li>
+          <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://unsplash.com/photos/SHP1t8EduMY" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Golden Gate Bridge, USA</a> by <span className="italics">Umer Sayyam</span></h5>
               </div>
             </div>
           </li>
@@ -204,55 +211,86 @@ const CreditsPage = () => (
       <div class="relative">
       <div>
        <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9 mb-10">
-            What We Offer
+            Front-End Technologies
           </h4>
           </div>
         <ul class="mt-10">
-          <li>
+           <li class="mt-5">
             <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
-                  <p className="text-xl md:text-2xl">1.</p>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-bold text-gray-900">Travel the World</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-                  When working for Coastal Airlines, you can travel the world -- and get paid to do it! Visit Hawaii, Alaska, Mexico, and so much more with Coastal Airlines.
-                </p>
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://fortawesome.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Fort Awesome Icons</a> by <span className="italics">Fort Awesome</span></h5>
               </div>
             </div>
           </li>
-          <li class="mt-10">
+          <li class="mt-5">
             <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
-                  <p className="text-xl md:text-2xl">2.</p>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-bold text-gray-900">Comprehensive Employee Benefits</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-Coastal Airlines provides extremely comprehensive employee benefits to all employees. We provide renowned benefits including healthcare, 401(k) matching, and much more!                </p>
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://tailwindui.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">TailwindUI</a> by <span className="italics">Tailwind CSS</span></h5>
               </div>
             </div>
           </li>
-          <li class="mt-10">
+          <li class="mt-5">
             <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-indigo-500 text-white">
-                  <p className="text-xl md:text-2xl">3.</p>
-                </div>
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://tailwindcss.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">TailwindCSS</a> by <span className="italics">Tailwind CSS</span></h5>
               </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-bold text-gray-900">Proven Employee Testimonials</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-We have more than 500 satisfied employees! We are consistently ranked amongst the top airlines to work for, and would love you here!                </p>
+            </div>
+          </li>
+          <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://postcss.org/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">PostCSS</a> by <span className="italics">PostCSS</span></h5>
+              </div>
+            </div>
+          </li>
+          <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://sass-lang.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Sass</a> by <span className="italics">Sass</span></h5>
+              </div>
+            </div>
+          </li>
+           <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://reactjs.org/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">React.js</a> by <span className="italics">React</span></h5>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+
+        <div>
+       <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-normal sm:text-3xl sm:leading-9 my-10 ">
+            Back-End Technologies
+          </h4>
+          </div>
+        <ul class="mt-10">
+           <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://www.netlify.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Netlify</a> by <span className="italics">Netlify</span></h5>
+              </div>
+            </div>
+          </li>
+          <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://firebase.google.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Firebase</a> by <span className="italics">Google</span></h5>
+              </div>
+            </div>
+          </li>
+          <li class="mt-5">
+            <div class="flex">
+              <div>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://www.gatsbyjs.org/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Gatsby.js</a> by <span className="italics">Gatsby</span></h5>
               </div>
             </div>
           </li>
         </ul>
       </div>
+
+
       </div>
 </div>
 </div>
