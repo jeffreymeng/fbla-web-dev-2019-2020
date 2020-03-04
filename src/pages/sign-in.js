@@ -75,15 +75,16 @@ const SignInPage = props => {
                     </div>
                   </div>
 
-                  <div className="my-6 flex float-right">
-                    <div className="text-sm leading-5">
+
+                  <div className="my-6">
+                    {auth.error !== null && <p className="mt-3 text-sm font-bold text-red-600">Error: {auth.error}</p>}
+                    <div className="text-sm leading-5 flex justify-end">
                       <a href="#"
                          className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Forgot your password?
                       </a>
                     </div>
                   </div>
-                  {auth.error !== null && <p className="mt-3 text-md font-bold text-red-600">Error: {auth.error}</p>}
 
                   <div className="mt-6">
                     <span className="block w-full rounded-md shadow-sm">
