@@ -45,7 +45,7 @@ module.exports = {
         name: `Troop 485`,
         short_name: `T485`,
         start_url: `/`,
-        icon: "src/images/logo144.png", // TODO
+        icon: "src/images/logo144.png",
         background_color: `#20232a`,
         theme_color: `#20232a`,
       }
