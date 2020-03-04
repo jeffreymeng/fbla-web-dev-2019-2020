@@ -155,7 +155,7 @@ let flightData = {
 
 
 // BEGIN GENERATING FLIGHTS //
-console.group("Generating Flights...");
+// console.group("Generating Flights...");
 
 let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:false},
   LAX: { latitude: 34.052235, longitude: -118.243683, isHub:false},
@@ -353,9 +353,9 @@ for (let code of codes) {
     flights: getFlightsFromAirport(code)
   };
 }
-console.log(flightData);
+// console.log(flightData);
 
-console.groupEnd();
+// console.groupEnd();
 // END GENERATING FLIGHTS //
 
 

@@ -9,7 +9,6 @@ import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
 import beachClubp1 from "../images/beachClubHome.jpg"
-import aboutUsp1 from "../images/aboutUsp1.jpg"
 import judithRose from "../images/judithRose.jpg"
 
 import Fade from 'react-reveal/Fade';
@@ -86,8 +85,10 @@ const IndexPage = ({ data }) => {
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <Fade right>
-          <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={aboutUsp1} alt="" />
-          </Fade>
+          <div className="h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full">
+            <Img className="w-full object-cover h-full" fluid={data.aboutUs.childImageSharp.fluid} alt="" />
+          </div>
+        </Fade>
         </div>
       </div>
 
@@ -274,6 +275,13 @@ export const query = graphql`
           ...GatsbyImageSharpFluid_noBase64
        }
      }
+    },
+    aboutUs: file(relativePath: { eq: "aboutUsp1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
     }
   }
 `
