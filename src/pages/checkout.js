@@ -146,15 +146,15 @@ const CheckoutPage = ({ location }) => {
                               {getFlightDescription(server.checkoutState.arrive)}
                             </p>
                           </div>
-                          <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
-                            <span className="text-purple-700 font-semibold">${server.checkoutState.arrive.price[priceIdx]}</span>
-                            <span className="inline-flex">
-                            <button type="button"
-                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
-                              Remove
-                            </button>
-                          </span>
-                          </div>
+                          {/*<div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">*/}
+                          {/*  <span className="text-purple-700 font-semibold">${server.checkoutState.arrive.price[priceIdx]}</span>*/}
+                          {/*  <span className="inline-flex">*/}
+                          {/*  <button type="button"*/}
+                          {/*          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">*/}
+                          {/*    Remove*/}
+                          {/*  </button>*/}
+                          {/*</span>*/}
+                          {/*</div>*/}
                         </div>
                       }
                     </div>
