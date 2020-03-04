@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import Layout from "../components/layout/layout"
 import { Link } from "gatsby"
 import ServerContext from "../context/ServerContext"
@@ -12,46 +12,45 @@ const CheckoutPage = ({ location }) => {
   useEffect(() => {
     if (!server.user) return
     if (window != null) {
-      require("../card").then(() => {
-        new Card({
-          // a selector or DOM element for the form where users will
-          // be entering their information
-          form: "#checkoutForm", // *required*
-          // a selector or DOM element for the container
-          // where you want the card to appear
-          container: "#cardJS", // *required*
+      require("../card")
+      new Card({
+        // a selector or DOM element for the form where users will
+        // be entering their information
+        form: "#checkoutForm", // *required*
+        // a selector or DOM element for the container
+        // where you want the card to appear
+        container: "#cardJS", // *required*
 
-          formSelectors: {
-            numberInput: "input#number", // optional — default input[name="number"]
-            expiryInput: "input#expiry", // optional — default input[name="expiry"]
-            cvcInput: "input#cvc", // optional — default input[name="cvc"]
-            nameInput: "input#name", // optional - defaults input[name="name"]
-          },
+        formSelectors: {
+          numberInput: "input#number", // optional — default input[name="number"]
+          expiryInput: "input#expiry", // optional — default input[name="expiry"]
+          cvcInput: "input#cvc", // optional — default input[name="cvc"]
+          nameInput: "input#name", // optional - defaults input[name="name"]
+        },
 
-          width: 320, // optional — default 350px
-          formatting: true, // optional - default true
+        width: 320, // optional — default 350px
+        formatting: true, // optional - default true
 
-          // Strings for translation - optional
-          messages: {
-            validDate: "valid\ndate", // optional - default 'valid\nthru'
-            monthYear: "mm/yyyy", // optional - default 'month/year'
-          },
+        // Strings for translation - optional
+        messages: {
+          validDate: "valid\ndate", // optional - default 'valid\nthru'
+          monthYear: "mm/yyyy", // optional - default 'month/year'
+        },
 
-          // Default placeholders for rendered fields - optional
-          placeholders: {
-            number: "•••• •••• •••• ••••",
-            name: "Full Name",
-            expiry: "••/••",
-            cvc: "•••",
-          },
+        // Default placeholders for rendered fields - optional
+        placeholders: {
+          number: "•••• •••• •••• ••••",
+          name: "Full Name",
+          expiry: "••/••",
+          cvc: "•••",
+        },
 
-          masks: {
-            cardNumber: "•", // optional - mask card number
-          },
+        masks: {
+          cardNumber: "•", // optional - mask card number
+        },
 
-          // if true, will log helpful messages for setting up Card
-          debug: false, // optional - default false
-        })
+        // if true, will log helpful messages for setting up Card
+        debug: false, // optional - default false
       })
     }
   }, [server.user])
@@ -99,9 +98,9 @@ const CheckoutPage = ({ location }) => {
                     <div className="px-6 pt-4">
                       <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
                       <p className="text-gray-700 text-base">
-                        TODO add details here....<br />
-                        TODO add details here....<br />
-                        TODO add details here....<br />
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
                       </p>
                     </div>
                     <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
@@ -119,9 +118,9 @@ const CheckoutPage = ({ location }) => {
                     <div className="px-6 pt-4">
                       <div className="font-bold text-xl mb-2">SFO &mdash; SLC &mdash; YVR</div>
                       <p className="text-gray-700 text-base">
-                        TODO add details here....<br />
-                        TODO add details here....<br />
-                        TODO add details here....<br />
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
+                        TODO add details here....<br/>
                       </p>
                     </div>
                     <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
@@ -154,7 +153,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="first_name"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -164,7 +163,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="last_name"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -174,7 +173,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="email" type="email"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -199,7 +198,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="street_address"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -209,7 +208,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="city"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -219,7 +218,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="state"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
 
@@ -229,7 +228,7 @@ const CheckoutPage = ({ location }) => {
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
                               <input id="zip"
-                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                           </div>
                         </div>
@@ -245,7 +244,7 @@ const CheckoutPage = ({ location }) => {
                         </div>
                         <div className="mt-2 sm:flex sm:items-center">
                           <div className="flex-1 order-2 max-w-full overflow-hidden">
-                            <div id="cardJS" />
+                            <div id="cardJS"/>
                           </div>
                           <div className="mt-4 sm:mt-0">
                             <div className="max-w-xs mx-auto">
@@ -257,26 +256,26 @@ const CheckoutPage = ({ location }) => {
                                     <input id="name"
                                            aria-label="Cardholder name"
                                            className="form-input relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                           placeholder="Cardholder name" />
+                                           placeholder="Cardholder name"/>
                                   </div>
                                   <div className="-mt-px">
                                     <input id="number"
                                            aria-label="Card number"
                                            className="form-input relative block w-full rounded-none bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                           placeholder="Card number" />
+                                           placeholder="Card number"/>
                                   </div>
                                   <div className="-mt-px flex">
                                     <div className="w-1/2 flex-1 min-w-0">
                                       <input id="expiry"
                                              aria-label="Card expiration date"
                                              className="form-input relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                             placeholder="MM / YY" />
+                                             placeholder="MM / YY"/>
                                     </div>
                                     <div className="-ml-px flex-1 min-w-0">
                                       <input id="cvc"
                                              aria-label="Card CVC"
                                              className="form-input relative block w-full rounded-none rounded-br-md bg-transparent focus:z-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                                             placeholder="CVC" />
+                                             placeholder="CVC"/>
                                     </div>
                                   </div>
                                 </div>
