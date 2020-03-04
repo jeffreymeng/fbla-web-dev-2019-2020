@@ -76,8 +76,7 @@ class Time {
 
   toHourMinute() {
     let HM = this.getHourMinuteObj();
-    console.log("TO", HM)
-    console.log(`${HM.hourString}h ${HM.minuteString}m`)
+
     return `${HM.hour}h ${HM.minute}m`;
   }
 
