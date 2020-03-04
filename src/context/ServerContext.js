@@ -155,18 +155,24 @@ const ServerProvider = ({ children }) => {
 
   const updateCheckoutState = useCallback((state) => {
     setLoading(true);
-    return firebase?.firestore().collection("users")
-      .doc(user.uid)
-      .collection("checkout")
-      .doc("checkoutState")
-      .set({
-        state: JSON.stringify(state)
+    if (user == null) {
+      return signIn("demo@gmail.com", "demo@gmail.com").then(x => {
+        return updateCheckoutState(state);
       })
-      .catch(e => {
-        setLoading(false);
-        setError(e.message);
-        throw e;
-      });
+    } else {
+      return firebase?.firestore().collection("users")
+        .doc(user.uid)
+        .collection("checkout")
+        .doc("checkoutState")
+        .set({
+          state: JSON.stringify(state)
+        })
+        .catch(e => {
+          setLoading(false);
+          setError(e.message);
+          throw e;
+        });
+    }
   }, [firebase, user]);
 
   return (

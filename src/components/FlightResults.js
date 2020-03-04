@@ -267,8 +267,8 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
   return (
     flightFound ?
       <div className={className}>
-        <div className="ml-4 mb-4 flex justify-between items-center">
-          <h3 className="text-xl font-semibold">{title}</h3>
+        <div className="ml-4 mb-4 md:flex justify-between items-center">
+          <h3 className="text-xl font-semibold mb-2 md:mb-0">{title}</h3>
           { selected === -1 && <FilterUI
             sortLabel={"Sort By: " + sort.label}
             NSOLabel={"Show: " + (nonstopOnly ? "Nonstop Only" : "All Flights")}
