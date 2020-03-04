@@ -232,7 +232,9 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   };
 
   useEffect(() => {
-    if (defaultValues != null && defaultValues != []) handleSubmit();
+    if (defaultValues != null && Object.keys(defaultValues).length !== 0) {
+      handleSubmit();
+    }
   }, [defaultValues]);
 
   return (
