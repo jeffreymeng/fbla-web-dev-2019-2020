@@ -8,6 +8,9 @@ import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
 import Rotate from 'react-reveal/Rotate';
 
+import girl from "../../images/girl.jpg"
+import dude from "../../images/dude.jpg"
+
 const jobs = [
   {
     name: "Junior Flight Attendant",
@@ -17,7 +20,7 @@ const jobs = [
     testimonial: {
       quote: "Coastal Airlines treats its Junior Flight Attendants very well and compensates them handsomely as well! If this is your first Flight Attendant job, you'll want to apply at Coastal Airlines.",
       name: "Judith Black",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      image: girl,
       position: "Junior Flight Attendant",
     },
     application: [
@@ -33,7 +36,7 @@ const jobs = [
     testimonial: {
       quote: "Even though Coastal Airlines is an airline company, it has an amazing, talented development team. You'll feel right at home as a back-end developer!",
       name: "John Smith",
-      image: "https://images.unsplash.com/photo-1506919258185-6078bba55d2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      image: dude,
       position: "Senior Full-Stack Engineer",
     },
     application: [
@@ -46,7 +49,7 @@ const jobs = [
 
 const ApplyPage = props => {
   const [selectedJob, setSelectedJob] = useState(0)
-
+  const data=props.data
   return (
     <Layout>
       <SEO title="Apply for a Job"/>
@@ -268,3 +271,4 @@ const ApplyPage = props => {
 }
 
 export default ApplyPage
+

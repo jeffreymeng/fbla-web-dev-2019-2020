@@ -21,6 +21,8 @@ import boatMount from "../images/boatMount.jpg"
 
 
 
+
+
 const FrequentFlyerProgramPage = ({ data }) => (
   <Layout>
     <SEO title="Beach Club+" />
@@ -213,14 +215,14 @@ export const query = graphql`
     },
     beachClubHeader: file(relativePath: { eq: "beachClubp1.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1920, quality: 100) {
+        fluid(maxWidth: 960, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     },
     jobsBg: file(relativePath: { eq: "jobs-bg.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1920, quality: 100) {
+        fluid(maxWidth: 960, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
