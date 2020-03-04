@@ -8,8 +8,6 @@ import Img from "gatsby-image";
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
-import beachClubp1 from "../images/beachClubHome.jpg"
-import judithRose from "../images/judithRose.jpg"
 
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
@@ -95,8 +93,10 @@ const IndexPage = ({ data }) => {
       <div className="flex bg-indigo-800 overflow-hidden items-stretch">
         <div className="hidden lg:block flex-1 overflow-hidden relative">
         <Fade left>
-          <img className="absolute h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full" src={beachClubp1} alt="" />
-          </Fade>
+          <div className="absolute h-56 w-full sm:h-72 md:hW-96 lg:h-full">
+            <Img className="w-full object-cover h-full" fluid={data.beachClub.childImageSharp.fluid} alt="" />
+          </div>
+        </Fade>
         </div>
         <div className="flex-1">
           <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -154,8 +154,8 @@ const IndexPage = ({ data }) => {
                 <div className="md:flex md:items-center md:justify-center">
                   <div className="md:flex-shrink-0">
                   <Fade left>
-                    <img className="mx-auto h-10 w-10 rounded-full"
-                         src={judithRose}
+                    <Img className="mx-auto h-10 w-10 rounded-full"
+                         fluid={data.judithRose.childImageSharp.fluid}
                          alt="" />
                   </Fade>
                   </div>
@@ -282,6 +282,20 @@ export const query = graphql`
           ...GatsbyImageSharpFluid
         }
       }
-    }
+    },
+    beachClub: file(relativePath: { eq: "beachClubHome.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    judithRose: file(relativePath: { eq: "judithRose.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 40, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
   }
 `
