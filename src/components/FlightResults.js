@@ -166,7 +166,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
   )
 }
 
-const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult, onDateChange }) => {
+const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult, onFlightUnselected }) => {
   const daysOfWeek = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
   let dayOfWeek = daysOfWeek[value[isDepartResult ? "startDate" : "endDate"]?.getDay()];
   const [selected, setSelected] = React.useState(-1);
@@ -313,21 +313,24 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
                 )
               })
             }
-<li hidden={selected === -1}>
-  <div className={classNames(
-    "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50",
-      "border-indigo-700 transition-bg duration-150 ease-in-out"
-  )}
-  onClick={() => setSelected(-1)}
-  >
-    <div className="flex items-center px-4 py-4 sm:px-6">
-      <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
-        {/*<div className="col-span-2">*/}
-          <div className="text-lg leading-5 font-medium text-gray-700">
-            Change Selection
-          </div></div></div></div>
-{/*</div>*/}
-</li>
+            <li hidden={selected === -1}>
+              <div className={classNames(
+                "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50",
+                  "border-indigo-700 transition-bg duration-150 ease-in-out"
+              )}
+              onClick={() => setSelected(-1)}
+              >
+                <div className="flex items-center px-4 py-4 sm:px-6">
+                  <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
+                    {/*<div className="col-span-2">*/}
+                      <button className="text-lg leading-5 font-medium text-gray-700" onClick={() => onFlightUnselected()}>
+                        Change Selection
+                      </button>
+                  </div>
+                </div>
+              </div>
+            {/*</div>*/}
+            </li>
           </ul>
         </div>
       </div> : noFlightsMessage
@@ -391,12 +394,12 @@ function getFlights(value, dayOfWeek, testMode) {
         // Now, search the schedules to find matches (layover < 2 hours)
         // For each of the initial airport's flights to the layover airport, check if there is a flight from the layover airport to the destination airport
         // within a reasonable amount of time.
-        let layoverFlights = []
+        let layoverFlights = [];
         let toLayoverFlight = FlightData[value.departAirport].flights[layoverAirport]
         add(layoverFlights, toLayoverFlight.schedule, new Time(toLayoverFlight.time))
         // console.log(new Time(0,45, true));
         // console.log(layoverFlights);
-        let destFlights = []
+        let destFlights = [];
         let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport]
         add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time))
         layoverFlights.forEach((flightToLayover) => {
