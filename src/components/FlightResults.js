@@ -166,7 +166,7 @@ const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, N
   )
 }
 
-const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult, onFlightUnselected }) => {
+const FlightResults = ({ title, value, searchedClass, onFlightSelected, className, isDepartResult }) => {
   const daysOfWeek = ["Su", "M", "Tu", "W", "Th", "F", "Sa"];
   let dayOfWeek = daysOfWeek[value[isDepartResult ? "startDate" : "endDate"]?.getDay()];
   const [selected, setSelected] = React.useState(-1);
@@ -269,12 +269,12 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
       <div className={className}>
         <div className="ml-4 mb-4 flex justify-between items-center">
           <h3 className="text-xl font-semibold">{title}</h3>
-          <FilterUI
+          { selected === -1 && <FilterUI
             sortLabel={"Sort By: " + sort.label}
             NSOLabel={"Show: " + (nonstopOnly ? "Nonstop Only" : "All Flights")}
             onSortByChange={v => setSort(v)}
             onNonstopOnlyChange={v => setNonstopOnly(v)}
-          />
+          />}
         </div>
 
         {flights.length === 0 &&
@@ -318,14 +318,17 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
                 "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50",
                   "border-indigo-700 transition-bg duration-150 ease-in-out"
               )}
-              onClick={() => setSelected(-1)}
+              onClick={() => {
+                setSelected(-1);
+                onFlightSelected(null);
+              }}
               >
                 <div className="flex items-center px-4 py-4 sm:px-6">
                   <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
                     {/*<div className="col-span-2">*/}
-                      <button className="text-lg leading-5 font-medium text-gray-700" onClick={() => onFlightUnselected()}>
+                      <div className="text-lg leading-5 font-medium text-gray-700">
                         Change Selection
-                      </button>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -406,7 +409,7 @@ function getFlights(value, dayOfWeek, testMode) {
           if (testPassed) return;
           destFlights.forEach((flightToDest) => {
 
-            // TODO Nathan: X.compareTo(Y) just subtracts Y from X. It's not names subtract because the value it returns is not supposed to be used as a value.
+            // X.compareTo(Y) just subtracts Y from X. It's not names subtract because the value it returns is not supposed to be used as a value.
             if (flightToDest.start.compareTo(flightToLayover.end) >= 0 && flightToDest.start.compareTo(flightToLayover.end) <= MAX_LAYOVER_LENGTH) {
 
               let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start);

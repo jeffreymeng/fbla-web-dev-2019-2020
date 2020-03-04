@@ -6,10 +6,14 @@ import ServerContext from "../context/ServerContext"
 import "../styles/card.css"
 import { navigate } from "../../.cache/gatsby-browser-entry"
 
-const getDescriptionString = obj => {
+const getFlightDescription = obj => {
   if (obj.layover) {
-    return `${obj.airports[0]} to ${obj.airports[1]} (${obj.times[0]}), ${obj.layover} (${obj.times[1]}), ${obj.airports[1]} to ${obj.airports[2]} (${obj.times[2]})`
-  } else {
+    return (<ul>
+      <li>{obj.airports[0]} to {obj.airports[1]} ({obj.times[0]})</li>
+      <li>{obj.layover} ({obj.times[1]})</li>
+      <li> {obj.airports[1]} to {obj.airports[2]} ({obj.times[2]})</li>
+  </ul>)
+      } else {
     return `${obj.airports[0]} to ${obj.airports[1]} (${obj.length})`
   }
 }
@@ -115,10 +119,10 @@ const CheckoutPage = ({ location }) => {
 
                       <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs">
                         <div className="px-6 pt-4">
-                          <div className="font-bold text-xl">{server.checkoutState.depart.airports.join(" — ")}</div>
+                          <div className="font-bold text-xl">{server.checkoutState.arrive && (<>Departing Flight <br/></>)}{server.checkoutState.depart.airports.join(" — ")}</div>
                           <div className="text-gray-700 text-sm mb-2">{server.checkoutState.depart.aircraft.join(", ")}</div>
                           <p className="text-gray-700 text-base">
-                            {getDescriptionString(server.checkoutState.depart)}
+                            {getFlightDescription(server.checkoutState.depart)}
                           </p>
                         </div>
                         <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
@@ -136,21 +140,21 @@ const CheckoutPage = ({ location }) => {
                         server.checkoutState.arrive &&
                         <div className="rounded overflow-hidden shadow-lg bg-white max-w-xs mt-4">
                           <div className="px-6 pt-4">
-                            <div className="font-bold text-xl">{server.checkoutState.arrive.airports.join(" — ")}</div>
+                            <div className="font-bold text-xl">Flight Back Home <br/>{server.checkoutState.arrive.airports.join(" — ")}</div>
                             <div className="text-gray-700 text-sm mb-2">{server.checkoutState.arrive.aircraft.join(", ")}</div>
                             <p className="text-gray-700 text-base">
-                              {getDescriptionString(server.checkoutState.arrive)}
+                              {getFlightDescription(server.checkoutState.arrive)}
                             </p>
                           </div>
-                          <div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">
-                            <span className="text-purple-700 font-semibold">${server.checkoutState.arrive.price[priceIdx]}</span>
-                            <span className="inline-flex">
-                            <button type="button"
-                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">
-                              Remove
-                            </button>
-                          </span>
-                          </div>
+                          {/*<div className="pl-6 pr-4 pt-2 pb-4 flex justify-between items-baseline">*/}
+                          {/*  <span className="text-purple-700 font-semibold">${server.checkoutState.arrive.price[priceIdx]}</span>*/}
+                          {/*  <span className="inline-flex">*/}
+                          {/*  <button type="button"*/}
+                          {/*          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 hover:text-red-700 hover:bg-red-50 focus:outline-none focus:border-red-50 focus:shadow-outline-red active:bg-red-50 transition ease-in-out duration-150">*/}
+                          {/*    Remove*/}
+                          {/*  </button>*/}
+                          {/*</span>*/}
+                          {/*</div>*/}
                         </div>
                       }
                     </div>
@@ -262,7 +266,7 @@ const CheckoutPage = ({ location }) => {
                                 Billing
                               </h3>
                               <p className="mt-1 text-sm leading-5 text-gray-500">
-                                For demonstration purposes, try entering any number (i.e. 5555-5555-5555-5555). The card will NOT be
+                                For demonstration purposes, try entering any number (especially 5555-5555-5555-5555) for the credit card number. The card will NOT be
                                 charged.
                               </p>
                             </div>
