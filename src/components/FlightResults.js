@@ -6,11 +6,11 @@ import "../styles/slider.scss"
 import ClickAwayListener from "./ClickAwayListener"
 import Transition from "./Transition"
 import classNames from "classnames"
+import Time from "./Time"
 
 const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, NSOLabel }) => {
   const [sortOpen, setSortOpen] = useState(false)
   const [nonstopOpen, setNonstopOpen] = useState(false)
-
   return (
     <div>
       <ClickAwayListener onClickAway={() => setNonstopOpen(false)}
@@ -226,7 +226,7 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
  }
 
  const getBestAlternative = (value, before, findAmount) => {
-   console.log(value, before, findAmount, "BATNA");
+   // console.log(value, before, findAmount, "BATNA");
     // before: boolean, if true, finds closest flight that is before the selected date, if false, finds closest flight after.
     let numFound = 0;// This function returns as many days possible with flights (at most 6, since it only searches within a week), up to findAmount
    let result = [];
@@ -350,122 +350,12 @@ function getFlights(value, dayOfWeek, testMode) {
 
   // Time = 0 means 12:00 AM!
   // The first time in each AM/PM category is 12, NOT 1
-  class Time {
-    /**
-     * Create a time object
-     * @param hour
-     * @param minute
-     * @param isAm
-     */
-    hour
-    minute
-    isAm
-    /**
-     * A number, the number of hours since midnight. e.g. 6 == 6AM, 13.75 == 1:45 PM
-     */
-    time
 
-    toString() {
-      if (this.time >= 24) {
-        this.time -= 24;
-      }
-      if (`${this.hour === 0 ? "12" : this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M` == "2:50 AM") {
-        // console.log("BOOOM", this)
-
-      }
-      return `${this.hour === 0 ? "12" : this.hour}:${(this.minute < 10 ? "0" : "") + this.minute} ${this.isAm ? "A" : "P"}M`
-    }
-
-    static timeFromHourMinuteIsAm(hour, minute, isAm) {
-      return hour + (isAm ? 0 : 12) + (minute / 60)
-    }
-
-    _setFromString(timeString) {
-      if (timeString.indexOf(":") > -1) {
-        [this.hour, this.minute] = timeString.split(/:|"am"|"pm"/g).map(x => parseInt(x))
-      } else {
-        this.hour = parseInt(timeString)
-        this.minute = 0
-      }
-      if (this.hour >= 12) {
-        this.hour = this.hour - 12;
-      }
-      this.isAm = timeString.indexOf("pm") === -1
-      this.time = Time.timeFromHourMinuteIsAm(this.hour, this.minute, this.isAm)
-    }
-
-    _setFromNumber(time) {
-      if (time >= 24) {
-        this._setFromNumber(time - 24)
-        return
-      }
-      this.time = time
-      this.isAm = time < 12
-      if (time >= 12) time -= 12 // NOT this.time
-      this.hour = Math.floor(time)
-      this.minute = Math.round(60 * (time % 1))
-
-
-    }
-
-    constructor(hour, minute, isAm) {
-      if (arguments.length == 1) {
-        if (typeof hour === "string") {
-          this._setFromString(hour)
-        } else {
-          this._setFromNumber(hour)
-        }
-
-      } else {
-        this.hour = hour
-        this.minute = minute
-        this.isAm = isAm || true
-        this.time = Time.timeFromHourMinuteIsAm(hour, minute, isAm)
-      }
-      // console.log(hour, minute, isAm, this.hour, this.time)
-      // if (this.hour > 12) {
-      //   this.hour -= 12;
-      // }
-      // console.log("TWO", this.time, this.hour, this.toString())
-    }
-
-
-    add(time) {
-
-      // console.log("BAAH", this, time)
-      this._setFromNumber(this.time + time.time)
-      // console.log("ACC", this)
-      return this
-    }
-
-    subtract(time) {
-      this._setFromNumber(this.time - time.time)
-      return this
-    }
-
-    toHourMinute() {
-      return `${this.hour}h${this.minute !== 0 ? " " + this.minute + "m" : ""}`
-    }
-
-    /**
-     * Returns a positive number if this flight is before the provided one, negative number if it is after, and 0 if they are equal.
-     * @param time
-     * @returns {number}
-     */
-    compareTo(time) {
-      return time.time - this.time
-    }
-
-    clone() {
-      return new Time(this.time)
-    }
-
-  }
 
   // const daysOfWeekReadable = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   let flights = []
   const route = FlightData[value.departAirport]?.flights[value.arriveAirport]
-  console.log(value.departAirport, value, route, 3988)
+  // console.log(value.departAirport, value, route, 3988)
   const add = (arr, schedule, routeTime) => {
     // console.log("RT", routeTime)
     schedule.forEach((rule) => {
@@ -483,7 +373,7 @@ function getFlights(value, dayOfWeek, testMode) {
               start: startTime,
               end: startTime.clone().add(routeTime),
               travelTime: routeTime,
-              length: `${routeTime.hour}h${routeTime.minute !== 0 ? " " + routeTime.minute + "m" : ""}`,
+              length: routeTime.toHourMinute(),
               aircraft: [rule.aircraft],
               stops: 0,
               airports: [value.departAirport, value.arriveAirport],
@@ -498,11 +388,11 @@ function getFlights(value, dayOfWeek, testMode) {
 
     add(flights, route.schedule, new Time(route.time))
   }
-    console.log(value.departAirport, Object.keys(FlightData[value.departAirport]?.flights || {}))
+    // console.log(value.departAirport, Object.keys(FlightData[value.departAirport]?.flights || {}))
     // find connecting flights via brute force LOL
     for (let layoverAirport of Object.keys(FlightData[value.departAirport]?.flights || {})) {
       if (layoverAirport === value.arriveAirport) continue;
-      console.log("Testing", layoverAirport)
+      // console.log("Testing", layoverAirport)
       // For each one of the departure airport's destinations, search the destination's flights to see if any of them go to the requested destination.
       // If they do, make sure the layover is acceptable.
       if (Object.keys(FlightData[layoverAirport]?.flights || {}).indexOf(value.arriveAirport) > -1) {
