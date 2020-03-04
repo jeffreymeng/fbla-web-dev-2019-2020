@@ -1,19 +1,22 @@
 import React from "react"
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby";
 
 import SEO from "../../components/seo"
 import Layout from "../../components/layout/layout"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 import flightJob from "../../images/flightJob.jpg"
 import attendantPic from "../../images/attendant.jpg"
 import officePic from "../../images/officePic.jpg"
 import offerPic from "../../images/offerPic.jpg"
 
+import Img from "gatsby-image" 
+
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
 import Rotate from 'react-reveal/Rotate';
 
-const JobsPage = () => (
+const JobsPage = ({ data }) => (
   <Layout> {/*parallax={"jobs"}*/}
     <SEO title="Apply for a Job" />
 {/*}
@@ -138,12 +141,12 @@ const JobsPage = () => (
           </Fade>
 
         </div>
-        <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+        <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
           <Fade right appear>
-          <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
+          <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
             
-            <div class="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
-              <img class="w-full" src={flightJob} alt="Woman making a sale" />
+            <div className="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
+              <Img className="w-full" fluid={data.flightJob.childImageSharp.fluid} alt="Woman making a sale" />
              
             </div>
           </div>
@@ -236,7 +239,7 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
           </defs>
           <rect width="784" height="404" fill="url(#svg-pattern-squares-2)" />
         </svg>
-        <img class="relative mx-auto rounded-lg" width="490" src={offerPic} alt="" />
+        <Img className="relative mx-auto rounded-lg" style={{width:"490px"}} fluid={data.offerPic.childImageSharp.fluid} alt="" />
       </div>
       </Fade>
 
@@ -270,8 +273,8 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
           <Flip right>
           <div className="hidden lg:block lg:flex-shrink-0">
 
-            <img className="h-64 w-64 rounded-full xl:h-80 xl:w-80"
-                 src={attendantPic}
+            <Img className="h-64 w-64 rounded-full xl:h-80 xl:w-80"
+                 fluid={data.attendantPic.childImageSharp.fluid}
                  alt="" />
           </div>
           </Flip>
@@ -294,8 +297,8 @@ We have more than 500 satisfied employees! We are consistently ranked amongst th
               <div className="mt-8">
                 <div className="flex">
                   <div className="flex-shrink-0 lg:hidden">
-                    <img className="h-12 w-12 rounded-full"
-                         src={attendantPic}
+                    <Img className="h-12 w-12 rounded-full"
+                         fluid={data.attendantPic.childImageSharp.fluid}
                          alt="" />
                   </div>
                   <div className="ml-4 lg:ml-0">
@@ -378,8 +381,8 @@ We'll get back to you within a few days to arrange an interview!                
           </Fade>
         </div>
 
-        <div class="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
-          <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
+        <div className="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
+          <svg className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
             <defs>
               <pattern id="svg-pattern-squares-4" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                 <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
@@ -387,7 +390,7 @@ We'll get back to you within a few days to arrange an interview!                
             </defs>
             <rect width="784" height="404" fill="url(#svg-pattern-squares-4)" />
           </svg>
-          <img class="relative mx-auto rounded-lg" width="490" src={officePic} alt="" />
+          <Img className="relative mx-auto rounded-lg" style={{width:"490px"}} fluid={data.officePic.childImageSharp.fluid} alt="" />
         </div>
       </div>
     </div>
@@ -463,3 +466,40 @@ We'll get back to you within a few days to arrange an interview!                
 )
 
 export default JobsPage
+
+
+
+
+
+export const query = graphql`
+ query {
+    flightJob: file(relativePath: { eq: "flightJob.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 660, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    attendantPic: file(relativePath: { eq: "attendant.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 660, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    officePic: file(relativePath: { eq: "officePic.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 660, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+     offerPic: file(relativePath: { eq: "offerPic.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 660, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

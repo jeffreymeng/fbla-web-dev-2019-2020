@@ -3,12 +3,14 @@ import React from "react"
 import SEO from "../components/seo"
 import Layout from "../components/layout/layout"
 import FFPRewardsSpender from "../components/FFPRewardsSpender"
+import Img from "gatsby-image"
 
 import "../styles/index.scss"
 import "../styles/about.scss"
 import "../styles/parallax.scss"
 import { Link } from "gatsby"
 import beachClubHeader from "../images/beachClubp1.jpg"
+import { graphql, StaticQuery } from "gatsby"
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
 import Rotate from 'react-reveal/Rotate';
@@ -19,7 +21,9 @@ import boatMount from "../images/boatMount.jpg"
 
 
 
-const FrequentFlyerProgramPage = () => (
+
+
+const FrequentFlyerProgramPage = ({ data }) => (
   <Layout>
     <SEO title="Beach Club+" />
 
@@ -53,8 +57,8 @@ const FrequentFlyerProgramPage = () => (
       </svg>
     </div>
   </div>
-  <div class="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2">
-    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={beachClubHeader} alt="" />
+  <div className="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2">
+    <Img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" fluid={data.beachClubHeader.childImageSharp.fluid} alt="" />
   </div>
 </div>
 
@@ -139,7 +143,7 @@ const FrequentFlyerProgramPage = () => (
         </Fade>
         </div>
         <Fade right>
-        <div className="hidden lg:block flex-1 bg-cover bg-center" style={{ backgroundImage: "url('/jobs-bg.jpg')" }}/>
+         <div className="hidden lg:block flex-1 bg-cover bg-center"> <Img className="h-full" fluid={data.jobsBg.childImageSharp.fluid} /></div> 
         </Fade>
       </div>
       <div class="md:ml-auto md:w-1/2 md:pl-10">
@@ -168,7 +172,7 @@ const FrequentFlyerProgramPage = () => (
 <div class="relative bg-gray-900">
 
   <div class="h-56 bg-gray-900 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
-    <Fade left>  <div className="w-full h-full object-cover" style={{ backgroundImage: "url('/boatMount.jpg')", backgroundSize: "cover" }}/>{/*<img class="w-full h-full object-cover" src={boatMount} alt="Support team" />*/} </Fade>
+    <Fade left>  <div className="w-full h-full object-cover"> <Img className="h-full" fluid={data.boatMount.childImageSharp.fluid} /></div> </Fade>
   </div>
   <Fade right cascade>
   <div>
@@ -196,3 +200,32 @@ const FrequentFlyerProgramPage = () => (
 )
 
 export default FrequentFlyerProgramPage
+
+
+
+
+export const query = graphql`
+ query {
+    boatMount: file(relativePath: { eq: "boatMount.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1920, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    beachClubHeader: file(relativePath: { eq: "beachClubp1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    jobsBg: file(relativePath: { eq: "jobs-bg.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
