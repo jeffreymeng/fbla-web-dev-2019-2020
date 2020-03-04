@@ -162,8 +162,7 @@ const CheckoutPage = ({ location }) => {
                                 Personal Information
                               </h3>
                               <p className="mt-1 text-sm leading-5 text-gray-500">
-                                For demonstration purposes, we prefilled some of the fields for you.
-                                Also, no validation will be done, for demonstration purposes only, so feel free to submit without
+                                For demonstration purposes, no validation or input will be required, so feel free to submit without
                                 the hassle of filling out any information that would normally be required.
                               </p>
                             </div>
@@ -262,7 +261,7 @@ const CheckoutPage = ({ location }) => {
                                 Billing
                               </h3>
                               <p className="mt-1 text-sm leading-5 text-gray-500">
-                                For demonstration purposes, try entering 5555-5555-5555-5555. The card will NOT be
+                                For demonstration purposes, try entering any number (i.e. 5555-5555-5555-5555). The card will NOT be
                                 charged.
                               </p>
                             </div>
