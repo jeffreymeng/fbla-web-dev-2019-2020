@@ -255,24 +255,14 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
     return `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][date.getDay()]}, ${["January","February","March","April","May","June","July","August","September","October","November","December"][date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
   const noFlightsMessage = (
-    <div>
-      <h3 className="text-xl font-semibold">{title}</h3>
+    <div className={className}>
+  <div className="ml-4 mb-4 flex justify-between items-center">
+           <h3 className="text-xl font-semibold">{title}</h3>
       <p>Sorry, it doesn't look like we have any flights from {value.departAirport} to {value.arriveAirport} on {FormatDate(value[isDepartResult ? "startDate" : "endDate"])}.
       </p>
-      <b>However, we found flights on the following days between {value.departAirport} and {value.arriveAirport}:</b>
-      <ul>
-        {[...getBestAlternative(value, true, 3),...getBestAlternative(value, false, 3)]
-          .sort((a,b) => a.getTime()-b.getTime())
-          .map((date, i) => {
-          return (
-            <li key={i} hidden={!date}>
-              {FormatDate(date)}
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
+      </div>
+      </div>
+)
 
   return (
     flightFound ?
