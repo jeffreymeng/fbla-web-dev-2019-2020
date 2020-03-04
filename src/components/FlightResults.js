@@ -204,7 +204,7 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
           // if (byArrive !== 0) return byArrive;
           // else if (depth === 0) return compare(a, b, undefined,1);
         case "length":
-          return b.travelTime.compareTo(a.travelTime);
+          return a.travelTime.compareTo(b.travelTime);
           // if (byLength !== 0) return byLength;
           // else if (depth === 0) return compare(a, b, undefined,1);
         case "stops":

@@ -35,9 +35,8 @@
   }
 }
 
-.airport-select > div:first-child > div:nth-child(3) {
+.airport-select {
   z-index:100000 !important;
-  //background-color:purple !important;
 }
 
 @screen md {
