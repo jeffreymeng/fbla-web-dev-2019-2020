@@ -218,7 +218,7 @@ const CreditsPage = () => (
            <li class="mt-5">
             <div class="flex">
               <div>
-                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://fortawesome.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Fort Awesome Icons</a> by <span className="italics">Fort Awesome</span></h5>
+                <h5 class="text-lg leading-6 font-semibold text-gray-900"><a href="https://fontawesome.com/" target="_blank" className="inline-flex items-center px-3 py-1 rounded-full  leading-5 bg-indigo-100 text-indigo-800 transition ease-in-out hover:bg-indigo-300 duration-500">Font Awesome Icons</a> by <span className="italics">Font Awesome</span></h5>
               </div>
             </div>
           </li>
