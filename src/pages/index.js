@@ -72,7 +72,7 @@ const IndexPage = ({ data }) => {
               <div className="inline-block mt-8">
                 <Link to="about" className="rounded border border-indigo-700 px-4 py-2 text-indigo-700 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-indigo-700 hover:text-indigo-50">
                   Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"         className="fill-current inline-block ml-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="fill-current inline-block ml-4">
                     <path d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z" />
                   </svg>
                 </Link>
@@ -81,7 +81,7 @@ const IndexPage = ({ data }) => {
             </Fade>
           </div>
           <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-50 transform translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <polygon points="50,0 100,0 50,100" />
+            <polygon points="49,0 50,0 100,0 50,100 49,100" />
           </svg>
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
@@ -100,7 +100,7 @@ const IndexPage = ({ data }) => {
         <div className="flex-1">
           <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <svg className="hidden lg:block absolute left-0 inset-y-0 h-full w-48 text-indigo-800 transform -translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <polygon points="50,0 50,100 0,100" />
+              <polygon points="50,0 51,0 50,100 51,100 0,100" />
             </svg>
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
             <Fade right cascade>
