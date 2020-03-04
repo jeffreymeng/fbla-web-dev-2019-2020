@@ -1,3 +1,8 @@
+import * as seedrandom from "seedrandom";
+
+seedrandom('I like planes', { global: true });
+
+
 const airports = [
   "Albuquerque International Sunport - Albuquerque, NM - ABQ",
   "Denver International Airport - Denver, CO - DEN",
@@ -150,27 +155,27 @@ let flightData = {
 
 
 // BEGIN GENERATING FLIGHTS //
-console.group("Generating Flights...");
+// console.group("Generating Flights...");
 
-let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:true},
-  LAX: { latitude: 34.052235, longitude: -118.243683, isHub:true},
+let locations = { OAK: { latitude: 37.804363, longitude: -122.271111, isHub:false},
+  LAX: { latitude: 34.052235, longitude: -118.243683, isHub:false},
   FAI: { latitude: 64.837776, longitude: -147.716385, isHub:false},
-  ABQ: { latitude: 35.081206, longitude: -106.654514, isHub:true},
+  ABQ: { latitude: 35.081206, longitude: -106.654514, isHub:false},
   ANC: { latitude: 61.208400, longitude: -149.890815, isHub:false},
   DEN: { latitude: 39.752642, longitude: -104.967042, isHub:true},
-  HNL: { latitude: 21.329299, longitude: -157.919581, isHub:true},
+  HNL: { latitude: 21.329299, longitude: -157.919581, isHub:false},
   KOA: { latitude: 19.740591, longitude: -156.043164, isHub:false},
-  LAS: { latitude: 36.174819, longitude: -115.141362, isHub:true},
-  PDX: { latitude: 45.505649, longitude: -122.678018, isHub:true},
+  LAS: { latitude: 36.174819, longitude: -115.141362, isHub:false},
+  PDX: { latitude: 45.505649, longitude: -122.678018, isHub:false},
   PHX: { latitude: 33.437134, longitude: -112.008003, isHub:true},
-  PVR: { latitude: 20.680468, longitude: -105.252709, isHub:true},
-  SAN: { latitude: 32.733593, longitude: -117.193390, isHub:true},
-  SEA: { latitude: 47.605999, longitude: -122.324905, isHub:true},
+  PVR: { latitude: 20.680468, longitude: -105.252709, isHub:false},
+  SAN: { latitude: 32.733593, longitude: -117.193390, isHub:false},
+  SEA: { latitude: 47.605999, longitude: -122.324905, isHub:false},
   SFO: { latitude: 37.621950, longitude: -122.380189, isHub:true},
-  SLC: { latitude: 40.753444, longitude: -111.881691, isHub:true},
-  TIJ: { latitude: 32.542879, longitude: -116.973975, isHub:true},
+  SLC: { latitude: 40.753444, longitude: -111.881691, isHub:false},
+  TIJ: { latitude: 32.542879, longitude: -116.973975, isHub:false},
   YVR: { latitude: 49.196522, longitude: -123.182722, isHub:true},
-  YYZ: { latitude: 43.678881, longitude: -79.628596, isHub:true}}
+  YYZ: { latitude: 43.678881, longitude: -79.628596, isHub:false}}
 
 // https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
 function randn_bm() {
@@ -179,7 +184,9 @@ function randn_bm() {
   while(v === 0) v = Math.random();
   let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
   num = num / 10.0 + 0.5; // Translate to 0 -> 1
-  if (num > 1 || num < 0) return randn_bm(); // resample between 0 and 1
+  // changed from 0, 1 to 0.25, 0.75
+  if (num > 0.75 || num < 0.25) return randn_bm(); // resample between 0 and 1
+  num = (num-0.25)*2;
   return num;
 }
 
@@ -208,11 +215,11 @@ const calcDistanceBetween = (a, b) => {
   }
 }
 const genPrice = (distance) => {
-  let basePrice = 60;
-  let costPerKM = 0.264;
+  let basePrice = 88;
+  let costPerKM = 0.11;
 
   let additionalCost = distance*costPerKM;
-  let variance = (randn_bm()-0.5)*0.2*additionalCost;
+  let variance = (randn_bm()-0.5)*0.5*additionalCost;
 
   return basePrice + additionalCost - variance;
 }
@@ -222,23 +229,33 @@ const codes = airports.map(x => x.split(" - ")[2]);
 const daysOfWeek = Object.keys(dayOfWeekMap);
 // console.log(daysOfWeek);
 const aircrafts = ["Boeing 787-8 Dreamliner", "Boeing 787-9 Dreamliner", "Boeing 787-10 Dreamliner", "Boeing 777-200", "Boeing 777-300ER", "Boeing 767-300ER", "Boeing 767-400ER", "Boeing 757-200", "Boeing 757-300", "Boeing 737-700", "Boeing 737-800", "Boeing 737-900", "Airbus 319", "Airbus 320", "Bombardier CRJ-200", "Bombardier CRJ-550", "Bombardier CRJ-700", "EMB 170", "EMB 175", "EMB 145"];
-const flightTimes = [];
-for (let i = 0; i < 100; i++) {
+const genTime = (minHr = 0, maxHr = 24) => {
   let hr = Math.ceil(Math.random()*12);
+  let am = Math.random() >= 0.5;
+
+  let realHr = hr%12 + (am ? 0 : 12);
+  if (realHr < minHr || realHr > maxHr) return genTime(minHr, maxHr);
+
   if (hr < 10) hr = "0" + hr;
   let min = Math.ceil(Math.random()*60/5)*5%60;
   if (min < 10) min = "0" + min;
-  let am = Math.random() >= 0.5;
-  if (am && hr <= 5) continue;
-  flightTimes.push(`${hr}:${min}${am?"am":"pm"}`);
+  return `${hr}:${min}${am?"am":"pm"}`;
 }
 
-let getFlightSchedule = (from, to) => {
+let getFlightSchedule = (from, to, count) => {
   let flights = [];
-  for (let i = 0; i < 4 + Math.random() * 3; i++) {
+  let chosenTimes = [];
+  if (count === 1) chosenTimes = [genTime(8, 18)];
+  else if (count === 2) chosenTimes = [genTime(7, 12), genTime(12, 18)];
+  else if (count === 3) chosenTimes = [genTime(6, 11), genTime(11, 16), genTime(16, 21)];
+  let chosenTimes2 = [];
+  if (count === 1) chosenTimes2 = [genTime(8, 18)];
+  else if (count === 2) chosenTimes2 = [genTime(7, 12), genTime(12, 18)];
+  else if (count === 3) chosenTimes2 = [genTime(6, 11), genTime(11, 16), genTime(16, 21)];
+  for (let i = 0; i < count; i++) {
     let days = "";
     let mask = 0;
-    for (let j = 0; j < 3 + Math.random() * 7; j++) {
+    for (let j = 0; j < 2 + Math.random() * (4); j++) {
       mask |= (1 << Math.floor(Math.random() * 7));
     }
     for (let j = 0; j < 7; j++) {
@@ -246,18 +263,27 @@ let getFlightSchedule = (from, to) => {
         days += daysOfWeek[j];
       }
     }
-    let times = [];
-    for (let j = 0; j < 1 + Math.floor(Math.random() * 2); j++) {
-      let time = flightTimes[Math.floor(Math.random() * flightTimes.length)];
-      if (times.includes(time)) {
-        j--;
-        continue;
-      }
-      times.push(time);
-    }
+    let times = [chosenTimes[i]];
     flights.push({
       days,
       times,
+      aircraft: aircrafts[Math.floor(Math.random() * aircrafts.length)],
+      price: genPrice(calcDistanceBetween(from, to))
+    });
+
+    days = "";
+    let mask2 = (1 << 7)-1; mask2 ^= mask;
+    if (mask2 === 0) continue;
+    for (let j = 0; j < 7; j++) {
+      if (mask2 & (1 << j)) {
+        days += daysOfWeek[j];
+      }
+    }
+    let times2 = [chosenTimes2[i]];
+    console.log(days, times2);
+    flights.push({
+      days,
+      times: times2,
       aircraft: aircrafts[Math.floor(Math.random() * aircrafts.length)],
       price: genPrice(calcDistanceBetween(from, to))
     });
@@ -266,21 +292,55 @@ let getFlightSchedule = (from, to) => {
 }
 
 let genTimeOfFlight = (from, to) => {
-  let hr = Math.ceil(Math.random()*12);
+  let planeSpeed = 800; // kph
+  let dist = calcDistanceBetween(from, to);
+  let minutes = dist/planeSpeed*60;
+  let variance = (randn_bm()-0.5)*0.3*minutes;
+  minutes += variance;
+
+  let hr = Math.round(minutes/60);
   if (hr < 10) hr = "0" + hr;
-  let min = Math.ceil(Math.random()*60/5)*5%60;
+  let min = Math.round(minutes%60);
   if (min < 10) min = "0" + min;
   return `${hr}:${min}`;
 }
 
+let toConnect = {};
+for (let startAirport of codes) {
+  if (locations[startAirport].isHub) toConnect[startAirport] = [];
+}
+for (let startAirport of codes) {
+  let nearestHub = 1000000000;
+  for (let code of codes) {
+    if (code === startAirport) continue;
+    if (locations[code].isHub) nearestHub = Math.min(nearestHub, calcDistanceBetween(code, startAirport));
+  }
+  for (let code of codes) {
+    if (nearestHub === calcDistanceBetween(code, startAirport)) {
+      toConnect[code].push(startAirport);
+    }
+  }
+}
+
 let getFlightsFromAirport = blacklist => {
   let flights = {};
+  let nearestHub = 1000000000;
   for (let code of codes) {
     if (code === blacklist) continue;
+    if (locations[code].isHub) nearestHub = Math.min(nearestHub, calcDistanceBetween(code, blacklist));
+  }
+  for (let code of codes) {
+    if (code === blacklist) continue;
+    let numFlights = 0;
+    if (calcDistanceBetween(code, blacklist) <= nearestHub) numFlights = 1;
+    if (locations[blacklist].isHub) numFlights = 2;
+    // if (locations[blacklist].isHub && toConnect[blacklist].includes(code)) numFlights = 2;
+    if (locations[code].isHub) numFlights = 3;
+    if (numFlights === 0) continue;
     flights[code] = {
       code,
       time: genTimeOfFlight(blacklist, code),
-      schedule: getFlightSchedule(blacklist, code)
+      schedule: getFlightSchedule(blacklist, code, numFlights)
     };
   }
   return flights;
@@ -293,9 +353,9 @@ for (let code of codes) {
     flights: getFlightsFromAirport(code)
   };
 }
-console.log(flightData);
+// console.log(flightData);
 
-console.groupEnd();
+// console.groupEnd();
 // END GENERATING FLIGHTS //
 
 

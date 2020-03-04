@@ -45,6 +45,7 @@
     "react-reveal": "^1.2.2",
     "react-select": "^3.0.8",
     "react-transition-group": "^4.3.0",
+    "seedrandom": "^3.0.5",
     "styled-components": "^5.0.1",
     "uncss": "^0.17.3"
   },

@@ -1,57 +1,59 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import Layout from "../components/layout/layout"
-import { Link } from "gatsby";
+import { Link } from "gatsby"
 import ServerContext from "../context/ServerContext"
 
 import "../styles/card.css"
-import "../card"
 
-const CheckoutPage = ({location}) => {
+const CheckoutPage = ({ location }) => {
   console.log(location.state || {}) // @nathan wang TODO
-  const server = React.useContext(ServerContext);
+  const server = React.useContext(ServerContext)
 
   useEffect(() => {
-    if (!server.user) return;
-    new Card({
-      // a selector or DOM element for the form where users will
-      // be entering their information
-      form: "#checkoutForm", // *required*
-      // a selector or DOM element for the container
-      // where you want the card to appear
-      container: "#cardJS", // *required*
+    if (!server.user) return
+    if (window != null) {
+      require("../card")
+      new Card({
+        // a selector or DOM element for the form where users will
+        // be entering their information
+        form: "#checkoutForm", // *required*
+        // a selector or DOM element for the container
+        // where you want the card to appear
+        container: "#cardJS", // *required*
 
-      formSelectors: {
-        numberInput: 'input#number', // optional — default input[name="number"]
-        expiryInput: 'input#expiry', // optional — default input[name="expiry"]
-        cvcInput: 'input#cvc', // optional — default input[name="cvc"]
-        nameInput: 'input#name' // optional - defaults input[name="name"]
-      },
+        formSelectors: {
+          numberInput: "input#number", // optional — default input[name="number"]
+          expiryInput: "input#expiry", // optional — default input[name="expiry"]
+          cvcInput: "input#cvc", // optional — default input[name="cvc"]
+          nameInput: "input#name", // optional - defaults input[name="name"]
+        },
 
-      width: 320, // optional — default 350px
-      formatting: true, // optional - default true
+        width: 320, // optional — default 350px
+        formatting: true, // optional - default true
 
-      // Strings for translation - optional
-      messages: {
-        validDate: 'valid\ndate', // optional - default 'valid\nthru'
-        monthYear: 'mm/yyyy', // optional - default 'month/year'
-      },
+        // Strings for translation - optional
+        messages: {
+          validDate: "valid\ndate", // optional - default 'valid\nthru'
+          monthYear: "mm/yyyy", // optional - default 'month/year'
+        },
 
-      // Default placeholders for rendered fields - optional
-      placeholders: {
-        number: '•••• •••• •••• ••••',
-        name: 'Full Name',
-        expiry: '••/••',
-        cvc: '•••'
-      },
+        // Default placeholders for rendered fields - optional
+        placeholders: {
+          number: "•••• •••• •••• ••••",
+          name: "Full Name",
+          expiry: "••/••",
+          cvc: "•••",
+        },
 
-      masks: {
-        cardNumber: '•' // optional - mask card number
-      },
+        masks: {
+          cardNumber: "•", // optional - mask card number
+        },
 
-      // if true, will log helpful messages for setting up Card
-      debug: false // optional - default false
-    });
-  }, [server.user]);
+        // if true, will log helpful messages for setting up Card
+        debug: false, // optional - default false
+      })
+    }
+  }, [server.user])
 
   return (
     <Layout>
@@ -66,22 +68,22 @@ const CheckoutPage = ({location}) => {
           </div>
         </div>
         <div className="w-100 flex-1 pt-8">
-          { !server.user ? <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-            Before you can continue, you need to <Link to="sign-in" className="" state={{
-              continueTo:"checkout",
-              continueState:location.state
+          {!server.user ? <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+              Before you can continue, you need to <Link to="sign-in" className="" state={{
+              continueTo: "checkout",
+              continueState: location.state,
             }}>sign in</Link>
-            {/*  or <Link to="sign-in" state={{*/}
-            {/*continueTo:"checkout",*/}
-            {/*continueState:location.state*/}
-            {/*}}>create an account</Link>*/}
+              {/*  or <Link to="sign-in" state={{*/}
+              {/*continueTo:"checkout",*/}
+              {/*continueState:location.state*/}
+              {/*}}>create an account</Link>*/}
               !
-          </div> :
+            </div> :
 
 
             <form id="checkoutForm" className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8" onSubmit={(e) => {
-              e.preventDefault();
-              console.log(e, e.target.value);
+              e.preventDefault()
+              console.log(e, e.target.value)
               server.pushFlights({
                 depart: JSON.stringify(location.state.depart),
                 arrive: JSON.stringify(location.state.arrive),
@@ -308,7 +310,7 @@ const CheckoutPage = ({location}) => {
         </div>
       </div>
     </Layout>
-  );
+  )
 }
 
-export default CheckoutPage;
+export default CheckoutPage

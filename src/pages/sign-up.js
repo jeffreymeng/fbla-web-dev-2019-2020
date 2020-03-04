@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Layout from "../components/layout/layout"
 import "../styles/auth.scss";
 import ServerContext from "../context/ServerContext"
@@ -10,10 +10,23 @@ const SignUpPage = props => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
+  const handleSubmit = useCallback((evt) => {
+    evt.preventDefault();
+    auth.signUp(email, pass).then(() => {
+      if (props?.location?.state?.continueTo) {
+        navigate(props.location.state.continueTo, {
+          state:props.location.state.continueState,
+        })
+      } else {
+        navigate("/")
+      }
+    });
+  }, [email, pass, auth.signIn]);
+
   return (
     <Layout backgroundColor="#f9fafb">
       <div className="min-h-content-area bg-white flex">
-        <form onSubmit={() => auth.signUp(email, pass)} className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm ">
             <div className="">
               {/*<img className="h-12 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow"/>*/}
@@ -39,7 +52,7 @@ const SignUpPage = props => {
 
 
               <div className="mt-6">
-                <form action="#" method="POST">
+                <form onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
                       Email address
@@ -63,7 +76,7 @@ const SignUpPage = props => {
                   </div>
 
 
-                  {auth.error !== "" && <p className="mt-3 text-md font-bold text-red-600">Error: {auth.error}</p>}
+                  {auth.error && <p className="mt-3 text-sm font-bold text-red-600">Error: {auth.error}</p>}
 
                   <div className="mt-16">
                     <span className="block w-full rounded-md shadow-sm">
@@ -78,7 +91,7 @@ const SignUpPage = props => {
               </div>
             </div>
           </div>
-        </form>
+        </div>
         <div className="hidden lg:block relative w-0 flex-1">
           <img className="absolute inset-0 h-full w-full object-cover"
                src="/img/login-img.jpg"

@@ -8,9 +8,6 @@ import Img from "gatsby-image";
 import BookingForm from "../components/BookingForm"
 import DynamicBackgroundImage from "../components/DynamicBackgroundImage"
 import bgImageCaptions from "../images/airport_bg_images/captions"
-import beachClubp1 from "../images/beachClubHome.jpg"
-import aboutUsp1 from "../images/aboutUsp1.jpg"
-import judithRose from "../images/judithRose.jpg"
 
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
@@ -42,6 +39,7 @@ const IndexPage = ({ data }) => {
             defaultImage={data.file.childImageSharp.fluid}
             defaultCaption={{ caption: "New York City Skyline", location: "New York, New York" }} />
         </div>
+        <Fade appear bottom cascade>
         <div className="pt-16">
           <Img className="max-w-6xl mx-auto mb-16" fluid={data.logoBig.childImageSharp.fluid} />
           <h1
@@ -49,9 +47,12 @@ const IndexPage = ({ data }) => {
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
           <div className="pb-24">
-            <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
+            <div className="max-w-4xl mx-auto bg-blur mx-4">
+              <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
+            </div>
           </div>
         </div>
+        </Fade>
       </div>
 
       <div className="relative overflow-hidden">
@@ -68,7 +69,7 @@ const IndexPage = ({ data }) => {
               <div className="inline-block mt-8">
                 <Link to="about" className="rounded border border-indigo-700 px-4 py-2 text-indigo-700 text-lg uppercase font-bold flex items-center transition duration-100 hover:bg-indigo-700 hover:text-indigo-50">
                   Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"         className="fill-current inline-block ml-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="fill-current inline-block ml-4">
                     <path d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z" />
                   </svg>
                 </Link>
@@ -77,26 +78,30 @@ const IndexPage = ({ data }) => {
             </Fade>
           </div>
           <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-50 transform translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <polygon points="50,0 100,0 50,100" />
+            <polygon points="49,0 50,0 100,0 50,100 49,100" />
           </svg>
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <Fade right>
-          <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={aboutUsp1} alt="" />
-          </Fade>
+          <div className="h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full">
+            <Img className="w-full object-cover h-full" fluid={data.aboutUs.childImageSharp.fluid} alt="" />
+          </div>
+        </Fade>
         </div>
       </div>
 
       <div className="flex bg-indigo-800 overflow-hidden items-stretch">
         <div className="hidden lg:block flex-1 overflow-hidden relative">
         <Fade left>
-          <img className="absolute h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full" src={beachClubp1} alt="" />
-          </Fade>
+          <div className="absolute h-56 w-full sm:h-72 md:hW-96 lg:h-full">
+            <Img className="w-full object-cover h-full" fluid={data.beachClub.childImageSharp.fluid} alt="" />
+          </div>
+        </Fade>
         </div>
         <div className="flex-1">
           <div className="relative z-10 pb-8 bg-indigo-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <svg className="hidden lg:block absolute left-0 inset-y-0 h-full w-48 text-indigo-800 transform -translate-x-24" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <polygon points="50,0 50,100 0,100" />
+              <polygon points="50,0 51,0 50,100 51,100 0,100" />
             </svg>
             <div className="pt-10 mx-auto max-w-screen-xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
             <Fade right cascade>
@@ -149,8 +154,8 @@ const IndexPage = ({ data }) => {
                 <div className="md:flex md:items-center md:justify-center">
                   <div className="md:flex-shrink-0">
                   <Fade left>
-                    <img className="mx-auto h-10 w-10 rounded-full"
-                         src={judithRose}
+                    <Img className="mx-auto h-10 w-10 rounded-full"
+                         fluid={data.judithRose.childImageSharp.fluid}
                          alt="" />
                   </Fade>
                   </div>
@@ -264,12 +269,33 @@ export const query = graphql`
        }
      }
     },
-    logoBig: file(relativePath: { eq: "longCoastalInvisV6.png" }) {
+    logoBig: file(relativePath: { eq: "longCoastalInvisVBlue.png" }) {
      childImageSharp {
        fluid(maxWidth: 1152, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
        }
      }
-    }
+    },
+    aboutUs: file(relativePath: { eq: "aboutUsp1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    beachClub: file(relativePath: { eq: "beachClubHome.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 960, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    judithRose: file(relativePath: { eq: "judithRose.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 40, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
   }
 `

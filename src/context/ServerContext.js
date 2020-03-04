@@ -63,6 +63,7 @@ const AuthProvider = ({ children }) => {
     return firebase.auth().signInWithEmailAndPassword(email, pass).catch(e => {
       setLoading(false);
       setError(e.message);
+      throw error;
     });
   }, [firebase]);
 
@@ -76,6 +77,7 @@ const AuthProvider = ({ children }) => {
     return firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
       setLoading(false);
       setError(error.message);
+      throw error;
     });
   }, [firebase]);
 const pushFlights = useCallback((data) => {

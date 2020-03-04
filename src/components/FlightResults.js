@@ -324,15 +324,15 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
             }
 <li hidden={selected === -1}>
   <div className={classNames(
-    "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out",
-      "border-indigo-700"
+    "border-l-4 cursor-pointer block hover:bg-gray-50 focus:outline-none focus:bg-gray-50",
+      "border-indigo-700 transition-bg duration-150 ease-in-out"
   )}
   onClick={() => setSelected(-1)}
   >
     <div className="flex items-center px-4 py-4 sm:px-6">
       <div className="min-w-0 flex-1 grid grid-cols-3 sm:grid-cols-4 sm:gap-4">
         {/*<div className="col-span-2">*/}
-          <div className="text-lg leading-5 font-medium text-gray-700 truncate">
+          <div className="text-lg leading-5 font-medium text-gray-700">
             Change Selection
           </div></div></div></div>
 {/*</div>*/}

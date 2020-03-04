@@ -1,6 +1,6 @@
 import React from "react";
 import ServerContext from "../context/ServerContext"
-import Layout from "../components/layout/Layout";
+import Layout from "../components/layout/layout";
 import SEO from "../components/seo";
 
 const MyFlightsPage = () => {
