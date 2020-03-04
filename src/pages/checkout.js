@@ -155,14 +155,23 @@ const CheckoutPage = ({ location }) => {
                     <div className="mt-12 lg:mt-0 lg:flex-1 lg:mr-10 lg:mr-20">
                       <div>
                         <div>
-                          <div>
-                            <div>
-                              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                                Personal Information
-                              </h3>
-                              <p className="mt-1 text-sm leading-5 text-gray-500">
-                                For demonstration purposes, we prefilled some of the fields for you.
-                              </p>
+                          <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Personal Information
+                          </h3>
+                          <p className="mt-1 text-sm leading-5 text-gray-500">
+                            For demonstration purposes, we prefilled some of the fields for you.
+                            Also, no validation will be done, for demonstration purposes only, so feel free to submit without
+                            the hassle of filling out any information that would normally be required.
+                          </p>
+                        </div>
+                        <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
+                          <div className="sm:col-span-3">
+                            <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">
+                              First name
+                            </label>
+                            <div className="mt-1 rounded-md shadow-sm">
+                              <input id="first_name"
+                                     className="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
                             </div>
                             <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
                               <div className="sm:col-span-3">

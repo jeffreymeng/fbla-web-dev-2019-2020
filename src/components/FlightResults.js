@@ -6,7 +6,7 @@ import "../styles/slider.scss"
 import ClickAwayListener from "./ClickAwayListener"
 import Transition from "./Transition"
 import classNames from "classnames"
-import Time from "./Time"
+import Time from "./time"
 
 const FilterUI = ({ className, onSortByChange, onNonstopOnlyChange, sortLabel, NSOLabel }) => {
   const [sortOpen, setSortOpen] = useState(false)
@@ -184,6 +184,8 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
   const [nonstopOnly, setNonstopOnly] = React.useState(defaults.nonstopOnly);
   let flights = getFlights(value, dayOfWeek);
   let flightFound = flights.length > 0;
+  const classIdx = ["economy", "business", "first"].indexOf(searchedClass); // class index
+
   flights = flights.filter((flight) => {
     return !((nonstopOnly && flight.stops > 0)/* || (flight.price[classIdx] < minPrice || flight.price[classIdx] > maxPrice)*/)
   }).sort((a,b) => {
@@ -194,21 +196,21 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
       switch(comparison) {
 
         case "depart":
-          let byDepart = b.start.compareTo(a.start);
-          if (byDepart !== 0) return byDepart
-          else if (depth === 0) return compare(a, b, undefined,1);
+          return a.start.compareTo(b.start);
+          // if (byDepart !== 0) return byDepart
+          // else if (depth === 0) return compare(a, b, undefined,1);
         case "arrive":
-          let byArrive = b.end.compareTo(a.end);
-          if (byArrive !== 0) return byArrive;
-          else if (depth === 0) return compare(a, b, undefined,1);
+          return a.end.compareTo(b.end);
+          // if (byArrive !== 0) return byArrive;
+          // else if (depth === 0) return compare(a, b, undefined,1);
         case "length":
-          let byLength = b.travelTime.compareTo(a.travelTime);
-          if (byLength !== 0) return byLength;
-          else if (depth === 0) return compare(a, b, undefined,1);
+          return b.travelTime.compareTo(a.travelTime);
+          // if (byLength !== 0) return byLength;
+          // else if (depth === 0) return compare(a, b, undefined,1);
         case "stops":
-          let byStops = a.stops - b.stops;
-          if (byStops !== 0) return byLength;
-          else if (depth === 0) return compare(a, b, undefined,1);
+          return a.stops - b.stops;
+          // if (byStops !== 0) return byLength;
+          // else if (depth === 0) return compare(a, b, undefined,1);
         case "price":
           let byClass = a.price[classIdx] - b.price[classIdx];
           return byClass; // even if it's equal to 0
@@ -219,7 +221,6 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
     let result = compare(a, b, sort.value);
     return result !== 0 ? result : compare(a, b, "depart");
   });
- const classIdx = ["economy", "business", "first"].indexOf(searchedClass); // class index
  let cheapestPrice = 10000000;
  for (let i = 0; i < flights.length; i++) {
    cheapestPrice = Math.min(cheapestPrice, flights[i].price[classIdx]);

@@ -53,7 +53,7 @@ class Time {
       hourString:hour === 0 ? "12" : hour,
       minute,
       isAm,
-      minuteString:(minute.toString().length == 1 ? "0" : "") + minute
+      minuteString:(minute < 10 ? "0" : "") + minute
     }
   }
   setTime(newTime) {
