@@ -14,6 +14,10 @@ import hawaii from "../images/hawaii.jpg"
 import cnTower from "../images/cnTower.jpg"
 import goldenGate from "../images/goldenGate.jpg"
 import Transition from "../components/Transition"
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
+import Rotate from 'react-reveal/Rotate';
+
 
 
 const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
@@ -66,10 +70,11 @@ const BookingPage = ({ data, location }) => {
         title="Book Now"
       />
 
-      <div className="pt-16 pb-6 sm:pt-32 sm:pb-12 relative">
+      <div className="pt-16 pb-6 sm:pt-32 sm:pb-12 relative z-40">
         <div className="absolute top-0 bottom-0 left-0 right-0 overflow-hidden -z-10">
           <Img className="h-full" fluid={data.file.childImageSharp.fluid} />
         </div>
+        <Fade bottom appear>
         <h1
           className="mb-8 sm:mb-16 px-4 text-center text-white text-4xl leading-10 font-bold text-gray-50 sm:text-5xl sm:leading-none md:text-6xl">Where
           will we be flying today?</h1>
@@ -88,6 +93,7 @@ const BookingPage = ({ data, location }) => {
             featuredAirport={selectedTrip}
             className="-mb-40 sm:-mb-32" />
         </div>
+        </Fade>
       </div>
 
       <div className="bg-gray-100 pt-40 sm:pt-32 pb-10 sm:pb-20 px-4">
@@ -139,7 +145,11 @@ const BookingPage = ({ data, location }) => {
             bookingData === null &&
             (
               <>
+
+                <div className="z-0">
+                <Fade bottom appear>
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
+               
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
                   <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
                     A spectular dance of solar wind in the magnetosphere brought us this magnificent view. Fly to Fairbanks, Alaska to experience the awe yourself!
@@ -160,6 +170,8 @@ const BookingPage = ({ data, location }) => {
                     California holds many of the most famous attractions and the Golden Gate is one of them. With foggy mornings and a cool ocean breeze at all times, you never know where this bridge will take you.
                   </SuggestedFlight>
                 </div>
+              </Fade>
+              </div>
               </>
             )
           }

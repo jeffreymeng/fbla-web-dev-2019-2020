@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import classNames from "classnames"
 import links from "./navlinks";
 
-import invisLogo from "../../images/longCoastalInvisV2.png"
+import invisLogo from "../../images/longCoastalInvisVBlue.png"
 import ServerContext from "../../context/ServerContext"
 import Transition from "../Transition"
 import ClickAwayListener from "../ClickAwayListener"
@@ -41,7 +41,7 @@ const CustomNavbar = ({ pageInfo }) => {
               </svg>
             </button>
           </div>
-          <Link to="/" className="flex-shrink-0 flex items-center pb-1.5 ml-4 md:ml-0">
+          <Link to="/" className="flex-shrink-0 flex items-center ml-4 md:ml-0">
             <img className="block lg:hidden h-8 w-auto" src={invisLogo} alt="" />
             <img className="hidden lg:block h-8 w-auto" src={invisLogo} alt="" />
           </Link>
@@ -82,7 +82,7 @@ const CustomNavbar = ({ pageInfo }) => {
                   leave="transition ease-in duration-75"
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
-                  className="origin-top-right absolute z-40 right-0 mt-2 w-48 rounded-md shadow-lg">
+                  className="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg">
                   <div className="py-1 rounded-md bg-white shadow-xs">
                     <Link to="checkout" className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Cart</Link>
                     <Link to="my-flights" className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">My Flights</Link>
