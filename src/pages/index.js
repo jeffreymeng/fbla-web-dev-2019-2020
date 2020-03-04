@@ -39,20 +39,22 @@ const IndexPage = ({ data }) => {
             defaultImage={data.file.childImageSharp.fluid}
             defaultCaption={{ caption: "New York City Skyline", location: "New York, New York" }} />
         </div>
-        <Fade appear bottom cascade>
+
         <div className="pt-16">
+        <Fade cascade appear>
+        <div>
           <Img className="max-w-6xl mx-auto mb-16" fluid={data.logoBig.childImageSharp.fluid} />
           <h1
             className="mb-4 sm:mb-8 px-4 text-center text-white text-3xl leading-10 font-bold text-indigo-50 sm:text-4xl sm:leading-none md:text-6xl"
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
-
+          </div>
+          </Fade>
           <div className="pb-24">
             <div className="max-w-4xl mx-auto bg-blur mx-4">
               <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
             </div>
           </div>
         </div>
-        </Fade>
       </div>
 
       <div className="relative overflow-hidden">
