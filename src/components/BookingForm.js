@@ -220,7 +220,7 @@ const BookingForm = ({ onSubmit, dropUp, defaultValues, className, style, onAirp
   }, [featuredAirport]);
 
   return (
-    <div className={classNames("px-4", className)}>
+    <div className={classNames("", className)}>
       <div className={classNames("max-w-4xl mx-auto bg-white p-4 sm:p-8 shadow-lg rounded", divClassName)} style={style}>
         <form onSubmit={(e) => {
           e.preventDefault();

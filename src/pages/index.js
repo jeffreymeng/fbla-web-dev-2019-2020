@@ -50,7 +50,9 @@ const IndexPage = ({ data }) => {
             style={{ textShadow: "0 0 75px black, 0 0 20px rgba(0,0,0,0.7)" }}>Where will we be flying today?</h1>
 
           <div className="pb-24">
-            <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
+            <div className="max-w-4xl mx-auto bg-blur mx-4">
+              <BookingForm divClassName={"index-booking-form"} onAirportSelect={airport => setAirport(airport)} onSubmit={(data) => navigate("book", {state:data})}/>
+            </div>
           </div>
         </div>
         </Fade>

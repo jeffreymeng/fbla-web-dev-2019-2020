@@ -41,6 +41,9 @@
 }
 
 @screen md {
+  .bg-blur {
+    backdrop-filter: blur(5px);
+  }
 
   .index-booking-form {
     backdrop-filter: blur(5px);

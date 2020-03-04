@@ -91,7 +91,7 @@ const BookingPage = ({ data, location }) => {
               return clone;
             })}
             featuredAirport={selectedTrip}
-            className="-mb-40 sm:-mb-32" />
+            className="-mb-40 sm:-mb-32 px-4" />
         </div>
         </Fade>
       </div>
