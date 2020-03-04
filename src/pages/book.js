@@ -94,7 +94,9 @@ const BookingPage = ({ data, location }) => {
       <div className="bg-gray-100 pt-40 sm:pt-32 pb-10 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto">
           {
-            bookingData !== null &&
+            (bookingData !== null &&
+            bookingData.departAirport &&
+            bookingData.arriveAirport) ?
             <>
               {
                 <FlightResults
@@ -102,11 +104,7 @@ const BookingPage = ({ data, location }) => {
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={(f) => setDepartFlight(f)}
-                  onFlightUnselected={() => {
-                    console.log("!!!uadhfidhafidhfas")
-                    setDepartFlight(false)
-                  }}
-                isDepartResult={true}
+                  isDepartResult={true}
                   // onDateChange={(d) => {
                   //   setBookingData(o => {
                   //     let clone = Object.assign({}, o);
@@ -132,8 +130,7 @@ const BookingPage = ({ data, location }) => {
                       return clone;
                     })
                   }}
-                  onFlightSelected={(f) => setArriveFlight(f)}
-                 onFlightUnselected={() => setArriveFlight(false)}/>
+                  onFlightSelected={(f) => setArriveFlight(f)} />
 
                   </>
               }
@@ -141,15 +138,12 @@ const BookingPage = ({ data, location }) => {
               <button className=
                         {classNames(
                           "flex justify-center px-5 py-3 border border-transparent text-base leading-6 font-semibold rounded-md text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out",
-                          (!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")) ? "bg-gray-300 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500"
+                          (departFlight == null || (arriveFlight == null && bookingData.roundTrip==="rt")) ? "bg-gray-300 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500"
                         )}
-                      onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>{(!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")) ? "Select flights above to checkout" : "Checkout"}</button>
+                      onClick={() => setShowBookingModal(true)} disabled={departFlight == null || (arriveFlight==null&&bookingData.roundTrip==="rt")}>{(departFlight == null || (arriveFlight==null&&bookingData.roundTrip==="rt")) ? "Select flights above to checkout" : "Checkout"}</button>
               </div>
             </>
-          }
-
-          {
-            bookingData === null &&
+          :
             (
               <>
 
@@ -159,7 +153,7 @@ const BookingPage = ({ data, location }) => {
                
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
                   <SuggestedFlight title="The Northern Lights" img={data.northLight.childImageSharp.fluid} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
-                    A spectular dance of solar wind in the magnetosphere brought us this magnificent view. Fly to Fairbanks, Alaska to experience the awe yourself!
+                    A spectacular dance of solar wind in the magnetosphere brought us this magnificent view. Fly to Fairbanks, Alaska to experience the awe yourself!
                   </SuggestedFlight>
                   <SuggestedFlight title="The Golden City" img={data.goldCity.childImageSharp.fluid} flight="LAS" onClick={()=>setSelectedTrip("LAS")}>
                     If the enormous buildings, skyline, and beautiful buildings aren't enough to take your breath away, the vibrance of gold, in all forms, is bound to draw you in. That's Vegas, baby.

@@ -47,7 +47,6 @@ class Time {
     }
     let minute = normalizedTime % 60;
 
-    console.log("TIME", this, hour, minute, isAm);
     return {
       hour,
       hourString:hour === 0 ? "12" : hour,
