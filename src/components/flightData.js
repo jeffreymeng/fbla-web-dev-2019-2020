@@ -1,3 +1,8 @@
+import * as seedrandom from "seedrandom";
+
+seedrandom('I like planes', { global: true });
+
+
 const airports = [
   "Albuquerque International Sunport - Albuquerque, NM - ABQ",
   "Denver International Airport - Denver, CO - DEN",
@@ -224,23 +229,33 @@ const codes = airports.map(x => x.split(" - ")[2]);
 const daysOfWeek = Object.keys(dayOfWeekMap);
 // console.log(daysOfWeek);
 const aircrafts = ["Boeing 787-8 Dreamliner", "Boeing 787-9 Dreamliner", "Boeing 787-10 Dreamliner", "Boeing 777-200", "Boeing 777-300ER", "Boeing 767-300ER", "Boeing 767-400ER", "Boeing 757-200", "Boeing 757-300", "Boeing 737-700", "Boeing 737-800", "Boeing 737-900", "Airbus 319", "Airbus 320", "Bombardier CRJ-200", "Bombardier CRJ-550", "Bombardier CRJ-700", "EMB 170", "EMB 175", "EMB 145"];
-const flightTimes = [];
-for (let i = 0; i < 100; i++) {
+const genTime = (minHr = 0, maxHr = 24) => {
   let hr = Math.ceil(Math.random()*12);
+  let am = Math.random() >= 0.5;
+
+  let realHr = hr%12 + (am ? 0 : 12);
+  if (realHr < minHr || realHr > maxHr) return genTime(minHr, maxHr);
+
   if (hr < 10) hr = "0" + hr;
   let min = Math.ceil(Math.random()*60/5)*5%60;
   if (min < 10) min = "0" + min;
-  let am = Math.random() >= 0.5;
-  if (am && hr <= 5) continue;
-  flightTimes.push(`${hr}:${min}${am?"am":"pm"}`);
+  return `${hr}:${min}${am?"am":"pm"}`;
 }
 
-let getFlightSchedule = (from, to) => {
+let getFlightSchedule = (from, to, count) => {
   let flights = [];
-  for (let i = 0; i < 1 + (randn_bm()>0.75?1:0); i++) {
+  let chosenTimes = [];
+  if (count === 1) chosenTimes = [genTime(8, 18)];
+  else if (count === 2) chosenTimes = [genTime(7, 12), genTime(12, 18)];
+  else if (count === 3) chosenTimes = [genTime(6, 11), genTime(11, 16), genTime(16, 21)];
+  let chosenTimes2 = [];
+  if (count === 1) chosenTimes2 = [genTime(8, 18)];
+  else if (count === 2) chosenTimes2 = [genTime(7, 12), genTime(12, 18)];
+  else if (count === 3) chosenTimes2 = [genTime(6, 11), genTime(11, 16), genTime(16, 21)];
+  for (let i = 0; i < count; i++) {
     let days = "";
     let mask = 0;
-    for (let j = 0; j < 3 + Math.random() * 7; j++) {
+    for (let j = 0; j < 2 + Math.random() * (4); j++) {
       mask |= (1 << Math.floor(Math.random() * 7));
     }
     for (let j = 0; j < 7; j++) {
@@ -248,18 +263,27 @@ let getFlightSchedule = (from, to) => {
         days += daysOfWeek[j];
       }
     }
-    let times = [];
-    for (let j = 0; j < 1 + (randn_bm()>0.75?1:0); j++) {
-      let time = flightTimes[Math.floor(Math.random() * flightTimes.length)];
-      if (times.includes(time)) {
-        j--;
-        continue;
-      }
-      times.push(time);
-    }
+    let times = [chosenTimes[i]];
     flights.push({
       days,
       times,
+      aircraft: aircrafts[Math.floor(Math.random() * aircrafts.length)],
+      price: genPrice(calcDistanceBetween(from, to))
+    });
+
+    days = "";
+    let mask2 = (1 << 7)-1; mask2 ^= mask;
+    if (mask2 === 0) continue;
+    for (let j = 0; j < 7; j++) {
+      if (mask2 & (1 << j)) {
+        days += daysOfWeek[j];
+      }
+    }
+    let times2 = [chosenTimes2[i]];
+    console.log(days, times2);
+    flights.push({
+      days,
+      times: times2,
       aircraft: aircrafts[Math.floor(Math.random() * aircrafts.length)],
       price: genPrice(calcDistanceBetween(from, to))
     });
@@ -281,15 +305,42 @@ let genTimeOfFlight = (from, to) => {
   return `${hr}:${min}`;
 }
 
+let toConnect = {};
+for (let startAirport of codes) {
+  if (locations[startAirport].isHub) toConnect[startAirport] = [];
+}
+for (let startAirport of codes) {
+  let nearestHub = 1000000000;
+  for (let code of codes) {
+    if (code === startAirport) continue;
+    if (locations[code].isHub) nearestHub = Math.min(nearestHub, calcDistanceBetween(code, startAirport));
+  }
+  for (let code of codes) {
+    if (nearestHub === calcDistanceBetween(code, startAirport)) {
+      toConnect[code].push(startAirport);
+    }
+  }
+}
+
 let getFlightsFromAirport = blacklist => {
   let flights = {};
+  let nearestHub = 1000000000;
   for (let code of codes) {
     if (code === blacklist) continue;
-    if (locations[blacklist].isHub || locations[code].isHub || calcDistanceBetween(blacklist, code) < 500) {} else continue;
+    if (locations[code].isHub) nearestHub = Math.min(nearestHub, calcDistanceBetween(code, blacklist));
+  }
+  for (let code of codes) {
+    if (code === blacklist) continue;
+    let numFlights = 0;
+    if (calcDistanceBetween(code, blacklist) <= nearestHub) numFlights = 1;
+    if (locations[blacklist].isHub) numFlights = 2;
+    // if (locations[blacklist].isHub && toConnect[blacklist].includes(code)) numFlights = 2;
+    if (locations[code].isHub) numFlights = 3;
+    if (numFlights === 0) continue;
     flights[code] = {
       code,
       time: genTimeOfFlight(blacklist, code),
-      schedule: getFlightSchedule(blacklist, code)
+      schedule: getFlightSchedule(blacklist, code, numFlights)
     };
   }
   return flights;
