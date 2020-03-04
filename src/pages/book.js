@@ -15,8 +15,7 @@ import cnTower from "../images/cnTower.jpg"
 import goldenGate from "../images/goldenGate.jpg"
 import Transition from "../components/Transition"
 import Fade from 'react-reveal/Fade';
-import Flip from 'react-reveal/Flip';
-import Rotate from 'react-reveal/Rotate';
+import classNames from 'classnames';
 import ServerContext from "../context/ServerContext"
 
 
@@ -110,7 +109,11 @@ const BookingPage = ({ data, location }) => {
                   value={bookingData}
                   searchedClass={bookingData.flightClass}
                   onFlightSelected={(f) => setDepartFlight(f)}
-                  isDepartResult={true}
+                  onFlightUnselected={() => {
+                    console.log("!!!uadhfidhafidhfas")
+                    setDepartFlight(false)
+                  }}
+                isDepartResult={true}
                   // onDateChange={(d) => {
                   //   setBookingData(o => {
                   //     let clone = Object.assign({}, o);
@@ -136,12 +139,18 @@ const BookingPage = ({ data, location }) => {
                       return clone;
                     })
                   }}
-                  onFlightSelected={(f) => setArriveFlight(f)}/>
+                  onFlightSelected={(f) => setArriveFlight(f)}
+                 onFlightUnselected={() => setArriveFlight(false)}/>
 
                   </>
               }
               <div className="flex justify-end py-3">
-              <button className="flex justify-center px-5 py-3 border border-transparent text-base leading-6 font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>Checkout</button>
+              <button className=
+                        {classNames(
+                          "flex justify-center px-5 py-3 border border-transparent text-base leading-6 font-semibold rounded-md text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out",
+                          (!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")) ? "bg-gray-300 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500"
+                        )}
+                      onClick={() => setShowBookingModal(true)} disabled={!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")}>{(!departFlight || (!arriveFlight&&bookingData.roundTrip==="rt")) ? "Select flights above to checkout" : "Checkout"}</button>
               </div>
             </>
           }
@@ -206,7 +215,7 @@ const BookingPage = ({ data, location }) => {
               </div>
               <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
                 <div className="rounded-md shadow-sm">
-                  <a href="https://tailwindui.com?utm_source=tailwindcss&amp;utm_medium=footer-banner" className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
+                  <a href="#" className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
                     Checkout
                   </a>
                 </div>

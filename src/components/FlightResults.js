@@ -340,7 +340,7 @@ const FlightResults = ({ title, value, searchedClass, onFlightSelected, classNam
 function getFlights(value, dayOfWeek, testMode) {
   let testPassed = false;
   testMode = testMode === undefined ? false : testMode;
-  const MAX_LAYOVER_LENGTH = 5;
+  const MAX_LAYOVER_LENGTH = 5*60;
 
   // Time = 0 means 12:00 AM!
   // The first time in each AM/PM category is 12, NOT 1
@@ -397,25 +397,24 @@ function getFlights(value, dayOfWeek, testMode) {
         let layoverFlights = [];
         let toLayoverFlight = FlightData[value.departAirport].flights[layoverAirport]
         add(layoverFlights, toLayoverFlight.schedule, new Time(toLayoverFlight.time))
-        // console.log(new Time(0,45, true));
-        // console.log(layoverFlights);
+
+
         let destFlights = [];
         let toDestFlight = FlightData[layoverAirport].flights[value.arriveAirport]
         add(destFlights, toDestFlight.schedule, new Time(toDestFlight.time))
         layoverFlights.forEach((flightToLayover) => {
           if (testPassed) return;
           destFlights.forEach((flightToDest) => {
-            // console.log("HI",flightToLayover, flightToDest, flightToLayover.start.compareTo(flightToDest.end));
-            if (flightToLayover.end.compareTo(flightToDest.start) >= 0 && flightToLayover.end.compareTo(flightToDest.start) <= MAX_LAYOVER_LENGTH) {
-              // console.log("BLDS", flightToLayover.start.clone())
-              let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start)
-              let atLayoverTime = flightToDest.start.clone().subtract(flightToLayover.end)
-              let toDestTime = flightToDest.end.clone().subtract(flightToDest.start)
 
-              let travelTime = flightToDest.end.clone().subtract(flightToLayover.start)
-              // console.log("TT", travelTime, flightToDest, flightToLayover, toDestFlight, toLayoverFlight)
-              let totalPrice = 1.1208 * (toLayoverFlight.price + toDestFlight.price);
-              // console.log(totalPrice,flightToLayover.price, "TPP")
+            // TODO Nathan: X.compareTo(Y) just subtracts Y from X. It's not names subtract because the value it returns is not supposed to be used as a value.
+            if (flightToDest.start.compareTo(flightToLayover.end) >= 0 && flightToDest.start.compareTo(flightToLayover.end) <= MAX_LAYOVER_LENGTH) {
+
+              let toLayoverTime = flightToLayover.end.clone().subtract(flightToLayover.start);
+              let atLayoverTime = flightToDest.start.clone().subtract(flightToLayover.end);
+              let toDestTime = flightToDest.end.clone().subtract(flightToDest.start);
+              let travelTime = flightToDest.end.clone().subtract(flightToLayover.start);
+
+
               if (testMode) {
                 testPassed = true;
                 return;
