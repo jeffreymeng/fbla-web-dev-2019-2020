@@ -32,6 +32,7 @@ const ServerContext = React.createContext({
 const ServerProvider = ({ children }) => {
   const [firebase, setFirebase] = useState(undefined)
   const [user, setUser] = useState(null)
+  const [flights, setFlights] = useState(null)
   const [checkoutState, setCheckoutState] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -73,11 +74,31 @@ const ServerProvider = ({ children }) => {
         querySnapshot.forEach(function(doc) {
           data.push(doc.data())
         });
-        setCheckoutState(JSON.parse(data[0].state));
+        if (data.length === 0) setCheckoutState(null);
+        else setCheckoutState(JSON.parse(data[0].state));
       });
 
     return () => unsubscribe;
   }, [firebase, user])
+
+  useEffect(() => {
+    if (!firebase || !user) return;
+
+    const unsubscribe = firebase?.firestore().collection("users")
+      .doc(user.uid)
+      .collection("flights")
+      .onSnapshot(function(querySnapshot) {
+        let data = [];
+        querySnapshot.forEach(function(doc) {
+          data.push(doc.data());
+          data[data.length-1].depart = JSON.parse(data[data.length-1].depart);
+          if ("arrive" in data[data.length-1]) data[data.length-1].arrive = JSON.parse(data[data.length-1].arrive);
+        });
+        setFlights(data);
+      });
+
+    return () => unsubscribe;
+  }, [firebase, user]);
 
   const signIn = useCallback((email, pass) => {
     setLoading(true)
@@ -102,6 +123,17 @@ const ServerProvider = ({ children }) => {
       throw error
     })
   }, [firebase])
+
+  const clearCheckoutState = useCallback((email, pass) => {
+    setError(null)
+    setLoading(true)
+    return firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
+      setLoading(false)
+      setError(error.message)
+      throw error
+    })
+  }, [firebase])
+
   const pushFlights = useCallback((data) => {
     setError(null)
     return firebase.firestore().collection("users").doc(user.uid).collection("flights").add(data).catch(error => setError(error.message))
@@ -112,15 +144,13 @@ const ServerProvider = ({ children }) => {
         .doc(user.uid)
         .collection("flights")
         .onSnapshot(function(querySnapshot) {
-          let data = []
+          let data = [];
           querySnapshot.forEach(function(doc) {
-            data.push(doc.data())
-          })
-          resolve(data)
-        })
-    })
-
-
+            data.push(doc.data());
+          });
+          resolve(data);
+        });
+    });
   }, [firebase, user])
 
   const updateCheckoutState = useCallback((state) => {
@@ -142,7 +172,7 @@ const ServerProvider = ({ children }) => {
   return (
     <ServerContext.Provider
       value={{
-        user, signIn, signOut, signUp, loading, error, pushFlights, getFlights, updateCheckoutState, checkoutState
+        user, signIn, signOut, signUp, loading, error, pushFlights, getFlights, updateCheckoutState, checkoutState, clearCheckoutState, flights
       }}>
       {children}
     </ServerContext.Provider>

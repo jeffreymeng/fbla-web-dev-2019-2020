@@ -5,21 +5,8 @@ import SEO from "../components/seo"
 import FlightInfoCard from "../components/FlightInfoCard"
 
 const MyFlightsPage = () => {
-  const [flights, setFlights] = React.useState([])
   let server = React.useContext(ServerContext)
-  React.useEffect(() => {
-    server.user?.uid && server.getFlights().then((data) => {
-      data = data.map(o => {
-        return {
-          depart: JSON.parse(o.depart),
-          arrive: o.arrive && JSON.parse(o.arrive),
-        }
-      })
-      setFlights(data)
-      console.log(data)
 
-    })
-  }, [server.user])
   return (
     <Layout>
       <SEO title="My Flights"/>
@@ -37,7 +24,8 @@ const MyFlightsPage = () => {
         <div className="w-100 flex-1 pt-8">
           <div className="max-w-3xl mx-auto px-4 md:px-6 lg:px-8">
             {/*<pre>{flights.map(x => JSON.stringify(x, null, 2))}</pre>*/}
-            {flights.map(x => <FlightInfoCard flight={x} className="mb-6" />)}
+            {server.flights && server.flights.map(x => <FlightInfoCard flight={x} className="mb-6" key={x} />)}
+            {(!server.flights || server.flights.length===0) && <p className="text-xl text-indigo-700 font-bold">You have no flights!</p>}
           </div>
         </div>
       </div>
