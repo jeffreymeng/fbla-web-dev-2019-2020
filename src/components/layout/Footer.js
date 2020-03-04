@@ -28,7 +28,7 @@ const Footer = props => {
           {/*</div>*/}
           <div className="px-5 py-2" key="/credits">
           <Link to="/credits" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Credits
+                Credits/Documentation
             </Link>
           </div>
         </nav>
