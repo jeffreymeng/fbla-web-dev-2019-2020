@@ -70,7 +70,7 @@ const BookingPage = ({ data, location }) => {
         title="Book Now"
       />
 
-      <div className="pt-16 pb-6 sm:pt-32 sm:pb-12 relative">
+      <div className="pt-16 pb-6 sm:pt-32 sm:pb-12 relative z-40">
         <div className="absolute top-0 bottom-0 left-0 right-0 overflow-hidden -z-10">
           <Img className="h-full" fluid={data.file.childImageSharp.fluid} />
         </div>
@@ -145,6 +145,8 @@ const BookingPage = ({ data, location }) => {
             bookingData === null &&
             (
               <>
+
+                <div className="z-0">
                 <Fade bottom appear>
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
                
@@ -169,6 +171,7 @@ const BookingPage = ({ data, location }) => {
                   </SuggestedFlight>
                 </div>
               </Fade>
+              </div>
               </>
             )
           }
