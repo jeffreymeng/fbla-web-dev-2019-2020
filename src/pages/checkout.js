@@ -144,6 +144,8 @@ const CheckoutPage = ({ location }) => {
                           </h3>
                           <p className="mt-1 text-sm leading-5 text-gray-500">
                             For demonstration purposes, we prefilled some of the fields for you.
+                            Also, no validation will be done, for demonstration purposes only, so feel free to submit without
+                            the hassle of filling out any information that would normally be required.
                           </p>
                         </div>
                         <div className="mt-6 grid grid-cols-1 row-gap-4 col-gap-4 sm:grid-cols-6">
