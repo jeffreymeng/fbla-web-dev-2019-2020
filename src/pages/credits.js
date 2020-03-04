@@ -24,7 +24,7 @@ const CreditsPage = () => (
    
         <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6">
           <h2 class="mt-1 text-6xl tracking-tight leading-10 font-extrabold text-indigo-600 sm:leading-none sm:text-8xl lg:text-10xl xl:text-12xl">
-            Credits
+            Credits and Technologies Documentation
           </h2>
       </div>
     </div>
