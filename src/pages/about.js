@@ -14,7 +14,6 @@ import Fade from 'react-reveal/Fade';
 
 
 import planeImage from "../images/planecoast.jpg"
-import icon from "../images/coastalLogo.png"
 import edfPic from "../images/EDFPic.png"
 import epaPic from "../images/EPAPic.png"
 import percentPic from "../images/1ForThePlanet.png"
@@ -186,58 +185,7 @@ What started off as a dream with three individuals to travel and explore the nat
 
 			   
 				
-				{/*<CardDeck className="about_cardDeck">
-				  <Card bg="light">
-				    <Card.Img variant="top" src={icon} />
-				    <Card.Body>
-				      <Card.Title>The Best in Sustainability</Card.Title>
-				      <Card.Text>
-				        One of our core principles is to <span className="italics">simplicity</span> - that's why we have partnered up with agencys such as the EPA to find the safest way to fly.
-				      </Card.Text>
-				    </Card.Body>
-				    <Card.Footer>
-				      <small className="text-muted">Last updated 3 mins ago</small>
-				    </Card.Footer>
-				  </Card>
-				  <Card bg="light">
-				    <Card.Img variant="top" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg"/>
-				    <Card.Body>
-				      <Card.Title>The Best for a Budget</Card.Title>
-				      <Card.Text>
-				        With the best prices in the market, we provide a service for everyone - without leaving quality behind.
-				      </Card.Text>
-				    </Card.Body>
-				    <Card.Footer>
-				      <small className="text-muted">Last updated 3 mins ago</small>
-				    </Card.Footer>
-				  </Card>
-				  <Card bg="light">
-				    <Card.Img variant="top" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" />
-				    <Card.Body>
-				      <Card.Title>For the People</Card.Title>
-				      <Card.Text>
-				        One of our core principles is to <span className="italics">simplicity</span> - and our booking process is no different. In just a few steps, you can forget about the fine print and huge options, giving you freedom before your long needed vacation. 
-				      </Card.Text>
-				    </Card.Body>
-				    <Card.Footer>
-				      <small className="text-muted">Last updated 3 mins ago</small>
-				    </Card.Footer>
-				  </Card>
-				</CardDeck>
-
-	
-				 <Jumbotron className="planeBackground">
-				  	<h1 className="about_subTitle nexa center">Dream On!</h1>
-				  	<p className="about_phrase center">
-					   Travel to your favorite locations <span className="italics">right now!</span>
-				  	</p>
-				  	<p className="center">
-    			        <a className="about_button btn btn-outline-secondary" href="/">Book Now</a>
-    				</p>
-    			</Jumbotron>
-    			
-				*/}
-
+				
 				
 
 
@@ -325,23 +273,23 @@ What started off as a dream with three individuals to travel and explore the nat
 
 			          <a href="https://www.epa.gov/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 mx-auto flex justify-center py-1 px-8 ">
-				          <img className="max-h-24" src={epaPic} alt="EPA" />
+				          <Img className="max-h-24" fluid={data.epaPic.childImageSharp.fluid} alt="EPA" />
 				        </div>
 			          </a>
 
 				          <a href="https://www.edf.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
-				          <img className="max-h-24" src={edfPic} alt="Environmental Defense Fund" />
+				          <Img className="max-h-24" fluid={data.edfPic.childImageSharp.fluid} alt="Environmental Defense Fund" />
 				        </div>
 			          </a>
 				         <a href="https://www.onepercentfortheplanet.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
-				          <img className="max-h-28" src={percentPic} alt="1% For the Planet" />
+				          <Img className="max-h-28" fluid={data.percentPic.childImageSharp.fluid} alt="1% For the Planet" />
 				        </div>
 			          </a>
 				           <a href="https://flightsafety.org/"  target="_blank" className="inline-flex items-center px-2.5 py-1.5 mx-1.5 my-1.5 border border-transparent text-xs leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-50 transform hover:scale-105 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 				        <div className="col-span-1 flex mx-auto justify-center py-1 px-8 ">
-				          <img className="max-h-28 " src={flightSafetyPic} alt="Workcation" />
+				          <Img className="max-h-28 " fluid={data.flightSafetyPic.childImageSharp.fluid} alt="Workcation" />
 				        </div>
 			          </a>
 				        </div>
@@ -400,41 +348,41 @@ export const query = graphql`
         }
       }
     },
-    northLight: file(relativePath: { eq: "northLight.jpg" }) {
+    epaPic: file(relativePath: { eq: "EPAPic.png" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 100) {
+        fluid(maxWidth: 1920, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     },
-    goldCity: file(relativePath: { eq: "goldCity.jpg" }) {
+    edfPic: file(relativePath: { eq: "EDFPic.png" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 100) {
+        fluid(maxWidth: 200, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     },
-    hawaii: file(relativePath: { eq: "hawaii.jpg" }) {
+    percentPic: file(relativePath: { eq: "1ForThePlanet.png" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 100) {
+        fluid(maxWidth: 200, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     },
-    cnTower: file(relativePath: { eq: "cnTower.jpg" }) {
+    flightSafetyPic: file(relativePath: { eq: "flightSafetyPic.png" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 100) {
+        fluid(maxWidth: 200, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
     },
-    goldenGate: file(relativePath: { eq: "goldenGate.jpg" }) {
+    vacationPic: file(relativePath: { eq: "dreamOn.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 700, quality: 100) {
+        fluid(maxWidth: 960, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
-    }
+    },
   }
 `
  
