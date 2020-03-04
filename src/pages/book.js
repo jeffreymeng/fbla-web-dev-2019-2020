@@ -7,12 +7,6 @@ import Layout from "../components/layout/layout"
 import { graphql } from "gatsby"
 import FlightResults from "../components/FlightResults"
 import ConfirmFlightModal from "../components/ConfirmFlightModal"
-import bigBalloons from "../images/bigBalloons.jpg"
-import northLight from "../images/northLight.jpg"
-import goldCity from "../images/goldCity.jpg"
-import hawaii from "../images/hawaii.jpg"
-import cnTower from "../images/cnTower.jpg"
-import goldenGate from "../images/goldenGate.jpg"
 import Transition from "../components/Transition"
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
@@ -20,13 +14,12 @@ import Rotate from 'react-reveal/Rotate';
 import ServerContext from "../context/ServerContext"
 
 
-
 const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
   return (
     <div className="cursor-pointer rounded overflow-hidden shadow-lg bg-white transition ease-in-out duration-300 hover:shadow-2xl" onClick={onClick}>
       <div className="h-64 lg:h-48">
         {/*todo center this?*/}
-        <img className="w-full h-full object-cover" src={img}
+        <Img className="w-full h-full object-cover" fluid={img}
              alt="Sunset in the mountains" />
       </div>
       <div className="px-6 py-4">
@@ -156,22 +149,22 @@ const BookingPage = ({ data, location }) => {
                 <h2 className="uppercase text-indigo-700 font-bold mb-4">Featured Trips</h2>
                
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-                  <SuggestedFlight title="The Northern Lights" img={northLight} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
+                  <SuggestedFlight title="The Northern Lights" img={data.northLight.childImageSharp.fluid} flight="FAI" onClick={()=>setSelectedTrip("FAI")}>
                     A spectular dance of solar wind in the magnetosphere brought us this magnificent view. Fly to Fairbanks, Alaska to experience the awe yourself!
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Golden City" img={goldCity} flight="LAS" onClick={()=>setSelectedTrip("LAS")}>
+                  <SuggestedFlight title="The Golden City" img={data.goldCity.childImageSharp.fluid} flight="LAS" onClick={()=>setSelectedTrip("LAS")}>
                     If the enormous buildings, skyline, and beautiful buildings aren't enough to take your breath away, the vibrance of gold, in all forms, is bound to draw you in. That's Vegas, baby.
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Flight of the Balloons" img={bigBalloons} flight="ABQ" onClick={()=>setSelectedTrip("ABQ")}>
+                  <SuggestedFlight title="The Flight of the Balloons" img={data.bigBalloons.childImageSharp.fluid} flight="ABQ" onClick={()=>setSelectedTrip("ABQ")}>
                     Travel to Albuquerque to witness the International Balloon Fiesta, a festival of color, culture, celebration. Where will your flights take you?   
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Islands of Aloha" img={hawaii} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
+                  <SuggestedFlight title="The Islands of Aloha" img={data.hawaii.childImageSharp.fluid} flight="HNL" onClick={()=>setSelectedTrip("HNL")}>
                     With the best beaches, foods, and natural beauties to be found in the US, Hawaii is a must for the frequent traveler, the once-in-a-lifetime honeymoon, and everything in between.
                   </SuggestedFlight>
-                  <SuggestedFlight title="The CN Tower" img={cnTower} flight="YVR" onClick={()=>setSelectedTrip("YVR")}>
+                  <SuggestedFlight title="The CN Tower" img={data.cnTower.childImageSharp.fluid} flight="YVR" onClick={()=>setSelectedTrip("YVR")}>
                     Ontario holds many treasures, and one you cannot miss is the CN Tower, once the tallest tower ever. Even for the faint of heart, it's an experience worth every penny.
                   </SuggestedFlight>
-                  <SuggestedFlight title="The Golden Gate" img={goldenGate} flight="SFO" onClick={()=>setSelectedTrip("SFO")}>
+                  <SuggestedFlight title="The Golden Gate" img={data.goldenGate.childImageSharp.fluid} flight="SFO" onClick={()=>setSelectedTrip("SFO")}>
                     California holds many of the most famous attractions and the Golden Gate is one of them. With foggy mornings and a cool ocean breeze at all times, you never know where this bridge will take you.
                   </SuggestedFlight>
                 </div>
@@ -237,6 +230,48 @@ export const query = graphql`
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
         fluid(maxWidth: 1920, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    bigBalloons: file(relativePath: { eq: "bigBalloons.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    northLight: file(relativePath: { eq: "northLight.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    goldCity: file(relativePath: { eq: "goldCity.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    hawaii: file(relativePath: { eq: "hawaii.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    cnTower: file(relativePath: { eq: "cnTower.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    },
+    goldenGate: file(relativePath: { eq: "goldenGate.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 700, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
