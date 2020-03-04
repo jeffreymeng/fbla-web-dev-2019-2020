@@ -1,10 +1,13 @@
 import React from "react";
 import classNames from 'classnames';
 
+import Time from "./time";
+
 const formatTime = obj => {
-  let hr = obj.hour; if (hr < 10) hr = "0" + hr;
-  let min = obj.minute; if (min < 10) min = "0" + min;
-  return `${hr}:${min} ${obj.isAm ? "AM" : "PM"}`
+  return new Time(obj.time).toString();
+  // let hr = obj.hour; if (hr < 10) hr = "0" + hr;
+  // let min = obj.minute; if (min < 10) min = "0" + min;
+  // return `${hr}:${min} ${obj.isAm ? "AM" : "PM"}`
 }
 
 const getDescriptionString = obj => {

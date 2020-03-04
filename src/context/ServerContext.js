@@ -19,91 +19,130 @@ const ServerContext = React.createContext({
   },
   signUp: () => {
   },
-  getFlights:() => {},
-  pushFlights: () => {},
+  getFlights: () => {
+  },
+  pushFlights: () => {
+  },
+  updateCheckoutState: () => {
+  },
   loading: false,
   error: null,
-});
+})
 
-const AuthProvider = ({ children }) => {
-  const [firebase, setFirebase] = useState(undefined);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const ServerProvider = ({ children }) => {
+  const [firebase, setFirebase] = useState(undefined)
+  const [user, setUser] = useState(null)
+  const [checkoutState, setCheckoutState] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!firebase && typeof window !== "undefined") {
-      const app = import("firebase/app");
-      const auth = import("firebase/auth");
-      const firestore = import("firebase/firestore");
+      const app = import("firebase/app")
+      const auth = import("firebase/auth")
+      const firestore = import("firebase/firestore")
 
       Promise.all([
-        app, auth, firestore
+        app, auth, firestore,
       ]).then(values => {
-        const instance = values[0];
-        instance.initializeApp(firebaseConfig);
-        setFirebase(instance);
-      });
+        const instance = values[0]
+        instance.initializeApp(firebaseConfig)
+        setFirebase(instance)
+      })
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    if (!firebase) return;
+    if (!firebase) return
 
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      setLoading(false);
-      setUser(user);
+      setLoading(false)
+      setUser(user)
     })
     return () => unsubscribe()
-  }, [firebase]);
+  }, [firebase])
+
+  useEffect(() => {
+    if (!firebase || !user) return;
+
+    const unsubscribe = firebase?.firestore().collection("users")
+      .doc(user.uid)
+      .collection("checkout")
+      .onSnapshot(function(querySnapshot) {
+        let data = []
+        querySnapshot.forEach(function(doc) {
+          data.push(doc.data())
+        });
+        setCheckoutState(JSON.parse(data[0].state));
+      });
+
+    return () => unsubscribe;
+  }, [firebase, user])
 
   const signIn = useCallback((email, pass) => {
-    setLoading(true);
-    setError(null);
+    setLoading(true)
+    setError(null)
     return firebase.auth().signInWithEmailAndPassword(email, pass).catch(e => {
-      setLoading(false);
-      setError(e.message);
-      throw error;
-    });
-  }, [firebase]);
+      setLoading(false)
+      setError(e.message)
+      throw error
+    })
+  }, [firebase])
 
   const signOut = useCallback(() => {
-    firebase.auth().signOut();
-  }, [firebase]);
+    firebase.auth().signOut()
+  }, [firebase])
 
   const signUp = useCallback((email, pass) => {
-    setError(null);
-    setLoading(true);
+    setError(null)
+    setLoading(true)
     return firebase.auth().createUserWithEmailAndPassword(email, pass).catch((error) => {
-      setLoading(false);
-      setError(error.message);
-      throw error;
-    });
-  }, [firebase]);
-const pushFlights = useCallback((data) => {
-  setError(null);
- return firebase.firestore().collection("users").doc(user.uid).collection("flights").add(data).catch(error => setError(error.message))
-}, [firebase, user]);
-const getFlights = useCallback(() => {
-  return new Promise((resolve, reject) => {
-    firebase?.firestore().collection("users")
+      setLoading(false)
+      setError(error.message)
+      throw error
+    })
+  }, [firebase])
+  const pushFlights = useCallback((data) => {
+    setError(null)
+    return firebase.firestore().collection("users").doc(user.uid).collection("flights").add(data).catch(error => setError(error.message))
+  }, [firebase, user])
+  const getFlights = useCallback(() => {
+    return new Promise((resolve, reject) => {
+      firebase?.firestore().collection("users")
+        .doc(user.uid)
+        .collection("flights")
+        .onSnapshot(function(querySnapshot) {
+          let data = []
+          querySnapshot.forEach(function(doc) {
+            data.push(doc.data())
+          })
+          resolve(data)
+        })
+    })
+
+
+  }, [firebase, user])
+
+  const updateCheckoutState = useCallback((state) => {
+    setLoading(true);
+    return firebase?.firestore().collection("users")
       .doc(user.uid)
-      .collection("flights")
-      .onSnapshot(function(querySnapshot) {
-        let data = [];
-        querySnapshot.forEach(function(doc) {
-          data.push(doc.data());
-        });
-        resolve(data);
+      .collection("checkout")
+      .doc("checkoutState")
+      .set({
+        state: JSON.stringify(state)
+      })
+      .catch(e => {
+        setLoading(false);
+        setError(e.message);
+        throw e;
       });
-  });
+  }, [firebase, user]);
 
-
-}, [firebase, user]);
   return (
     <ServerContext.Provider
       value={{
-        user, signIn, signOut, signUp, loading, error, pushFlights, getFlights
+        user, signIn, signOut, signUp, loading, error, pushFlights, getFlights, updateCheckoutState, checkoutState
       }}>
       {children}
     </ServerContext.Provider>
@@ -111,4 +150,4 @@ const getFlights = useCallback(() => {
 }
 
 export default ServerContext
-export { AuthProvider }
+export { ServerProvider }

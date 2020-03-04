@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useContext, useEffect } from "react"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import BookingForm from "../components/BookingForm"
@@ -17,6 +17,7 @@ import Transition from "../components/Transition"
 import Fade from 'react-reveal/Fade';
 import Flip from 'react-reveal/Flip';
 import Rotate from 'react-reveal/Rotate';
+import ServerContext from "../context/ServerContext"
 
 
 
@@ -43,6 +44,7 @@ const SuggestedFlight = ({ title, img, flight, onClick, children }) => {
 }
 
 const BookingPage = ({ data, location }) => {
+  const server = useContext(ServerContext);
   const [bookingData, setBookingData] = React.useState(null)
   // const [selectedFlight, setSelectedFlight] = React.useState(null);
   const [departFlight, setDepartFlight] = React.useState(null);
@@ -54,12 +56,13 @@ const BookingPage = ({ data, location }) => {
 
   const handleConfirmedBooking = () => {
     // console.log(departFlight, arriveFlight)
-   navigate("checkout", {
-      state:{
-        depart:departFlight,
-        arrive:arriveFlight
-      }
-    })
+    server.updateCheckoutState({
+      depart:departFlight,
+      arrive:arriveFlight,
+      bookingData
+    }).then(() => {
+      navigate("checkout")
+    });
   }
   const returnTripData = Object.assign({}, bookingData);
   // swap
@@ -214,6 +217,7 @@ const BookingPage = ({ data, location }) => {
 
       <ConfirmFlightModal
         // flight={selectedFlight}
+        loading={server.loading}
         price={bookingData && departFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] + (bookingData.roundTrip === "rt" ? arriveFlight?.price[["economy", "business", "first"].indexOf(bookingData?.flightClass)] : 0)}
         isOpen={showBookingModal}
         onConfirm={handleConfirmedBooking}

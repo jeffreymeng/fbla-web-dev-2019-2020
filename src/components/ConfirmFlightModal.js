@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Transition from "./Transition"
 import classNames from "classnames"
 
-const ConfirmFlightModal = ({ price, isOpen, onConfirm, onCancel }) => {
+const ConfirmFlightModal = ({ loading, price, isOpen, onConfirm, onCancel }) => {
   const [shouldShow, setShouldShow] = useState(false);
   // give time for animation
   useEffect(() => {
@@ -15,7 +15,7 @@ const ConfirmFlightModal = ({ price, isOpen, onConfirm, onCancel }) => {
 
 
   return (
-    <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center z-20">
+    <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center z-40">
       <Transition
         show={isOpen}
         enter="transition-opacity ease-out duration-300"
@@ -57,6 +57,7 @@ const ConfirmFlightModal = ({ price, isOpen, onConfirm, onCancel }) => {
         <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
           <span className="flex w-full rounded-md shadow-sm sm:col-start-2">
             <button onClick={() => onConfirm()} type="button"
+                    disabled={loading}
                     className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
               Confirm: ${price}
             </button>

@@ -8,8 +8,8 @@ import "./src/styles/style.scss"
 
 import React from "react";
 
-import { AuthProvider } from "./src/context/ServerContext";
+import { ServerProvider } from "./src/context/ServerContext";
 
 export const wrapRootElement = ({ element }) => (
-  <AuthProvider>{element}</AuthProvider>
+  <ServerProvider>{element}</ServerProvider>
 )
